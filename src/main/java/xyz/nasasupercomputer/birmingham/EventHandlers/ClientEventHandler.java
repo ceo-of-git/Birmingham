@@ -38,7 +38,7 @@ public class ClientEventHandler {
         // ===================
         // GEM ALERT!
 
-  		if (true) { // No config installed yet
+  		if (ForgeConfigs.enableItemGems) {
         
         	// Apply Gem Description
         	GemSystem.ApplyGemTooltip(stack, event.getEntity(), tooltipString);
