@@ -1,4 +1,4 @@
-package xyz.nasasupercomputer.birmingham.EventHandlers.Client;
+package xyz.nasasupercomputer.birmingham.EventHandlers;
 
 import java.util.ArrayList;
 import java.util.List;
