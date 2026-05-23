@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.client.resources.language.I18n;
 import xyz.nasasupercomputer.birmingham.ItemHazards.IHazardType;
 
 public class HazardToxic implements IHazardType {
@@ -39,6 +40,6 @@ public class HazardToxic implements IHazardType {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void AddHazardTooltip(Player player, List<String> description, ItemStack stack) {
-		description.add("§2[ " + "Toxic" + " ]§r"); // TODO: Add Localization to Hazard Tooltips.
+		description.add("§2[ " + I18n.get("hazard.toxic.title") + " ]§r");
 	}
 }

@@ -1,3 +1,7 @@
 {
-	"item.birmingham.test_item": "fucked up bread"
+	"itemGroup.birmingham.creative_tab_machines": "Machines",
+	"itemGroup.birmingham.creative_tab_resources": "Resources",
+	"itemGroup.birmingham.creative_tab_combat": "Combat",
+	"item.birmingham.test_item": "fucked up bread",
+	"hazard.toxic.title": "Toxic"
 }

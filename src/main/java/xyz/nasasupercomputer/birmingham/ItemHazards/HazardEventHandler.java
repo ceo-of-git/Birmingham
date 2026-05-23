@@ -32,9 +32,15 @@ public class HazardEventHandler {
         }
 
         // Iterate thru inventory & Apply Hazards
-        for (ItemStack stack : player.getInventory().items) {
-
-            HazardSystem.ApplyHazard(stack, player);
+        List<ItemStack> inventoryItems = new ArrayList<ItemStack>();
+        inventoryItems.addAll(player.getInventory().items);
+        inventoryItems.add(player.getOffhandItem());
+        
+        if (inventoryItems != null) {
+            
+		    for (ItemStack stack : inventoryItems) {
+		        HazardSystem.ApplyHazard(stack, player);
+		    }
         }
 	}
 	

@@ -2,7 +2,9 @@ package xyz.nasasupercomputer.birmingham;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -45,8 +47,8 @@ public class MainRegistry
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
 
     // Blocks
-    public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
-    public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties()));
+    // public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
+    // public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties()));
 
     // Items
     public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item", () -> new Item(new Item.Properties().stacksTo(64)));
@@ -56,13 +58,23 @@ public class MainRegistry
             .alwaysEat().nutrition(1).saturationMod(2f).build())));
 
 
-    // Creates a creative tab with the id "examplemod:example_tab" for the example item, that is placed after the combat tab
-    public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
-            .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> EXAMPLE_ITEM.get().getDefaultInstance())
-            .displayItems((parameters, output) -> {
-                output.accept(EXAMPLE_ITEM.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
-            }).build());
+    // Machines Tab
+    public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_MACHINES = CREATIVE_MODE_TABS.register("creative_tab_machines", () -> CreativeModeTab.builder()
+            .icon(() -> TEST_ITEM.get().getDefaultInstance())
+            .title(Component.translatable("itemGroup.birmingham.creative_tab_machines"))
+            .build());
+    
+    // Resources Tab
+    public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_RESOURCES = CREATIVE_MODE_TABS.register("creative_tab_resources", () -> CreativeModeTab.builder()
+            .icon(() -> TEST_ITEM.get().getDefaultInstance())
+            .title(Component.translatable("itemGroup.birmingham.creative_tab_resources"))
+            .build());
+    
+    // Combat Tab
+    public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_COMBAT = CREATIVE_MODE_TABS.register("creative_tab_combat", () -> CreativeModeTab.builder()
+            .icon(() -> TEST_ITEM.get().getDefaultInstance())
+            .title(Component.translatable("itemGroup.birmingham.creative_tab_combat"))
+            .build());
     
     public MainRegistry(FMLJavaModLoadingContext context)
     {
@@ -109,8 +121,8 @@ public class MainRegistry
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
-        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
-        	event.accept(EXAMPLE_BLOCK_ITEM);
+        if (event.getTabKey() == CREATIVE_TAB_RESOURCES.getKey() || event.getTabKey() == CREATIVE_TAB_MACHINES.getKey() || event.getTabKey() == CREATIVE_TAB_COMBAT.getKey())
+        	event.accept(TEST_ITEM);
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
