@@ -21,7 +21,7 @@ public class GemSystem {
 			return List.of(); // Empty List
 		}
 		CompoundTag tag=stack.getTag();
-		
+		GemRegistry gr=new GemRegistry(); //possibly unoptimized change later
 		ArrayList<IGemType> gems = new ArrayList<IGemType>();
 		if (tag.contains("GemList")){
 			ListTag gem=tag.getList("GemList",Tag.TAG_COMPOUND);
