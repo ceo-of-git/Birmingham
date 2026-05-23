@@ -36,7 +36,7 @@ public class ForgeConfigs
     // Main Setting: Enable Item Hazards
 	public static boolean enableItemHazards;
     private static final ForgeConfigSpec.BooleanValue ENABLED_ITEM_HAZARDS = BUILDER
-            .comment("Whether or not to enable the Exploration / Boss-Fighting Terraria-Like progression path in this mod.")
+            .comment("Whether or not to enable hazardous items")
             .define("enableItemHazards", true);
 	
 //    private static final ForgeConfigSpec.IntValue MAGIC_NUMBER = BUILDER
@@ -62,8 +62,7 @@ public class ForgeConfigs
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
     
-    
-    private static boolean validateItemName(final Object obj)
+	private static boolean validateItemName(final Object obj)
     {
         return obj instanceof final String itemName && ForgeRegistries.ITEMS.containsKey(new ResourceLocation(itemName));
     }
