@@ -3,6 +3,7 @@ package xyz.nasasupercomputer.birmingham.ItemHazards;
 import net.minecraft.world.item.Item;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.Types.HazardToxic;
+import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
 
 // Adds Hazards to items.
 public class HazardRegistry {
@@ -11,10 +12,11 @@ public class HazardRegistry {
 	static final HazardToxic Hazard_Toxic_T1 = new HazardToxic(1.0);
 	
 	
+	// =========================
+	// ITEM HAZARDS
 	public static void RegisterAllHazards() {
 		
-		// Put the Hazards onto an Item.
-		HazardSystem.RegisterHazard(MainRegistry.TEST_ITEM.get(), Hazard_Toxic_T1);
+		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Toxic_T1);
 	}
 
 }

@@ -28,8 +28,11 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
+import xyz.nasasupercomputer.birmingham.ItemGroups.ItemGroupRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardSystem;
+import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
 
 import org.slf4j.Logger;
 
@@ -39,70 +42,36 @@ public class MainRegistry
 {
     // Define Mod ID in a common place for everything to reference
     public static final String MOD_ID = "birmingham";
-    private static final Logger LOGGER = LogUtils.getLogger();
-    
-    // Deferred Registers
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
+    public static final Logger LOGGER = LogUtils.getLogger();
 
-    // Blocks
-    // public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
-    // public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties()));
-
-    // Items
-    public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item", () -> new Item(new Item.Properties().stacksTo(64)));
-    
-    // Creates a new food item with the id "examplemod:example_id", nutrition 1 and saturation 2
-    public static final RegistryObject<Item> EXAMPLE_ITEM = ITEMS.register("example_item", () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
-            .alwaysEat().nutrition(1).saturationMod(2f).build())));
-
-
-    // Machines Tab
-    public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_MACHINES = CREATIVE_MODE_TABS.register("creative_tab_machines", () -> CreativeModeTab.builder()
-            .icon(() -> TEST_ITEM.get().getDefaultInstance())
-            .title(Component.translatable("itemGroup.birmingham.creative_tab_machines"))
-            .build());
-    
-    // Resources Tab
-    public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_RESOURCES = CREATIVE_MODE_TABS.register("creative_tab_resources", () -> CreativeModeTab.builder()
-            .icon(() -> TEST_ITEM.get().getDefaultInstance())
-            .title(Component.translatable("itemGroup.birmingham.creative_tab_resources"))
-            .build());
-    
-    // Combat Tab
-    public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_COMBAT = CREATIVE_MODE_TABS.register("creative_tab_combat", () -> CreativeModeTab.builder()
-            .icon(() -> TEST_ITEM.get().getDefaultInstance())
-            .title(Component.translatable("itemGroup.birmingham.creative_tab_combat"))
-            .build());
-    
+	// Treat this as the first thing that runs in the entire mod.
     public MainRegistry(FMLJavaModLoadingContext context)
     {
         IEventBus modEventBus = context.getModEventBus();
 
         // Register the commonSetup method for modloading
-        modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::CommonSetup);
 
-        BLOCKS.register(modEventBus);
-        ITEMS.register(modEventBus);
-        CREATIVE_MODE_TABS.register(modEventBus);
-        
+        BlockRegistry.BLOCKS.register(modEventBus);
+        ItemRegistry.ITEMS.register(modEventBus);
+        ItemGroupRegistry.CREATIVE_MODE_TABS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
         // Register the item to a creative tab
-        modEventBus.addListener(this::addCreative);
+        modEventBus.addListener(ItemGroupRegistry::AddItemToTab);
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         context.registerConfig(ModConfig.Type.COMMON, ForgeConfigs.SPEC);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
+    private void CommonSetup(final FMLCommonSetupEvent event)
     {	
     	
     	LOGGER.info("[Birmingham] Started Mod with Tech Route Enabled: " + String.valueOf(ForgeConfigs.enableTechRoute).toUpperCase());
     	LOGGER.info("[Birmingham] Started Mod with Exploration Route Enabled: " + String.valueOf(ForgeConfigs.enableExplorationRoute).toUpperCase());
+    	LOGGER.info("[Birmingham] Started Mod with Hazards Enabled: " + String.valueOf(ForgeConfigs.enableItemHazards).toUpperCase());
     	
         // Register all Item Hazards
         HazardRegistry.RegisterAllHazards();
@@ -118,14 +87,6 @@ public class MainRegistry
 //        ForgeConfigs.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
     }
 
-    // Add the example block item to the building blocks tab
-    private void addCreative(BuildCreativeModeTabContentsEvent event)
-    {
-        if (event.getTabKey() == CREATIVE_TAB_RESOURCES.getKey() || event.getTabKey() == CREATIVE_TAB_MACHINES.getKey() || event.getTabKey() == CREATIVE_TAB_COMBAT.getKey())
-        	event.accept(TEST_ITEM);
-    }
-
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
     {
@@ -133,7 +94,6 @@ public class MainRegistry
         LOGGER.info("HELLO from server starting");
     }
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
@@ -141,8 +101,8 @@ public class MainRegistry
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+            // LOGGER.info("HELLO FROM CLIENT SETUP");
+            // LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
     }
 }

@@ -32,6 +32,12 @@ public class ForgeConfigs
     private static final ForgeConfigSpec.BooleanValue ENABLED_EXPLORATION_ROUTE = BUILDER
             .comment("Whether or not to enable the Exploration / Boss-Fighting Terraria-Like progression path in this mod.")
             .define("enableExplorationPath", true);
+    
+    // Main Setting: Enable Item Hazards
+	public static boolean enableItemHazards;
+    private static final ForgeConfigSpec.BooleanValue ENABLED_ITEM_HAZARDS = BUILDER
+            .comment("Whether or not to enable the Exploration / Boss-Fighting Terraria-Like progression path in this mod.")
+            .define("enableExplorationPath", true);
 	
 //    private static final ForgeConfigSpec.IntValue MAGIC_NUMBER = BUILDER
 //            .comment("A magic number")
@@ -67,6 +73,7 @@ public class ForgeConfigs
     {
     	enableTechRoute = ENABLED_TECH_ROUTE.get();
     	enableExplorationRoute = ENABLED_EXPLORATION_ROUTE.get();
+    	enableItemHazards = ENABLED_ITEM_HAZARDS.get();
 //        magicNumber = MAGIC_NUMBER.get();
 //        magicNumberIntroduction = MAGIC_NUMBER_INTRODUCTION.get();
 //

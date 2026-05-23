@@ -12,6 +12,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import xyz.nasasupercomputer.birmingham.ForgeConfigs;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 
 @Mod.EventBusSubscriber(modid = MainRegistry.MOD_ID)
@@ -36,7 +37,7 @@ public class HazardEventHandler {
         inventoryItems.addAll(player.getInventory().items);
         inventoryItems.add(player.getOffhandItem());
         
-        if (inventoryItems != null) {
+        if (inventoryItems != null && ForgeConfigs.enableItemHazards) {
             
 		    for (ItemStack stack : inventoryItems) {
 		        HazardSystem.ApplyHazard(stack, player);
@@ -51,12 +52,15 @@ public class HazardEventHandler {
         List<Component> tooltipList = event.getToolTip();
         List<String> tooltipString = new ArrayList<String>();
         
-        // Apply Hazard Description
-        HazardSystem.ApplyHazardTooltip(stack, event.getEntity(), tooltipString);
-        
-        // Finalize any changes. by converting & adding back onto tooltipString back to tooltipList components.
-        for (String line : tooltipString) {
-            tooltipList.add(Component.literal(line));
+        if (ForgeConfigs.enableItemHazards) {
+	        
+	        // Apply Hazard Description
+	        HazardSystem.ApplyHazardTooltip(stack, event.getEntity(), tooltipString);
+	        
+	        // Finalize any changes. by converting & adding back onto tooltipString back to tooltipList components.
+	        for (String line : tooltipString) {
+	            tooltipList.add(Component.literal(line));
+	        }
         }
 	}
 }

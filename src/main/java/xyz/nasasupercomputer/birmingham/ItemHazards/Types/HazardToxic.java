@@ -27,12 +27,12 @@ public class HazardToxic implements IHazardType {
 	public void PerTickUpdate(ServerPlayer player, ItemStack stack) {
 		// Remember that this could be running many times EVERY TICK,
 		// if you're not careful when optimizing these the lag will be INSANE!!!!
-		MobEffectInstance effect = player.getEffect(MobEffects.BLINDNESS);
+		MobEffectInstance effect = player.getEffect(MobEffects.POISON);
 		
 		// When holding the item, if you're not in creative mode. give blindness.
 		if (player.gameMode.getGameModeForPlayer() != GameType.CREATIVE){
 			if (effect == null || effect.getDuration() < 30) {
-			    player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 60, 2));
+			    player.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 2));
 			}
 		}
 	}

@@ -1,7 +1,15 @@
 {
 	"itemGroup.birmingham.creative_tab_machines": "Machines",
 	"itemGroup.birmingham.creative_tab_resources": "Resources",
+	"itemGroup.birmingham.creative_tab_building": "Building",
 	"itemGroup.birmingham.creative_tab_combat": "Combat",
+	
+	
 	"item.birmingham.test_item": "fucked up bread",
+	
+	
+	"block.birmingham.example_block": "test blockkkk123123123123",
+	
+	
 	"hazard.toxic.title": "Toxic"
 }

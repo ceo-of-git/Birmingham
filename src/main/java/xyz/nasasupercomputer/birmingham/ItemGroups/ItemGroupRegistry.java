@@ -1,0 +1,53 @@
+package xyz.nasasupercomputer.birmingham.ItemGroups;
+
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
+import xyz.nasasupercomputer.birmingham.MainRegistry;
+import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
+
+public class ItemGroupRegistry {
+	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MainRegistry.MOD_ID);
+	
+	// =========================
+	// ITEM GROUPS
+	
+    // Machines Tab
+    public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_MACHINES = CREATIVE_MODE_TABS.register("creative_tab_machines", () -> CreativeModeTab.builder()
+            .icon(() -> ItemRegistry.TEST_ITEM.get().getDefaultInstance())
+            .title(Component.translatable("itemGroup.birmingham.creative_tab_machines"))
+            .build());
+    
+    // Resources Tab
+    public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_RESOURCES = CREATIVE_MODE_TABS.register("creative_tab_resources", () -> CreativeModeTab.builder()
+            .icon(() -> ItemRegistry.TEST_ITEM.get().getDefaultInstance())
+            .title(Component.translatable("itemGroup.birmingham.creative_tab_resources"))
+            .build());
+    
+    // Building Tab
+    public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_BUILDING = CREATIVE_MODE_TABS.register("creative_tab_building", () -> CreativeModeTab.builder()
+            .icon(() -> ItemRegistry.TEST_ITEM.get().getDefaultInstance())
+            .title(Component.translatable("itemGroup.birmingham.creative_tab_building"))
+            .build());
+    
+    // Combat Tab
+    public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_COMBAT = CREATIVE_MODE_TABS.register("creative_tab_combat", () -> CreativeModeTab.builder()
+            .icon(() -> ItemRegistry.TEST_ITEM.get().getDefaultInstance())
+            .title(Component.translatable("itemGroup.birmingham.creative_tab_combat"))
+            .build());
+    
+	// =========================
+	// ADDING ITEMS TO ITEM GROUPS
+    public static void AddItemToTab(BuildCreativeModeTabContentsEvent event)
+    {
+        if (event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_RESOURCES.getKey() || 
+        		event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_MACHINES.getKey() || 
+        		event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_COMBAT.getKey() || 
+        		event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_BUILDING.getKey()) {
+        	event.accept(ItemRegistry.TEST_ITEM);
+        }
+    }
+}
