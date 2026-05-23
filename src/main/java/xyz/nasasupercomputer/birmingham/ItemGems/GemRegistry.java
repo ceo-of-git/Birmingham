@@ -16,7 +16,7 @@ public class GemRegistry{
 	// ITEM HAZARDS
 	public static void RegisterAllGems() {
 		
-		GemSystem.RegisterGem(ItemRegistry.TEST_ITEM.get(), fireGem);
+		//GemSystem.RegisterGem(ItemRegistry.TEST_ITEM.get(), fireGem);
 	}
 
 }

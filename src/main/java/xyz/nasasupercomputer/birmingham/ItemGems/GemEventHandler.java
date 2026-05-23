@@ -17,15 +17,17 @@ import xyz.nasasupercomputer.birmingham.ForgeConfigs;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 
 @Mod.EventBusSubscriber(modid = MainRegistry.MOD_ID)
 public class GemEventHandler {
 
 	@SubscribeEvent
 	public static void onEntityHit(LivingDamageEvent event){
-		var enemy = event.getEntity();
-		var attacker=event.getSource();
-		if (source.getEntity() != null){
+		LivingEntity enemy = event.getEntity();
+		LivingEntity attacker=(LivingEntity) event.getSource().getEntity();
+		if (attacker != null){
 			ItemStack item = attacker.getMainHandItem();
 			if (item.hasTag()){
 				CompoundTag tag = item.getTag();
