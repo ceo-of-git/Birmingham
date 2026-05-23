@@ -14,6 +14,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.nasasupercomputer.birmingham.ForgeConfigs;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
+import xyz.nasasupercomputer.birmingham.ItemGems.GemSystem;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardSystem;
 
 @Mod.EventBusSubscriber(modid = MainRegistry.MOD_ID)
@@ -31,11 +32,22 @@ public class ClientEventHandler {
 	        
 	        // Apply Hazard Description
 	        HazardSystem.ApplyHazardTooltip(stack, event.getEntity(), tooltipString);
-	        
-	        // Finalize any changes. by converting & adding back onto tooltipString back to tooltipList components.
-	        for (String line : tooltipString) {
-	            tooltipList.add(Component.literal(line));
-	        }
+
         }
+        
+        // ===================
+        // GEM ALERT!
+
+  		if (true) { // No config installed yet
+        
+        	// Apply Gem Description
+        	GemSystem.ApplyGemTooltip(stack, event.getEntity(), tooltipString);
+        
+    	}
+  		
+    	// Finalize any changes. by converting & adding back onto tooltipString back to tooltipList components.
+    	for (String line : tooltipString) {
+        		tooltipList.add(Component.literal(line));
+    	}
 	}
 }

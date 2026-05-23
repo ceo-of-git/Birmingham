@@ -14,16 +14,9 @@ public class GemRegistry{
 	//static final GemFlame fireGem = new GemFlame();
 	
 	static HashMap<String,IGemType> gemList = new HashMap<>();
+	
 	public GemRegistry() {
 		gemList.put("Flame", new GemFlame());
-	}
-	//EXTREMELY SCUFFED WAY OF CODING THIS but i'm not a pro coder so idc
-	
-	// =========================
-	// ITEM HAZARDS
-	public static void RegisterAllGems() {
-		
-		//GemSystem.RegisterGem(ItemRegistry.TEST_ITEM.get(), fireGem);
 	}
 
 }

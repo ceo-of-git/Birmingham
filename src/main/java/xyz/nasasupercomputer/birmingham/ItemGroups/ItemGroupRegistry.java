@@ -48,6 +48,7 @@ public class ItemGroupRegistry {
         		event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_COMBAT.getKey() || 
         		event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_BUILDING.getKey()) {
         	event.accept(ItemRegistry.TEST_ITEM);
+        
         }
     }
 }

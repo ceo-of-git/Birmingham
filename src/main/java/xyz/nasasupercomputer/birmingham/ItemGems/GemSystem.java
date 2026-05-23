@@ -18,13 +18,17 @@ public class GemSystem {
 	// Returns a list of every Gem that the ItemStack may have.
 	public static List<IGemType> GetGemsFromItemStack(ItemStack stack){
 		if (stack.isEmpty()) {
-			return List.of(); // Empty List
+			return List.of();
 		}
-		CompoundTag tag=stack.getTag();
-		GemRegistry gr=new GemRegistry(); //possibly unoptimized change later
+		
+		CompoundTag tag = stack.getTag();
+		if (tag == null) { return List.of(); }
+
 		ArrayList<IGemType> gems = new ArrayList<IGemType>();
 		if (tag.contains("GemList")){
+			
 			ListTag gem=tag.getList("GemList",Tag.TAG_COMPOUND);
+			
 			for (Tag s: gem){
 				gems.add(GemRegistry.gemList.get(s.toString()));
 			}
@@ -33,7 +37,7 @@ public class GemSystem {
 		return gems;
 	}
 	
-	// Edits the description of an item to add hazards :)
+	// Edits the description of an item to add the gem tooltip
 	public static void ApplyGemTooltip(ItemStack stack, Player player, List<String> description) {
 		if (GetGemsFromItemStack(stack) == null) return;
 		
@@ -42,14 +46,15 @@ public class GemSystem {
 		}
 	}
 	
-	// Gets all the hazards on an item, and does the "perTickUpdate" method on each of em.
 	public static float ApplyGem(ItemStack stack, LivingEntity attacker, LivingEntity enemy, float damage) {
 		if (stack.isEmpty()) return damage;
 		
-		List<IGemType> itemHazards = GetGemsFromItemStack(stack);
-		for (IGemType hazard : itemHazards) {
-			damage=hazard.RegisterDamage(attacker, enemy, stack, damage);
+		List<IGemType> itemGems = GetGemsFromItemStack(stack);
+		
+		for (IGemType gem : itemGems) {
+			damage=gem.RegisterDamage(attacker, enemy, stack, damage);
 		}
+		
 		return damage;
 	}
 }

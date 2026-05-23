@@ -38,6 +38,12 @@ public class ForgeConfigs
     private static final ForgeConfigSpec.BooleanValue ENABLED_ITEM_HAZARDS = BUILDER
             .comment("Whether or not to enable hazardous items")
             .define("enableItemHazards", true);
+    
+    // Main Setting: Enable Gems
+	public static boolean enableItemGems;
+    private static final ForgeConfigSpec.BooleanValue ENABLED_ITEM_GEMS = BUILDER
+            .comment("Whether or not to enable hazardous items")
+            .define("enableItemGems", true);
 	
 //    private static final ForgeConfigSpec.IntValue MAGIC_NUMBER = BUILDER
 //            .comment("A magic number")
@@ -73,6 +79,7 @@ public class ForgeConfigs
     	enableTechRoute = ENABLED_TECH_ROUTE.get();
     	enableExplorationRoute = ENABLED_EXPLORATION_ROUTE.get();
     	enableItemHazards = ENABLED_ITEM_HAZARDS.get();
+    	enableItemGems = ENABLED_ITEM_GEMS.get();
 //        magicNumber = MAGIC_NUMBER.get();
 //        magicNumberIntroduction = MAGIC_NUMBER_INTRODUCTION.get();
 //
