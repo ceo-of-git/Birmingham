@@ -7,12 +7,13 @@
 
 	"item.birmingham.test_item": "fucked up bread",
 	"item.birmingham.energy_drink": "Energy Drink",
-
+	"item.birmingham.raw_adamantite": "RAW ADAMMMMM",
 	
 	"block.birmingham.example_block": "test blockkkk123123123123",
-	
+	"block.birmingham.adamantite": "ADAMMMMANTITE",
 	
 	"hazard.toxic.title": "Toxic",
 
 	"gems.flame.title": "Flame Gem"
+	
 }
