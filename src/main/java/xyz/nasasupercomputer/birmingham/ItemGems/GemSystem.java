@@ -26,7 +26,7 @@ public class GemSystem {
 		if (tag.contains("GemList")){
 			ListTag gem=tag.getList("GemList",Tag.TAG_COMPOUND);
 			for (Tag s: gem){
-				//gems.add();
+				gems.add(GemRegistry.gemList.get(s.toString()));
 			}
 		}
 		

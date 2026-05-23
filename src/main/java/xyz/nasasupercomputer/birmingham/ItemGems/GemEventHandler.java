@@ -42,6 +42,7 @@ public class GemEventHandler {
 
 	@SubscribeEvent
 	public static void drawTooltip(ItemTooltipEvent event) {
+			if (true) { return; }
     		ItemStack stack = event.getItemStack();
      		List<Component> tooltipList = event.getToolTip();
      		List<String> tooltipString = new ArrayList<String>();
@@ -49,7 +50,7 @@ public class GemEventHandler {
       		if (true) { //No config installed yet
 	        
 	        	// Apply Gem Description
-	        	GemSystem.ApplyGemTooltip(stack, event.getEntity(), tooltipString);
+	        	//GemSystem.ApplyGemTooltip(stack, event.getEntity(), tooltipString);
 	        
 	        	// Finalize any changes. by converting & adding back onto tooltipString back to tooltipList components.
 	        	for (String line : tooltipString) {
