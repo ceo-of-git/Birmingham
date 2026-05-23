@@ -11,5 +11,7 @@
 	"block.birmingham.example_block": "test blockkkk123123123123",
 	
 	
-	"hazard.toxic.title": "Toxic"
+	"hazard.toxic.title": "Toxic",
+
+	"gems.flame.title": "Flame Gem",
 }
