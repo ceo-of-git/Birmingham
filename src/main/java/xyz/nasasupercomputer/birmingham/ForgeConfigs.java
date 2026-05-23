@@ -37,7 +37,7 @@ public class ForgeConfigs
 	public static boolean enableItemHazards;
     private static final ForgeConfigSpec.BooleanValue ENABLED_ITEM_HAZARDS = BUILDER
             .comment("Whether or not to enable the Exploration / Boss-Fighting Terraria-Like progression path in this mod.")
-            .define("enableExplorationPath", true);
+            .define("enableItemHazards", true);
 	
 //    private static final ForgeConfigSpec.IntValue MAGIC_NUMBER = BUILDER
 //            .comment("A magic number")
