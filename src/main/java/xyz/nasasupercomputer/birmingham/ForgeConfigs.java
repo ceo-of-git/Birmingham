@@ -1,4 +1,4 @@
-package xyz.nasasupercomputer.birminghammod;
+package xyz.nasasupercomputer.birmingham;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

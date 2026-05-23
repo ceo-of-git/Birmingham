@@ -1,4 +1,4 @@
-package xyz.nasasupercomputer.birminghammod;
+package xyz.nasasupercomputer.birmingham;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -26,6 +26,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import xyz.nasasupercomputer.birmingham.ItemHazards.HazardRegistry;
+import xyz.nasasupercomputer.birmingham.ItemHazards.HazardSystem;
+
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -43,10 +46,11 @@ public class MainRegistry
 
     // Blocks
     public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.STONE)));
-    
-    // Items
     public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties()));
 
+    // Items
+    public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item", () -> new Item(new Item.Properties().stacksTo(64)));
+    
     // Creates a new food item with the id "examplemod:example_id", nutrition 1 and saturation 2
     public static final RegistryObject<Item> EXAMPLE_ITEM = ITEMS.register("example_item", () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
             .alwaysEat().nutrition(1).saturationMod(2f).build())));
@@ -59,7 +63,6 @@ public class MainRegistry
             .displayItems((parameters, output) -> {
                 output.accept(EXAMPLE_ITEM.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
             }).build());
-
     
     public MainRegistry(FMLJavaModLoadingContext context)
     {
@@ -68,12 +71,10 @@ public class MainRegistry
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
-        // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so items get registered
         ITEMS.register(modEventBus);
-        // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
+        
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -88,9 +89,12 @@ public class MainRegistry
     private void commonSetup(final FMLCommonSetupEvent event)
     {	
     	
-    	LOGGER.info("[Birmingham] Starting Mod with Tech Route Enabled: " + String.valueOf(ForgeConfigs.enableTechRoute).toUpperCase());
-    	LOGGER.info("[Birmingham] Starting Mod with Exploration Route Enabled: " + String.valueOf(ForgeConfigs.enableExplorationRoute).toUpperCase());
+    	LOGGER.info("[Birmingham] Started Mod with Tech Route Enabled: " + String.valueOf(ForgeConfigs.enableTechRoute).toUpperCase());
+    	LOGGER.info("[Birmingham] Started Mod with Exploration Route Enabled: " + String.valueOf(ForgeConfigs.enableExplorationRoute).toUpperCase());
     	
+        // Register all Item Hazards
+        HazardRegistry.RegisterAllHazards();
+        
 //        // Some common setup code
 //        LOGGER.info("HELLO FROM COMMON SETUP");
 //
@@ -106,7 +110,7 @@ public class MainRegistry
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
-            event.accept(EXAMPLE_BLOCK_ITEM);
+        	event.accept(EXAMPLE_BLOCK_ITEM);
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
