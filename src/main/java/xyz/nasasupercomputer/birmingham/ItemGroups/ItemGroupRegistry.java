@@ -50,5 +50,8 @@ public class ItemGroupRegistry {
         	event.accept(ItemRegistry.TEST_ITEM);
         
         }
+        if (event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_COMBAT.getKey()) {
+            event.accept(ItemRegistry.ENERGY_DRINK);
+        }
     }
 }
