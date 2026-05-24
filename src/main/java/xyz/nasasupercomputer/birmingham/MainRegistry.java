@@ -36,6 +36,7 @@ import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
 import xyz.nasasupercomputer.birmingham.Sound.SoundRegistry;
 
 import org.slf4j.Logger;
+import xyz.nasasupercomputer.birmingham.loottables.ModLootModifiers;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(MainRegistry.MOD_ID)
@@ -57,6 +58,9 @@ public class MainRegistry
         ItemRegistry.ITEMS.register(modEventBus);
         SoundRegistry.SOUND_EVENTS.register(modEventBus);
         ItemGroupRegistry.CREATIVE_MODE_TABS.register(modEventBus);
+
+        //registering loot tables (Probably)
+        ModLootModifiers.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

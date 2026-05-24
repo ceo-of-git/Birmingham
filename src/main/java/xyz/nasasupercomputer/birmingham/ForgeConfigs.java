@@ -44,7 +44,8 @@ public class ForgeConfigs
     private static final ForgeConfigSpec.BooleanValue ENABLED_ITEM_GEMS = BUILDER
             .comment("Whether or not to enable hazardous items")
             .define("enableItemGems", true);
-	
+
+
 //    private static final ForgeConfigSpec.IntValue MAGIC_NUMBER = BUILDER
 //            .comment("A magic number")
 //            .defineInRange("magicNumber", 42, 0, Integer.MAX_VALUE);
