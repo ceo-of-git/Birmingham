@@ -15,14 +15,16 @@ public class HazardRegistry {
 	
 	// Register each hazard (And their 'intensity')
 	// Reminder to add each of these to the "HazardVarientsList" in the RegisterHazardVarients method, thx.
-	static final HazardToxic Hazard_Toxic_T1 = new HazardToxic(1.0, "hazard.birmingham.toxic.title");
-	static final HazardToxic Hazard_Toxic_T2 = new HazardToxic(2.0, "hazard.birmingham.toxic.strong.title");
+	static final HazardToxic Hazard_Toxic_T1 = new HazardToxic(1.0, "hazard.birmingham.toxic.title", "hazard.birmingham.toxic.description");
+	static final HazardToxic Hazard_Toxic_T2 = new HazardToxic(5.0, "hazard.birmingham.toxic.moderate.title", "hazard.birmingham.toxic.moderate.description");
+	static final HazardToxic Hazard_Toxic_T3 = new HazardToxic(15.0, "hazard.birmingham.toxic.strong.title", "hazard.birmingham.toxic.strong.description");
 	
 	// =========================
 	// HAZARD VARIANTS
 	public static void RegisterHazardVarients() {
 		HazardVariantsList.add(Hazard_Toxic_T1);
 		HazardVariantsList.add(Hazard_Toxic_T2);
+		HazardVariantsList.add(Hazard_Toxic_T3);
 	}
 	
 	// =========================
@@ -32,6 +34,7 @@ public class HazardRegistry {
 		
 		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Toxic_T1);
 		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Toxic_T2);
+		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Toxic_T3);
 	}
 
 }

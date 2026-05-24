@@ -3,6 +3,7 @@ package xyz.nasasupercomputer.birmingham.Items.custom;
 
 import java.util.List;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
@@ -59,12 +60,12 @@ public class Gloves extends Item implements ICurioItem {
 
 				// This glove must protect from that effect.
 				hazardsProtectedFrom++;
-				tooltip.add(Component.literal("§e- ").append(Component.translatable(hazard.GetTranslatableTitle())));
+				tooltip.add(Component.literal("§e- ").append(Component.translatable(hazard.GetTranslatableTitle()).withStyle(ChatFormatting.YELLOW)));
 			}
 		}
 		
 		if (hazardsProtectedFrom == 0) {
-			tooltip.add(Component.literal("§c- ").append(Component.translatable("tooltip.birmingham.protects_nothing")));
+			tooltip.add(Component.literal("§c- ").append(Component.translatable("tooltip.birmingham.protects_nothing")).withStyle(ChatFormatting.RED));
 		}
         super.appendHoverText(stack, level, tooltip, flag);
     }

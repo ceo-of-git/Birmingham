@@ -28,4 +28,5 @@ public interface IHazardType {
 	// Getter Methods
     double GetIntensity();
     String GetTranslatableTitle();
+    String GetTranslatableDescription();
 }

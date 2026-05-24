@@ -10,19 +10,23 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.language.I18n;
 import xyz.nasasupercomputer.birmingham.ItemHazards.IHazardType;
 
 public class HazardToxic implements IHazardType {
 
-	public String translatableTitle;
-	public double intensity;
+	private String translatableTitle;
+	private double intensity;
+	private String translatableDescription;
 	
 	
 	// Constructor
-	public HazardToxic(double intensity, String translatableTitle) {
+	public HazardToxic(double intensity, String translatableTitle, String translatableDescription) {
 		this.intensity = intensity;
 		this.translatableTitle = translatableTitle;
+		this.translatableDescription = translatableDescription;
 	}
 	
 	@Override
@@ -36,8 +40,11 @@ public class HazardToxic implements IHazardType {
 			if (effect == null || effect.getDuration() < 30) {
 			    player.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 2));
 			    if (intensity > 1) {
-			    	player.addEffect(new MobEffectInstance(MobEffects.WITHER, 160, (int)Math.ceil(intensity)));
 			    	player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 160, (int)Math.ceil(intensity)));
+			    	
+			    	if (intensity > 6) {
+			    		player.addEffect(new MobEffectInstance(MobEffects.WITHER, 160, 5));
+			    	}
 			    }
 			}
 		}
@@ -47,6 +54,10 @@ public class HazardToxic implements IHazardType {
 	@OnlyIn(Dist.CLIENT)
 	public void AddHazardTooltip(Player player, List<String> description, ItemStack stack) {
 		description.add("§2[ " + I18n.get(this.translatableTitle) + " ]§r");
+		
+		if (Screen.hasShiftDown()) {
+			description.add("§8- " + I18n.get(this.translatableDescription));
+		}
 	}
 
 	@Override
@@ -57,5 +68,10 @@ public class HazardToxic implements IHazardType {
 	@Override
 	public String GetTranslatableTitle() {
 		return this.translatableTitle;
+	}
+	
+	@Override
+	public String GetTranslatableDescription() {
+		return this.translatableDescription;
 	}
 }
