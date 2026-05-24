@@ -34,9 +34,9 @@ public class ItemGroupRegistry {
             .build());
     
     // Combat Tab
-    public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_COMBAT = CREATIVE_MODE_TABS.register("creative_tab_combat", () -> CreativeModeTab.builder()
+    public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_TOOLS = CREATIVE_MODE_TABS.register("creative_tab_tools", () -> CreativeModeTab.builder()
             .icon(() -> ItemRegistry.TEST_ITEM.get().getDefaultInstance())
-            .title(Component.translatable("itemGroup.birmingham.creative_tab_combat"))
+            .title(Component.translatable("itemGroup.birmingham.creative_tab_tools"))
             .build());
     
 	// =========================
@@ -45,12 +45,12 @@ public class ItemGroupRegistry {
     {
         if (event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_RESOURCES.getKey() || 
         		event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_MACHINES.getKey() || 
-        		event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_COMBAT.getKey() || 
+        		event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_TOOLS.getKey() || 
         		event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_BUILDING.getKey()) {
         	event.accept(ItemRegistry.TEST_ITEM);
         
         }
-        if (event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_COMBAT.getKey()) {
+        if (event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_TOOLS.getKey()) {
             event.accept(ItemRegistry.ENERGY_DRINK);
         }
     }
