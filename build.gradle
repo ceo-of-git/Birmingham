@@ -4,6 +4,7 @@ plugins {
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version '0.7.+'
 
 }
 
@@ -118,20 +119,22 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    maven { url = 'https://maven.minecraftforge.net/' }
+
+    // JEI
     maven {
-        name = "Forge"
-        url = "https://maven.minecraftforge.net"
+        url = "https://maven.blamejared.com/"
     }
 
+    // Curios
     maven {
-        name = "BlameJared"
-        url = "https://maven.blamejared.com"
-    }
-    maven {
-        name = "Illusive Soulworks maven"
         url = "https://maven.theillusivec4.top/"
     }
 
+    // GeckoLib
+    maven {
+        url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
+    }
 
 
 
@@ -156,6 +159,9 @@ dependencies {
     compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api"))
     // Use the full Curios API jar at runtime
     runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}"))
+    
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
+    implementation("com.eliotlash.mclib:mclib:20")
 
     // Compile against only the API artifact
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
