@@ -1,4 +1,5 @@
 package xyz.nasasupercomputer.birmingham.ItemGems.Types;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 
 import java.util.List;
 
@@ -24,10 +25,8 @@ public class GemFlame implements IGemType {
 	}
 	
 	//@Override
-	public float RegisterDamage(LivingEntity attacker, LivingEntity victim, ItemStack stack, float damage) {
-		// Remember that this could be running many times EVERY TICK,
-		// if you're not careful when optimizing these the lag will be INSANE!!!!
-		return damage;
+	public LivingDamageEvent RegisterDamage(LivingEntity attacker, LivingEntity victim, ItemStack stack, LivingDamageEvent event) {
+		return event; //Does nothing atm cause hasnt been implemented
 	}
 	
 	//@Override

@@ -63,8 +63,8 @@ public class ServerEventHandler {
 				CompoundTag tag = item.getTag();
 				
 				if (tag.contains("GemList")){
-					float damage=event.getAmount();
-					damage = GemSystem.ApplyGem(item, attacker, victim, damage);
+					//float damage=event.getAmount();
+					event = GemSystem.ApplyGem(item, attacker, victim, event);
 				}
 			}
 		}

@@ -12,6 +12,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraftforge.event.entity.living.LivingDamageEvent;
 
 public class GemSystem {
 	
@@ -46,15 +47,15 @@ public class GemSystem {
 		}
 	}
 	
-	public static float ApplyGem(ItemStack stack, LivingEntity attacker, LivingEntity enemy, float damage) {
-		if (stack.isEmpty()) return damage;
+	public static LivingDamageEvent ApplyGem(ItemStack stack, LivingEntity attacker, LivingEntity enemy, LivingDamageEvent event) {
+		if (stack.isEmpty()) return event;
 		
 		List<IGemType> itemGems = GetGemsFromItemStack(stack);
 		
 		for (IGemType gem : itemGems) {
-			damage=gem.RegisterDamage(attacker, enemy, stack, damage);
+			event=gem.RegisterDamage(attacker, enemy, stack, event);
 		}
 		
-		return damage;
+		return event;
 	}
 }
