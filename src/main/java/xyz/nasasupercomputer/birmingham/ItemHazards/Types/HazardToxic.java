@@ -15,12 +15,14 @@ import xyz.nasasupercomputer.birmingham.ItemHazards.IHazardType;
 
 public class HazardToxic implements IHazardType {
 
+	public String translatableTitle;
 	public double intensity;
 	
 	
 	// Constructor
-	public HazardToxic(double intensity) {
+	public HazardToxic(double intensity, String translatableTitle) {
 		this.intensity = intensity;
+		this.translatableTitle = translatableTitle;
 	}
 	
 	@Override
@@ -29,10 +31,14 @@ public class HazardToxic implements IHazardType {
 		// if you're not careful when optimizing these the lag will be INSANE!!!!
 		MobEffectInstance effect = player.getEffect(MobEffects.POISON);
 		
-		// When holding the item, if you're not in creative mode. give blindness.
+		// When holding the item, if you're not in creative mode. do stuff
 		if (player.gameMode.getGameModeForPlayer() != GameType.CREATIVE){
 			if (effect == null || effect.getDuration() < 30) {
 			    player.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 2));
+			    if (intensity > 1) {
+			    	player.addEffect(new MobEffectInstance(MobEffects.WITHER, 160, (int)Math.ceil(intensity)));
+			    	player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 160, (int)Math.ceil(intensity)));
+			    }
 			}
 		}
 	}
@@ -40,6 +46,16 @@ public class HazardToxic implements IHazardType {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void AddHazardTooltip(Player player, List<String> description, ItemStack stack) {
-		description.add("§2[ " + I18n.get("hazard.toxic.title") + " ]§r");
+		description.add("§2[ " + I18n.get(this.translatableTitle) + " ]§r");
+	}
+
+	@Override
+	public double GetIntensity() {
+		return this.intensity;
+	}
+
+	@Override
+	public String GetTranslatableTitle() {
+		return this.translatableTitle;
 	}
 }

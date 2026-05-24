@@ -1,5 +1,8 @@
 package xyz.nasasupercomputer.birmingham.ItemHazards;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.world.item.Item;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.Types.HazardToxic;
@@ -8,15 +11,27 @@ import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
 // Adds Hazards to items.
 public class HazardRegistry {
 	
-	// Register each hazard (And their 'intensity')
-	static final HazardToxic Hazard_Toxic_T1 = new HazardToxic(1.0);
+	public static final List<IHazardType> HazardVariantsList = new ArrayList<IHazardType>();
 	
+	// Register each hazard (And their 'intensity')
+	// Reminder to add each of these to the "HazardVarientsList" in the RegisterHazardVarients method, thx.
+	static final HazardToxic Hazard_Toxic_T1 = new HazardToxic(1.0, "hazard.birmingham.toxic.title");
+	static final HazardToxic Hazard_Toxic_T2 = new HazardToxic(2.0, "hazard.birmingham.toxic.strong.title");
+	
+	// =========================
+	// HAZARD VARIANTS
+	public static void RegisterHazardVarients() {
+		HazardVariantsList.add(Hazard_Toxic_T1);
+		HazardVariantsList.add(Hazard_Toxic_T2);
+	}
 	
 	// =========================
 	// ITEM HAZARDS
 	public static void RegisterAllHazards() {
+		RegisterHazardVarients();
 		
 		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Toxic_T1);
+		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Toxic_T2);
 	}
 
 }

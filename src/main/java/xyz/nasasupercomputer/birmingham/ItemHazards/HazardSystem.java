@@ -7,6 +7,13 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.IItemHandlerModifiable;
+import top.theillusivec4.curios.api.CuriosApi;
+import xyz.nasasupercomputer.birmingham.ItemHazards.Types.HazardToxic;
+import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
+import xyz.nasasupercomputer.birmingham.Items.custom.Gloves;
 
 public class HazardSystem {
 
@@ -53,6 +60,33 @@ public class HazardSystem {
 		
 		List<IHazardType> itemHazards = GetHazardsFromItemStack(stack);
 		for (IHazardType hazard : itemHazards) {
+			
+			// CuriosApi.getCuriosHelper().findEquippedCurio(ItemRegistry.LEATHER_GLOVES.get(), player)
+			// TODO: Add checking for curio worn gloves
+			// TODO: Optimize glove checks if possible.
+			ItemStack offhandStack = player.getOffhandItem();
+			ItemStack mainhandStack = player.getMainHandItem();
+
+			boolean offhandIsProtective = false;
+			boolean mainhandIsProtective = false;
+			
+			// Check if offhand item is an instance of "Gloves"
+			// Also check if the Offhand items protection value is good or not.
+			if (!offhandStack.isEmpty() && offhandStack.getItem() instanceof Gloves glove) {
+			    offhandIsProtective = hazard.GetIntensity() <= glove.protectionValue;
+			}
+			
+			// Check if offhand item is an instance of "Gloves"
+			// Also check if the Mainhand items protection value is good or not.
+			if (!mainhandStack.isEmpty() && offhandStack.getItem() instanceof Gloves glove) {
+			    mainhandIsProtective = hazard.GetIntensity() <= glove.protectionValue;
+			}
+			
+			if (offhandIsProtective || mainhandIsProtective) {
+			    // Don't add effect.
+			    continue;
+			}
+
 			hazard.PerTickUpdate(player, stack);
 		}
 	}

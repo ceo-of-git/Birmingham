@@ -8,11 +8,18 @@
 	"item.birmingham.test_item": "fucked up bread",
 	"item.birmingham.energy_drink": "Energy Drink",
 	"item.birmingham.raw_adamantite": "RAW ADAMMMMM",
+	"item.birmingham.gloves_leather": "Leather Gloves",
+	"item.birmingham.gloves_creative": "Creative Gloves",
+	
+	"tooltip.birmingham.protects_from": "§6Protects from:",
+	"tooltip.birmingham.protects_nothing": "Nothing!",
+	"tooltip.birmingham.gloves": "§7Gloves that you can wear to protect\n§7yourself from certain Hazardous Items!\n§7Applies only when in Mainhand or Offhand slots.",
 	
 	"block.birmingham.example_block": "test blockkkk123123123123",
 	"block.birmingham.adamantite": "ADAMMMMANTITE",
 	
-	"hazard.toxic.title": "Toxic",
+	"hazard.birmingham.toxic.title": "Mildly Toxic",
+	"hazard.birmingham.toxic.strong.title": "Extreme Toxicity",
 
 	"gems.flame.title": "Flame Gem"
 	

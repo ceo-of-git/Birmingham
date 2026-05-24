@@ -16,8 +16,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 // an interface is basically just a template with empty methods :)
 public interface IHazardType {
 
-	public double intensity = 1.0;
-
 	// Applys whatever you want every single tick
 	// Whether that be a poison effect or something like it.
 	// Is called by HazardSystem.ApplyHazard
@@ -26,4 +24,8 @@ public interface IHazardType {
 	// Adds the Hazard Tooltip to the actual item.
 	@OnlyIn(Dist.CLIENT)
 	void AddHazardTooltip(Player player, List<String> description, ItemStack stack);
+	
+	// Getter Methods
+    double GetIntensity();
+    String GetTranslatableTitle();
 }
