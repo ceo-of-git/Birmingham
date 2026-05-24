@@ -3,16 +3,21 @@ package xyz.nasasupercomputer.birmingham.Items.custom;
 
 import java.util.List;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardSystem;
 import xyz.nasasupercomputer.birmingham.ItemHazards.IHazardType;
+import xyz.nasasupercomputer.birmingham.Sound.SoundRegistry;
 
 public class Gloves extends Item implements ICurioItem {
 
@@ -63,6 +68,27 @@ public class Gloves extends Item implements ICurioItem {
 		}
         super.appendHoverText(stack, level, tooltip, flag);
     }
+  
+    // When "Used" on something, (right-clicked)
+    @Override
+    public InteractionResult useOn(UseOnContext pContext) {
+    	
+    	BlockPos clickedBlockPosition = pContext.getClickedPos();
+    	
+    	pContext.getLevel().playSeededSound(null, clickedBlockPosition.getX(), clickedBlockPosition.getY(), clickedBlockPosition.getZ(), SoundRegistry.HORSING_AROUND_TEST.get(), SoundSource.PLAYERS, 1f, 1f, 0);
+    	// .playSeededSound() args
+    	// 1 - Ignored Players (pass null if you want EVERYONE in a radius to hear.)
+    	// 2 - X
+    	// 3 - Y
+    	// 4 - Z
+    	// 5 - The SOUND itself from Sound Registry. (make sure it a part in sounds.json)
+    	// 6 - Which "Category" of sound it is.
+    	// 7 - Volume,
+    	// 8 - Pitch,
+    	// 9 - Seed (You can probably ignore this)
+    	
+        return InteractionResult.SUCCESS;
+     }
 	
 	
 	// ================
@@ -91,6 +117,6 @@ public class Gloves extends Item implements ICurioItem {
 	// Default for this mod should be True because I like it
 	@Override
 	public boolean canEquipFromUse(SlotContext slotContext, ItemStack stack) {
-		return true;
+		return false; // temp for testing
 	}
 }

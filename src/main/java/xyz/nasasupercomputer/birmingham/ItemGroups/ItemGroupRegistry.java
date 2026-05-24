@@ -45,12 +45,15 @@ public class ItemGroupRegistry {
     {
         if (event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_RESOURCES.getKey() || 
         		event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_MACHINES.getKey() || 
-        		event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_TOOLS.getKey() || 
         		event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_BUILDING.getKey()) {
         	event.accept(ItemRegistry.TEST_ITEM);
         
         }
+        
+        // ADDING TO TOOLS TAB
         if (event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_TOOLS.getKey()) {
+            event.accept(ItemRegistry.LEATHER_GLOVES);
+            event.accept(ItemRegistry.CREATIVE_GLOVES);
             event.accept(ItemRegistry.ENERGY_DRINK);
         }
     }
