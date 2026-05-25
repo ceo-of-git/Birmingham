@@ -7,6 +7,7 @@ import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
+import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
 
 public class ItemGroupRegistry {
@@ -43,7 +44,7 @@ public class ItemGroupRegistry {
 	// ADDING ITEMS TO ITEM GROUPS
     public static void AddItemToTab(BuildCreativeModeTabContentsEvent event)
     {
-        if (event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_RESOURCES.getKey() || 
+        if (event.getTabKey() == CREATIVE_TAB_RESOURCES.getKey() || 
         		event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_MACHINES.getKey() || 
         		event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_BUILDING.getKey()) {
         	event.accept(ItemRegistry.TEST_ITEM);
@@ -51,10 +52,15 @@ public class ItemGroupRegistry {
         }
         
         // ADDING TO TOOLS TAB
-        if (event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_TOOLS.getKey()) {
+        if (event.getTabKey() == CREATIVE_TAB_TOOLS.getKey()) {
             event.accept(ItemRegistry.LEATHER_GLOVES);
             event.accept(ItemRegistry.CREATIVE_GLOVES);
             event.accept(ItemRegistry.ENERGY_DRINK);
+        }
+        
+        // ADDING TO MACHINES TAB
+        if (event.getTabKey() == CREATIVE_TAB_MACHINES.getKey()) {
+        	event.accept(BlockRegistry.COKING_OVEN_ITEM);
         }
     }
 }
