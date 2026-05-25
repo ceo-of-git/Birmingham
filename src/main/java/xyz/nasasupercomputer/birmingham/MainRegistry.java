@@ -2,6 +2,7 @@ package xyz.nasasupercomputer.birmingham;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -34,6 +35,8 @@ import xyz.nasasupercomputer.birmingham.ItemHazards.HazardRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardSystem;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
 import xyz.nasasupercomputer.birmingham.Sound.SoundRegistry;
+import xyz.nasasupercomputer.birmingham.entity.ModEntities;
+import xyz.nasasupercomputer.birmingham.entity.client.CrabRenderer;
 
 import org.slf4j.Logger;
 import xyz.nasasupercomputer.birmingham.loottables.ModLootModifiers;
@@ -58,7 +61,8 @@ public class MainRegistry
         ItemRegistry.ITEMS.register(modEventBus);
         SoundRegistry.SOUND_EVENTS.register(modEventBus);
         ItemGroupRegistry.CREATIVE_MODE_TABS.register(modEventBus);
-
+        ModEntities.register(modEventBus);
+        
         //registering loot tables (Probably)
         ModLootModifiers.register(modEventBus);
 
@@ -106,6 +110,7 @@ public class MainRegistry
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
+        	EntityRenderers.register(ModEntities.crab.get(), CrabRenderer::new);
             // Some client setup code
             // LOGGER.info("HELLO FROM CLIENT SETUP");
             // LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());

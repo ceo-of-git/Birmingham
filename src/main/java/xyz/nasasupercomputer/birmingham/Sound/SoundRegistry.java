@@ -13,6 +13,8 @@ public class SoundRegistry {
 	
 	public static final RegistryObject<SoundEvent> HORSING_AROUND_TEST = registerSoundEvents("horsing_around_test");
 	
+	public static final RegistryObject<SoundEvent> horsing_around =  registerSoundEvents("horsing_around");
+	
 	public static void Register(IEventBus eventBus) {
 		SOUND_EVENTS.register(eventBus);
 	}

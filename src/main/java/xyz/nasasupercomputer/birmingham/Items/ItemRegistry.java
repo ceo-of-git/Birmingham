@@ -5,12 +5,14 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.RecordItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import xyz.nasasupercomputer.birmingham.Items.curios.energyDrink;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.Items.custom.Gloves;
+import xyz.nasasupercomputer.birmingham.Sound.SoundRegistry;
 
 public class ItemRegistry {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MainRegistry.MOD_ID);
@@ -19,7 +21,8 @@ public class ItemRegistry {
 	// ORIGINAL ITEMS
 	public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item", () -> new Item(new Item.Properties().stacksTo(64)));
 	public static final RegistryObject<Item> RAW_ADAMANTITE = ITEMS.register("raw_adamantite", () -> new Item(new Item.Properties().stacksTo(64)));
-	
+    public static final RegistryObject<Item> HORSING_AROUND = ITEMS.register("horsing_around", () -> new RecordItem(6, SoundRegistry.horsing_around, new Item.Properties().stacksTo(1), 2440));
+
 	// =========================
 	// TOOLS / CURIOS
 	public static final RegistryObject<Item> LEATHER_GLOVES = ITEMS.register("gloves_leather", () -> new Gloves(new Item.Properties().stacksTo(1), 1, null));

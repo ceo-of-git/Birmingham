@@ -4,5 +4,14 @@
 		"sounds": [
 			"birmingham:horsing_around"
 		]
+	},
+		"horsing_around": {
+			"subtitles": "horsing.around",
+			"sounds": [
+				"birmingham:horsing_around"
+				"stream": true
+			]
+		}
 	}
 }
+
