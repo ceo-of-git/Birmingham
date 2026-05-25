@@ -19,6 +19,7 @@
 	
 	"block.birmingham.example_block": "test blockkkk123123123123",
 	"block.birmingham.adamantite": "ADAMMMMANTITE",
+	"block.birmingham.coking_oven": "Coking Oven",
 	
 	"hazard.birmingham.toxic.title": "Mildly Toxic",
 	"hazard.birmingham.toxic.description": "Inflicts Poison III when held if unprotected.",

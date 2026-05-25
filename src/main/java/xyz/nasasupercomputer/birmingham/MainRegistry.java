@@ -28,6 +28,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import software.bernie.geckolib.GeckoLib;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
 import xyz.nasasupercomputer.birmingham.ItemGroups.ItemGroupRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardRegistry;
@@ -54,7 +55,11 @@ public class MainRegistry
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::CommonSetup);
 
+        GeckoLib.initialize();
+        
         BlockRegistry.BLOCKS.register(modEventBus);
+        BlockRegistry.BLOCK_ENTITIES.register(modEventBus);
+        
         ItemRegistry.ITEMS.register(modEventBus);
         SoundRegistry.SOUND_EVENTS.register(modEventBus);
         ItemGroupRegistry.CREATIVE_MODE_TABS.register(modEventBus);
