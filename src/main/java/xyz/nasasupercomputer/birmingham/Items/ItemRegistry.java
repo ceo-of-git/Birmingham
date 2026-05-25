@@ -22,6 +22,7 @@ public class ItemRegistry {
 	public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item", () -> new Item(new Item.Properties().stacksTo(64)));
 	public static final RegistryObject<Item> RAW_ADAMANTITE = ITEMS.register("raw_adamantite", () -> new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> HORSING_AROUND = ITEMS.register("horsing_around", () -> new RecordItem(6, SoundRegistry.horsing_around, new Item.Properties().stacksTo(1), 2440));
+    public static final RegistryObject<Item> FLAME_GEM = ITEMS.register("flame_gem", () -> new Item(new Item.Properties().stacksTo(64)));
 
 	// =========================
 	// TOOLS / CURIOS

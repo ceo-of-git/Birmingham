@@ -32,6 +32,6 @@ public class GemFlame implements IGemType {
 	//@Override
 	@OnlyIn(Dist.CLIENT)
 	public void AddGemTooltip(Player player, List<String> description, ItemStack stack) {
-		description.add("§2[ " + I18n.get("gem.flame.title") + " ]§r");
+		description.add("§2[ " + I18n.get("gem.birmingham.flame.title") + " ]§r");
 	}
 }

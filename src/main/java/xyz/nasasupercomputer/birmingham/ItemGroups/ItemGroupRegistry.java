@@ -28,6 +28,12 @@ public class ItemGroupRegistry {
             .title(Component.translatable("itemGroup.birmingham.creative_tab_resources"))
             .build());
     
+    //GEM ALARM
+    public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_MODULES = CREATIVE_MODE_TABS.register("creative_tab_modules", () -> CreativeModeTab.builder()
+            .icon(() -> ItemRegistry.TEST_ITEM.get().getDefaultInstance())
+            .title(Component.translatable("itemGroup.birmingham.creative_tab_modules"))
+            .build());
+    
     // Building Tab
     public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_BUILDING = CREATIVE_MODE_TABS.register("creative_tab_building", () -> CreativeModeTab.builder()
             .icon(() -> ItemRegistry.TEST_ITEM.get().getDefaultInstance())
@@ -61,6 +67,11 @@ public class ItemGroupRegistry {
         // ADDING TO MACHINES TAB
         if (event.getTabKey() == CREATIVE_TAB_MACHINES.getKey()) {
         	event.accept(BlockRegistry.COKING_OVEN_ITEM);
+        }
+        
+     // ADDING TO MODULES TAB
+        if (event.getTabKey() == CREATIVE_TAB_MODULES.getKey()) {
+        	event.accept(ItemRegistry.FLAME_GEM);
         }
     }
 }

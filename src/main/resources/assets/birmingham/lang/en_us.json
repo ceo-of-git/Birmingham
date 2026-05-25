@@ -3,6 +3,7 @@
 	"itemGroup.birmingham.creative_tab_resources": "Resources",
 	"itemGroup.birmingham.creative_tab_building": "Building",
 	"itemGroup.birmingham.creative_tab_tools": "Tools",
+	"itemGroup.birmingham.creative_tab_modules": "Modules",
 
 	"horsing.around.test.whatever": "hello didcool",
 
@@ -12,6 +13,7 @@
 	"item.birmingham.gloves_leather": "Leather Gloves",
 	"item.birmingham.gloves_creative": "Creative Gloves",
 	"item.birmingham.horsing_around": "Disc Horse",
+	"item.birmingham.flame_gem": "Flame Gem",
 	
 	"tooltip.birmingham.protects_from": "§6Protects from:",
 	"tooltip.birmingham.protects_nothing": "Nothing!",
@@ -28,6 +30,6 @@
 	"hazard.birmingham.toxic.strong.title": "Extreme Toxicity",
 	"hazard.birmingham.toxic.strong.description": "Inflicts strong Wither, Poison & Slowness effects when held if unprotected.",
 
-	"gems.flame.title": "Flame Gem"
+	"gems.birmingham.flame.title": "[SOCKET] Flame Gem"
 	
 }
