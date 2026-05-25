@@ -10,17 +10,26 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.nasasupercomputer.birmingham.ForgeConfigs;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
+import xyz.nasasupercomputer.birmingham.ItemGems.GemRegistry;
 import xyz.nasasupercomputer.birmingham.ItemGems.GemSystem;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardSystem;
+import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.CompoundTag;
 
 @Mod.EventBusSubscriber(modid = MainRegistry.MOD_ID)
 public class ServerEventHandler {
@@ -69,6 +78,31 @@ public class ServerEventHandler {
 					//float damage=event.getAmount();
 					event = GemSystem.ApplyGem(item, attacker, victim, event);
 				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onAnvilUpdate(AnvilUpdateEvent event) {
+		ItemStack left=event.getLeft();
+		ItemStack right=event.getRight();
+		if ((left.is(ItemTags.SWORDS) || left.is(ItemTags.AXES)) && right.is(ItemRegistry.FLAME_GEM.get())) {
+			ItemStack output=left;
+			CompoundTag tag=output.getOrCreateTag();
+			ListTag list=new ListTag();
+			if (tag.contains("GemList")){
+				ListTag gem=tag.getList("GemList",Tag.TAG_COMPOUND);
+				for (Tag s: gem){
+					list.add(StringTag.valueOf(s.toString()));
+				}
+			}
+			if (!list.contains(StringTag.valueOf("Flame"))) {
+				list.add(StringTag.valueOf("Flame"));
+				tag.put("GemList", list);
+				output.setTag(tag);
+				event.setOutput(output);
+				event.setCost(15);
+				event.setMaterialCost(1);
 			}
 		}
 	}
