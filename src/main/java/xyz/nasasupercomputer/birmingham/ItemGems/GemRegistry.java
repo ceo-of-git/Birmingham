@@ -13,10 +13,14 @@ public class GemRegistry{
 	// Register each hazard (And their 'intensity')
 	//static final GemFlame fireGem = new GemFlame();
 	
-	static HashMap<String,IGemType> gemList = new HashMap<>();
+	public static HashMap<String,IGemType> gemList = new HashMap<>(Map.ofEntries(
+			Map.entry("Flame", new GemFlame())));
 	
 	public GemRegistry() {
-		gemList.put("Flame", new GemFlame());
+		
 	}
+	//public static void main(String[] args) {
+		//gemList.put("Flame", new GemFlame()); //not sure if this is a good idea, but it'll be initialized on startup
+	//}
 
 }

@@ -16,6 +16,7 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 
 public class GemSystem {
 	
+	
 	// Returns a list of every Gem that the ItemStack may have.
 	public static List<IGemType> GetGemsFromItemStack(ItemStack stack){
 		if (stack.isEmpty()) {
@@ -28,11 +29,14 @@ public class GemSystem {
 		ArrayList<IGemType> gems = new ArrayList<IGemType>();
 		if (tag.contains("GemList")){
 			
-			ListTag gem=tag.getList("GemList",Tag.TAG_COMPOUND);
+			ListTag gem=tag.getList("GemList",Tag.TAG_STRING);
 			
-			for (Tag s: gem){
-				gems.add(GemRegistry.gemList.get(s.toString()));
+			for (int i=0;i<gem.size();i++) {
+				gems.add(GemRegistry.gemList.get(gem.getString(i)));
 			}
+			//for (Tag s: gem){
+				//gems.add(GemRegistry.gemList.get(s.toString()));
+			//}
 		}
 		
 		return gems;

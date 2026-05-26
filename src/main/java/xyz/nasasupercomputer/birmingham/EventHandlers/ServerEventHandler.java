@@ -86,23 +86,34 @@ public class ServerEventHandler {
 	public static void onAnvilUpdate(AnvilUpdateEvent event) {
 		ItemStack left=event.getLeft();
 		ItemStack right=event.getRight();
-		if ((left.is(ItemTags.SWORDS) || left.is(ItemTags.AXES)) && right.is(ItemRegistry.FLAME_GEM.get())) {
-			ItemStack output=left;
-			CompoundTag tag=output.getOrCreateTag();
-			ListTag list=new ListTag();
-			if (tag.contains("GemList")){
-				ListTag gem=tag.getList("GemList",Tag.TAG_COMPOUND);
-				for (Tag s: gem){
-					list.add(StringTag.valueOf(s.toString()));
+		if (ForgeConfigs.enableItemGems) {
+			if ((left.is(ItemTags.SWORDS) || left.is(ItemTags.AXES)) && right.is(ItemRegistry.FLAME_GEM.get())) {
+				ItemStack output=left.copy();
+				CompoundTag tag=output.getOrCreateTag();
+				ListTag list=new ListTag();
+				list=tag.getList("GemList", Tag.TAG_STRING);
+				//if (tag.contains("GemList",Tag.TAG_COMPOUND)){
+					//list=tag.getList("GemList",Tag.TAG_COMPOUND);
+					//for (Tag s: gem){
+					//	list.add(StringTag.valueOf(s.toString()));
+					//}
+				//}
+				//System.out.println("DEBUG: "+list.size());
+				boolean has=false;
+				for (int i=0;i<list.size();i++) {
+					if (list.getString(i).equals("Flame")) {
+						has=true;
+						break;
+					}
 				}
-			}
-			if (!list.contains(StringTag.valueOf("Flame"))) {
-				list.add(StringTag.valueOf("Flame"));
-				tag.put("GemList", list);
-				output.setTag(tag);
-				event.setOutput(output);
-				event.setCost(15);
-				event.setMaterialCost(1);
+				if (has==false) {
+					list.add(StringTag.valueOf("Flame"));
+					tag.put("GemList", list);
+					output.setTag(tag);
+					event.setOutput(output);
+					event.setCost(15);
+					event.setMaterialCost(1);
+				}
 			}
 		}
 	}
