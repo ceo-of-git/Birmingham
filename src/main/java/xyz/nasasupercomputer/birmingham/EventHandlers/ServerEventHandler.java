@@ -26,6 +26,7 @@ import xyz.nasasupercomputer.birmingham.ItemGems.GemRegistry;
 import xyz.nasasupercomputer.birmingham.ItemGems.GemSystem;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardSystem;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
+import xyz.nasasupercomputer.birmingham.Items.custom.Gem;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
@@ -76,7 +77,7 @@ public class ServerEventHandler {
 				
 				if (tag.contains("GemList")){
 					//float damage=event.getAmount();
-					event = GemSystem.ApplyGem(item, attacker, victim, event);
+					event = GemSystem.ApplyGemEffect(item, attacker, victim, event);
 				}
 			}
 		}
@@ -86,33 +87,41 @@ public class ServerEventHandler {
 	public static void onAnvilUpdate(AnvilUpdateEvent event) {
 		ItemStack left=event.getLeft();
 		ItemStack right=event.getRight();
+		
 		if (ForgeConfigs.enableItemGems) {
-			if ((left.is(ItemTags.SWORDS) || left.is(ItemTags.AXES)) && right.is(ItemRegistry.FLAME_GEM.get())) {
-				ItemStack output=left.copy();
-				CompoundTag tag=output.getOrCreateTag();
-				ListTag list=new ListTag();
-				list=tag.getList("GemList", Tag.TAG_STRING);
-				//if (tag.contains("GemList",Tag.TAG_COMPOUND)){
-					//list=tag.getList("GemList",Tag.TAG_COMPOUND);
-					//for (Tag s: gem){
-					//	list.add(StringTag.valueOf(s.toString()));
+			
+			// If the right item is any kind of gem.
+			if (event.getRight().getItem() instanceof Gem) {
+				
+				String gemTag = Gem.getTag(event.getRight().getItem());
+				
+				if ((left.is(ItemTags.SWORDS) || left.is(ItemTags.AXES))) {
+					ItemStack output=left.copy();
+					CompoundTag tag=output.getOrCreateTag();
+					ListTag list=new ListTag();
+					list=tag.getList("GemList", Tag.TAG_STRING);
+					//if (tag.contains("GemList",Tag.TAG_COMPOUND)){
+						//list=tag.getList("GemList",Tag.TAG_COMPOUND);
+						//for (Tag s: gem){
+						//	list.add(StringTag.valueOf(s.toString()));
+						//}
 					//}
-				//}
-				//System.out.println("DEBUG: "+list.size());
-				boolean has=false;
-				for (int i=0;i<list.size();i++) {
-					if (list.getString(i).equals("Flame")) {
-						has=true;
-						break;
+					//System.out.println("DEBUG: "+list.size());
+					boolean has=false;
+					for (int i=0;i<list.size();i++) {
+						if (list.getString(i).equals(gemTag)) {
+							has=true;
+							break;
+						}
 					}
-				}
-				if (has==false) {
-					list.add(StringTag.valueOf("Flame"));
-					tag.put("GemList", list);
-					output.setTag(tag);
-					event.setOutput(output);
-					event.setCost(15);
-					event.setMaterialCost(1);
+					if (has==false) {
+						list.add(StringTag.valueOf(gemTag));
+						tag.put("GemList", list);
+						output.setTag(tag);
+						event.setOutput(output);
+						event.setCost(15);
+						event.setMaterialCost(1);
+					}
 				}
 			}
 		}

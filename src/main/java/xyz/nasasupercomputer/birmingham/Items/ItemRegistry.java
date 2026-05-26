@@ -11,6 +11,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import xyz.nasasupercomputer.birmingham.Items.curios.energyDrink;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
+import xyz.nasasupercomputer.birmingham.Items.custom.Gem;
 import xyz.nasasupercomputer.birmingham.Items.custom.Gloves;
 import xyz.nasasupercomputer.birmingham.Sound.SoundRegistry;
 
@@ -22,7 +23,6 @@ public class ItemRegistry {
 	public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item", () -> new Item(new Item.Properties().stacksTo(64)));
 	public static final RegistryObject<Item> RAW_ADAMANTITE = ITEMS.register("raw_adamantite", () -> new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> HORSING_AROUND = ITEMS.register("horsing_around", () -> new RecordItem(6, SoundRegistry.horsing_around, new Item.Properties().stacksTo(1), 2440));
-    public static final RegistryObject<Item> FLAME_GEM = ITEMS.register("flame_gem", () -> new Item(new Item.Properties().stacksTo(64)));
 
 	// =========================
 	// TOOLS / CURIOS
@@ -31,4 +31,7 @@ public class ItemRegistry {
 
 	public static final RegistryObject<Item> ENERGY_DRINK = ITEMS.register("energy_drink", () -> new energyDrink(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(4).saturationMod(0.6f).effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1600, 7), 1f).alwaysEat().build()), 1f));
 
+	// =========================
+	// GEMS
+	public static final RegistryObject<Item> FLAME_GEM = ITEMS.register("flame_gem", () -> new Gem(new Item.Properties().stacksTo(64), "Flame", "gems.birmingham.flame.title", "gems.birmingham.flame.description"));
 }

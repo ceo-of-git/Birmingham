@@ -7,8 +7,12 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -46,12 +50,14 @@ public class GemSystem {
 	public static void ApplyGemTooltip(ItemStack stack, Player player, List<String> description) {
 		if (GetGemsFromItemStack(stack) == null) return;
 		
-		for (IGemType hazards : GetGemsFromItemStack(stack)) {
-			hazards.AddGemTooltip(player, description, stack);
+		for (IGemType gems : GetGemsFromItemStack(stack)) {
+			gems.AddGemTooltip(player, description, stack);
 		}
+		
+
 	}
 	
-	public static LivingDamageEvent ApplyGem(ItemStack stack, LivingEntity attacker, LivingEntity enemy, LivingDamageEvent event) {
+	public static LivingDamageEvent ApplyGemEffect(ItemStack stack, LivingEntity attacker, LivingEntity enemy, LivingDamageEvent event) {
 		if (stack.isEmpty()) return event;
 		
 		List<IGemType> itemGems = GetGemsFromItemStack(stack);

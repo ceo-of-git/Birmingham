@@ -43,7 +43,6 @@ public class ClientEventHandler {
         // GEM ALERT!
 
   		if (ForgeConfigs.enableItemGems) {
-        
         	// Apply Gem Description
         	GemSystem.ApplyGemTooltip(stack, event.getEntity(), tooltipString);
         

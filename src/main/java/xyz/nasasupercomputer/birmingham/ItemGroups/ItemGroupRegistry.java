@@ -3,6 +3,7 @@ package xyz.nasasupercomputer.birmingham.ItemGroups;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
@@ -72,6 +73,7 @@ public class ItemGroupRegistry {
      // ADDING TO MODULES TAB
         if (event.getTabKey() == CREATIVE_TAB_MODULES.getKey()) {
         	event.accept(ItemRegistry.FLAME_GEM);
+        	event.accept(Items.AMETHYST_SHARD);
         }
     }
 }
