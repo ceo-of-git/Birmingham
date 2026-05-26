@@ -10,10 +10,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
-import xyz.nasasupercomputer.birmingham.Blocks.IMultiblockType;
+import xyz.nasasupercomputer.birmingham.Blocks.IBigBlockType;
 
 // TODO: Make multiblocks expand their render bound thingies when they can.
-public class CokingOven extends BaseEntityBlock implements IMultiblockType {
+public class CokingOven extends BaseEntityBlock implements IBigBlockType {
 
 	public CokingOven(Properties pProperties) {
 		super(pProperties);

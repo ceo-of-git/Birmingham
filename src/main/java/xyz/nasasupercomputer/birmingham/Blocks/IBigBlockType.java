@@ -8,7 +8,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 // Multiblocks implement one "Main Block"
 // and every other block as a dummy loser block.
-public interface IMultiblockType {
+public interface IBigBlockType {
 
 	// How many blocks your multiblock goes past the origin block position
 	// So for the Coking oven its, 1, 1, 1 for a 2x2 block
