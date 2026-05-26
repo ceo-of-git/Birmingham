@@ -6,7 +6,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import java.util.HashMap;
 import java.util.Map;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
-import xyz.nasasupercomputer.birmingham.ItemGems.Types.GemAmethyst;
 import xyz.nasasupercomputer.birmingham.ItemGems.Types.GemFlame;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
 
@@ -21,9 +20,5 @@ public class GemRegistry{
 	public static void register(IEventBus modEventBus) {
 		gemList.put("Flame", new GemFlame());
 	}
-	
-	//public static void main(String[] args) {
-		//gemList.put("Flame", new GemFlame()); //not sure if this is a good idea, but it'll be initialized on startup
-	//}
 
 }
