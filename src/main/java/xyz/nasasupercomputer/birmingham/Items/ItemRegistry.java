@@ -34,4 +34,6 @@ public class ItemRegistry {
 	// =========================
 	// GEMS
 	public static final RegistryObject<Item> FLAME_GEM = ITEMS.register("flame_gem", () -> new Gem(new Item.Properties().stacksTo(64), "Flame", "gems.birmingham.flame.title", "gems.birmingham.flame.description"));
+	public static final RegistryObject<Item> VAMPIRE_GEM = ITEMS.register("vampire_gem", () -> new Gem(new Item.Properties().stacksTo(64), "Vampiric", "gems.birmingham.vampiric.title", "gems.birmingham.vampiric.description"));
+
 }

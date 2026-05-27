@@ -88,6 +88,7 @@ public class ServerEventHandler {
 		ItemStack left=event.getLeft();
 		ItemStack right=event.getRight();
 		
+		
 		if (ForgeConfigs.enableItemGems) {
 			
 			// If the right item is any kind of gem.

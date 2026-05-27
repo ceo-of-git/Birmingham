@@ -74,6 +74,7 @@ public class ItemGroupRegistry {
         if (event.getTabKey() == CREATIVE_TAB_MODULES.getKey()) {
         	event.accept(ItemRegistry.FLAME_GEM);
         	event.accept(Items.AMETHYST_SHARD);
+        	event.accept(ItemRegistry.VAMPIRE_GEM);
         }
     }
 }

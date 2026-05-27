@@ -14,6 +14,7 @@
 	"item.birmingham.gloves_creative": "Creative Gloves",
 	"item.birmingham.horsing_around": "Disc Horse",
 	"item.birmingham.flame_gem": "Flame Gem",
+	"item.birmingham.vampire_gem": "Vampiric Gem",
 	
 	"tooltip.birmingham.protects_from": "§6Protects from:",
 	"tooltip.birmingham.protects_nothing": "Nothing!",
@@ -34,6 +35,8 @@
 	"gems.birmingham.empty.title": "[EMPTY SOCKET]",
 	"gems.birmingham.flame.title": "[SOCKET] Flame Gem",
 	"gems.birmingham.flame.description": "    §a[+] Attacks have a 50%% chance to burn.\n    §a[+] 20%% increased damage to burning enemies.\n    §c[-] 30%% chance to light self on fire.",
+	"gems.birmingham.vampiric.title": "[SOCKET] Vampiric Gem",
+	"gems.birmingham.vampiric.description": "    §a[+] Attacks restore 1 health.\n    §c[-] Take 30%% more damage.",
 	"gems.birmingham.amethyst.title": "[SOCKET] Amethyst Gem",
 	"gems.birmingham.amethyst.description": "    §a[+] Being attacked has a 50%% chance to 'Charge' You:.\n    §a- Resistance II, Speed II for 5 Seconds"
 

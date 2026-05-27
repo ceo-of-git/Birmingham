@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.ItemGems.Types.GemFlame;
+import xyz.nasasupercomputer.birmingham.ItemGems.Types.GemVampiric;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
 
 // Adds Hazards to items.
@@ -19,6 +20,7 @@ public class GemRegistry{
 	
 	public static void register(IEventBus modEventBus) {
 		gemList.put("Flame", new GemFlame());
+		gemList.put("Vampiric", new GemVampiric());
 	}
 
 }
