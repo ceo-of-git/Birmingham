@@ -57,13 +57,24 @@ public class GemSystem {
 
 	}
 	
-	public static LivingDamageEvent ApplyGemEffect(ItemStack stack, LivingEntity attacker, LivingEntity enemy, LivingDamageEvent event) {
+	public static LivingDamageEvent ApplyGemEffectDamage(ItemStack stack, LivingEntity attacker, LivingEntity enemy, LivingDamageEvent event) {
 		if (stack.isEmpty()) return event;
 		
 		List<IGemType> itemGems = GetGemsFromItemStack(stack);
 		
 		for (IGemType gem : itemGems) {
 			event=gem.RegisterDamage(attacker, enemy, stack, event);
+		}
+		
+		return event;
+	}
+	public static LivingDamageEvent ApplyGemEffectTaken(ItemStack stack, LivingEntity enemy, LivingDamageEvent event) {
+		if (stack.isEmpty()) return event;
+		
+		List<IGemType> itemGems = GetGemsFromItemStack(stack);
+		
+		for (IGemType gem : itemGems) {
+			event=gem.RegisterTaken(enemy, stack, event);
 		}
 		
 		return event;

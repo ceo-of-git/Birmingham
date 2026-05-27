@@ -27,7 +27,14 @@ public class GemVampiric implements IGemType {
 	
 	@Override
 	public LivingDamageEvent RegisterDamage(LivingEntity attacker, LivingEntity victim, ItemStack stack, LivingDamageEvent event) {
+		attacker.heal(1);
 		return event; //Does nothing atm cause hasnt been implemented
+	}
+	
+	@Override
+	public LivingDamageEvent RegisterTaken(LivingEntity victim, ItemStack stack, LivingDamageEvent event) {
+		event.setAmount((float) (event.getAmount()*1.3));
+		return event; //default event since flame gem doesnt have any damage taken trigger
 	}
 	
 	@Override

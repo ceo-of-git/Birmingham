@@ -70,14 +70,40 @@ public class ServerEventHandler {
 		Entity sourceEntity = dmgSrc.getEntity();
 		
 		if (sourceEntity instanceof LivingEntity attacker){
-			ItemStack item = attacker.getMainHandItem();
+			ArrayList<ItemStack> stuff=new ArrayList<ItemStack>();
+			stuff.add(attacker.getMainHandItem());
+			for (ItemStack i : attacker.getArmorSlots()) {
+				stuff.add(i);
+			}
+			//has not been implemented into offhand yet for concerns players will use gems in offhand for benefits; needs to be coded different
+			//gems currently do not have valid slots, so i cannot implement this yet.
 			
+			for (ItemStack item : stuff) {
+				if (item.hasTag()){
+					CompoundTag tag = item.getTag();
+					
+					if (tag.contains("GemList")){
+						//float damage=event.getAmount();
+						event = GemSystem.ApplyGemEffectDamage(item, attacker, victim, event);
+					}
+				}
+			}
+		}
+		ArrayList<ItemStack> stuff=new ArrayList<ItemStack>();
+		stuff.add(victim.getMainHandItem());
+		for (ItemStack i : victim.getArmorSlots()) {
+			stuff.add(i);
+		}
+		
+		for (ItemStack item : stuff) {
 			if (item.hasTag()){
 				CompoundTag tag = item.getTag();
 				
 				if (tag.contains("GemList")){
 					//float damage=event.getAmount();
-					event = GemSystem.ApplyGemEffect(item, attacker, victim, event);
+					event = GemSystem.ApplyGemEffectTaken(item, victim, event);
+					//damage doesnt always have a source, so it doesnt have an attacker. gems can reach them using
+					//the event's parameters
 				}
 			}
 		}

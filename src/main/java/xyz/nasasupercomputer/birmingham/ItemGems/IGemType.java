@@ -22,6 +22,8 @@ public interface IGemType {
 
 	public LivingDamageEvent RegisterDamage(LivingEntity attacker, LivingEntity victim, ItemStack stack, LivingDamageEvent event);
 	
+	public LivingDamageEvent RegisterTaken(LivingEntity victim, ItemStack stack, LivingDamageEvent event);
+	
 	// Adds the GEM Tooltip to the actual item.
 	@OnlyIn(Dist.CLIENT)
 	void AddGemTooltip(Player player, List<String> description, ItemStack stack);

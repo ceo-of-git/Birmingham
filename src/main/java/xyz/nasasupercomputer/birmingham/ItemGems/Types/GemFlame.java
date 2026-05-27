@@ -30,13 +30,18 @@ public class GemFlame implements IGemType {
 		if (Math.random()<=0.5) {
 			victim.setRemainingFireTicks(100);
 		}
-		if (Math.random()*100<30) {
+		if (Math.random()<=0.3) {
 			attacker.setRemainingFireTicks(100);
 		}
 		if (victim.isOnFire()==true) {
 			event.setAmount((float) (event.getAmount()*1.2));
 		}
 		return event; //Does nothing atm cause hasnt been implemented
+	}
+	
+	@Override
+	public LivingDamageEvent RegisterTaken(LivingEntity victim, ItemStack stack, LivingDamageEvent event) {
+		return event; //default event since flame gem doesnt have any damage taken trigger
 	}
 	
 	@Override
