@@ -30,6 +30,9 @@
 	"hazard.birmingham.toxic.moderate.description": "Inflicts Poison & Slowness when held if unprotected.",
 	"hazard.birmingham.toxic.strong.title": "Extreme Toxicity",
 	"hazard.birmingham.toxic.strong.description": "Inflicts strong Wither, Poison & Slowness effects when held if unprotected.",
+	"hazard.birmingham.molten.title": "Molten",
+	"hazard.birmingham.molten.description": "Ignites player when held if unprotected",
+	"hazard.birmingham.molten.strong.title": "Superheated",
 
 	"gems.birmingham.shift_to_view": "- Shift to View Effects",
 	"gems.birmingham.empty.title": "[EMPTY SOCKET]",

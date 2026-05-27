@@ -1,5 +1,7 @@
 package xyz.nasasupercomputer.birmingham.Items;
 
+import java.util.List;
+
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -11,6 +13,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import xyz.nasasupercomputer.birmingham.Items.curios.energyDrink;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
+import xyz.nasasupercomputer.birmingham.ItemHazards.HazardRegistry;
+import xyz.nasasupercomputer.birmingham.ItemHazards.IHazardType;
 import xyz.nasasupercomputer.birmingham.Items.custom.Gem;
 import xyz.nasasupercomputer.birmingham.Items.custom.Gloves;
 import xyz.nasasupercomputer.birmingham.Sound.SoundRegistry;
@@ -26,7 +30,7 @@ public class ItemRegistry {
 
 	// =========================
 	// TOOLS / CURIOS
-	public static final RegistryObject<Item> LEATHER_GLOVES = ITEMS.register("gloves_leather", () -> new Gloves(new Item.Properties().stacksTo(1), 1, null));
+	public static final RegistryObject<Item> LEATHER_GLOVES = ITEMS.register("gloves_leather", () -> new Gloves(new Item.Properties().stacksTo(1), 1, List.of(HazardRegistry.Hazard_Molten_T1, HazardRegistry.Hazard_Molten_T2)));
 	public static final RegistryObject<Item> CREATIVE_GLOVES = ITEMS.register("gloves_creative", () -> new Gloves(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), 69420, null));
 
 	public static final RegistryObject<Item> ENERGY_DRINK = ITEMS.register("energy_drink", () -> new energyDrink(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(4).saturationMod(0.6f).effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1600, 7), 1f).alwaysEat().build()), 1f));

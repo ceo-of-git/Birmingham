@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.world.item.Item;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.Types.HazardToxic;
+import xyz.nasasupercomputer.birmingham.ItemHazards.Types.HazardMolten;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
 
 // Adds Hazards to items.
@@ -15,9 +16,11 @@ public class HazardRegistry {
 	
 	// Register each hazard (And their 'intensity')
 	// Reminder to add each of these to the "HazardVarientsList" in the RegisterHazardVarients method, thx.
-	static final HazardToxic Hazard_Toxic_T1 = new HazardToxic(1.0, "hazard.birmingham.toxic.title", "hazard.birmingham.toxic.description");
-	static final HazardToxic Hazard_Toxic_T2 = new HazardToxic(5.0, "hazard.birmingham.toxic.moderate.title", "hazard.birmingham.toxic.moderate.description");
-	static final HazardToxic Hazard_Toxic_T3 = new HazardToxic(15.0, "hazard.birmingham.toxic.strong.title", "hazard.birmingham.toxic.strong.description");
+	public static final HazardToxic Hazard_Toxic_T1 = new HazardToxic(1.0, "hazard.birmingham.toxic.title", "hazard.birmingham.toxic.description");
+	public static final HazardToxic Hazard_Toxic_T2 = new HazardToxic(5.0, "hazard.birmingham.toxic.moderate.title", "hazard.birmingham.toxic.moderate.description");
+	public static final HazardToxic Hazard_Toxic_T3 = new HazardToxic(15.0, "hazard.birmingham.toxic.strong.title", "hazard.birmingham.toxic.strong.description");
+	public static final HazardMolten Hazard_Molten_T1 = new HazardMolten(2.0, "hazard.birmingham.molten.title", "hazard.birmingham.molten.description");
+	public static final HazardMolten Hazard_Molten_T2 = new HazardMolten(8.0, "hazard.birmingham.molten.strong.title", "hazard.birmingham.molten.description");
 	
 	// =========================
 	// HAZARD VARIANTS
@@ -25,6 +28,8 @@ public class HazardRegistry {
 		HazardVariantsList.add(Hazard_Toxic_T1);
 		HazardVariantsList.add(Hazard_Toxic_T2);
 		HazardVariantsList.add(Hazard_Toxic_T3);
+		HazardVariantsList.add(Hazard_Molten_T1);
+		HazardVariantsList.add(Hazard_Molten_T2);
 	}
 	
 	// =========================
@@ -35,6 +40,8 @@ public class HazardRegistry {
 		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Toxic_T1);
 		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Toxic_T2);
 		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Toxic_T3);
+		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Molten_T1);
+		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Molten_T2);
 	}
 
 }

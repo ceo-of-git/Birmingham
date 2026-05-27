@@ -3,6 +3,9 @@ package xyz.nasasupercomputer.birmingham.ItemHazards;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -88,6 +91,7 @@ public class HazardSystem {
 			}
 
 			hazard.PerTickUpdate(player, stack);
+			// player.sendSystemMessage(Component.literal("Checking " + hazard.toString()));
 		}
 	}
 }
