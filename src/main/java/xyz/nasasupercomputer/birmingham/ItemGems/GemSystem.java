@@ -13,6 +13,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -48,13 +49,21 @@ public class GemSystem {
 	
 	// Edits the description of an item to add the gem tooltip
 	public static void ApplyGemTooltip(ItemStack stack, Player player, List<String> description) {
-		if (GetGemsFromItemStack(stack) == null) return;
-		
-		for (IGemType gems : GetGemsFromItemStack(stack)) {
-			gems.AddGemTooltip(player, description, stack);
+		if (GetGemsFromItemStack(stack) == null || !stack.hasTag()) return;
+		int gemCount=stack.getTag().getInt("GemCount"); //max gems
+		if (!stack.getTag().contains("GemCount")) {
+			gemCount=1; //default amount
 		}
 		
-
+		for (IGemType gems : GetGemsFromItemStack(stack)) {
+			gemCount--;
+			gems.AddGemTooltip(player, description, stack);
+		}
+		if (gemCount>0) {
+			for (int i=0;i<gemCount;i++) {
+				description.add("§8" + I18n.get("gems.birmingham.empty.title") + "§r");
+			}
+		}
 	}
 	
 	public static LivingDamageEvent ApplyGemEffectDamage(ItemStack stack, LivingEntity attacker, LivingEntity enemy, LivingDamageEvent event) {

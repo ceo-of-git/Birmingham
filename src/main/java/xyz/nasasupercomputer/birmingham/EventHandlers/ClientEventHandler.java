@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -42,7 +43,7 @@ public class ClientEventHandler {
         // ===================
         // GEM ALERT!
 
-  		if (ForgeConfigs.enableItemGems) {
+  		if (ForgeConfigs.enableItemGems && (stack.is(ItemTags.SWORDS) || stack.is(ItemTags.AXES))) {
         	// Apply Gem Description
         	GemSystem.ApplyGemTooltip(stack, event.getEntity(), tooltipString);
         
