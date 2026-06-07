@@ -9,17 +9,26 @@ import net.minecraft.world.level.block.state.BlockState;
 public class BigBlockPartBlockEntity extends BlockEntity {
 	
 	private BlockPos masterPos;
+	private BlockPos relativeOffset;
 	
 	
     public BigBlockPartBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
 		super(pType, pPos, pBlockState);
 	}
 
+    public void setRelativeOffset(BlockPos offset) {
+    	this.relativeOffset = offset;
+    }
+    
     public void setMasterPos(BlockPos pos) {
         this.masterPos = pos;
     }
 
     public BlockPos getMasterPos() {
         return masterPos;
+    }
+    
+    public BlockPos getRelativeOffset() {
+        return relativeOffset;
     }
 }

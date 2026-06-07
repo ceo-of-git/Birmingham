@@ -15,16 +15,19 @@ public class BigBlockPart extends Block {
 		super(pProperties);
 	}
 	
+	// Destroy the whole if a part is gone.
 	@Override
 	public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+	    if (!level.isClientSide()) {
 
-	    BlockEntity be = level.getBlockEntity(pos);
+	        BlockEntity blockEntity = level.getBlockEntity(pos);
 
-	    if (be instanceof BigBlockPartBlockEntity partBlockEntity) {
-	        BlockPos masterPos = partBlockEntity.getMasterPos();
+	        if (blockEntity instanceof BigBlockPartBlockEntity part) {
 
-	        BlockState masterState = level.getBlockState(masterPos);
-	        masterState.getBlock().playerWillDestroy(level, masterPos, masterState, player );
+	            BlockPos masterPos = part.getMasterPos();
+
+	            level.destroyBlock(masterPos, !player.isCreative());
+	        }
 	    }
 
 	    super.playerWillDestroy(level, pos, state, player);

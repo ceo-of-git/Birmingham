@@ -5,7 +5,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.AxisDirection;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -17,15 +19,15 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 // Who knows.
 // (I dont)
 public interface IBigBlockType {
-
 	// How many blocks your multiblock goes past the origin block position
 	// So for the Coking oven its, 1, 1, 1 for a 2x2 block
 	// MAKE SURE THAT WHEN YOU MODEL THE BLOCKS IN BLOCKBENCH, THE ORIGIN IS THE BOTTOM RIGHT.
     int GetSizeX();
     int GetSizeY();
     int GetSizeZ();
+    
 
-    default boolean canPlace(BlockState state, Level level, BlockPos origin) {
+    default boolean canPlace(BlockState state, Level level, BlockPos origin, Direction facing) {
     	
         // Check all blocks in volume
         for (int x = 0; x < GetSizeX(); x++) {

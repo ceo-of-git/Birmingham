@@ -3,6 +3,7 @@ package xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -10,6 +11,7 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.AABB;
@@ -21,18 +23,40 @@ import xyz.nasasupercomputer.birmingham.Blocks.IBigBlockType;
 
 public class CokingOvenBlock extends BaseEntityBlock implements IBigBlockType {
 
-	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty RENDER_ACTIVE = BooleanProperty.create("render_active");
-    
     
 	public CokingOvenBlock(Properties pProperties) {
 		super(pProperties);
+		
+        registerDefaultState(
+                this.stateDefinition.any()
+                        .setValue(FACING, Direction.NORTH)
+                        .setValue(RENDER_ACTIVE, false)
+        );
 	}
 
-	public boolean canPlaceAt(BlockState state, Level level, BlockPos pos) {
-		return canPlace(state, level, pos);
-	}
-	
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+
+        Direction facing = context.getHorizontalDirection().getOpposite();
+
+        BlockState state = defaultBlockState().setValue(FACING, facing);
+
+        if (!canPlace( state, context.getLevel(), context.getClickedPos(), facing)) {
+            return null;
+        }
+
+        return state;
+    }
+    
+    // google tells me to do this i am SO confused bro.
+    @Override
+    protected void createBlockStateDefinition(
+        StateDefinition.Builder<net.minecraft.world.level.block.Block,BlockState> builder) {
+        builder.add(FACING, RENDER_ACTIVE);
+    }
+
 	@Override
 	public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
 	    if (level.isClientSide()) { return; }
@@ -65,6 +89,33 @@ public class CokingOvenBlock extends BaseEntityBlock implements IBigBlockType {
 	}
 
 	
+	@SuppressWarnings("deprecation")
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+
+        if (!state.is(newState.getBlock())) {
+
+            Direction facing = state.getValue(FACING);
+
+            for (int x = 0; x < GetSizeX(); x++) {
+                for (int y = 0; y < GetSizeY(); y++) {
+                    for (int z = 0; z < GetSizeZ(); z++) {
+
+                        if (x == 0 && y == 0 && z == 0)
+                            continue;
+
+                        BlockPos partPos = getPartPosition( pos, x, y, z, facing);
+
+                        if (level.getBlockState(partPos).is(BlockRegistry.BIGBLOCK_PART.get())) {
+                            level.removeBlock(partPos, false);
+                        }
+                    }
+                }
+            }
+        }
+
+        super.onRemove(state, level, pos, newState, isMoving);
+    }
 	
 	@SuppressWarnings("unused") // not a big fan of these warnings I must say
 	private void removeAllParts(Level level, BlockPos origin) {
