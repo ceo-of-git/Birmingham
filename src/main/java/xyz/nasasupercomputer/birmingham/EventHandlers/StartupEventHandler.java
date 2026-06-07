@@ -6,7 +6,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
-import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenRenderer;
 
 @Mod.EventBusSubscriber(
 	    modid = MainRegistry.MOD_ID,
@@ -14,8 +13,9 @@ import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenRen
 	    bus = Mod.EventBusSubscriber.Bus.MOD
 	)
 public class StartupEventHandler {
+	
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-    	event.registerBlockEntityRenderer(BlockRegistry.COKING_OVEN_ENTITY.get(), CokingOvenRenderer::new);
+    	// event.registerBlockEntityRenderer(BlockRegistry.COKING_OVEN_ENTITY.get(), CokingOvenRenderer::new);
     }
 }

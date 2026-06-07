@@ -12,8 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
-import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOven;
-import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenEntity;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlock;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
 
 public class BlockRegistry {
@@ -22,8 +21,8 @@ public class BlockRegistry {
 	
 	// =========================
 	// MACHINES
-	public static final RegistryObject<Block> COKING_OVEN = BLOCKS.register("coking_oven", () -> new CokingOven(BlockBehaviour.Properties.copy(Blocks.BRICKS).noOcclusion()));
-	public static final RegistryObject<BlockEntityType<CokingOvenEntity>> COKING_OVEN_ENTITY = BLOCK_ENTITIES.register("coking_oven_entity", () -> BlockEntityType.Builder.of(CokingOvenEntity::new, COKING_OVEN.get()).build(null));
+	public static final RegistryObject<Block> BIGBLOCK_PART = BLOCKS.register("multiblock_part", () -> new BigBlockPart(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()));
+	public static final RegistryObject<Block> COKING_OVEN = BLOCKS.register("coking_oven", () -> new CokingOvenBlock(BlockBehaviour.Properties.copy(Blocks.BRICKS).noOcclusion()));
 	
 	// =========================
 	// ORIGINAL BLOCKS

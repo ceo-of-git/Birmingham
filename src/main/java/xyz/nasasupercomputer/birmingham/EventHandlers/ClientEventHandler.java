@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import xyz.nasasupercomputer.birmingham.ForgeConfigs;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
-import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenRenderer;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlock;
 import xyz.nasasupercomputer.birmingham.ItemGems.GemSystem;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardSystem;
 
