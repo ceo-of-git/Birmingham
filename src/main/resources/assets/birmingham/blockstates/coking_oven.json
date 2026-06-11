@@ -1,5 +1,8 @@
 {
-	"variants": {
-		"": { "model": "birmingham:block/coking_oven" }
-	}
+  "variants": {
+    "facing=north": { "model": "birmingham:block/coking_oven" },
+    "facing=east":  { "model": "birmingham:block/coking_oven", "y": 90 },
+    "facing=south": { "model": "birmingham:block/coking_oven", "y": 180 },
+    "facing=west":  { "model": "birmingham:block/coking_oven", "y": 270 }
+  }
 }

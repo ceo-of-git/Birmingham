@@ -34,7 +34,7 @@ public interface IBigBlockType {
             for (int y = 0; y < GetSizeY(); y++) {
                 for (int z = 0; z < GetSizeZ(); z++) {
 
-                    BlockPos checkPos = origin.offset(x, y, z);
+                    BlockPos checkPos = origin.offset(rotateOffset(x, y, z, facing));
                     
                     // Don't fuck up the master block just incase
                     if (x == 0 && y == 0 && z == 0)
