@@ -77,10 +77,10 @@ public class CokingOvenBlock extends BaseEntityBlock implements IBigBlockType {
 	                // Set every block to a bigblock part
 	                Direction facing = state.getValue(FACING);
 	                
-	                BlockPos offset = rotateOffset(x, y, z, facing);
+	                BlockPos offset = IBigBlockType.rotateOffset(x, y, z, facing);
 	                BlockPos partPos = pos.offset(offset);
 
-	                level.setBlock(partPos, BlockRegistry.BIGBLOCK_PART.get().defaultBlockState().setValue(BigBlockPart.OFFSET_X, x).setValue(BigBlockPart.OFFSET_Y, y).setValue(BigBlockPart.OFFSET_Z, z), 3);
+	                level.setBlock(partPos, BlockRegistry.BIGBLOCK_PART.get().defaultBlockState().setValue(BigBlockPart.FACING, facing).setValue(BigBlockPart.OFFSET_X, x).setValue(BigBlockPart.OFFSET_Y, y).setValue(BigBlockPart.OFFSET_Z, z), 3);
 	            }
 	        }
 	    }
@@ -102,7 +102,7 @@ public class CokingOvenBlock extends BaseEntityBlock implements IBigBlockType {
 	                    if (x == 0 && y == 0 && z == 0)
 	                        continue;
 
-	                    BlockPos offset = rotateOffset(x, y, z, facing);
+	                    BlockPos offset = IBigBlockType.rotateOffset(x, y, z, facing);
 	                    BlockPos partPos = pos.offset(offset);
 
 	                    if (level.getBlockState(partPos).is(BlockRegistry.BIGBLOCK_PART.get())) {

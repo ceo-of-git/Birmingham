@@ -53,7 +53,7 @@ public interface IBigBlockType {
     }
     
     // Helper method that i 100% stole
-    default BlockPos rotateOffset(int x, int y, int z, Direction facing) {
+    static BlockPos rotateOffset(int x, int y, int z, Direction facing) {
 
         return switch (facing) {
             case NORTH -> new BlockPos(x, y, z);
