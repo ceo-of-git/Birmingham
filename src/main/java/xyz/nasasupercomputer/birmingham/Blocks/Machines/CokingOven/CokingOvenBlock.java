@@ -1,14 +1,13 @@
 package xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
@@ -18,10 +17,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
+import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.Blocks.BigBlockPart;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
 import xyz.nasasupercomputer.birmingham.Blocks.IBigBlockType;
+import xyz.nasasupercomputer.birmingham.Inventories.GUICokingOven;
 
 
 public class CokingOvenBlock extends BaseEntityBlock implements IBigBlockType {
@@ -29,12 +32,28 @@ public class CokingOvenBlock extends BaseEntityBlock implements IBigBlockType {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty RENDER_ACTIVE = BooleanProperty.create("render_active");
     
+    private int SizeX = 2;
+    private int SizeY = 2;
+    private int SizeZ = 2;
+    
 	public CokingOvenBlock(Properties pProperties) {
 		super(pProperties);
 		
         registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
 	}
 	
+    // Right-Click Use
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (player.isShiftKeyDown()) {
+            return InteractionResult.PASS;
+        }
+        
+        // Open the screen here (on clients only)
+        
+        return InteractionResult.sidedSuccess(level.isClientSide());
+    }
+    
 	@Override
 	public RenderShape getRenderShape(BlockState state) {
 	    return RenderShape.MODEL;
@@ -140,20 +159,20 @@ public class CokingOvenBlock extends BaseEntityBlock implements IBigBlockType {
 	@Override
 	public int GetSizeX() {
 		// TODO Auto-generated method stub
-		return 2;
+		return SizeX;
 	}
 
 
 	@Override
 	public int GetSizeY() {
 		// TODO Auto-generated method stub
-		return 2;
+		return SizeY;
 	}
 
 
 	@Override
 	public int GetSizeZ() {
 		// TODO Auto-generated method stub
-		return 2;
+		return SizeZ;
 	}
 }

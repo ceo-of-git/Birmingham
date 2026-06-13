@@ -9,8 +9,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.state.BlockState;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlock;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlockEntity;
@@ -25,14 +23,6 @@ public class BlockRegistry {
 	public static final RegistryObject<Block> BIGBLOCK_PART = BLOCKS.register("bigblock_part", () -> new BigBlockPart(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()));
 	public static final RegistryObject<Block> COKING_OVEN = BLOCKS.register("coking_oven", () -> new CokingOvenBlock(BlockBehaviour.Properties.copy(Blocks.BRICKS).noOcclusion()));
 	public static final RegistryObject<BlockEntityType<CokingOvenBlockEntity>> COKING_OVEN_ENTITY = BLOCK_ENTITIES.register("coking_oven", () -> BlockEntityType.Builder.of(CokingOvenBlockEntity::new, COKING_OVEN.get()).build(null));
-        
-//	public static final RegistryObject<BlockEntityType<CokingOvenBlockEntity>> COKING_OVEN_ENTITY =
-//		    BLOCK_ENTITIES.register("coking_oven", () ->
-//		        BlockEntityType.Builder.of(
-//		            CokingOvenBlockEntity::new,
-//		            COKING_OVEN.get()
-//		        ).build(null)
-//		    );
 	
 	// =========================
 	// ORIGINAL BLOCKS

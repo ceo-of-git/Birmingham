@@ -1,22 +1,21 @@
 package xyz.nasasupercomputer.birmingham.Blocks;
 
-import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlock;
+import net.minecraft.world.phys.BlockHitResult;
 
 
 // Lives to serve the eternal coking oven
@@ -32,6 +31,26 @@ public class BigBlockPart extends Block {
         
         registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(OFFSET_X, 0).setValue(OFFSET_Y, 0).setValue(OFFSET_Z, 0));
     }
+
+    // Right-Click Use
+    // Redirects all usage to the master block
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (player.isShiftKeyDown()) {
+            return InteractionResult.PASS;
+        }
+        
+        // If the master block exists, pretend you actually just used that block
+        BlockPos masterBlockPos = getMasterPos(pos, state, state.getValue(BigBlockPart.FACING));
+        BlockEntity masterBlock = level.getBlockEntity(masterBlockPos);
+        
+        if (masterBlock != null) {
+        	masterBlock.getBlockState().use(level, player, hand, hit);
+        }
+
+        return InteractionResult.sidedSuccess(level.isClientSide());
+    }
+    
 
     // Setup Blockstates
     @Override
