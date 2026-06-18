@@ -16,6 +16,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -61,6 +63,11 @@ public class CokingOvenBlock extends BaseEntityBlock implements IBigBlockType {
         }
         
         return InteractionResult.sidedSuccess(level.isClientSide());
+    }
+    
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return level.isClientSide ? null : createTickerHelper(type, BlockRegistry.COKING_OVEN_ENTITY.get(), CokingOvenBlockEntity::tick);
     }
     
     // Stuff for opening the menu :?

@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.level.block.Blocks;
 
 // SCREENS are the client-side version of guis..
 // bad explanation but whatever
@@ -21,11 +22,23 @@ public class CokingOvenScreen extends AbstractContainerScreen<CokingOvenMenu> {
 		super(pMenu, pPlayerInventory, GUI_TITLE);
 		
         this.imageWidth = 176;
-        this.imageHeight = 166;
+        this.imageHeight = 185;
         
-	    this.titleLabelX = 10;
-	    this.inventoryLabelX = 10;
+	    this.titleLabelX = 5;
+	    
+	    this.inventoryLabelX = 8;
+	    this.inventoryLabelY = 89;
 	}
+	
+    private void renderProgressBar(GuiGraphics guiGraphics) {
+    	int x = this.leftPos;
+    	int y = this.topPos;
+    	
+    	guiGraphics.blit(GUI_TEXTURE, x + 45, y + 41, 2, 202, menu.getScaledProgress(), 8);
+            
+//            int l = this.menu.getBurnProgress();
+//            pGuiGraphics.blit(this.texture, i + 79, j + 34, 176, 14, l + 1, 16);
+    }
 
 	// mouseX and mouseY indicate the scaled coordinates of where the cursor is in on the screen
 	@Override
@@ -37,6 +50,9 @@ public class CokingOvenScreen extends AbstractContainerScreen<CokingOvenMenu> {
 
 	    // Then the widgets if this is a direct child of the Screen
 	    super.render(graphics, mouseX, mouseY, partialTick);
+	    
+	    // Progress Bar
+	    renderProgressBar(graphics);
 
 	    // Render things after widgets (tooltips)
 	    this.renderTooltip(graphics, mouseX, mouseY);

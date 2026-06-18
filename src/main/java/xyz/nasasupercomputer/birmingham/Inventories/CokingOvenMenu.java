@@ -10,7 +10,9 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -26,9 +28,10 @@ public class CokingOvenMenu extends AbstractContainerMenu {
     
     private final BlockPos pos;
     private final Level level;
+    private final ContainerData data;
     
     // "Menu Constructor"
-    public CokingOvenMenu(int containerId, Inventory inventory, BlockPos pos, Container container) {
+    public CokingOvenMenu(int containerId, Inventory inventory, BlockPos pos, Container container, ContainerData data) {
         super(InventoryRegistry.COKING_OVEN_MENU.get(), containerId);
         
         this.container = container;
@@ -38,15 +41,17 @@ public class CokingOvenMenu extends AbstractContainerMenu {
         this.level = inventory.player.level();
         
         addSlot(new Slot(this.container, 0, 26, 36)); // input
-        addSlot(new Slot(this.container, 1, 98, 36)); // output
+        addSlot(new Slot(this.container, 1, 134, 36)); // output
+		this.data = data;
         
+		addDataSlots(data);
         addPlayerInventory(inventory);
         addPlayerHotbar(inventory);
     }
     
     // "Normal Constructor" -- A simple redirect to the menu constructor
     public CokingOvenMenu(int containerId, Inventory inventory, BlockPos pos) {
-        this(containerId, inventory, pos, inventory.player.level().getBlockEntity(pos) instanceof CokingOvenBlockEntity blockEntity ? blockEntity : new SimpleContainer(2));
+        this(containerId, inventory, pos, getContainer(inventory, pos), getData(inventory, pos));
     }
     
     // "Network Constructor" -- Called upon registry.
@@ -54,18 +59,51 @@ public class CokingOvenMenu extends AbstractContainerMenu {
         this(containerId, inventory, buf.readBlockPos());
     }
 
-    private void addPlayerInventory(Inventory inventory) {
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 9; col++) {
-                this.addSlot(new Slot(inventory, col + row * 9 + 9, 8 + col * 18, 84 + row * 18));
+    private void addPlayerInventory(Inventory playerInventory) {
+    	int offsetX = 9;
+    	int offsetY = 102;
+    	
+        for (int i = 0; i < 3; ++i) {
+            for (int l = 0; l < 9; ++l) {
+                this.addSlot(new Slot(playerInventory, l + i * 9 + offsetX, 8 + l * 18, offsetY + i * 18));
             }
         }
     }
-
-    private void addPlayerHotbar(Inventory inventory) {
-        for (int i = 0; i < 9; i++) {
-            this.addSlot(new Slot(inventory, i, 8 + i * 18, 142));
+    
+    private void addPlayerHotbar(Inventory playerInventory) {
+    	int offsetX = 8;
+    	int offsetY = 160;
+    	
+        for (int i = 0; i < 9; ++i) {
+            this.addSlot(new Slot(playerInventory, i, offsetX + i * 18, offsetY));
         }
+    }
+
+    // Returns how far done the recipe is (mostly for progress bar)
+    public int getScaledProgress() {
+
+        int progress = data.get(0);
+        int maxProgress = data.get(1);
+
+        int progressBarSize = 86;
+
+        return maxProgress > 0 ? progress * progressBarSize / maxProgress : 0;
+    }
+
+    private static Container getContainer(Inventory inventory, BlockPos pos) {
+        if (inventory.player.level().getBlockEntity(pos) instanceof CokingOvenBlockEntity be) {
+            return be;
+        }
+
+        return new SimpleContainer(2);
+    }
+
+    private static ContainerData getData(Inventory inventory, BlockPos pos) {
+        if (inventory.player.level().getBlockEntity(pos) instanceof CokingOvenBlockEntity be) {
+            return be.getData();
+        }
+
+        return new SimpleContainerData(2);
     }
 
     @Override

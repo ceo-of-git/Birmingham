@@ -28,7 +28,7 @@ public class CokingCategoryJEI implements IRecipeCategory<RecipeTypeCokingOven> 
 	private final IDrawable icon;
 	
 	public CokingCategoryJEI(IGuiHelper helper) {
-		this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
+		this.background = helper.createDrawable(TEXTURE, 0, 0, 176, 60);
 		this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(BlockRegistry.COKING_OVEN.get()));
 	}
 	
@@ -55,7 +55,7 @@ public class CokingCategoryJEI implements IRecipeCategory<RecipeTypeCokingOven> 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, RecipeTypeCokingOven recipe, IFocusGroup focuses) {
 		builder.addSlot(RecipeIngredientRole.INPUT, 26, 36).addIngredients(recipe.getIngredients().get(0));
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 98, 36).addItemStack(recipe.getResultItem(null));
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 134, 36).addItemStack(recipe.getResultItem(null));
 	}
 
 }
