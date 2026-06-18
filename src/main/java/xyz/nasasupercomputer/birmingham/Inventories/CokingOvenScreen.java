@@ -39,6 +39,7 @@ public class CokingOvenScreen extends AbstractContainerScreen<CokingOvenMenu> {
 	    super.render(graphics, mouseX, mouseY, partialTick);
 
 	    // Render things after widgets (tooltips)
+	    this.renderTooltip(graphics, mouseX, mouseY);
 	}
 	
 	// Called when the player tries to exit the screen in any way (ESC or E)

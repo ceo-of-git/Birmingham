@@ -3,6 +3,7 @@ package xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
@@ -123,6 +124,11 @@ public class CokingOvenBlock extends BaseEntityBlock implements IBigBlockType {
 	@Override
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 
+		// Drop GUI Items when broken
+		if (level.getBlockEntity(pos) instanceof CokingOvenBlockEntity cokingBE) {
+			Containers.dropContents(level, pos, cokingBE);
+		}
+		
 	    if (!state.is(newState.getBlock())) {
 
 	        Direction facing = state.getValue(FACING);

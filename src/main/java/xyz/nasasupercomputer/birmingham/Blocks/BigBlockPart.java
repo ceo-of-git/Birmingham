@@ -2,8 +2,10 @@ package xyz.nasasupercomputer.birmingham.Blocks;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -16,12 +18,13 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.network.NetworkHooks;
 
 
 // Lives to serve the eternal coking oven
 public class BigBlockPart extends Block {
 
-	// the second number (1, in this case) is the largest size - 1 that a "bigblock" can be.
+	// This variable controls how big bigblocks CAN get (cubed)
 	// so right now this means the biggest bigblock is a 2x2x2 one.
 	// 
 	// KEEP IN MIND: Changing this number can have DIRE results...
@@ -29,11 +32,13 @@ public class BigBlockPart extends Block {
 	// Any high number (id say above 10 maybe) will make the game try to generate 10x10x10x4 blockstates (x4 for facing)
 	// A.K.A, it aint gonna be fun
 	//
-	// If Possible, keep this # as LOW AS POSSIBLE!!!
+	// TL:DR for you reddit brainrot scum: If Possible, keep this number as LOW AS POSSIBLE!!! (nothing below 1 though, please)
 	
-	public static final IntegerProperty OFFSET_X = IntegerProperty.create("master_x_offset", 0, 1);
-	public static final IntegerProperty OFFSET_Y = IntegerProperty.create("master_y_offset", 0, 1);
-	public static final IntegerProperty OFFSET_Z = IntegerProperty.create("master_z_offset", 0, 1);
+	private static final int MAX_BIGBLOCK_SIZE = 2;
+	
+	public static final IntegerProperty OFFSET_X = IntegerProperty.create("master_x_offset", 0, MAX_BIGBLOCK_SIZE - 1);
+	public static final IntegerProperty OFFSET_Y = IntegerProperty.create("master_y_offset", 0, MAX_BIGBLOCK_SIZE - 1);
+	public static final IntegerProperty OFFSET_Z = IntegerProperty.create("master_z_offset", 0, MAX_BIGBLOCK_SIZE - 1);
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	
     public BigBlockPart(Properties properties) {
@@ -46,19 +51,12 @@ public class BigBlockPart extends Block {
     // Redirects all usage to the master block, whatever it may be
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (player.isShiftKeyDown()) {
-            return InteractionResult.PASS;
-        }
-        
-        // If the master block exists, pretend you actually just used that block
-        BlockPos masterBlockPos = getMasterPos(pos, state, state.getValue(BigBlockPart.FACING));
-        BlockEntity masterBlock = level.getBlockEntity(masterBlockPos);
-        
-        if (masterBlock != null) {
-        	masterBlock.getBlockState().use(level, player, hand, hit);
-        }
+        if (player.isShiftKeyDown()) { return InteractionResult.PASS; }
 
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        BlockPos masterBlockPos = getMasterPos(pos, state, state.getValue(BigBlockPart.FACING));
+        BlockState masterBlockState = level.getBlockState(masterBlockPos);
+
+        return masterBlockState.use(level, player, hand, new BlockHitResult(hit.getLocation(), hit.getDirection(), masterBlockPos, hit.isInside()));
     }
     
 
