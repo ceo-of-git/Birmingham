@@ -37,6 +37,7 @@ import xyz.nasasupercomputer.birmingham.ItemGroups.ItemGroupRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardSystem;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
+import xyz.nasasupercomputer.birmingham.Recipes.RecipeRegistry;
 import xyz.nasasupercomputer.birmingham.Sound.SoundRegistry;
 import xyz.nasasupercomputer.birmingham.entity.ModEntities;
 import xyz.nasasupercomputer.birmingham.entity.client.CrabRenderer;
@@ -70,6 +71,7 @@ public class MainRegistry
         ItemGroupRegistry.CREATIVE_MODE_TABS.register(modEventBus);
         ModEntities.register(modEventBus);
         GemRegistry.register(modEventBus);
+    	RecipeRegistry.register(modEventBus);
         
         InventoryRegistry.MENUS.register(modEventBus);
         

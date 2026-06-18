@@ -1,0 +1,12 @@
+{
+	"type": "birmingham:coking",
+	"ingredients": [
+		{
+			"item": "minecraft:coal"	
+		}	
+	],
+	"output": {
+		"count": 1,
+		"item": "minecraft:diamond"
+	}	
+}

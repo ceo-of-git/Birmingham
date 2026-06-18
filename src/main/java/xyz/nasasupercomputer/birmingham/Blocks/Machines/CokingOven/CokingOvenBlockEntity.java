@@ -1,15 +1,19 @@
 package xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven;
 
+import java.util.Optional;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.ItemStackHandler;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
+import xyz.nasasupercomputer.birmingham.Recipes.RecipeTypeCokingOven;
 
 public class CokingOvenBlockEntity extends BlockEntity implements Container {
 
@@ -31,7 +35,7 @@ public class CokingOvenBlockEntity extends BlockEntity implements Container {
         items.fromTag(tag.getList("inventory", 10));
     }
 
-    // bunch of balony
+	// bunch of balony
     @Override public int getContainerSize() { return items.getContainerSize(); }
     @Override public boolean isEmpty() { return items.isEmpty(); }
     @Override public ItemStack getItem(int slot) { return items.getItem(slot); }
