@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#=#",
+    "=X=",
+    "#F#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bricks"
+    },
+    "=": {
+      "item": "minecraft:clay"
+    },
+    "X": {
+      "item": "minecraft:iron_bars"
+    },
+    "F": {
+      "item": "minecraft:smoker"
+    }
+  },
+  "result": {
+    "item": "birmingham:coking_oven"
+  }
+}

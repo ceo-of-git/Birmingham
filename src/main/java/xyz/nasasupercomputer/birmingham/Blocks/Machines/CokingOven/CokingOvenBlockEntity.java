@@ -20,7 +20,7 @@ public class CokingOvenBlockEntity extends BlockEntity implements Container {
 
 	private final SimpleContainer items = new SimpleContainer(2);
 	public int progress = 0;
-	public int maxProgress = 200;
+	public int maxProgress = 1200;
 	// private float progressMultiplier = 1.0f; TODO: Overhaul Configs & make this configurable.
     
 	public CokingOvenBlockEntity(BlockPos pos, BlockState state) {

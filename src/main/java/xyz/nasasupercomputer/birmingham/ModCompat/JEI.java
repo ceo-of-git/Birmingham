@@ -41,7 +41,7 @@ public class JEI implements IModPlugin {
 	// Making it so you can click on the "arrow" to go into JEI.
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-		registration.addRecipeClickArea(CokingOvenScreen.class, 60, 30, 20, 30, CokingCategoryJEI.COKING_OVEN_TYPE);
+		registration.addRecipeClickArea(CokingOvenScreen.class, 45, 41, 86, 7, CokingCategoryJEI.COKING_OVEN_TYPE);
 	}
 
 }
