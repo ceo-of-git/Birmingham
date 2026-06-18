@@ -31,6 +31,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import software.bernie.geckolib.GeckoLib;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
+import xyz.nasasupercomputer.birmingham.Inventories.InventoryRegistry;
 import xyz.nasasupercomputer.birmingham.ItemGems.GemRegistry;
 import xyz.nasasupercomputer.birmingham.ItemGroups.ItemGroupRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardRegistry;
@@ -69,6 +70,8 @@ public class MainRegistry
         ItemGroupRegistry.CREATIVE_MODE_TABS.register(modEventBus);
         ModEntities.register(modEventBus);
         GemRegistry.register(modEventBus);
+        
+        InventoryRegistry.MENUS.register(modEventBus);
         
         //registering loot tables (Probably)
         ModLootModifiers.register(modEventBus);

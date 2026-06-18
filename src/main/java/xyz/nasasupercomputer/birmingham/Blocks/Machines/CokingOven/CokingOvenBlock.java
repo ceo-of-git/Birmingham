@@ -1,10 +1,12 @@
 package xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
@@ -18,13 +20,12 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
-import xyz.nasasupercomputer.birmingham.MainRegistry;
+import net.minecraftforge.network.NetworkHooks;
 import xyz.nasasupercomputer.birmingham.Blocks.BigBlockPart;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
 import xyz.nasasupercomputer.birmingham.Blocks.IBigBlockType;
-import xyz.nasasupercomputer.birmingham.Inventories.GUICokingOven;
+import xyz.nasasupercomputer.birmingham.Inventories.CokingOvenMenu;
+import xyz.nasasupercomputer.birmingham.Inventories.CokingOvenScreen;
 
 
 public class CokingOvenBlock extends BaseEntityBlock implements IBigBlockType {
@@ -42,6 +43,7 @@ public class CokingOvenBlock extends BaseEntityBlock implements IBigBlockType {
         registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
 	}
 	
+
     // Right-Click Use
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
@@ -49,9 +51,20 @@ public class CokingOvenBlock extends BaseEntityBlock implements IBigBlockType {
             return InteractionResult.PASS;
         }
         
-        // Open the screen here (on clients only)
+        // Open the screen here (on server only?)
+        if (!level.isClientSide()) {
+        	if (player instanceof ServerPlayer playuh) {
+        		
+                NetworkHooks.openScreen(playuh, CokingOvenBlock.createMenuProvider(pos), pos);
+        	}
+        }
         
         return InteractionResult.sidedSuccess(level.isClientSide());
+    }
+    
+    // Stuff for opening the menu :?
+    public static MenuProvider createMenuProvider(BlockPos pos) {
+        return new SimpleMenuProvider((id, inv, player) -> new CokingOvenMenu(id, inv, pos), CokingOvenScreen.GUI_TITLE);
     }
     
 	@Override
