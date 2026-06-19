@@ -11,6 +11,7 @@ public class RecipeRegistry {
 	public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MainRegistry.MOD_ID);
 	
 	public static final RegistryObject<RecipeSerializer<RecipeTypeCokingOven>> COKING_SERIALIZER = SERIALIZERS.register("coking", () -> RecipeTypeCokingOven.Serializer.INSTANCE);
+	public static final RegistryObject<RecipeSerializer<RecipeTypeAlloyBlasting>> ALLOY_BLAST_SERIALIZER = SERIALIZERS.register("alloy_blasting", () -> RecipeTypeAlloyBlasting.Serializer.INSTANCE);
 	
 	
 	public static void register(IEventBus eventBus) {

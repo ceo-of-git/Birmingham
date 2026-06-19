@@ -34,7 +34,7 @@ public class BigBlockPart extends Block {
 	//
 	// TL:DR for you reddit brainrot scum: If Possible, keep this number as LOW AS POSSIBLE!!! (nothing below 1 though, please)
 	
-	private static final int MAX_BIGBLOCK_SIZE = 2;
+	private static final int MAX_BIGBLOCK_SIZE = 5;
 	
 	public static final IntegerProperty OFFSET_X = IntegerProperty.create("master_x_offset", 0, MAX_BIGBLOCK_SIZE - 1);
 	public static final IntegerProperty OFFSET_Y = IntegerProperty.create("master_y_offset", 0, MAX_BIGBLOCK_SIZE - 1);

@@ -8,6 +8,7 @@
 	"horsing.around.test.whatever": "hello didcool",
 
 	"inventory.birmingham.coking_oven": "Coking Oven",
+	"inventory.birmingham.alloy_blast_furnace": "Alloy Blast Furnace",
 	
 	
 	"item.birmingham.test_item": "fucked up bread",
@@ -31,6 +32,7 @@
 	"block.birmingham.example_block": "test blockkkk123123123123",
 	"block.birmingham.adamantite": "ADAMMMMANTITE",
 	"block.birmingham.coking_oven": "Coking Oven",
+	"block.birmingham.alloy_blast_furnace": "Alloy Blast Furnace",
 	
 	"hazard.birmingham.toxic.title": "Mildly Toxic",
 	"hazard.birmingham.toxic.description": "Inflicts Poison III when held if unprotected.",

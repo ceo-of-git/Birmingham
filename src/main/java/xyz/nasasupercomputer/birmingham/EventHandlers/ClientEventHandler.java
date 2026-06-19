@@ -42,7 +42,7 @@ public class ClientEventHandler {
         	int sizeY = bigBlock.GetSizeY();
         	int sizeZ = bigBlock.GetSizeZ();
         	
-        	tooltipList.add(0, Component.literal("[" + sizeX + "x" + sizeY + "x" + sizeZ + "]").withStyle(ChatFormatting.GRAY));
+        	tooltipList.add(1, Component.literal("[" + sizeX + "x" + sizeY + "x" + sizeZ + "]").withStyle(ChatFormatting.GRAY));
         }
         
         // ===================
@@ -53,7 +53,6 @@ public class ClientEventHandler {
 	        HazardSystem.ApplyHazardTooltip(stack, event.getEntity(), tooltipString);
 
         }
-        
         
         // ===================
         // GEM ALERT!
@@ -68,4 +67,12 @@ public class ClientEventHandler {
         		tooltipList.add(Component.literal(line));
     	}
 	}
+	
+//    @SubscribeEvent
+//    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+//        event.registerBlockEntityRenderer(
+//                BlockRegistry.ALLOY_BLAST_FURNACE_ENTITY.get(),
+//                AlloyBlastFurnaceBlockEntityRenderer::new
+//        );
+//    }
 }
