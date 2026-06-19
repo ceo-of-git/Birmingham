@@ -19,7 +19,11 @@
 	"item.birmingham.flame_gem": "Flame Gem",
 	"item.birmingham.vampire_gem": "Vampiric Gem",
 	"item.birmingham.coal_coke": "Coal Coke",
-	
+	"item.birmingham.geiger_counter": "§eGeiger Counter",
+
+	"item.birmingham.geigercounter.description": "§7Shows you your current radiation levels on right click.",
+
+
 	"tooltip.birmingham.protects_from": "§6Protects from:",
 	"tooltip.birmingham.protects_nothing": "Nothing!",
 	"tooltip.birmingham.gloves": "§7Gloves that you can wear to protect\n§7yourself from certain Hazardous Items!\n§7Applies only when in Mainhand or Offhand slots.",
@@ -37,6 +41,10 @@
 	"hazard.birmingham.molten.title": "Molten",
 	"hazard.birmingham.molten.description": "Ignites player when held if unprotected",
 	"hazard.birmingham.molten.strong.title": "Superheated",
+
+	"hazard.birmingham.radioactive.weak.title": "Weakly Radioactive",
+	"hazard.birmingham.radioactive.weak.description": "Slowly applies 0.05 RAD/s if unprotected.",
+
 
 	"gems.birmingham.shift_to_view": "- Shift to View Effects",
 	"gems.birmingham.empty.title": "[EMPTY SOCKET]",

@@ -5,15 +5,18 @@ import java.util.List;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.AnvilUpdateEvent;
@@ -31,6 +34,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.nbt.CompoundTag;
+import xyz.nasasupercomputer.birmingham.radiation.PlayerRadiationProvider;
 
 @Mod.EventBusSubscriber(modid = MainRegistry.MOD_ID)
 public class ServerEventHandler {
@@ -61,7 +65,15 @@ public class ServerEventHandler {
 		    }
         }
 	}
-	
+	@SubscribeEvent
+	public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event) {
+		if (event.getObject() instanceof Player) {
+			if (!event.getObject().getCapability(PlayerRadiationProvider.PLAYER_RADIATION).isPresent()) {
+				event.addCapability(ResourceLocation.fromNamespaceAndPath(MainRegistry.MOD_ID, "radiation"), new PlayerRadiationProvider());
+			}
+		}
+	}
+
 	@SubscribeEvent
 	public static void onEntityHit(LivingDamageEvent event){
 		DamageSource dmgSrc = event.getSource();

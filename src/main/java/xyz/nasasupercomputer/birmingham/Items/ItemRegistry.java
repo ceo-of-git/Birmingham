@@ -12,6 +12,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import xyz.nasasupercomputer.birmingham.Items.curios.energyDrink;
+import xyz.nasasupercomputer.birmingham.Items.custom.geigerCounter;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.IHazardType;
@@ -27,14 +28,16 @@ public class ItemRegistry {
 	public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item", () -> new Item(new Item.Properties().stacksTo(64)));
 	public static final RegistryObject<Item> RAW_ADAMANTITE = ITEMS.register("raw_adamantite", () -> new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> HORSING_AROUND = ITEMS.register("horsing_around", () -> new RecordItem(6, SoundRegistry.horsing_around, new Item.Properties().stacksTo(1), 2440));
-    public static final RegistryObject<Item> COAL_COKE = ITEMS.register("coal_coke", () -> new Item(new Item.Properties().stacksTo(64)));
-    
+	public static final RegistryObject<Item> COAL_COKE = ITEMS.register("coal_coke", () -> new Item(new Item.Properties().stacksTo(64)));
+
 	// =========================
 	// TOOLS / CURIOS
 	public static final RegistryObject<Item> LEATHER_GLOVES = ITEMS.register("gloves_leather", () -> new Gloves(new Item.Properties().stacksTo(1), 1, List.of(HazardRegistry.Hazard_Molten_T1, HazardRegistry.Hazard_Molten_T2)));
 	public static final RegistryObject<Item> CREATIVE_GLOVES = ITEMS.register("gloves_creative", () -> new Gloves(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), 69420, null));
 
 	public static final RegistryObject<Item> ENERGY_DRINK = ITEMS.register("energy_drink", () -> new energyDrink(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(4).saturationMod(0.6f).effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1600, 7), 1f).alwaysEat().build()), 1f));
+
+	public static final RegistryObject<Item> GEIGER_COUNTER = ITEMS.register("geiger_counter", () -> new geigerCounter(new Item.Properties().stacksTo(1), "item.birmingham.geigercounter.description"));
 
 	// =========================
 	// GEMS

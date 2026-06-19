@@ -1,0 +1,65 @@
+package xyz.nasasupercomputer.birmingham.ItemHazards.Types;
+
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import xyz.nasasupercomputer.birmingham.ItemHazards.IHazardType;
+import xyz.nasasupercomputer.birmingham.radiation.PlayerRadiationProvider;
+
+import java.util.List;
+import java.util.logging.Logger;
+
+public class HazardRadioactive implements IHazardType {
+
+	private String translatableTitle;
+	private double intensity;
+	private String translatableDescription;
+
+
+	// Constructor
+	public HazardRadioactive(double intensity, String translatableTitle, String translatableDescription) {
+		this.intensity = intensity;
+		this.translatableTitle = translatableTitle;
+		this.translatableDescription = translatableDescription;
+	}
+	
+	@Override
+	public void PerTickUpdate(ServerPlayer player, ItemStack stack) {
+		player.getCapability(PlayerRadiationProvider.PLAYER_RADIATION).ifPresent(playerRadiation -> {
+			playerRadiation.addRadiation((intensity / 20) * stack.getCount());
+//			player.sendSystemMessage(Component.literal(String.valueOf(playerRadiation.getRadiation()))); // t3esting purposes
+		});
+
+		// Ignite player when held.
+	}
+	
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public void AddHazardTooltip(Player player, List<String> description, ItemStack stack) {
+		description.add("§a[ " + I18n.get(this.translatableTitle) + " ]§r");
+		
+		if (Screen.hasShiftDown()) {
+			description.add("§8- " + I18n.get(this.translatableDescription));
+		}
+	}
+
+	@Override
+	public double GetIntensity() {
+		return this.intensity;
+	}
+
+	@Override
+	public String GetTranslatableTitle() {
+		return this.translatableTitle;
+	}
+	
+	@Override
+	public String GetTranslatableDescription() {
+		return this.translatableDescription;
+	}
+}
