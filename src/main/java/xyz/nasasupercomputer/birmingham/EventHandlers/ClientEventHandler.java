@@ -5,14 +5,17 @@ import java.util.List;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.EntityRenderersEvent.RegisterRenderers;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,10 +28,9 @@ import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlo
 import xyz.nasasupercomputer.birmingham.ItemGems.GemSystem;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardSystem;
 
-@Mod.EventBusSubscriber( modid = MainRegistry.MOD_ID)
+@Mod.EventBusSubscriber(modid = MainRegistry.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ClientEventHandler {
 
-	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void drawTooltip(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
@@ -68,11 +70,4 @@ public class ClientEventHandler {
     	}
 	}
 	
-//    @SubscribeEvent
-//    public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-//        event.registerBlockEntityRenderer(
-//                BlockRegistry.ALLOY_BLAST_FURNACE_ENTITY.get(),
-//                AlloyBlastFurnaceBlockEntityRenderer::new
-//        );
-//    }
 }

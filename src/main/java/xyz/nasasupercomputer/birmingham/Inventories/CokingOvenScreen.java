@@ -1,5 +1,6 @@
 package xyz.nasasupercomputer.birmingham.Inventories;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -13,7 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 // bad explanation but whatever
 public class CokingOvenScreen extends AbstractContainerScreen<CokingOvenMenu> {
 
-	public static final Component GUI_TITLE = Component.translatable("inventory.birmingham.coking_oven");
+	public static final Component GUI_TITLE = Component.translatable("inventory.birmingham.coking_oven").withStyle(ChatFormatting.YELLOW);
     private static final ResourceLocation GUI_TEXTURE = new ResourceLocation("birmingham", "textures/gui/machines/gui_coking_oven.png");
 
     

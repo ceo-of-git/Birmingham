@@ -40,9 +40,10 @@ public class AlloyBlastFurnaceMenu extends AbstractContainerMenu {
         this.pos = pos;
         this.level = inventory.player.level();
         
-        addSlot(new Slot(this.container, 0, 26, 36)); // input
-        addSlot(new Slot(this.container, 0, 26, 50)); // input #2
-        addSlot(new Slot(this.container, 1, 134, 36)); // output
+        addSlot(new Slot(this.container, 0, 44, 36)); // input
+        addSlot(new Slot(this.container, 1, 116, 36)); // input #2
+        addSlot(new Slot(this.container, 2, 80, 36)); // output
+        
 		this.data = data;
         
 		addDataSlots(data);
@@ -96,7 +97,7 @@ public class AlloyBlastFurnaceMenu extends AbstractContainerMenu {
             return be;
         }
 
-        return new SimpleContainer(2);
+        return new SimpleContainer(3);
     }
 
     private static ContainerData getData(Inventory inventory, BlockPos pos) {

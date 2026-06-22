@@ -68,12 +68,12 @@ public class ItemGroupRegistry {
         // ADDING TO MACHINES TAB
         if (event.getTabKey() == CREATIVE_TAB_MACHINES.getKey()) {
         	event.accept(BlockRegistry.COKING_OVEN_ITEM);
+        	event.accept(BlockRegistry.ALLOY_BLAST_FURNACE_ITEM);
         }
         
      // ADDING TO MODULES TAB
         if (event.getTabKey() == CREATIVE_TAB_MODULES.getKey()) {
         	event.accept(ItemRegistry.FLAME_GEM);
-        	event.accept(Items.AMETHYST_SHARD);
         	event.accept(ItemRegistry.VAMPIRE_GEM);
         }
     }

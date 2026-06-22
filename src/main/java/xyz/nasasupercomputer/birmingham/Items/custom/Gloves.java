@@ -76,7 +76,11 @@ public class Gloves extends Item implements ICurioItem {
     	
     	BlockPos clickedBlockPosition = pContext.getClickedPos();
     	
-    	pContext.getLevel().playSeededSound(null, clickedBlockPosition.getX(), clickedBlockPosition.getY(), clickedBlockPosition.getZ(), SoundRegistry.HORSING_AROUND_TEST.get(), SoundSource.PLAYERS, 1f, 1f, 0);
+    	// DISABLING this because i accidentally clicked on
+    	// a block at 4am and shit myself oh my god
+    	// pContext.getLevel().playSeededSound(null, clickedBlockPosition.getX(), clickedBlockPosition.getY(), clickedBlockPosition.getZ(), SoundRegistry.HORSING_AROUND_TEST.get(), SoundSource.PLAYERS, 1f, 1f, 0);
+    	
+    	
     	// .playSeededSound() args
     	// 1 - Ignored Players (pass null if you want EVERYONE in a radius to hear.)
     	// 2 - X

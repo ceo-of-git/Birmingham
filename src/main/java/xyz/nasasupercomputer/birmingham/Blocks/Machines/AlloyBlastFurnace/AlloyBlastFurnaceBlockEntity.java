@@ -4,9 +4,11 @@ import java.util.Optional;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
@@ -16,6 +18,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
 import xyz.nasasupercomputer.birmingham.Recipes.RecipeTypeAlloyBlasting;
 
@@ -23,12 +27,7 @@ public class AlloyBlastFurnaceBlockEntity extends BlockEntity implements Contain
 
 	private final SimpleContainer items = new SimpleContainer(3);
 	public int progress = 0;
-	public int maxProgress = 1200;
-	
-	public AlloyBlastFurnaceBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
-		super(pType, pPos, pBlockState);
-		// TODO Auto-generated constructor stub
-	}
+	public int maxProgress = 20;
 	
     @Override
     protected void saveAdditional(CompoundTag tag) {
@@ -72,7 +71,6 @@ public class AlloyBlastFurnaceBlockEntity extends BlockEntity implements Contain
         if (level == null) { return Optional.empty(); }
 
         SimpleContainer inventory = new SimpleContainer(getContainerSize());
-
         for (int i = 0; i < getContainerSize(); i++) {
             inventory.setItem(i, getItem(i));
         }
@@ -82,7 +80,7 @@ public class AlloyBlastFurnaceBlockEntity extends BlockEntity implements Contain
     
     private boolean canCraft(RecipeTypeAlloyBlasting recipe) {
 
-        ItemStack outputSlot = getItem(1);
+        ItemStack outputSlot = getItem(2);
         ItemStack recipeOutput = recipe.getResultItem(null);
 
         if (outputSlot.isEmpty()) { return true; }
@@ -92,13 +90,14 @@ public class AlloyBlastFurnaceBlockEntity extends BlockEntity implements Contain
     }
     
     private void craftItem(RecipeTypeAlloyBlasting recipe) {
-        removeItem(0, 1);
+    	removeItem(0, 1);
+    	removeItem(1, 1);
 
         ItemStack output = recipe.getResultItem(null);
-        ItemStack outputSlot = getItem(1);
+        ItemStack outputSlot = getItem(2);
 
         if (outputSlot.isEmpty()) {
-            setItem(1, output.copy());
+            setItem(2, output.copy());
         } else {
             outputSlot.grow(output.getCount());
         }
@@ -126,7 +125,7 @@ public class AlloyBlastFurnaceBlockEntity extends BlockEntity implements Contain
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
     };
 

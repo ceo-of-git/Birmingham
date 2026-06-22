@@ -19,6 +19,8 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
+import xyz.nasasupercomputer.birmingham.Recipes.RecipeTypeAlloyBlasting.Serializer;
+import xyz.nasasupercomputer.birmingham.Recipes.RecipeTypeAlloyBlasting.Type;
 
 public class RecipeTypeCokingOven implements Recipe<SimpleContainer> {
 
@@ -40,46 +42,13 @@ public class RecipeTypeCokingOven implements Recipe<SimpleContainer> {
 		return inputItems.get(0).test(pContainer.getItem(0));
 	}
 	
-	@Override
-	public NonNullList<Ingredient> getIngredients() {
-		return inputItems;
-	}
-
-	@Override
-	public ItemStack assemble(SimpleContainer pContainer, RegistryAccess pRegistryAccess) {
-		// TODO Auto-generated method stub
-		return output.copy();
-	}
-
-	@Override
-	public boolean canCraftInDimensions(int pWidth, int pHeight) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
-		// TODO Auto-generated method stub
-		return output.copy();
-	}
-
-	@Override
-	public ResourceLocation getId() {
-		// TODO Auto-generated method stub
-		return id;
-	}
-
-	@Override
-	public RecipeSerializer<?> getSerializer() {
-		// TODO Auto-generated method stub
-		return Serializer.INSTANCE;
-	}
-
-	@Override
-	public RecipeType<?> getType() {
-		// TODO Auto-generated method stub
-		return Type.INSTANCE;
-	}
+	@Override public NonNullList<Ingredient> getIngredients() { return inputItems; }
+	@Override public ItemStack assemble(SimpleContainer pContainer, RegistryAccess pRegistryAccess) { return output.copy(); }
+	@Override public boolean canCraftInDimensions(int pWidth, int pHeight) { return false; }
+	@Override public ItemStack getResultItem(RegistryAccess pRegistryAccess) { return output.copy(); }
+	@Override public ResourceLocation getId() { return id; }
+	@Override public RecipeSerializer<?> getSerializer() { return Serializer.INSTANCE; }
+	@Override public RecipeType<?> getType() { return Type.INSTANCE; }
 	
 	public static class Type implements RecipeType<RecipeTypeCokingOven> {
 		public static final Type INSTANCE = new Type();

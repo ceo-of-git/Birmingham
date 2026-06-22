@@ -1,5 +1,6 @@
 package xyz.nasasupercomputer.birmingham.Inventories;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -13,7 +14,7 @@ import net.minecraft.world.level.block.Blocks;
 // bad explanation but whatever
 public class AlloyBlastFurnaceScreen extends AbstractContainerScreen<AlloyBlastFurnaceMenu> {
 
-	public static final Component GUI_TITLE = Component.translatable("inventory.birmingham.alloy_blast_furnace");
+	public static final Component GUI_TITLE = Component.translatable("inventory.birmingham.alloy_blast_furnace").withStyle(ChatFormatting.YELLOW);
     private static final ResourceLocation GUI_TEXTURE = new ResourceLocation("birmingham", "textures/gui/machines/gui_alloy_blast_furnace.png");
 
     
@@ -34,7 +35,7 @@ public class AlloyBlastFurnaceScreen extends AbstractContainerScreen<AlloyBlastF
     	int x = this.leftPos;
     	int y = this.topPos;
     	
-    	guiGraphics.blit(GUI_TEXTURE, x + 45, y + 41, 2, 202, menu.getScaledProgress(), 8);
+    	guiGraphics.blit(GUI_TEXTURE, x + 45, y + 63, 2, 202, menu.getScaledProgress(), 8);
             
 //            int l = this.menu.getBurnProgress();
 //            pGuiGraphics.blit(this.texture, i + 79, j + 34, 176, 14, l + 1, 16);

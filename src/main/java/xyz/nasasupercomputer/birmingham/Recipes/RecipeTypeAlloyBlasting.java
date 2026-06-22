@@ -37,49 +37,20 @@ public class RecipeTypeAlloyBlasting implements Recipe<SimpleContainer> {
 	public boolean matches(SimpleContainer pContainer, Level pLevel) {
 		if (pLevel.isClientSide()) { return false; } // No Crafting on a Server (will crash :( )
 		
-		return inputItems.get(0).test(pContainer.getItem(0)) && inputItems.get(0).test(pContainer.getItem(1));
+	    if (pContainer.getItem(0).isEmpty() || pContainer.getItem(1).isEmpty()) { return false; } // Empty Slots
+	    
+	    // Makes it "Shapeless" kinda. not really. almost
+	    return (inputItems.get(0).test(pContainer.getItem(0)) && inputItems.get(1).test(pContainer.getItem(1)))
+	           || (inputItems.get(0).test(pContainer.getItem(1)) && inputItems.get(1).test(pContainer.getItem(0)));
 	}
 	
-	@Override
-	public NonNullList<Ingredient> getIngredients() {
-		return inputItems;
-	}
-
-	@Override
-	public ItemStack assemble(SimpleContainer pContainer, RegistryAccess pRegistryAccess) {
-		// TODO Auto-generated method stub
-		return output.copy();
-	}
-
-	@Override
-	public boolean canCraftInDimensions(int pWidth, int pHeight) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
-		// TODO Auto-generated method stub
-		return output.copy();
-	}
-
-	@Override
-	public ResourceLocation getId() {
-		// TODO Auto-generated method stub
-		return id;
-	}
-
-	@Override
-	public RecipeSerializer<?> getSerializer() {
-		// TODO Auto-generated method stub
-		return Serializer.INSTANCE;
-	}
-
-	@Override
-	public RecipeType<?> getType() {
-		// TODO Auto-generated method stub
-		return Type.INSTANCE;
-	}
+	@Override public NonNullList<Ingredient> getIngredients() { return inputItems; }
+	@Override public ItemStack assemble(SimpleContainer pContainer, RegistryAccess pRegistryAccess) { return output.copy(); }
+	@Override public boolean canCraftInDimensions(int pWidth, int pHeight) { return false; }
+	@Override public ItemStack getResultItem(RegistryAccess pRegistryAccess) { return output.copy(); }
+	@Override public ResourceLocation getId() { return id; }
+	@Override public RecipeSerializer<?> getSerializer() { return Serializer.INSTANCE; }
+	@Override public RecipeType<?> getType() { return Type.INSTANCE; }
 	
 	public static class Type implements RecipeType<RecipeTypeAlloyBlasting> {
 		public static final Type INSTANCE = new Type();

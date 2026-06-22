@@ -2,8 +2,8 @@
 	"type": "birmingham:coking",
 	"ingredients": [
 		{
-			"item": "minecraft:coal"	
-		}	
+			"item": "minecraft:coal"
+		}
 	],
 	"output": {
 		"count": 1,

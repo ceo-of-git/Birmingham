@@ -1,8 +1,9 @@
 {
-  "loader": "forge:obj",
-  "model": "birmingham:models/block/alloy_blast_furnace.obj",
-  "flip-v": true,
-  "textures": {
-    "particle": "birmingham:block/alloy_blast_furnace.png"
-  }
+	"loader": "forge:obj",
+	"model": "birmingham:models/block/alloy_blast_furnace.obj",
+	"flip_v": true,
+	"textures": {
+		"texture0": "birmingham:block/alloy_blast_furnace",
+		"particle": "birmingham:block/alloy_blast_furnace"
+	}
 }

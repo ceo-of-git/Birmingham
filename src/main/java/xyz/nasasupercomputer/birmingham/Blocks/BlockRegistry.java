@@ -29,7 +29,6 @@ public class BlockRegistry {
 	public static final RegistryObject<Block> ALLOY_BLAST_FURNACE = BLOCKS.register("alloy_blast_furnace", () -> new AlloyBlastFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.BRICKS).requiresCorrectToolForDrops().strength(3.0F, 14.0F).noOcclusion()));
 	public static final RegistryObject<BlockEntityType<AlloyBlastFurnaceBlockEntity>> ALLOY_BLAST_FURNACE_ENTITY = BLOCK_ENTITIES.register("alloy_blast_furnace", () -> BlockEntityType.Builder.of(AlloyBlastFurnaceBlockEntity::new, ALLOY_BLAST_FURNACE.get()).build(null));
 	
-	
 	// =========================
 	// ORIGINAL BLOCKS
 	public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));

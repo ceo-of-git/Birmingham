@@ -1,3 +1,22 @@
 {
-	"parent": "birmingham:block/coking_oven"
+	"parent": "birmingham:block/coking_oven",
+	"display": {
+		"firstperson_righthand": {
+			"scale": [0.2, 0.2, 0.2]
+		},
+		"firstperson_lefthand": {
+			"scale": [0.2, 0.2, 0.2]
+		},
+		"thirdperson_righthand": {
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"firstperson_lefthand": {
+			"scale": [0.2, 0.2, 0.2]
+		},
+		"gui": {
+			"scale": [0.4, 0.4, 0.4],
+			"rotation": [30, 225, 0],
+			"translation": [5, -2, 0]
+		}
+	}
 }

@@ -1,0 +1,15 @@
+{
+	"type": "birmingham:alloy_blasting",
+	"ingredients": [
+		{
+			"item": "birmingham:coal_coke"
+		},
+		{
+			"item": "minecraft:iron_ore"
+		}
+	],
+	"output": {
+		"count": 3,
+		"item": "minecraft:iron_block"
+	}	
+}

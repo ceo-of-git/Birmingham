@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "u  ",
+    "I##",
+    "S=B"
+  ],
+  "key": {
+    "u": {
+      "item": "minecraft:bucket"
+    },
+    "I": {
+      "item": "minecraft:iron_block"
+    },
+    "#": {
+      "item": "minecraft:bricks"
+    },
+    "S": {
+      "item": "minecraft:smooth_stone"
+    },
+    "=": {
+      "item": "minecraft:brick_wall"
+    },
+    "B": {
+      "item": "minecraft:blast_furnace"
+    }
+  },
+  "result": {
+    "item": "birmingham:alloy_blast_furnace"
+  }
+}

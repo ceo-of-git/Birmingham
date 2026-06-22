@@ -10,6 +10,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -39,7 +40,7 @@ public class CokingCategoryJEI implements IRecipeCategory<RecipeTypeCokingOven> 
 
 	@Override
 	public Component getTitle() {
-		return Component.translatable("inventory.birmingham.coking_oven");
+		return Component.translatable("inventory.birmingham.coking_oven").withStyle(ChatFormatting.YELLOW);
 	}
 	
 	@Override

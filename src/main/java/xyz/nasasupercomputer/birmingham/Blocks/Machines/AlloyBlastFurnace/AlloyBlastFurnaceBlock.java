@@ -117,8 +117,8 @@ public class AlloyBlastFurnaceBlock extends BaseEntityBlock implements IBigBlock
 	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
 
 		// Drop GUI Items when broken
-		if (level.getBlockEntity(pos) instanceof CokingOvenBlockEntity cokingBE) {
-			Containers.dropContents(level, pos, cokingBE);
+		if (level.getBlockEntity(pos) instanceof AlloyBlastFurnaceBlockEntity blastBE) {
+			Containers.dropContents(level, pos, blastBE);
 		}
 		
 	    if (!state.is(newState.getBlock())) {
