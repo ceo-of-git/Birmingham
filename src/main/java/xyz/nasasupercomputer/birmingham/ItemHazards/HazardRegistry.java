@@ -50,6 +50,8 @@ public class HazardRegistry {
 		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Molten_T1);
 		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Molten_T2);
 		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Radioactive_T1);
+		
+		HazardSystem.RegisterHazard(ItemRegistry.FLAME_GEM.get(), Hazard_Molten_T1);
 
 	}
 

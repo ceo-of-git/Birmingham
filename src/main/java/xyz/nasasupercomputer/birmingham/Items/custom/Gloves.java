@@ -24,16 +24,23 @@ public class Gloves extends Item implements ICurioItem {
 
 	public double protectionValue;
 	public List<IHazardType> protectionBlacklist;
+	private boolean damageUponProtect = false; // Whether the glove is damaged after protecting from a hazard.
+	
 	// The CurioAPI works through tags, to see how Gloves fit in the "Hands" slot, look at.
 	// /Birmingham/src/main/resources/data/curios/tags/items/hands.json
 	
 	// The protectionValue stat determines every single hazard that the gloves protect from depending on their intensity.
 	// The protectionBlacklist list determines which hazards this glove does NOT protect from, despite its level of intensity.
-	public Gloves(Properties properties, double protectionValue, List<IHazardType> protectionBlacklist) {
+	public Gloves(Properties properties, double protectionValue, List<IHazardType> protectionBlacklist, boolean damageUponProtect) {
 		super(properties);
 		
 		this.protectionBlacklist = protectionBlacklist;
 		this.protectionValue = protectionValue;
+		this.damageUponProtect = damageUponProtect;
+	}
+	
+	public boolean getDamageUponProtect() {
+		return this.damageUponProtect;
 	}
 	
 	// Appends a custom description to the item.

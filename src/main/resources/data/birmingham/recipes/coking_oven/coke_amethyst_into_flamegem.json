@@ -1,0 +1,12 @@
+{
+	"type": "birmingham:coking",
+	"ingredients": [
+		{
+			"tag": "forge:gems"
+		}
+	],
+	"output": {
+		"count": 1,
+		"item": "birmingham:flame_gem"
+	}	
+}

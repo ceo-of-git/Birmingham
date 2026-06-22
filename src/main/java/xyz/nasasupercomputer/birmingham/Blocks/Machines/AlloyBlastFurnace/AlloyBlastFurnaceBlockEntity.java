@@ -27,7 +27,7 @@ public class AlloyBlastFurnaceBlockEntity extends BlockEntity implements Contain
 
 	private final SimpleContainer items = new SimpleContainer(3);
 	public int progress = 0;
-	public int maxProgress = 20;
+	public int maxProgress = 400;
 	
     @Override
     protected void saveAdditional(CompoundTag tag) {

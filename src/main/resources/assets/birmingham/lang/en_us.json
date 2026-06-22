@@ -14,8 +14,9 @@
 	"item.birmingham.test_item": "fucked up bread",
 	"item.birmingham.energy_drink": "Energy Drink",
 	"item.birmingham.raw_adamantite": "RAW ADAMMMMM",
-	"item.birmingham.gloves_leather": "Leather Gloves",
-	"item.birmingham.gloves_creative": "Creative Gloves",
+	"item.birmingham.leather_gloves": "Leather Gloves",
+	"item.birmingham.creative_gloves": "Creative Gloves",
+	"item.birmingham.wooden_tongs": "Wooden Tongs",
 	"item.birmingham.horsing_around": "Disc Horse",
 	"item.birmingham.flame_gem": "Flame Gem",
 	"item.birmingham.vampire_gem": "Vampiric Gem",
@@ -27,7 +28,7 @@
 
 	"tooltip.birmingham.protects_from": "§6Protects from:",
 	"tooltip.birmingham.protects_nothing": "Nothing!",
-	"tooltip.birmingham.gloves": "§7Gloves that you can wear to protect\n§7yourself from certain Hazardous Items!\n§7Applies only when in Mainhand or Offhand slots.",
+	"tooltip.birmingham.gloves": "§7A Tool that you can hold to protect\n§7yourself from certain Hazardous Items!\n§7Applies only when in Mainhand or Offhand slots.",
 	
 	"block.birmingham.example_block": "test blockkkk123123123123",
 	"block.birmingham.adamantite": "ADAMMMMANTITE",

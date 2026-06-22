@@ -1,6 +1,6 @@
 {
 	"parent": "item/generated",
 	"textures": {
-		"layer0": "birmingham:item/gloves_leather"
+		"layer0": "birmingham:item/wooden_tongs"
 	}
 }

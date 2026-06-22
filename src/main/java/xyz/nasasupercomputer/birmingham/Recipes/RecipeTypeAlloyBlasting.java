@@ -38,6 +38,8 @@ public class RecipeTypeAlloyBlasting implements Recipe<SimpleContainer> {
 		if (pLevel.isClientSide()) { return false; } // No Crafting on a Server (will crash :( )
 		
 	    if (pContainer.getItem(0).isEmpty() || pContainer.getItem(1).isEmpty()) { return false; } // Empty Slots
+	    System.out.println("CONTAINER ITEM: " + pContainer.getItem(0));
+	    System.out.println("INPUT ITEM: " + inputItems.get(0));
 	    
 	    // Makes it "Shapeless" kinda. not really. almost
 	    return (inputItems.get(0).test(pContainer.getItem(0)) && inputItems.get(1).test(pContainer.getItem(1)))

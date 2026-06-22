@@ -64,6 +64,7 @@ public class ServerEventHandler {
 		        HazardSystem.ApplyHazard(stack, player);
 		    }
         }
+        
 	}
 	@SubscribeEvent
 	public static void onAttachCapabilitiesPlayer(AttachCapabilitiesEvent<Entity> event) {

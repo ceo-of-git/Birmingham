@@ -19,6 +19,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
@@ -69,6 +71,11 @@ public class AlloyBlastFurnaceBlock extends BaseEntityBlock implements IBigBlock
         return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return level.isClientSide ? null : createTickerHelper(type, BlockRegistry.ALLOY_BLAST_FURNACE_ENTITY.get(), AlloyBlastFurnaceBlockEntity::tick);
+    }
+    
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
 		return new AlloyBlastFurnaceBlockEntity(pPos, pState);

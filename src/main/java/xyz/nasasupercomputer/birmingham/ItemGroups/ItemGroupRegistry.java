@@ -19,19 +19,19 @@ public class ItemGroupRegistry {
 	
     // Machines Tab
     public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_MACHINES = CREATIVE_MODE_TABS.register("creative_tab_machines", () -> CreativeModeTab.builder()
-            .icon(() -> ItemRegistry.TEST_ITEM.get().getDefaultInstance())
+            .icon(() -> BlockRegistry.COKING_OVEN_ITEM.get().getDefaultInstance())
             .title(Component.translatable("itemGroup.birmingham.creative_tab_machines"))
             .build());
     
     // Resources Tab
     public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_RESOURCES = CREATIVE_MODE_TABS.register("creative_tab_resources", () -> CreativeModeTab.builder()
-            .icon(() -> ItemRegistry.TEST_ITEM.get().getDefaultInstance())
+            .icon(() -> ItemRegistry.COAL_COKE.get().getDefaultInstance())
             .title(Component.translatable("itemGroup.birmingham.creative_tab_resources"))
             .build());
     
     //GEM ALARM
     public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_MODULES = CREATIVE_MODE_TABS.register("creative_tab_modules", () -> CreativeModeTab.builder()
-            .icon(() -> ItemRegistry.TEST_ITEM.get().getDefaultInstance())
+            .icon(() -> ItemRegistry.FLAME_GEM.get().getDefaultInstance())
             .title(Component.translatable("itemGroup.birmingham.creative_tab_modules"))
             .build());
     
@@ -43,7 +43,7 @@ public class ItemGroupRegistry {
     
     // Combat Tab
     public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_TOOLS = CREATIVE_MODE_TABS.register("creative_tab_tools", () -> CreativeModeTab.builder()
-            .icon(() -> ItemRegistry.TEST_ITEM.get().getDefaultInstance())
+            .icon(() -> ItemRegistry.LEATHER_GLOVES.get().getDefaultInstance())
             .title(Component.translatable("itemGroup.birmingham.creative_tab_tools"))
             .build());
     
@@ -51,30 +51,34 @@ public class ItemGroupRegistry {
 	// ADDING ITEMS TO ITEM GROUPS
     public static void AddItemToTab(BuildCreativeModeTabContentsEvent event)
     {
-        if (event.getTabKey() == CREATIVE_TAB_RESOURCES.getKey() || 
-        		event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_MACHINES.getKey() || 
-        		event.getTabKey() == ItemGroupRegistry.CREATIVE_TAB_BUILDING.getKey()) {
-        	event.accept(ItemRegistry.TEST_ITEM);
-        
-        }
-        
-        // ADDING TO TOOLS TAB
-        if (event.getTabKey() == CREATIVE_TAB_TOOLS.getKey()) {
-            event.accept(ItemRegistry.LEATHER_GLOVES);
-            event.accept(ItemRegistry.CREATIVE_GLOVES);
-            event.accept(ItemRegistry.ENERGY_DRINK);
-        }
-        
         // ADDING TO MACHINES TAB
         if (event.getTabKey() == CREATIVE_TAB_MACHINES.getKey()) {
         	event.accept(BlockRegistry.COKING_OVEN_ITEM);
         	event.accept(BlockRegistry.ALLOY_BLAST_FURNACE_ITEM);
         }
         
-     // ADDING TO MODULES TAB
-        if (event.getTabKey() == CREATIVE_TAB_MODULES.getKey()) {
+        // ADDING TO RESOURCES TAB
+        else if (event.getTabKey() == CREATIVE_TAB_RESOURCES.getKey()) {
+        	event.accept(ItemRegistry.COAL_COKE);
+        }
+        
+        // ADDING TO MODULES TAB
+        else if (event.getTabKey() == CREATIVE_TAB_MODULES.getKey()) {
         	event.accept(ItemRegistry.FLAME_GEM);
         	event.accept(ItemRegistry.VAMPIRE_GEM);
+        }
+        
+        // ADDING TO BUILDING TAB
+        else if (event.getTabKey() == CREATIVE_TAB_BUILDING.getKey()) {
+        	event.accept(ItemRegistry.TEST_ITEM);
+        }
+
+        // ADDING TO TOOLS TAB
+        else if (event.getTabKey() == CREATIVE_TAB_TOOLS.getKey()) {
+        	event.accept(ItemRegistry.WOODEN_TONGS);
+            event.accept(ItemRegistry.LEATHER_GLOVES);
+            event.accept(ItemRegistry.CREATIVE_GLOVES);
+            event.accept(ItemRegistry.ENERGY_DRINK);
         }
     }
 }

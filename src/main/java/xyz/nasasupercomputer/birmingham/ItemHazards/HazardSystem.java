@@ -7,6 +7,7 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -21,6 +22,7 @@ import xyz.nasasupercomputer.birmingham.Items.custom.Gloves;
 public class HazardSystem {
 
 	public static HashMap<Item, List<IHazardType>> ALL_HAZARDS = new HashMap<>();
+	public static byte DamageCounter = 0;
 	
 	// Registers a Hazard that an item may have
 	// ex: the test item being toxic to all non-creative mode players.
@@ -72,21 +74,36 @@ public class HazardSystem {
 
 			boolean offhandIsProtective = false;
 			boolean mainhandIsProtective = false;
+			boolean damageOffhand = false;
+			boolean damageMainhand = false;
 			
 			// Check if offhand item is an instance of "Gloves"
 			// Also check if the Offhand items protection value is good or not.
 			if (!offhandStack.isEmpty() && offhandStack.getItem() instanceof Gloves glove) {
 			    offhandIsProtective = hazard.GetIntensity() <= glove.protectionValue;
+			    if (offhandIsProtective) { damageOffhand = glove.getDamageUponProtect(); } 
 			}
 			
 			// Check if offhand item is an instance of "Gloves"
 			// Also check if the Mainhand items protection value is good or not.
-			if (!mainhandStack.isEmpty() && offhandStack.getItem() instanceof Gloves glove) {
+			if (!mainhandStack.isEmpty() && mainhandStack.getItem() instanceof Gloves glove) {
 			    mainhandIsProtective = hazard.GetIntensity() <= glove.protectionValue;
+			    if (mainhandIsProtective) { damageMainhand = glove.getDamageUponProtect(); } 
 			}
 			
 			if (offhandIsProtective || mainhandIsProtective) {
-			    // Don't add effect.
+				// Don't apply hazard effect.
+				
+			    // Damage glove item if thats gonna happen
+				// Damage done is based on how much of the hazarditem you are holding
+				// so if you have like 10 zillion hot rods of doom your tongs will break instantly
+				if (DamageCounter >= 20) {
+				    if (damageOffhand) { offhandStack.hurtAndBreak(stack.getCount(), player, e -> e.broadcastBreakEvent(EquipmentSlot.OFFHAND)); }
+				    if (damageMainhand) { mainhandStack.hurtAndBreak(stack.getCount(), player, e -> e.broadcastBreakEvent(EquipmentSlot.MAINHAND)); } 
+				    DamageCounter = 0;
+				}
+			    
+			    DamageCounter++;
 			    continue;
 			}
 

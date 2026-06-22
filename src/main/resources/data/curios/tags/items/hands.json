@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "birmingham:gloves_leather",
-    "birmingham:gloves_creative"
+    "birmingham:leather_gloves",
+    "birmingham:creative_gloves"
   ]
 }
