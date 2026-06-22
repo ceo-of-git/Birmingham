@@ -1,0 +1,9 @@
+{
+	"parent": "forge:item/bucket",
+	"loader": "forge:fluid_container",
+	"textures": {
+		"base": "item/bucket",
+		"fluid": "birmingham:item/drip_bucket"
+	},
+	"fluid": "birmingham:example_fluid"
+}

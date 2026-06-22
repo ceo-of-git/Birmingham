@@ -28,6 +28,8 @@
 	"item.birmingham.geiger_counter": "§eGeiger Counter",
 	"item.birmingham.geigercounter.description": "§7Shows you your current radiation levels on right click.",
 
+	"item.birmingham.example_fluid_bucket": "Bucket of Unidentified Fluid",
+
 
 	"tooltip.birmingham.protects_from": "§6Protects from:",
 	"tooltip.birmingham.protects_nothing": "Nothing!",

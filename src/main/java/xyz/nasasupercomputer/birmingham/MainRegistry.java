@@ -31,6 +31,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import software.bernie.geckolib.GeckoLib;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
+import xyz.nasasupercomputer.birmingham.Fluids.FluidRegistry;
 import xyz.nasasupercomputer.birmingham.Inventories.InventoryRegistry;
 import xyz.nasasupercomputer.birmingham.ItemGems.GemRegistry;
 import xyz.nasasupercomputer.birmingham.ItemGroups.ItemGroupRegistry;
@@ -69,6 +70,10 @@ public class MainRegistry
         ItemRegistry.ITEMS.register(modEventBus);
         SoundRegistry.SOUND_EVENTS.register(modEventBus);
         ItemGroupRegistry.CREATIVE_MODE_TABS.register(modEventBus);
+
+        FluidRegistry.FLUID_TYPES.register(modEventBus);
+        FluidRegistry.FLUIDS.register(modEventBus);
+
         ModEntities.register(modEventBus);
         GemRegistry.register(modEventBus);
     	RecipeRegistry.register(modEventBus);
