@@ -21,8 +21,11 @@
 	"item.birmingham.flame_gem": "Flame Gem",
 	"item.birmingham.vampire_gem": "Vampiric Gem",
 	"item.birmingham.coal_coke": "Coal Coke",
+	"item.birmingham.steel_block": "Block of Steel",
+	"item.birmingham.steel_ingot": "Steel Ingot",
+	"item.birmingham.steel_nugget": "Steel Nugget",
+	"item.birmingham.steel_slag": "Steel Slag Pile",
 	"item.birmingham.geiger_counter": "§eGeiger Counter",
-
 	"item.birmingham.geigercounter.description": "§7Shows you your current radiation levels on right click.",
 
 
@@ -34,6 +37,7 @@
 	"block.birmingham.adamantite": "ADAMMMMANTITE",
 	"block.birmingham.coking_oven": "Coking Oven",
 	"block.birmingham.alloy_blast_furnace": "Alloy Blast Furnace",
+	"block.birmingham.steel_block": "Block of Steel",
 	
 	"hazard.birmingham.toxic.title": "Mildly Toxic",
 	"hazard.birmingham.toxic.description": "Inflicts Poison III when held if unprotected.",

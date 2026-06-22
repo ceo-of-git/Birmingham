@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.RecordItem;
@@ -14,6 +15,7 @@ import net.minecraftforge.registries.RegistryObject;
 import xyz.nasasupercomputer.birmingham.Items.curios.energyDrink;
 import xyz.nasasupercomputer.birmingham.Items.custom.geigerCounter;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
+import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.IHazardType;
 import xyz.nasasupercomputer.birmingham.Items.custom.Gem;
@@ -40,6 +42,14 @@ public class ItemRegistry {
 
 	public static final RegistryObject<Item> GEIGER_COUNTER = ITEMS.register("geiger_counter", () -> new geigerCounter(new Item.Properties().stacksTo(1), "item.birmingham.geigercounter.description"));
 
+	// =========================
+	// MATERIALS
+	public static final RegistryObject<Item> STEEL_BLOCK = ITEMS.register("steel_block", () -> new BlockItem(BlockRegistry.STEEL_BLOCK.get(), new Item.Properties()));
+	public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> STEEL_SLAG = ITEMS.register("steel_slag", () -> new Item(new Item.Properties().stacksTo(64)));
+
+	
 	// =========================
 	// GEMS
 	public static final RegistryObject<Item> FLAME_GEM = ITEMS.register("flame_gem", () -> new Gem(new Item.Properties().stacksTo(64), "Flame", "gems.birmingham.flame.title", "gems.birmingham.flame.description"));

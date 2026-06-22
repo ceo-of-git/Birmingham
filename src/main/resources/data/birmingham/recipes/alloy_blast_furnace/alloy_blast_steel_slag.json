@@ -9,7 +9,7 @@
 		}
 	],
 	"output": {
-		"count": 3,
-		"item": "minecraft:iron_block"
+		"count": 2,
+		"item": "birmingham:steel_slag"
 	}	
 }

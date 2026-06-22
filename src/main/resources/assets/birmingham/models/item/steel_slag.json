@@ -1,0 +1,6 @@
+{
+	"parent": "birmingham:item/slag_template",
+	"textures": {
+		"0": "birmingham:item/steel_slag"
+	}
+}

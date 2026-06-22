@@ -30,6 +30,10 @@ public class BlockRegistry {
 	public static final RegistryObject<BlockEntityType<AlloyBlastFurnaceBlockEntity>> ALLOY_BLAST_FURNACE_ENTITY = BLOCK_ENTITIES.register("alloy_blast_furnace", () -> BlockEntityType.Builder.of(AlloyBlastFurnaceBlockEntity::new, ALLOY_BLAST_FURNACE.get()).build(null));
 	
 	// =========================
+	// MATERIAL BLOCKS
+	public static final RegistryObject<Block> STEEL_BLOCK = BLOCKS.register("steel_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
+	
+	// =========================
 	// ORIGINAL BLOCKS
 	public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
 	public static final RegistryObject<Block> ADAMANTITE = BLOCKS.register("adamantite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS).strength(6f).requiresCorrectToolForDrops()));
