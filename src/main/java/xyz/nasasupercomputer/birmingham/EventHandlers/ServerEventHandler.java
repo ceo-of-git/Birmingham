@@ -23,6 +23,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.AnvilUpdateEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -180,6 +181,30 @@ public class ServerEventHandler {
 			}
 		}
 	}
+
+	@SubscribeEvent
+	public static void onPlayerClone(PlayerEvent.Clone event) {
+		// Check if the clone was caused by dying (rather than returning from the End)
+		if (!event.isWasDeath()) {
+			event.getOriginal().reviveCaps();
+			// Retrieve the dead player's data
+			event.getOriginal().getCapability(PlayerRadiationProvider.PLAYER_RADIATION).ifPresent(oldCap -> {
+
+				// Retrieve the new player's capability instance
+				event.getEntity().getCapability(PlayerRadiationProvider.PLAYER_RADIATION).ifPresent(newCap -> {
+
+					// Copy the data over
+					newCap.setRadiation(oldCap.getRadiation());
+					newCap.setWarn(1, oldCap.getWarn(1));
+					newCap.setWarn(2, oldCap.getWarn(2));
+					newCap.setWarn(3, oldCap.getWarn(3));
+					newCap.setWarn(4, oldCap.getWarn(4));
+				});
+				event.getOriginal().invalidateCaps();
+			});
+		}
+	}
+
 
 	@SubscribeEvent
 	public static void onEntityHit(LivingDamageEvent event){
