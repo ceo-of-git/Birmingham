@@ -39,7 +39,7 @@ public class RadioactiveBlock extends Block {
 
     @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
-        level.scheduleTick(pos, this, 5);
+        level.scheduleTick(pos, this, 4);
         radiate(level, pos);
     }
 
@@ -56,7 +56,7 @@ public class RadioactiveBlock extends Block {
         for (LivingEntity entity : entities) {
             entity.getCapability(PlayerRadiationProvider.PLAYER_RADIATION).ifPresent(playerRadiation -> {
                 double distanceSqr = entity.distanceToSqr(pos.getCenter());
-                playerRadiation.addRadiation(((intensity * (1.0/Math.max(distanceSqr, 1.0) / 4 /* divided by 4 because we do every 5 ticks (so 4 times per sec) */))));
+                playerRadiation.addRadiation(((intensity * (1.0/Math.max(distanceSqr, 1.0) / 5/* divided by 4 because we do every 5 ticks (so 4 times per sec) */))));
 //			player.sendSystemMessage(Component.literal(String.valueOf(playerRadiation.getRadiation()))); // t3esting purposes
             });
 

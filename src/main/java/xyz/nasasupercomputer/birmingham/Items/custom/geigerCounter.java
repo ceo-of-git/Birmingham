@@ -18,6 +18,7 @@ import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlo
 import xyz.nasasupercomputer.birmingham.radiation.PlayerRadiationProvider;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class geigerCounter extends Item {
@@ -31,12 +32,17 @@ public class geigerCounter extends Item {
         this.translatableShiftGeigerDescription = translatableShiftGeigerDescription;
     }
 
+
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pUsedHand);
 
         pPlayer.getCapability(PlayerRadiationProvider.PLAYER_RADIATION).ifPresent(playerRadiation -> {
             if (!pLevel.isClientSide()) {
-                pPlayer.sendSystemMessage(Component.literal(String.format("%.2f", playerRadiation.getRadiation()))); // t3esting purposes
+                ArrayList<Double> list = playerRadiation.getList();
+                double average = list.get(list.size() - 1) - list.get(0);
+                pPlayer.sendSystemMessage(Component.literal(String.format("You are currently gaining %.2f RAD/s", average))); // t3esting purposes
+
+                pPlayer.sendSystemMessage(Component.literal(String.format("You currently have %.2f RADs", playerRadiation.getRadiation()))); // t3esting purposes
             }
             //playerRadiation.getRadiation()
         });

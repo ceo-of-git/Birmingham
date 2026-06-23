@@ -1,9 +1,11 @@
 package xyz.nasasupercomputer.birmingham.radiation;
 
 import net.minecraft.nbt.CompoundTag;
+import org.checkerframework.checker.units.qual.A;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 
 // this is probably the wrong place to puyt this file but i do not care
 
@@ -15,6 +17,7 @@ public class PlayerRadiation  {
     private boolean hasSeenThirdWarn; // radiation warnings
     private boolean hasSeenLastWarn; // radiation warnings
 
+    public ArrayList<Double> last20Radiation = new ArrayList<>();
 
 
     public double getRadiation() {
@@ -42,6 +45,13 @@ public class PlayerRadiation  {
         }
 
         }
+    public ArrayList<Double> getList(){
+        return this.last20Radiation;
+    }
+
+    public void setList(ArrayList<Double> listToSet) {
+        this.last20Radiation = listToSet;
+    }
 
     public void setWarn(int warnNumber, boolean setTo) {
         switch (warnNumber) {
