@@ -39,7 +39,7 @@ public class HazardRadioactive implements IHazardType {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void AddHazardTooltip(Player player, List<String> description, ItemStack stack) {
-		description.add("§a[ " + I18n.get(translatableTitle, intensity) + " ]§r");
+		description.add("§a[ " + I18n.get(translatableTitle, (Math.round(intensity * 100.0) / 100.0) * stack.getCount()) + " ]§r");
 		
 	}
 

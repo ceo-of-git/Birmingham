@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "birmingham:radium_block"
+    }
+  ],
+  "result": {
+    "item": "birmingham:radium_ingot",
+    "count": 9
+  }
+}

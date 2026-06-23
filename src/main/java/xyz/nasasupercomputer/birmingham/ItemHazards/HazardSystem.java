@@ -9,11 +9,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import net.minecraftforge.registries.RegistryObject;
 import top.theillusivec4.curios.api.CuriosApi;
 import xyz.nasasupercomputer.birmingham.ItemHazards.Types.HazardToxic;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
@@ -34,7 +36,9 @@ public class HazardSystem {
 
 	    ALL_HAZARDS.get(item).add(hazard);
 	}
-	
+
+
+
 	// Returns a list of every Hazard that the ItemStack may have.
 	public static List<IHazardType> GetHazardsFromItemStack(ItemStack stack){
 		if (stack.isEmpty()) {

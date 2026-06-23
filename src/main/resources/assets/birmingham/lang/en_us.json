@@ -38,6 +38,9 @@
 	"item.birmingham.dollar_20": "20$ Bill",
 	"item.birmingham.dollar_50": "50$ Bill",
 	"item.birmingham.dollar_100": "100$ Bill",
+	"item.birmingham.radium_ingot": "Radium Ingot",
+	"item.birmingham.radium_nugget": "Radium Nugget",
+	"block.birmingham.radium_block": "Radium Block",
 
 	"tooltip.birmingham.protects_from": "§6Protects from:",
 	"tooltip.birmingham.protects_nothing": "Nothing!",

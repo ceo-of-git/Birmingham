@@ -1,7 +1,10 @@
-//package xyz.nasasupercomputer.birmingham.Materials;
-//
-//public class Radium extends BaseMaterial {
-//    public Radium(Properties pProperties) {
-//        super(pProperties);
-//    }
-//}
+package xyz.nasasupercomputer.birmingham.Materials;
+
+import net.minecraft.world.item.Item;
+
+public class Radium extends Item {
+
+    public Radium(Properties pProperties) {
+        super(pProperties);
+    }
+}
