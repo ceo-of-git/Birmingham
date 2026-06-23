@@ -52,7 +52,6 @@ public class HazardRegistry {
 		HazardSystem.RegisterHazard(FluidRegistry.CONTAMINATED_WATER.bucket.get(), new HazardRadioactive(1));
 
 		HazardSystem.RegisterHazard(ItemRegistry.FLAME_GEM.get(), Hazard_Molten_T1);
-		
 		// SLAG
 		HazardSystem.RegisterHazard(ItemRegistry.STEEL_SLAG.get(), Hazard_Molten_T1);
 

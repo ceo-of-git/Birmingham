@@ -8,6 +8,7 @@ import net.minecraftforge.fluids.FluidType;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import xyz.nasasupercomputer.birmingham.Fluids.CustomFluids.ContaminatedWaterBlock;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 
 public class FluidRegistry {
@@ -20,6 +21,7 @@ public class FluidRegistry {
             () -> FluidRegistryContainer.createExtension(
             new FluidRegistryContainer.ClientExtensions(MainRegistry.MOD_ID, "example_fluid").
             fogColor(0.0f, 1.0f, 0.0f)),
+            null,
             BlockBehaviour.Properties.copy(Blocks.WATER),
             new Item.Properties().stacksTo(1));
 
@@ -27,10 +29,12 @@ public class FluidRegistry {
 
     public static final FluidRegistryContainer CONTAMINATED_WATER = new FluidRegistryContainer(
             "contaminated_water",
-            FluidType.Properties.create().viscosity(1),
+            FluidType.Properties.create().viscosity(1000).temperature(300).canSwim(true).supportsBoating(true).canDrown(true).canPushEntity(true).canExtinguish(true).canHydrate(false).canConvertToSource(false).motionScale(0.014D).density(1000), // stuff that makes it similar to water (wihle not making it like infinite)
             () -> FluidRegistryContainer.createExtension(
                     new FluidRegistryContainer.ClientExtensions(MainRegistry.MOD_ID, "contaminated_water").
                             fogColor(5 / 255f, 101 / 255f, 51 / 255f).tint(0x60e07e)),
+            null,
+            ContaminatedWaterBlock::new, // allows you to actually use custom stuff toa dd custom code instead of vasnilla stuff
             BlockBehaviour.Properties.copy(Blocks.WATER),
             new Item.Properties().stacksTo(1));
 }

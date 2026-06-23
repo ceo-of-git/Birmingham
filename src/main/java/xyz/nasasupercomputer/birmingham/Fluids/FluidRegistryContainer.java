@@ -2,6 +2,7 @@ package xyz.nasasupercomputer.birmingham.Fluids;
 
 import com.mojang.blaze3d.shaders.FogShape;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.world.level.material.FlowingFluid;
 import org.joml.Vector3f;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
@@ -27,6 +28,7 @@ import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -42,7 +44,7 @@ public class FluidRegistryContainer {
 
 
     public FluidRegistryContainer(String name, FluidType.Properties typeProperties,
-                                  Supplier<IClientFluidTypeExtensions> clientExtensions, @Nullable AdditionalProperties additionalProperties,
+                                  Supplier<IClientFluidTypeExtensions> clientExtensions, @Nullable AdditionalProperties additionalProperties, BiFunction<Supplier<? extends FlowingFluid>, BlockBehaviour.Properties, ? extends LiquidBlock> blockFactory,
                                   BlockBehaviour.Properties blockProperties, Item.Properties itemProperties) {
         this.typeProperties = typeProperties;
         this.type = FluidRegistry.FLUID_TYPES.register(name, () -> new FluidType(this.typeProperties) {
@@ -63,7 +65,7 @@ public class FluidRegistryContainer {
                     .slopeFindDistance(additionalProperties.slopeFindDistance).tickRate(additionalProperties.tickRate);
         }
 
-        this.block = BlockRegistry.BLOCKS.register(name, () -> new LiquidBlock(this.source, blockProperties));
+        this.block = BlockRegistry.BLOCKS.register(name, () -> blockFactory.apply(this.source, blockProperties));
         this.properties.block(this.block);
 
         this.bucket = ItemRegistry.ITEMS.register(name + "_bucket", () -> new BucketItem(this.source, itemProperties));
@@ -72,9 +74,10 @@ public class FluidRegistryContainer {
     }
 
     public FluidRegistryContainer(String name, FluidType.Properties typeProperties,
-                                  Supplier<IClientFluidTypeExtensions> clientExtensions, BlockBehaviour.Properties blockProperties,
+                                  Supplier<IClientFluidTypeExtensions> clientExtensions, @Nullable AdditionalProperties additionalProperties, BlockBehaviour.Properties blockProperties,
                                   Item.Properties itemProperties) {
-        this(name, typeProperties, clientExtensions, null, blockProperties, itemProperties);
+        this(name, typeProperties, clientExtensions, additionalProperties,
+                LiquidBlock::new, blockProperties, itemProperties);
     }
 
     public ForgeFlowingFluid.Properties getProperties() {
