@@ -27,14 +27,23 @@
 	"item.birmingham.steel_slag": "Steel Slag Pile",
 	"item.birmingham.geiger_counter": "§eGeiger Counter",
 	"item.birmingham.geigercounter.description": "§7Shows you your current radiation levels on right click.",
-
 	"item.birmingham.example_fluid_bucket": "Bucket of Unidentified Fluid",
 	"item.birmingham.contaminated_water_bucket": "Contaminated Water Bucket",
-
+	"item.birmingham.cent_1": "Penny",
+	"item.birmingham.cent_10": "Dime",
+	"item.birmingham.cent_25": "Quarter",
+	"item.birmingham.dollar_1": "Loonie",
+	"item.birmingham.dollar_5": "5$ Bill",
+	"item.birmingham.dollar_10": "10$ Bill",
+	"item.birmingham.dollar_20": "20$ Bill",
+	"item.birmingham.dollar_50": "50$ Bill",
+	"item.birmingham.dollar_100": "100$ Bill",
 
 	"tooltip.birmingham.protects_from": "§6Protects from:",
 	"tooltip.birmingham.protects_nothing": "Nothing!",
 	"tooltip.birmingham.gloves": "§7A Tool that you can hold to protect\n§7yourself from certain Hazardous Items!\n§7Applies only when in Mainhand or Offhand slots.",
+	"tooltip.birmingham.money.authentic": "Authentic",
+	"tooltip.birmingham.money.fraudulent": "Fraudulent",
 	
 	"block.birmingham.example_block": "test blockkkk123123123123",
 	"block.birmingham.adamantite": "ADAMMMMANTITE",

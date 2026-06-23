@@ -67,7 +67,15 @@ public class ItemGroupRegistry {
         	event.accept(ItemRegistry.STEEL_SLAG);
             event.accept(FluidRegistry.CONTAMINATED_WATER.bucket.get());
             event.accept(FluidRegistry.EXAMPLE_FLUID.bucket.get());
-
+            event.accept(ItemRegistry.CENT_1);
+            event.accept(ItemRegistry.CENT_10);
+            event.accept(ItemRegistry.CENT_25);
+            event.accept(ItemRegistry.DOLLAR_1);
+            event.accept(ItemRegistry.DOLLAR_5);
+            event.accept(ItemRegistry.DOLLAR_10);
+            event.accept(ItemRegistry.DOLLAR_20);
+            event.accept(ItemRegistry.DOLLAR_50);
+            event.accept(ItemRegistry.DOLLAR_100);     
         }
         
         // ADDING TO MODULES TAB

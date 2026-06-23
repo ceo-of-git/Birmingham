@@ -20,6 +20,7 @@ import xyz.nasasupercomputer.birmingham.ItemHazards.HazardRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.IHazardType;
 import xyz.nasasupercomputer.birmingham.Items.custom.Gem;
 import xyz.nasasupercomputer.birmingham.Items.custom.Gloves;
+import xyz.nasasupercomputer.birmingham.Items.custom.Money;
 import xyz.nasasupercomputer.birmingham.Sound.SoundRegistry;
 
 public class ItemRegistry {
@@ -49,6 +50,17 @@ public class ItemRegistry {
 	public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget", () -> new Item(new Item.Properties().stacksTo(64)));
 	public static final RegistryObject<Item> STEEL_SLAG = ITEMS.register("steel_slag", () -> new Item(new Item.Properties().stacksTo(64)));
 
+	// =========================
+	// MONEY
+	public static final RegistryObject<Item> CENT_1 = ITEMS.register("cent_1", () -> new Money(new Item.Properties().stacksTo(64), 0.01, true));
+	public static final RegistryObject<Item> CENT_10 = ITEMS.register("cent_10", () -> new Money(new Item.Properties().stacksTo(64), 0.10, true));
+	public static final RegistryObject<Item> CENT_25 = ITEMS.register("cent_25", () -> new Money(new Item.Properties().stacksTo(64), 0.25, true));
+	public static final RegistryObject<Item> DOLLAR_1 = ITEMS.register("dollar_1", () -> new Money(new Item.Properties().stacksTo(64), 1.00, true));
+	public static final RegistryObject<Item> DOLLAR_5 = ITEMS.register("dollar_5", () -> new Money(new Item.Properties().stacksTo(64), 5.00, true));
+	public static final RegistryObject<Item> DOLLAR_10 = ITEMS.register("dollar_10", () -> new Money(new Item.Properties().stacksTo(64), 10.00, true));
+	public static final RegistryObject<Item> DOLLAR_20 = ITEMS.register("dollar_20", () -> new Money(new Item.Properties().stacksTo(64), 20.00, true));
+	public static final RegistryObject<Item> DOLLAR_50 = ITEMS.register("dollar_50", () -> new Money(new Item.Properties().stacksTo(64), 50.00, true));
+	public static final RegistryObject<Item> DOLLAR_100 = ITEMS.register("dollar_100", () -> new Money(new Item.Properties().stacksTo(64), 100.00, true));
 	
 	// =========================
 	// GEMS
