@@ -10,6 +10,11 @@ import java.math.RoundingMode;
 public class PlayerRadiation  {
 
     private double radiation;
+    private boolean hasSeenFirstWarn; // radiation warnings
+    private boolean hasSeenSecondWarn; // radiation warnings
+    private boolean hasSeenThirdWarn; // radiation warnings
+    private boolean hasSeenLastWarn; // radiation warnings
+
 
 
     public double getRadiation() {
@@ -22,6 +27,42 @@ public class PlayerRadiation  {
     public void addRadiation(double amount) {
         this.radiation = this.radiation + amount;
     }
+    public boolean getWarn(int warn) {
+        switch (warn) {
+            case 1:
+                return this.hasSeenFirstWarn;
+            case 2:
+                return this.hasSeenSecondWarn;
+            case 3:
+                return this.hasSeenThirdWarn;
+            case 4:
+                return this.hasSeenLastWarn;
+            default:
+                return false;
+        }
+
+        }
+
+    public void setWarn(int warnNumber, boolean setTo) {
+        switch (warnNumber) {
+            case 1:
+                this.hasSeenFirstWarn = setTo;
+                break;
+            case 2:
+                this.hasSeenSecondWarn = setTo;
+                break;
+            case 3:
+                this.hasSeenThirdWarn = setTo;
+                break;
+            case 4:
+                this.hasSeenLastWarn = setTo;
+                break;
+            default:
+                break;
+
+
+        }
+    }
 
 
 
@@ -29,11 +70,19 @@ public class PlayerRadiation  {
     // Save data to NBT
     public void saveNBTData(CompoundTag nbt) {
         nbt.putDouble("radiation", this.radiation);
+        nbt.putBoolean("hasSeenFirstWarn", this.hasSeenFirstWarn);
+        nbt.putBoolean("hasSeenSecondWarn", this.hasSeenSecondWarn);
+        nbt.putBoolean("hasSeenThirdWarn", this.hasSeenThirdWarn);
+        nbt.putBoolean("hasSeenLastWarn", this.hasSeenLastWarn);
     }
 
     // Load data from NBT
     public void loadNBTData(CompoundTag nbt) {
-        this.radiation = nbt.getInt("radiation");
+        this.radiation = nbt.getDouble("radiation");
+        this.hasSeenFirstWarn = nbt.getBoolean("hasSeenFirstWarn");
+        this.hasSeenSecondWarn = nbt.getBoolean("hasSeenSecondWarn");
+        this.hasSeenThirdWarn = nbt.getBoolean("hasSeenThirdWarn");
+        this.hasSeenLastWarn = nbt.getBoolean("hasSeenLastWarn");
     }
 
 }

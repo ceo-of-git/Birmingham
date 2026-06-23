@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
@@ -53,7 +54,29 @@ public class ServerEventHandler {
             return;
         }
 
-        // Iterate thru inventory & Apply Hazards
+		// radiation warnings
+		player.getCapability(PlayerRadiationProvider.PLAYER_RADIATION).ifPresent(playerRadiation -> {
+			if (playerRadiation.getRadiation() > 200 && !playerRadiation.getWarn(1)) {
+				playerRadiation.setWarn(1, true);
+				player.sendSystemMessage(Component.literal("You feel ill.."), true);
+			}
+			if (playerRadiation.getRadiation() > 500 && !playerRadiation.getWarn(2)) {
+				playerRadiation.setWarn(2, true);
+				player.sendSystemMessage(Component.literal("You feel greatly ill.."), true);
+			}
+			if (playerRadiation.getRadiation() > 800 && !playerRadiation.getWarn(3)) {
+				playerRadiation.setWarn(3, true);
+				player.sendSystemMessage(Component.literal("You feel as if you are dying.."), true);
+			}
+			if (playerRadiation.getRadiation() > 1200 && !playerRadiation.getWarn(4)) {
+				playerRadiation.setWarn(4, true);
+				player.sendSystemMessage(Component.literal("You are going to die."), true);
+			}
+
+		});
+
+
+		// Iterate thru inventory & Apply Hazards
         List<ItemStack> inventoryItems = new ArrayList<ItemStack>();
         inventoryItems.addAll(player.getInventory().items);
         inventoryItems.add(player.getOffhandItem());
