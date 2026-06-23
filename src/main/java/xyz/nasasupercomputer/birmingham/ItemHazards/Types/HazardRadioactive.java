@@ -16,16 +16,14 @@ import java.util.logging.Logger;
 
 public class HazardRadioactive implements IHazardType {
 
-	private String translatableTitle;
+	private String translatableTitle = "hazard.birmingham.radioactive.title";
 	private double intensity;
-	private String translatableDescription;
+	private String translatableDescription = "nothing lmfao";
 
 
 	// Constructor
-	public HazardRadioactive(double intensity, String translatableTitle, String translatableDescription) {
+	public HazardRadioactive(double intensity) {
 		this.intensity = intensity;
-		this.translatableTitle = translatableTitle;
-		this.translatableDescription = translatableDescription;
 	}
 	
 	@Override
@@ -41,11 +39,8 @@ public class HazardRadioactive implements IHazardType {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void AddHazardTooltip(Player player, List<String> description, ItemStack stack) {
-		description.add("§a[ " + I18n.get(this.translatableTitle) + " ]§r");
+		description.add("§a[ " + I18n.get(translatableTitle, intensity) + " ]§r");
 		
-		if (Screen.hasShiftDown()) {
-			description.add("§8- " + I18n.get(this.translatableDescription));
-		}
 	}
 
 	@Override
@@ -60,6 +55,6 @@ public class HazardRadioactive implements IHazardType {
 	
 	@Override
 	public String GetTranslatableDescription() {
-		return this.translatableDescription;
+		return translatableDescription;
 	}
 }

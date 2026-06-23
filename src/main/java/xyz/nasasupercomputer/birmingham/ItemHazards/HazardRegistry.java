@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.world.item.Item;
+import xyz.nasasupercomputer.birmingham.Fluids.FluidRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.Types.HazardRadioactive;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.Types.HazardToxic;
@@ -25,7 +26,6 @@ public class HazardRegistry {
 
 
 
-	public static final HazardRadioactive Hazard_Radioactive_T1 = new HazardRadioactive(0.05, "hazard.birmingham.radioactive.weak.title", "hazard.birmingham.radioactive.weak.description");
 
 
 	// =========================
@@ -36,7 +36,6 @@ public class HazardRegistry {
 		HazardVariantsList.add(Hazard_Toxic_T3);
 		HazardVariantsList.add(Hazard_Molten_T1);
 		HazardVariantsList.add(Hazard_Molten_T2);
-		HazardVariantsList.add(Hazard_Radioactive_T1);
 	}
 	
 	// =========================
@@ -49,8 +48,9 @@ public class HazardRegistry {
 		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Toxic_T3);
 		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Molten_T1);
 		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Molten_T2);
-		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), Hazard_Radioactive_T1);
-		
+		HazardSystem.RegisterHazard(ItemRegistry.TEST_ITEM.get(), new HazardRadioactive(10000.05));
+		HazardSystem.RegisterHazard(FluidRegistry.CONTAMINATED_WATER.bucket.get(), new HazardRadioactive(1));
+
 		HazardSystem.RegisterHazard(ItemRegistry.FLAME_GEM.get(), Hazard_Molten_T1);
 		
 		// SLAG

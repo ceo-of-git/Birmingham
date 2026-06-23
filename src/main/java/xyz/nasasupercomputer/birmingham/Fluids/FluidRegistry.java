@@ -22,4 +22,18 @@ public class FluidRegistry {
             fogColor(0.0f, 1.0f, 0.0f)),
             BlockBehaviour.Properties.copy(Blocks.WATER),
             new Item.Properties().stacksTo(1));
+
+
+
+    public static final FluidRegistryContainer CONTAMINATED_WATER = new FluidRegistryContainer(
+            "contaminated_water",
+            FluidType.Properties.create().viscosity(1),
+            () -> FluidRegistryContainer.createExtension(
+                    new FluidRegistryContainer.ClientExtensions(MainRegistry.MOD_ID, "contaminated_water").
+                            fogColor(5 / 255f, 101 / 255f, 51 / 255f).tint(0x60e07e)),
+            BlockBehaviour.Properties.copy(Blocks.WATER),
+            new Item.Properties().stacksTo(1));
 }
+
+
+

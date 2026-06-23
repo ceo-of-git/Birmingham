@@ -29,6 +29,7 @@
 	"item.birmingham.geigercounter.description": "§7Shows you your current radiation levels on right click.",
 
 	"item.birmingham.example_fluid_bucket": "Bucket of Unidentified Fluid",
+	"item.birmingham.contaminated_water_bucket": "Contaminated Water Bucket",
 
 
 	"tooltip.birmingham.protects_from": "§6Protects from:",
@@ -51,8 +52,7 @@
 	"hazard.birmingham.molten.description": "Ignites player when held if unprotected",
 	"hazard.birmingham.molten.strong.title": "Superheated",
 
-	"hazard.birmingham.radioactive.weak.title": "Weakly Radioactive",
-	"hazard.birmingham.radioactive.weak.description": "Slowly applies 0.05 RAD/s if unprotected.",
+	"hazard.birmingham.radioactive.title": "%s RAD/s",
 
 
 	"gems.birmingham.shift_to_view": "- Shift to View Effects",

@@ -25,6 +25,8 @@ import org.jetbrains.annotations.Nullable;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -36,6 +38,8 @@ public class FluidRegistryContainer {
     private ForgeFlowingFluid.Properties properties;
     public final RegistryObject<ForgeFlowingFluid.Source> source;
     public final RegistryObject<ForgeFlowingFluid.Flowing> flowing;
+    public static final List<FluidRegistryContainer> ALL = new ArrayList<>();
+
 
     public FluidRegistryContainer(String name, FluidType.Properties typeProperties,
                                   Supplier<IClientFluidTypeExtensions> clientExtensions, @Nullable AdditionalProperties additionalProperties,
@@ -64,6 +68,7 @@ public class FluidRegistryContainer {
 
         this.bucket = ItemRegistry.ITEMS.register(name + "_bucket", () -> new BucketItem(this.source, itemProperties));
         this.properties.bucket(this.bucket);
+        ALL.add(this);
     }
 
     public FluidRegistryContainer(String name, FluidType.Properties typeProperties,
@@ -103,6 +108,12 @@ public class FluidRegistryContainer {
             public int getTintColor(FluidState state, BlockAndTintGetter getter, BlockPos pos) {
                 return extensions.tintFunction == null ? 0xFFFFFFFF : extensions.tintFunction.apply(state, getter, pos);
             }
+
+            @Override
+            public int getTintColor() {                          // NEW – this is what the bucket reads
+                return extensions.itemTintColor;
+            }
+
 
             @Override
             public @NotNull Vector3f modifyFogColor(Camera camera, float partialTick, ClientLevel level,
@@ -156,6 +167,7 @@ public class FluidRegistryContainer {
         private ResourceLocation renderOverlay;
         private Vector3f fogColor;
         private TriFunction<FluidState, BlockAndTintGetter, BlockPos, Integer> tintFunction;
+        private int itemTintColor = 0xFFFFFFFF;          // thanks claude, used to make the bucket have an item tint too
 
         private final String modid;
 
@@ -205,6 +217,7 @@ public class FluidRegistryContainer {
 
         public ClientExtensions tint(int tint) {
             this.tintFunction = ($0, $1, $2) -> tint;
+            this.itemTintColor = tint;
             return this;
         }
 
@@ -212,5 +225,10 @@ public class FluidRegistryContainer {
             this.tintFunction = tinter;
             return this;
         }
+        public ClientExtensions bucketTint(int tint) {
+            this.itemTintColor = tint;
+            return this;
+        }
+
     }
 }
