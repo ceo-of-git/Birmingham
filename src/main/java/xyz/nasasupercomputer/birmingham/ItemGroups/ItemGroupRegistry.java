@@ -60,6 +60,10 @@ public class ItemGroupRegistry {
         // ADDING TO RESOURCES TAB
         else if (event.getTabKey() == CREATIVE_TAB_RESOURCES.getKey()) {
         	event.accept(ItemRegistry.COAL_COKE);
+        	event.accept(ItemRegistry.STEEL_BLOCK);
+        	event.accept(ItemRegistry.STEEL_INGOT);
+        	event.accept(ItemRegistry.STEEL_NUGGET);
+        	event.accept(ItemRegistry.STEEL_SLAG);
         }
         
         // ADDING TO MODULES TAB
@@ -76,9 +80,11 @@ public class ItemGroupRegistry {
         // ADDING TO TOOLS TAB
         else if (event.getTabKey() == CREATIVE_TAB_TOOLS.getKey()) {
         	event.accept(ItemRegistry.WOODEN_TONGS);
+        	event.accept(ItemRegistry.STEEL_TONGS);
             event.accept(ItemRegistry.LEATHER_GLOVES);
             event.accept(ItemRegistry.CREATIVE_GLOVES);
             event.accept(ItemRegistry.ENERGY_DRINK);
+            event.accept(ItemRegistry.GEIGER_COUNTER);
         }
     }
 }

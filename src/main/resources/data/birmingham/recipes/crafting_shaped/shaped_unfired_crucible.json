@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "#=#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:clay_ball"
+    },
+    "=": {
+      "item": "birmingham:steel_ingot"
+    }
+  },
+  "result": {
+    "item": "birmingham:unfired_crucible"
+  }
+}

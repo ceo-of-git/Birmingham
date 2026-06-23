@@ -10,13 +10,13 @@
 	"inventory.birmingham.coking_oven": "Coking Oven",
 	"inventory.birmingham.alloy_blast_furnace": "Primitive Alloy Blast Furnace",
 	
-	
 	"item.birmingham.test_item": "fucked up bread",
 	"item.birmingham.energy_drink": "Energy Drink",
 	"item.birmingham.raw_adamantite": "RAW ADAMMMMM",
 	"item.birmingham.leather_gloves": "Leather Gloves",
 	"item.birmingham.creative_gloves": "Creative Gloves",
 	"item.birmingham.wooden_tongs": "Wooden Tongs",
+	"item.birmingham.steel_tongs": "Steel Tongs",
 	"item.birmingham.horsing_around": "Disc Horse",
 	"item.birmingham.flame_gem": "Flame Gem",
 	"item.birmingham.vampire_gem": "Vampiric Gem",
@@ -41,6 +41,8 @@
 	"block.birmingham.coking_oven": "Coking Oven",
 	"block.birmingham.alloy_blast_furnace": "Alloy Blast Furnace",
 	"block.birmingham.steel_block": "Block of Steel",
+	"block.birmingham.unfired_crucible": "Unfired Crucible",
+	"block.birmingham.fired_crucible": "Crucible",
 	
 	"hazard.birmingham.toxic.title": "Mildly Toxic",
 	"hazard.birmingham.toxic.description": "Inflicts Poison III when held if unprotected.",

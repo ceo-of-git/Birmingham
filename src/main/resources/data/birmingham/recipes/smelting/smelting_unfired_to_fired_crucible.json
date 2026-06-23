@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "experience": 10,
+  "cookingtime": 400,
+  "ingredient": {
+    "item": "birmingham:unfired_crucible"
+  },
+  "result": "birmingham:fired_crucible"
+}

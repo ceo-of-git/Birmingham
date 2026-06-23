@@ -29,6 +29,8 @@ public class BlockRegistry {
 	public static final RegistryObject<Block> ALLOY_BLAST_FURNACE = BLOCKS.register("alloy_blast_furnace", () -> new AlloyBlastFurnaceBlock(BlockBehaviour.Properties.copy(Blocks.BRICKS).requiresCorrectToolForDrops().strength(3.0F, 14.0F).noOcclusion()));
 	public static final RegistryObject<BlockEntityType<AlloyBlastFurnaceBlockEntity>> ALLOY_BLAST_FURNACE_ENTITY = BLOCK_ENTITIES.register("alloy_blast_furnace", () -> BlockEntityType.Builder.of(AlloyBlastFurnaceBlockEntity::new, ALLOY_BLAST_FURNACE.get()).build(null));
 	
+	public static final RegistryObject<Block> FIRED_CRUCIBLE = BLOCKS.register("fired_crucible", () -> new Block(BlockBehaviour.Properties.copy(Blocks.TERRACOTTA).noOcclusion().strength(3f)));
+	
 	// =========================
 	// MATERIAL BLOCKS
 	public static final RegistryObject<Block> STEEL_BLOCK = BLOCKS.register("steel_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)));
@@ -39,6 +41,7 @@ public class BlockRegistry {
 	public static final RegistryObject<Block> ADAMANTITE = BLOCKS.register("adamantite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS).strength(6f).requiresCorrectToolForDrops()));
 	public static final RegistryObject<Block> DEEPSLATE_ADAMANTITE_ORE = BLOCKS.register("deepslate_adamantite_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE).strength(6f).requiresCorrectToolForDrops()));
 	public static final RegistryObject<Block> ADAMANTITE_ORE = BLOCKS.register("adamantite_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).strength(6f).requiresCorrectToolForDrops()));
+	public static final RegistryObject<Block> UNFIRED_CRUCIBLE = BLOCKS.register("unfired_crucible", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CLAY).noOcclusion().strength(1f)));
 	
 	// =========================
 	// BLOCK ITEMS
@@ -48,4 +51,7 @@ public class BlockRegistry {
 	public static final RegistryObject<Item> ORE_ADAMANTITE_ITEM = ItemRegistry.ITEMS.register("adamantite_ore", () -> new BlockItem(ADAMANTITE_ORE.get(), new Item.Properties()));
 	public static final RegistryObject<Item> COKING_OVEN_ITEM = ItemRegistry.ITEMS.register("coking_oven", () -> new BlockItem(COKING_OVEN.get(), new Item.Properties()));
 	public static final RegistryObject<Item> ALLOY_BLAST_FURNACE_ITEM = ItemRegistry.ITEMS.register("alloy_blast_furnace", () -> new BlockItem(ALLOY_BLAST_FURNACE.get(), new Item.Properties()));
+	public static final RegistryObject<Item> UNFIRED_CRUCIBLE_ITEM = ItemRegistry.ITEMS.register("unfired_crucible", () -> new BlockItem(UNFIRED_CRUCIBLE.get(), new Item.Properties()));
+	public static final RegistryObject<Item> FIRED_CRUCIBLE_ITEM = ItemRegistry.ITEMS.register("fired_crucible", () -> new BlockItem(FIRED_CRUCIBLE.get(), new Item.Properties()));
+
 }
