@@ -7,6 +7,7 @@ import net.minecraft.world.item.Items;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+import xyz.nasasupercomputer.birmingham.Fluids.FluidRegistry;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
@@ -64,6 +65,9 @@ public class ItemGroupRegistry {
         	event.accept(ItemRegistry.STEEL_INGOT);
         	event.accept(ItemRegistry.STEEL_NUGGET);
         	event.accept(ItemRegistry.STEEL_SLAG);
+            event.accept(FluidRegistry.CONTAMINATED_WATER.bucket.get());
+            event.accept(FluidRegistry.EXAMPLE_FLUID.bucket.get());
+
         }
         
         // ADDING TO MODULES TAB
