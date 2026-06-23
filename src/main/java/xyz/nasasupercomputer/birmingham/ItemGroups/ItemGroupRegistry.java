@@ -3,6 +3,7 @@ package xyz.nasasupercomputer.birmingham.ItemGroups;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.DeferredRegister;
@@ -11,6 +12,10 @@ import xyz.nasasupercomputer.birmingham.Fluids.FluidRegistry;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
+import xyz.nasasupercomputer.birmingham.Materials.MaterialsHelper;
+import xyz.nasasupercomputer.birmingham.Materials.RegisteredMaterial;
+
+import java.util.List;
 
 public class ItemGroupRegistry {
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MainRegistry.MOD_ID);
@@ -75,7 +80,22 @@ public class ItemGroupRegistry {
             event.accept(ItemRegistry.DOLLAR_10);
             event.accept(ItemRegistry.DOLLAR_20);
             event.accept(ItemRegistry.DOLLAR_50);
-            event.accept(ItemRegistry.DOLLAR_100);     
+            event.accept(ItemRegistry.DOLLAR_100);
+
+            List<RegisteredMaterial>  list = MaterialsHelper.all(); // registering all materiasl from the material system
+            for (RegisteredMaterial thing : list) {
+                if (thing.blockItem() != null) {
+                    event.accept(thing.blockItem().get());
+
+                }
+
+                event.accept(thing.ingot().get());
+                if (thing.nugget() != null) {
+                    event.accept(thing.nugget().get());
+
+                }
+
+            }
         }
         
         // ADDING TO MODULES TAB

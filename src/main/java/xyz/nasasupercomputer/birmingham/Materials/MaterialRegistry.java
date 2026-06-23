@@ -18,7 +18,7 @@ public class MaterialRegistry {
             MaterialProperties.builder("radium")
                     .hasBlock(true) // defaults to true, adding for example purposes
                     .hasNugget(true) // defaults to true, adding for example purposes
-                    .radioactivity(20)
+                    .radioactivity(20) // radiopactiviy (per sec, nuggets have 1/9th this, blocks have 9x this)
                     .irradiationProperties(new IrradiationProperties(true, 30, 100)) // should irradiate is should it deal rads to entities nearby, range is range, power is how many rads (at most, falls off with distance)
                     .ingotFactory(Radium::new) // custom class if you need custom functionality, change ingotfactory to nuggetfactory or blockfactory if needed
                     //NOTICE: IF YOU HAVE A .blockFactory, YOU ******CANNOT****** USE IRRADIATION FROM HERE. IT WILL OVERRIDE YOUR CUSTOM BLOCK CODE. INSTEAD JUST LOOK AT RadioactiveBlock AND COPY IT OR EXTEND IT
