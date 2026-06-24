@@ -1,4 +1,4 @@
-package xyz.nasasupercomputer.birmingham.Materials;
+package xyz.nasasupercomputer.birmingham.Blocks.Custom;
 
 
 import net.minecraft.core.BlockPos;

@@ -3,6 +3,7 @@ package xyz.nasasupercomputer.birmingham.EventHandlers;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -18,6 +19,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
@@ -62,21 +64,26 @@ public class ServerEventHandler {
 		player.getCapability(PlayerRadiationProvider.PLAYER_RADIATION).ifPresent(playerRadiation -> {
 			long currentTick = player.level().getGameTime();
 			double rads = playerRadiation.getRadiation();
+			
+			if (player.gameMode.getGameModeForPlayer() != GameType.CREATIVE) { rads = 0.0; }
+			
+			// TODO: Localize
+
 			if (rads > 200 && !playerRadiation.getWarn(1)) {
 				playerRadiation.setWarn(1, true);
-				player.sendSystemMessage(Component.literal("You feel ill.."), true);
+				player.sendSystemMessage(Component.literal("You feel ill..").withStyle(ChatFormatting.RED), true);
 			}
 			if (rads > 500 && !playerRadiation.getWarn(2)) {
 				playerRadiation.setWarn(2, true);
-				player.sendSystemMessage(Component.literal("You feel greatly ill.."), true);
+				player.sendSystemMessage(Component.literal("You feel greatly ill..").withStyle(ChatFormatting.RED), true);
 			}
 			if (rads > 800 && !playerRadiation.getWarn(3)) {
 				playerRadiation.setWarn(3, true);
-				player.sendSystemMessage(Component.literal("You feel as if you are dying.."), true);
+				player.sendSystemMessage(Component.literal("You feel as if you are dying..").withStyle(ChatFormatting.RED), true);
 			}
 			if (rads > 1200 && !playerRadiation.getWarn(4)) {
 				playerRadiation.setWarn(4, true);
-				player.sendSystemMessage(Component.literal("You are going to die."), true);
+				player.sendSystemMessage(Component.literal("You are going to die.").withStyle(ChatFormatting.DARK_RED), true);
 			}
 
 			if (rads > 200) { // effects for 200 rads

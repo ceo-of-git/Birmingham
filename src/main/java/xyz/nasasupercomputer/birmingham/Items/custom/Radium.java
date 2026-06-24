@@ -1,4 +1,4 @@
-package xyz.nasasupercomputer.birmingham.Materials;
+package xyz.nasasupercomputer.birmingham.Items.custom;
 
 import net.minecraft.world.item.Item;
 

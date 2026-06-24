@@ -30,6 +30,7 @@ public class PlayerRadiation  {
     public void addRadiation(double amount) {
         this.radiation = this.radiation + amount;
     }
+    
     public boolean getWarn(int warn) {
         switch (warn) {
             case 1:

@@ -45,10 +45,10 @@ public class ItemRegistry {
 
 	// =========================
 	// MATERIALS
-	public static final RegistryObject<Item> STEEL_BLOCK = ITEMS.register("steel_block", () -> new BlockItem(BlockRegistry.STEEL_BLOCK.get(), new Item.Properties()));
-	public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot", () -> new Item(new Item.Properties().stacksTo(64)));
-	public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget", () -> new Item(new Item.Properties().stacksTo(64)));
-	public static final RegistryObject<Item> STEEL_SLAG = ITEMS.register("steel_slag", () -> new Item(new Item.Properties().stacksTo(64)));
+//	public static final RegistryObject<Item> STEEL_BLOCK = ITEMS.register("steel_block", () -> new BlockItem(BlockRegistry.STEEL_BLOCK.get(), new Item.Properties()));
+//	public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot", () -> new Item(new Item.Properties().stacksTo(64)));
+//	public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget", () -> new Item(new Item.Properties().stacksTo(64)));
+//	public static final RegistryObject<Item> STEEL_SLAG = ITEMS.register("steel_slag", () -> new Item(new Item.Properties().stacksTo(64)));
 
 	// =========================
 	// MONEY

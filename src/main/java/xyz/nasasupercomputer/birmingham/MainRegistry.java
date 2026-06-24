@@ -39,8 +39,7 @@ import xyz.nasasupercomputer.birmingham.ItemGroups.ItemGroupRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardSystem;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
-import xyz.nasasupercomputer.birmingham.Materials.MaterialRegistry;
-import xyz.nasasupercomputer.birmingham.Materials.MaterialsHelper;
+import xyz.nasasupercomputer.birmingham.Materials.MaterialSetRegistry;
 import xyz.nasasupercomputer.birmingham.Recipes.RecipeRegistry;
 import xyz.nasasupercomputer.birmingham.Sound.SoundRegistry;
 import xyz.nasasupercomputer.birmingham.entity.ModEntities;
@@ -70,12 +69,10 @@ public class MainRegistry
         BlockRegistry.BLOCKS.register(modEventBus);
         BlockRegistry.BLOCK_ENTITIES.register(modEventBus);
 
-        MaterialRegistry.init();
-        MaterialsHelper.ITEMS.register(modEventBus);
-        MaterialsHelper.BLOCKS.register(modEventBus);
         ItemRegistry.ITEMS.register(modEventBus);
         SoundRegistry.SOUND_EVENTS.register(modEventBus);
         ItemGroupRegistry.CREATIVE_MODE_TABS.register(modEventBus);
+        MaterialSetRegistry.registerEverything(modEventBus);
 
         FluidRegistry.FLUID_TYPES.register(modEventBus);
         FluidRegistry.FLUIDS.register(modEventBus);
@@ -101,7 +98,8 @@ public class MainRegistry
 
     private void CommonSetup(final FMLCommonSetupEvent event)
     {
-        event.enqueueWork(MaterialsHelper::bindHazards); // stuff idk
+    	// Apply Hazards to any Item Set
+        event.enqueueWork(MaterialSetRegistry::bindHazards);
 
         LOGGER.info("[Birmingham] Started Mod with Tech Route Enabled: " + String.valueOf(ForgeConfigs.enableTechRoute).toUpperCase());
     	LOGGER.info("[Birmingham] Started Mod with Exploration Route Enabled: " + String.valueOf(ForgeConfigs.enableExplorationRoute).toUpperCase());

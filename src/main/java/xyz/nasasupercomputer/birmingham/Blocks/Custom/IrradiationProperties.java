@@ -1,4 +1,4 @@
-package xyz.nasasupercomputer.birmingham.Materials;
+package xyz.nasasupercomputer.birmingham.Blocks.Custom;
 
 public record IrradiationProperties(
         boolean shouldIrradiate,
