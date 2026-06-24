@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "birmingham:radium_nuggets_to_ingot"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "hasbirmingham:radium_nugget": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "birmingham:radium_nugget"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "hasbirmingham:radium_nugget",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "birmingham:radium_nuggets_to_ingot"
+    ]
+  },
+  "sends_telemetry_event": false
+}

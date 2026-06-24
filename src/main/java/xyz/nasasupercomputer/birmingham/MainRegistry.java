@@ -72,7 +72,7 @@ public class MainRegistry
         ItemRegistry.ITEMS.register(modEventBus);
         SoundRegistry.SOUND_EVENTS.register(modEventBus);
         ItemGroupRegistry.CREATIVE_MODE_TABS.register(modEventBus);
-        MaterialSetRegistry.registerEverything(modEventBus);
+        MaterialSetRegistry.createMaterialSets();
 
         FluidRegistry.FLUID_TYPES.register(modEventBus);
         FluidRegistry.FLUIDS.register(modEventBus);
@@ -80,6 +80,7 @@ public class MainRegistry
         ModEntities.register(modEventBus);
         GemRegistry.register(modEventBus);
     	RecipeRegistry.register(modEventBus);
+    	MaterialSetRegistry.registerEverything(modEventBus);
         
         InventoryRegistry.MENUS.register(modEventBus);
         

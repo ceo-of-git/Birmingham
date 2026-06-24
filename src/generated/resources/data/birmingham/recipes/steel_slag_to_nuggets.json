@@ -1,12 +1,13 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
   "ingredients": [
     {
       "item": "birmingham:steel_slag"
     }
   ],
   "result": {
-    "item": "birmingham:steel_nugget",
-    "count": 3
+    "count": 3,
+    "item": "birmingham:steel_nugget"
   }
 }

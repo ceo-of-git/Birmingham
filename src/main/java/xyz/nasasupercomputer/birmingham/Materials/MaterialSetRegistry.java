@@ -5,8 +5,13 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import net.minecraft.advancements.CriterionTriggerInstance;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -33,32 +38,35 @@ import xyz.nasasupercomputer.birmingham.ItemHazards.HazardRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardSystem;
 import xyz.nasasupercomputer.birmingham.ItemHazards.Types.HazardRadioactive;
 
-@Mod.EventBusSubscriber(modid = MainRegistry.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+// @Mod.EventBusSubscriber(modid = MainRegistry.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class MaterialSetRegistry {
 
 		public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MainRegistry.MOD_ID);
 		public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MainRegistry.MOD_ID);
 		public static final ArrayList<MaterialSetRecord> ALL_SETS = new ArrayList<>();
 		private static final List<Runnable> PENDING_HAZARDS = new ArrayList<>(); // shit so it doesnt try to get the registryo bject before it actually exist so radiation doesnt crash
+		private static boolean IS_INITIALIZED = false;
 		
 		private static final double BLOCK_RADS_MULT = 9;
 		private static final double NUGGET_RADS_DIVIDE = 9;
 		private static final double SLAG_RADS_DIVIDE = 4;
 		
-	public static void registerEverything(IEventBus bus) {
-		// MAKE MAT-SETS HERE
-		// DONT WORRY ABOUT ANYTHING ELSE :)
-		ALL_SETS.add(createItemSet("steel", true, true, true, MapColor.COLOR_GRAY, 6.0f, 2.0f, 0.0, new IrradiationProperties(false, 0, 0.0)));
-		ALL_SETS.add(createItemSet("radium", true, true, false, MapColor.COLOR_LIGHT_GREEN, 6.0f, 2.0f, 30.0, new IrradiationProperties(true, 30, 100.0)));
-		
-		
-		
-		
-		
-		// Registers all the items and blocks
-		BLOCKS.register(bus);
-		ITEMS.register(bus);
-	}
+		public static void createMaterialSets() {
+		    if (IS_INITIALIZED) return;
+		    IS_INITIALIZED = true;
+
+		    // NOTE: When adding sets, recipes will NOT generate unless you run gradle in the data mode
+		    // gradlew runData (instead of runClient) (idk why) (it just does)
+		    ALL_SETS.add(createItemSet("steel", true, true, true, MapColor.COLOR_GRAY, 6.0f, 2.0f, 0.0, new IrradiationProperties(false, 0, 0.0)));
+		    ALL_SETS.add(createItemSet("radium", true, true, false, MapColor.COLOR_LIGHT_GREEN, 6.0f, 2.0f, 30.0, new IrradiationProperties(true, 30, 100.0)));
+		}
+
+		public static void registerEverything(IEventBus bus) {
+		    createMaterialSets();
+
+		    BLOCKS.register(bus);
+		    ITEMS.register(bus);
+		}
 	
 	public static void bindHazards() {
 		// Applies all of the Pending Hazards
@@ -161,7 +169,10 @@ public class MaterialSetRegistry {
 		
 		if (blockItem != null) {
 			// Block -> 9x Ingot
-			ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ingotItem, 9).requires(blockItem).save(recipeWriter, new ResourceLocation(MainRegistry.MOD_ID, prefix + "_block_to_ingots"));
+			ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ingotItem, 9)
+			.requires(blockItem)
+			.unlockedBy("has" + BuiltInRegistries.ITEM.getKey(blockItem), InventoryChangeTrigger.TriggerInstance.hasItems(blockItem))
+			.save(recipeWriter, new ResourceLocation(MainRegistry.MOD_ID, prefix + "_block_to_ingots"));
 		
 			// 9x Ingot -> Block
 			ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, blockItem)
@@ -169,6 +180,7 @@ public class MaterialSetRegistry {
 		        .pattern("###")
 		        .pattern("###")
 		        .define('#', ingotItem)
+		        .unlockedBy("has" + BuiltInRegistries.ITEM.getKey(ingotItem), InventoryChangeTrigger.TriggerInstance.hasItems(ingotItem))
 		        .save(recipeWriter, new ResourceLocation(MainRegistry.MOD_ID, prefix + "_ingots_to_block"));
 		}
 		
@@ -176,7 +188,10 @@ public class MaterialSetRegistry {
 	
 	    if (nuggetItem != null) {
 	    	// Ingot -> 9 Nuggets
-		    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, nuggetItem, 9).requires(ingotItem).save(recipeWriter, new ResourceLocation(MainRegistry.MOD_ID, prefix + "_ingot_to_nuggets"));
+		    ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, nuggetItem, 9)
+		    .requires(ingotItem)
+		    .unlockedBy("has" + BuiltInRegistries.ITEM.getKey(ingotItem), InventoryChangeTrigger.TriggerInstance.hasItems(ingotItem))
+		    .save(recipeWriter, new ResourceLocation(MainRegistry.MOD_ID, prefix + "_ingot_to_nuggets"));
 
 		 // 9 Nuggets -> 1 Ingot
 		    ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ingotItem)
@@ -184,12 +199,16 @@ public class MaterialSetRegistry {
 	        .pattern("###")
 	        .pattern("###")
 	        .define('#', nuggetItem)
+	        .unlockedBy("has" + BuiltInRegistries.ITEM.getKey(nuggetItem), InventoryChangeTrigger.TriggerInstance.hasItems(nuggetItem))
 	        .save(recipeWriter, new ResourceLocation(MainRegistry.MOD_ID, prefix + "_nuggets_to_ingot"));
 	    }
 	    
 	    if (slagItem != null && nuggetItem != null) {
 	    	// Slag -> 3 Nuggets
-	    	ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, nuggetItem, 3).requires(slagItem).save(recipeWriter, new ResourceLocation(MainRegistry.MOD_ID, prefix + "_slag_to_nuggets"));
+	    	ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, nuggetItem, 3)
+	    	.requires(slagItem)
+	    	.unlockedBy("has" + BuiltInRegistries.ITEM.getKey(slagItem), InventoryChangeTrigger.TriggerInstance.hasItems(slagItem))
+	    	.save(recipeWriter, new ResourceLocation(MainRegistry.MOD_ID, prefix + "_slag_to_nuggets"));
 	    }
 	   
 	    

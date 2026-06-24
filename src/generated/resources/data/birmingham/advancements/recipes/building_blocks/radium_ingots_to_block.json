@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "birmingham:radium_ingots_to_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "hasbirmingham:radium_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "birmingham:radium_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "hasbirmingham:radium_ingot",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "birmingham:radium_ingots_to_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

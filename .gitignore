@@ -24,5 +24,8 @@ run
 # Minecraft Options because mine are wack and im not letting you experiencethat.
 run/options.txt
 
+# run-data logs
+run-data/logs/
+
 # Files from Forge MDK
 forge*changelog.txt

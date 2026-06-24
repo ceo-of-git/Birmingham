@@ -21,9 +21,10 @@ public class MaterialSetRecipeProvider extends RecipeProvider {
 	@Override
 	protected void buildRecipes(Consumer<FinishedRecipe> writer) {
 
-		MainRegistry.LOGGER.error(MaterialSetRegistry.ALL_SETS.toString());
-		
+	    MainRegistry.LOGGER.info("Generating recipes for {} material sets", MaterialSetRegistry.ALL_SETS.size() );
+
 	    for (MaterialSetRecord set : MaterialSetRegistry.ALL_SETS) {
+	        MainRegistry.LOGGER.info("Recipe gen: {}", set.name());
 	        MaterialSetRegistry.createRecipes(writer, set);
 	    }
 	}

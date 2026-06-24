@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "birmingham:steel_nuggets_to_ingot"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "hasbirmingham:steel_nugget": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "birmingham:steel_nugget"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "hasbirmingham:steel_nugget",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "birmingham:steel_nuggets_to_ingot"
+    ]
+  },
+  "sends_telemetry_event": false
+}
