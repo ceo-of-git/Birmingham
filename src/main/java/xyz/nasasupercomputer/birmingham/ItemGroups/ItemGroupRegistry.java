@@ -92,12 +92,6 @@ public class ItemGroupRegistry {
                 }
 
                 event.accept(thing.ingot().get());
-<<<<<<< Updated upstream
-                
-=======
-
-
->>>>>>> Stashed changes
                 if (thing.nugget() != null) {
                     event.accept(thing.nugget().get());
                 }

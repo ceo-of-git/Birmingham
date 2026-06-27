@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
@@ -81,23 +82,25 @@ public class PurificationChamberBlockEntity extends BlockEntity implements Conta
     }
 
     // Runs every tick, handles recipe progression and stuff.
-    public static void tick(Level level, BlockPos pos, BlockState state, PurificationChamberBlockEntity blockEntity) {
+    public void tick(Level level, BlockPos pos, BlockState state, PurificationChamberBlockEntity blockEntity) {
 
-        Optional<RecipeTypeCokingOven> recipe = blockEntity.getCurrentRecipe();
+//        Optional<RecipeTypeCokingOven> recipe = blockEntity.getCurrentRecipe();
+//
+//        if (recipe.isPresent() && blockEntity.canCraft(recipe.get())) {
+//            blockEntity.progress += 1;
+//
+//            if (blockEntity.progress >= blockEntity.maxProgress) {
+//                blockEntity.craftItem(recipe.get());
+//                blockEntity.progress = 0;
+//            }
+//
+//        } else {
+//            blockEntity.progress = 0;
+//        }
+//
+//        blockEntity.setChanged();
 
-        if (recipe.isPresent() && blockEntity.canCraft(recipe.get())) {
-            blockEntity.progress += 1;
 
-            if (blockEntity.progress >= blockEntity.maxProgress) {
-                blockEntity.craftItem(recipe.get());
-                blockEntity.progress = 0;
-            }
-
-        } else {
-            blockEntity.progress = 0;
-        }
-
-        blockEntity.setChanged();
     }
 
     private Optional<RecipeTypeCokingOven> getCurrentRecipe() {
