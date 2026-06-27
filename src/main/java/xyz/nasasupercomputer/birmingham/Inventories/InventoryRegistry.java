@@ -19,11 +19,13 @@ public class InventoryRegistry {
 	
 	public static final RegistryObject<MenuType<CokingOvenMenu>> COKING_OVEN_MENU = MENUS.register("coking_oven", () -> IForgeMenuType.create((id, inv, pos) -> new CokingOvenMenu(id, inv, pos)));
 	public static final RegistryObject<MenuType<AlloyBlastFurnaceMenu>> ALLOY_BLAST_MENU = MENUS.register("alloy_blast", () -> IForgeMenuType.create((id, inv, pos) -> new AlloyBlastFurnaceMenu(id, inv, pos)));
+	public static final RegistryObject<MenuType<PurificationChamberMenu>> PURIFICATION_CHAMBER_MENU = MENUS.register("purification_chamber", () -> IForgeMenuType.create((id, inv, pos) -> new PurificationChamberMenu(id, inv, pos)));
 
 	// Link all Menus to their respective Screen
 	@SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
 		event.enqueueWork(() -> MenuScreens.register(COKING_OVEN_MENU.get(), CokingOvenScreen::new));
 		event.enqueueWork(() -> MenuScreens.register(ALLOY_BLAST_MENU.get(), AlloyBlastFurnaceScreen::new));
+		event.enqueueWork(() -> MenuScreens.register(PURIFICATION_CHAMBER_MENU.get(), PurificationChamberScreen::new));
     }
 }
