@@ -59,6 +59,8 @@ public class MaterialSetRegistry {
 		    // gradlew runData (instead of runClient) (idk why) (it just does)
 		    ALL_SETS.add(createItemSet("steel", true, true, true, MapColor.COLOR_GRAY, 6.0f, 2.0f, 0.0, new IrradiationProperties(false, 0, 0.0)));
 		    ALL_SETS.add(createItemSet("radium", true, true, false, MapColor.COLOR_LIGHT_GREEN, 6.0f, 2.0f, 30.0, new IrradiationProperties(true, 30, 100.0)));
+		    ALL_SETS.add(createItemSet("bronze", true, true, true, MapColor.COLOR_ORANGE, 6.0f, 2.0f, 0.0, new IrradiationProperties(false, 0, 0.0)));
+		    ALL_SETS.add(createItemSet("tin", true, true, false, MapColor.TERRACOTTA_WHITE, 3.0f, 1.0f, 0.0, new IrradiationProperties(false, 0, 0.0)));
 		}
 
 		public static void registerEverything(IEventBus bus) {

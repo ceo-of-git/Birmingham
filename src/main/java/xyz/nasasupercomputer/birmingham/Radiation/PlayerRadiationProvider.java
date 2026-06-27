@@ -1,4 +1,4 @@
-package xyz.nasasupercomputer.birmingham.radiation;
+package xyz.nasasupercomputer.birmingham.Radiation;
 
 // i essnetially just went off the code from googles ai overvierw thing because there is ZERO chance i ujnddeerstand anyh of tihs
 

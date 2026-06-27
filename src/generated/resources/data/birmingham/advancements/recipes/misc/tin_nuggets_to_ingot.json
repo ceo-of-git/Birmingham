@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "birmingham:tin_nuggets_to_ingot"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "hasbirmingham:tin_nugget": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "birmingham:tin_nugget"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "hasbirmingham:tin_nugget",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "birmingham:tin_nuggets_to_ingot"
+    ]
+  },
+  "sends_telemetry_event": false
+}

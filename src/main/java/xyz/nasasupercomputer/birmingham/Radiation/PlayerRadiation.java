@@ -1,4 +1,4 @@
-package xyz.nasasupercomputer.birmingham.radiation;
+package xyz.nasasupercomputer.birmingham.Radiation;
 
 import net.minecraft.nbt.CompoundTag;
 import org.checkerframework.checker.units.qual.A;

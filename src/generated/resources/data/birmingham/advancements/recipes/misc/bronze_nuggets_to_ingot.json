@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "birmingham:bronze_nuggets_to_ingot"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "hasbirmingham:bronze_nugget": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "birmingham:bronze_nugget"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "hasbirmingham:bronze_nugget",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "birmingham:bronze_nuggets_to_ingot"
+    ]
+  },
+  "sends_telemetry_event": false
+}

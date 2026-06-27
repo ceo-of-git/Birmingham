@@ -12,6 +12,8 @@ import xyz.nasasupercomputer.birmingham.Fluids.FluidRegistry;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
+import xyz.nasasupercomputer.birmingham.Materials.MaterialSetRecord;
+import xyz.nasasupercomputer.birmingham.Materials.MaterialSetRegistry;
 
 import java.util.List;
 
@@ -66,6 +68,10 @@ public class ItemGroupRegistry {
         	event.accept(ItemRegistry.COAL_COKE);
             event.accept(FluidRegistry.CONTAMINATED_WATER.bucket.get());
             event.accept(FluidRegistry.EXAMPLE_FLUID.bucket.get());
+            event.accept(BlockRegistry.TIN_ORE_ITEM);
+            event.accept(BlockRegistry.DEEPSLATE_TIN_ORE_ITEM);
+            event.accept(BlockRegistry.RAW_TIN_BLOCK_ITEM);
+            event.accept(ItemRegistry.RAW_TIN);
             event.accept(ItemRegistry.CENT_1);
             event.accept(ItemRegistry.CENT_10);
             event.accept(ItemRegistry.CENT_25);
@@ -77,31 +83,32 @@ public class ItemGroupRegistry {
             event.accept(ItemRegistry.DOLLAR_100);
 
             // MaterialRegistry items
-//            List<RegisteredMaterial>  list = MaterialsHelper.all(); // registering all materiasl from the material system
-//            for (RegisteredMaterial thing : list) {
-//                if (thing.blockItem() != null) {
-//                    event.accept(thing.blockItem().get());
-//
-//                }
-//
-//                event.accept(thing.ingot().get());
-//                if (thing.nugget() != null) {
-//                    event.accept(thing.nugget().get());
-//
-//                }
-//                
-//                if (thing.slag() != null) {
-//                    event.accept(thing.slag().get());
-//
-//                }
-//
-//            }
+            List<MaterialSetRecord> list = MaterialSetRegistry.getSets();
+            
+            // Order: Block, Ingot, Nugget, Slag
+            for (MaterialSetRecord thing : list) {
+                if (thing.blockItem() != null) {
+                    event.accept(thing.blockItem().get());
+                }
+
+                event.accept(thing.ingot().get());
+                
+                if (thing.nugget() != null) {
+                    event.accept(thing.nugget().get());
+                }
+                
+                if (thing.slag() != null) {
+                    event.accept(thing.slag().get());
+                }
+
+            }
         }
         
         // ADDING TO MODULES TAB
         else if (event.getTabKey() == CREATIVE_TAB_MODULES.getKey()) {
         	event.accept(ItemRegistry.FLAME_GEM);
         	event.accept(ItemRegistry.VAMPIRE_GEM);
+        	event.accept(ItemRegistry.RADIOACTIVE_GEM);
         }
         
         // ADDING TO BUILDING TAB

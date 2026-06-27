@@ -2,14 +2,16 @@ package xyz.nasasupercomputer.birmingham.ItemHazards.Types;
 
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.client.telemetry.TelemetryProperty.GameMode;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import xyz.nasasupercomputer.birmingham.ItemHazards.IHazardType;
-import xyz.nasasupercomputer.birmingham.radiation.PlayerRadiationProvider;
+import xyz.nasasupercomputer.birmingham.Radiation.PlayerRadiationProvider;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -28,10 +30,12 @@ public class HazardRadioactive implements IHazardType {
 	
 	@Override
 	public void PerTickUpdate(ServerPlayer player, ItemStack stack) {
-		player.getCapability(PlayerRadiationProvider.PLAYER_RADIATION).ifPresent(playerRadiation -> {
-			playerRadiation.addRadiation((intensity / 20) * stack.getCount());
-//			player.sendSystemMessage(Component.literal(String.valueOf(playerRadiation.getRadiation()))); // t3esting purposes
-		});
+		
+		if (player.gameMode.getGameModeForPlayer() != GameType.CREATIVE){
+			player.getCapability(PlayerRadiationProvider.PLAYER_RADIATION).ifPresent(playerRadiation -> {
+				playerRadiation.addRadiation((intensity / 20) * stack.getCount());
+			});
+		}
 
 		// Ignite player when held.
 	}

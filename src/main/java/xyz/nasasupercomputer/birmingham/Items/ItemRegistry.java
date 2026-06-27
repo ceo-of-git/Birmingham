@@ -13,7 +13,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import xyz.nasasupercomputer.birmingham.Items.curios.energyDrink;
-import xyz.nasasupercomputer.birmingham.Items.custom.geigerCounter;
+import xyz.nasasupercomputer.birmingham.Items.custom.GeigerCounter;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardRegistry;
@@ -41,10 +41,11 @@ public class ItemRegistry {
 	public static final RegistryObject<Item> STEEL_TONGS = ITEMS.register("steel_tongs", () -> new Gloves(new Item.Properties().stacksTo(1).durability(2048), 3, List.of(HazardRegistry.Hazard_Molten_T1), true));
 	
 	public static final RegistryObject<Item> ENERGY_DRINK = ITEMS.register("energy_drink", () -> new energyDrink(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(4).saturationMod(0.6f).effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1600, 7), 1f).alwaysEat().build()), 1f));
-	public static final RegistryObject<Item> GEIGER_COUNTER = ITEMS.register("geiger_counter", () -> new geigerCounter(new Item.Properties().stacksTo(1), "item.birmingham.geigercounter.description"));
+	public static final RegistryObject<Item> GEIGER_COUNTER = ITEMS.register("geiger_counter", () -> new GeigerCounter(new Item.Properties().stacksTo(1), "item.birmingham.geigercounter.description"));
 
 	// =========================
-	// MATERIALS
+	// MATERIALS / ORES
+	public static final RegistryObject<Item> RAW_TIN = ITEMS.register("raw_tin", () -> new Item(new Item.Properties().stacksTo(64)));
 //	public static final RegistryObject<Item> STEEL_BLOCK = ITEMS.register("steel_block", () -> new BlockItem(BlockRegistry.STEEL_BLOCK.get(), new Item.Properties()));
 //	public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot", () -> new Item(new Item.Properties().stacksTo(64)));
 //	public static final RegistryObject<Item> STEEL_NUGGET = ITEMS.register("steel_nugget", () -> new Item(new Item.Properties().stacksTo(64)));
@@ -66,6 +67,7 @@ public class ItemRegistry {
 	// GEMS
 	public static final RegistryObject<Item> FLAME_GEM = ITEMS.register("flame_gem", () -> new Gem(new Item.Properties().stacksTo(64), "Flame", "gems.birmingham.flame.title", "gems.birmingham.flame.description"));
 	public static final RegistryObject<Item> VAMPIRE_GEM = ITEMS.register("vampire_gem", () -> new Gem(new Item.Properties().stacksTo(64), "Vampiric", "gems.birmingham.vampiric.title", "gems.birmingham.vampiric.description"));
-
+	public static final RegistryObject<Item> RADIOACTIVE_GEM = ITEMS.register("radioactive_gem", () -> new Gem(new Item.Properties().stacksTo(64), "Radioactive", "gems.birmingham.radioactive.title", "gems.birmingham.radioactive.description"));
+	
 }
 

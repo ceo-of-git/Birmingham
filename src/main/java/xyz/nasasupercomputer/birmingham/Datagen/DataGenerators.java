@@ -1,5 +1,8 @@
-package xyz.nasasupercomputer.birmingham.EventHandlers;
+package xyz.nasasupercomputer.birmingham.Datagen;
 
+import java.util.concurrent.CompletableFuture;
+
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.data.event.GatherDataEvent;
@@ -18,11 +21,18 @@ public class DataGenerators {
 
 	    DataGenerator generator = event.getGenerator();
 	    PackOutput output = generator.getPackOutput();
+	    CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
 	    MaterialSetRegistry.createMaterialSets();
 
+	    // Material Set Recipe Generation
 	    generator.addProvider(event.includeServer(),
 	        new MaterialSetRecipeProvider(output)
 	    );
+	    
+	    // World Generation Provider
+	    generator.addProvider(event.includeServer(), 
+    		new ModWorldGenProvider(output, lookupProvider)
+		);
 	}
 }

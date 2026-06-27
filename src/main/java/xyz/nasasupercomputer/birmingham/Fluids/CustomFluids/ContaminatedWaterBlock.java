@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.phys.AABB;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
-import xyz.nasasupercomputer.birmingham.radiation.PlayerRadiationProvider;
+import xyz.nasasupercomputer.birmingham.Radiation.PlayerRadiationProvider;
 
 import java.util.function.Supplier;
 

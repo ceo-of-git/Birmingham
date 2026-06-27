@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "birmingham:bronze_slag_to_nuggets"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "hasbirmingham:bronze_slag": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "birmingham:bronze_slag"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "hasbirmingham:bronze_slag",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "birmingham:bronze_slag_to_nuggets"
+    ]
+  },
+  "sends_telemetry_event": false
+}

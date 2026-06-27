@@ -27,6 +27,7 @@ import xyz.nasasupercomputer.birmingham.Blocks.IBigBlockType;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlock;
 import xyz.nasasupercomputer.birmingham.ItemGems.GemSystem;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardSystem;
+import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
 
 @Mod.EventBusSubscriber(modid = MainRegistry.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ClientEventHandler {
@@ -46,7 +47,7 @@ public class ClientEventHandler {
         	
         	tooltipList.add(1, Component.literal("[" + sizeX + "x" + sizeY + "x" + sizeZ + "]").withStyle(ChatFormatting.GRAY));
         }
-        
+  		
         // ===================
         // ITEM HAZARDS
         if (ForgeConfigs.enableItemHazards) {
@@ -62,6 +63,12 @@ public class ClientEventHandler {
         	// Apply Gem Description
         	GemSystem.ApplyGemTooltip(stack, event.getEntity(), tooltipString);
     	}
+  		
+        // ===================
+        // ROTN easter egg
+  		if (stack.is(ItemRegistry.RAW_TIN.get()) && Screen.hasShiftDown()) {
+  			tooltipList.add(Component.literal("Say that again...").withStyle(ChatFormatting.RED).withStyle(ChatFormatting.ITALIC));
+  		}
   		
   		
     	// Finalize any changes. by converting & adding back onto tooltipString back to tooltipList components.

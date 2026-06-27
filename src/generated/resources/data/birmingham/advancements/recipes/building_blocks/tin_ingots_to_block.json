@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "birmingham:tin_ingots_to_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "hasbirmingham:tin_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "birmingham:tin_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "hasbirmingham:tin_ingot",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "birmingham:tin_ingots_to_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

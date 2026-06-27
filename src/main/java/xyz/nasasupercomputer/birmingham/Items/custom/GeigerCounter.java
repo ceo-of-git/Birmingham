@@ -1,5 +1,6 @@
 package xyz.nasasupercomputer.birmingham.Items.custom;
 
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -10,23 +11,24 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlock;
-import xyz.nasasupercomputer.birmingham.radiation.PlayerRadiationProvider;
+import xyz.nasasupercomputer.birmingham.Radiation.PlayerRadiationProvider;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class geigerCounter extends Item {
+public class GeigerCounter extends Item {
     String translatableGeigerTitle;
     String translatableShiftGeigerDescription;
 
 
-    public geigerCounter(Properties pProperties, String translatableShiftGeigerDescription) {
+    public GeigerCounter(Properties pProperties, String translatableShiftGeigerDescription) {
         super(pProperties);
 
         this.translatableShiftGeigerDescription = translatableShiftGeigerDescription;
@@ -52,8 +54,14 @@ public class geigerCounter extends Item {
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-            pTooltipComponents.add(Component.translatable(this.translatableShiftGeigerDescription));
-        }
+		if (Screen.hasShiftDown()) {
+			pTooltipComponents.add(Component.translatable("tooltip.birmingham.geiger.description_shift"));
+		} else {
+			pTooltipComponents.add(Component.translatable("tooltip.birmingham.geiger.description"));
+		}
+        
     }
+
+}
 
 

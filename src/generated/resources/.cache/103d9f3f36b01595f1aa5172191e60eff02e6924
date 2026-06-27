@@ -1,0 +1,4 @@
+// 1.20.1	2026-06-27T07:56:48.297117822	Registries
+b899584d31faeae41b4269f9422bf05155de3686 data/birmingham/forge/biome_modifier/add_tin_ore.json
+5ca313b09ae3cbc3ce16acfec756722c1ef1cc12 data/birmingham/worldgen/configured_feature/tin_ore.json
+2df183c65cd19ae1fa89d4bd45962637dd757cf0 data/birmingham/worldgen/placed_feature/tin_ore_placed.json

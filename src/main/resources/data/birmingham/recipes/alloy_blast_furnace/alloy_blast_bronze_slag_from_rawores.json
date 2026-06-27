@@ -1,0 +1,15 @@
+{
+	"type": "birmingham:alloy_blasting",
+	"ingredients": [
+		{
+			"tag": "birmingham:tin_ores"
+		},
+		{
+			"tag": "minecraft:copper_ores"
+		}
+	],
+	"output": {
+		"count": 4,
+		"item": "birmingham:bronze_slag"
+	}	
+}

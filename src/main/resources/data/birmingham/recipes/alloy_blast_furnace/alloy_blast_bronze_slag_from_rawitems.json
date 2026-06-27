@@ -1,0 +1,15 @@
+{
+	"type": "birmingham:alloy_blasting",
+	"ingredients": [
+		{
+			"item": "birmingham:raw_tin"
+		},
+		{
+			"item": "minecraft:raw_copper"
+		}
+	],
+	"output": {
+		"count": 2,
+		"item": "birmingham:bronze_slag"
+	}	
+}

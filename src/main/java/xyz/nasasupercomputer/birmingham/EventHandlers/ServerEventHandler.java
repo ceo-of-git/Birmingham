@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.telemetry.TelemetryProperty.GameMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -36,11 +37,11 @@ import xyz.nasasupercomputer.birmingham.ItemGems.GemSystem;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardSystem;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
 import xyz.nasasupercomputer.birmingham.Items.custom.Gem;
+import xyz.nasasupercomputer.birmingham.Radiation.PlayerRadiationProvider;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.nbt.CompoundTag;
-import xyz.nasasupercomputer.birmingham.radiation.PlayerRadiationProvider;
 
 @Mod.EventBusSubscriber(modid = MainRegistry.MOD_ID)
 public class ServerEventHandler {
@@ -65,7 +66,7 @@ public class ServerEventHandler {
 			long currentTick = player.level().getGameTime();
 			double rads = playerRadiation.getRadiation();
 			
-			if (player.gameMode.getGameModeForPlayer() != GameType.CREATIVE) { rads = 0.0; }
+			if (player.gameMode.getGameModeForPlayer() == GameType.CREATIVE) { rads = 0.0; }
 			
 			// TODO: Localize
 
@@ -85,67 +86,77 @@ public class ServerEventHandler {
 				playerRadiation.setWarn(4, true);
 				player.sendSystemMessage(Component.literal("You are going to die.").withStyle(ChatFormatting.DARK_RED), true);
 			}
-
-			if (rads > 200) { // effects for 200 rads
-				if (currentTick % 360 == 0) { // every 360 ticks (18 seconds), apply weakness and nausea for random seconds with a min of 60 ticks
-					player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, (int) Math.max(60, (Math.random() * 200) + 1), 1));
-					player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, (int) Math.max(200, (Math.random() * 400) + 1), 1)); // ?? why tf is it called confusion.
-
-					if (Math.random() > (3.0/5) ) {
-						player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, (int) Math.max(120, (Math.random() * 300) + 1), 1)); // add slowness, but only sokmetimes
-					}
-					if (Math.random() > (4.0/5) ) {
-						player.addEffect(new MobEffectInstance(MobEffects.POISON, (int) Math.max(40, (Math.random() * 100) + 1), 0)); // add poision but also only somethimes
-					}
-
-
-				}
+			
+			// slash kill
+			if (rads > 1500) {
+				playerRadiation.setWarn(4, true);
+				if (player.gameMode.getGameModeForPlayer() != GameType.CREATIVE) { player.kill(); }
 			}
-			if (rads > 500) { // effects for 500 rads
-				if (currentTick % 280 == 0) {
-					player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, (int) Math.max(140, (Math.random() * 280) + 1), 3));
-					player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, (int) Math.max(200, (Math.random() * 400) + 1), 4)); // ?? why tf is it called confusion.
 
-					if (Math.random() > (1.0/5) ) {
-						player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, (int) Math.max(160, (Math.random() * 300) + 1), 2)); // add slowness, but only sokmetimes
+			// Apply Radiation effects when not in creative mode
+			if (player.gameMode.getGameModeForPlayer() != GameType.CREATIVE) {
+				
+				if (rads > 200) { // effects for 200 rads
+					if (currentTick % 360 == 0) { // every 360 ticks (18 seconds), apply weakness and nausea for random seconds with a min of 60 ticks
+						player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, (int) Math.max(60, (Math.random() * 200) + 1), 1));
+						player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, (int) Math.max(200, (Math.random() * 400) + 1), 1)); // ?? why tf is it called confusion.
+	
+						if (Math.random() > (3.0/5) ) {
+							player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, (int) Math.max(120, (Math.random() * 300) + 1), 1)); // add slowness, but only sokmetimes
+						}
+						if (Math.random() > (4.0/5) ) {
+							player.addEffect(new MobEffectInstance(MobEffects.POISON, (int) Math.max(40, (Math.random() * 100) + 1), 0)); // add poision but also only somethimes
+						}
+	
+	
 					}
-					if (Math.random() > (3.0/5) ) {
-						player.addEffect(new MobEffectInstance(MobEffects.WITHER, (int) Math.max(60, (Math.random() * 100) + 1), 2)); // add poision but also only somethimes
-						player.addEffect(new MobEffectInstance(MobEffects.POISON, (int) Math.max(40, (Math.random() * 100) + 1), 0)); // add poision but also only somethimes
-
-					}
-
-
 				}
-			}
-			if (rads > 800) { // effects for 800 rads
-				player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 1, 2));
-				player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 1, 4)); // ?? why tf is it called confusion.
-
-				if (currentTick % 100 == 0) {
-
-					if (Math.random() > (1.0/5) ) {
-						player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, (int) Math.max(40, (Math.random() * 100) + 1), 3)); // add slowness, but only sokmetimes
+				if (rads > 500) { // effects for 500 rads
+					if (currentTick % 280 == 0) {
+						player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, (int) Math.max(140, (Math.random() * 280) + 1), 3));
+						player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, (int) Math.max(200, (Math.random() * 400) + 1), 4)); // ?? why tf is it called confusion.
+	
+						if (Math.random() > (1.0/5) ) {
+							player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, (int) Math.max(160, (Math.random() * 300) + 1), 2)); // add slowness, but only sokmetimes
+						}
+						if (Math.random() > (3.0/5) ) {
+							player.addEffect(new MobEffectInstance(MobEffects.WITHER, (int) Math.max(60, (Math.random() * 100) + 1), 2)); // add poision but also only somethimes
+							player.addEffect(new MobEffectInstance(MobEffects.POISON, (int) Math.max(40, (Math.random() * 100) + 1), 0)); // add poision but also only somethimes
+	
+						}
+	
+	
 					}
-					if (Math.random() > (1.0/5) ) {
-						player.addEffect(new MobEffectInstance(MobEffects.WITHER, (int) Math.max(60, (Math.random() * 100) + 1), 4)); // add poision but also only somethimes
-						player.addEffect(new MobEffectInstance(MobEffects.POISON, (int) Math.max(40, (Math.random() * 100) + 1), 2)); // add poision but also only somethimes
-
-					}
-
-
 				}
-			}
-			if (rads > 1200) { // yeah you're cooked buddy
-                player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 5));
-                player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 400, 5)); // ?? why tf is it called confusion.
-                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 3));
-                player.addEffect(new MobEffectInstance(MobEffects.WITHER, 40, 5));
-                player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 5));
-				player.addEffect(new MobEffectInstance(MobEffects.POISON, 50, 10)); // add poision but also only somethimes
-
-
-
+				if (rads > 800) { // effects for 800 rads
+					player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 1, 2));
+					player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 1, 4)); // ?? why tf is it called confusion.
+	
+					if (currentTick % 100 == 0) {
+	
+						if (Math.random() > (1.0/5) ) {
+							player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, (int) Math.max(40, (Math.random() * 100) + 1), 3)); // add slowness, but only sokmetimes
+						}
+						if (Math.random() > (1.0/5) ) {
+							player.addEffect(new MobEffectInstance(MobEffects.WITHER, (int) Math.max(60, (Math.random() * 100) + 1), 4)); // add poision but also only somethimes
+							player.addEffect(new MobEffectInstance(MobEffects.POISON, (int) Math.max(40, (Math.random() * 100) + 1), 2)); // add poision but also only somethimes
+	
+						}
+	
+	
+					}
+				}
+				if (rads > 1200) { // yeah you're cooked buddy
+	                player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 40, 5));
+	                player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 400, 5)); // ?? why tf is it called confusion.
+	                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 3));
+	                player.addEffect(new MobEffectInstance(MobEffects.WITHER, 40, 5));
+	                player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 5));
+					player.addEffect(new MobEffectInstance(MobEffects.POISON, 50, 10)); // add poision but also only somethimes
+	
+	
+	
+				}
 			}
 
 			ArrayList<Double> list = playerRadiation.getList();
