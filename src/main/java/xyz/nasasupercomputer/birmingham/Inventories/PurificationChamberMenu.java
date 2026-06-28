@@ -9,6 +9,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import org.jetbrains.annotations.NotNull;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlockEntity;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.PurificationChamber.PurificationChamberBlockEntity;
 
@@ -33,8 +35,8 @@ public class PurificationChamberMenu extends AbstractContainerMenu {
         this.pos = pos;
         this.level = inventory.player.level();
 
-        addSlot(new Slot(this.container, 0, 26, 36)); // input
-        addSlot(new Slot(this.container, 1, 134, 36)); // output
+        addSlot(new FluidContainerSlot(this.container, 0, 44, 36)); // input
+        addSlot(new FluidContainerSlot(this.container, 1, 134, 36)); // output
 		this.data = data;
 
 		addDataSlots(data);
@@ -123,4 +125,5 @@ public class PurificationChamberMenu extends AbstractContainerMenu {
     public boolean stillValid(Player player) {
     	return true;
     }
+
 }

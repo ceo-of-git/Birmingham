@@ -16,7 +16,6 @@ import net.minecraft.client.resources.language.I18n;
 import xyz.nasasupercomputer.birmingham.ItemGems.IGemType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import xyz.nasasupercomputer.birmingham.Radiation.PlayerRadiation;
 import xyz.nasasupercomputer.birmingham.Radiation.PlayerRadiationProvider;
 
 public class GemRadioactive implements IGemType {

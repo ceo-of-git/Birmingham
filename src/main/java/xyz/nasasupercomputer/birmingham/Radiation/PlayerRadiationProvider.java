@@ -11,6 +11,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import xyz.nasasupercomputer.birmingham.MainRegistry;
 
 public class PlayerRadiationProvider implements ICapabilitySerializable<CompoundTag> { // wtf is ICapabilitySerializable<CompoundTag>
     public static Capability<PlayerRadiation> PLAYER_RADIATION = CapabilityManager.get(new CapabilityToken<>(){}); // capabilities sutff , ZERO clue on any of this
@@ -22,6 +23,7 @@ public class PlayerRadiationProvider implements ICapabilitySerializable<Compound
     private PlayerRadiation createPlayerRadiation() { // think i understand this. if from the start the radiation hasnt been initialzied yetr (still null) we just set it to type of playerradiation., or smth. im not good at java
         if(this.radiation == null) {
             this.radiation = new PlayerRadiation();
+            MainRegistry.LOGGER.info("Player radiation created");
         }
         return this.radiation;
     }

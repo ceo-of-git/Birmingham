@@ -2,6 +2,7 @@ package xyz.nasasupercomputer.birmingham.Radiation;
 
 import net.minecraft.nbt.CompoundTag;
 import org.checkerframework.checker.units.qual.A;
+import xyz.nasasupercomputer.birmingham.MainRegistry;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -40,6 +41,8 @@ public class PlayerRadiation  {
             case 3:
                 return this.hasSeenThirdWarn;
             case 4:
+                MainRegistry.LOGGER.info("Last warn for player");
+
                 return this.hasSeenLastWarn;
             default:
                 return false;
