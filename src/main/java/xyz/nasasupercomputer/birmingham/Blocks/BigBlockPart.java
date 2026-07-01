@@ -7,6 +7,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -58,7 +59,14 @@ public class BigBlockPart extends Block {
 
         return masterBlockState.use(level, player, hand, new BlockHitResult(hit.getLocation(), hit.getDirection(), masterBlockPos, hit.isInside()));
     }
-    
+
+    @Override
+    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+        BlockPos masterBlockPos = getMasterPos(pos, state, state.getValue(BigBlockPart.FACING));
+        BlockState masterBlockState = level.getBlockState(masterBlockPos);
+
+        return new ItemStack(masterBlockState.getBlock());
+    }
 
     // Setup Blockstates
     @Override

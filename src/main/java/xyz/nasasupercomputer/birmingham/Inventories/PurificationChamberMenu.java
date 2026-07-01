@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import org.jetbrains.annotations.NotNull;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlockEntity;
@@ -17,7 +18,7 @@ import xyz.nasasupercomputer.birmingham.Blocks.Machines.PurificationChamber.Puri
 // Menus are the BACKEND of guis, run server-side and whatnot.
 public class PurificationChamberMenu extends AbstractContainerMenu {
 
-	private static final int GUI_SLOTCOUNT = 2;
+	private static final int GUI_SLOTCOUNT = 4;
     private final ContainerLevelAccess access;
     private final Container container;
 
@@ -35,8 +36,8 @@ public class PurificationChamberMenu extends AbstractContainerMenu {
         this.pos = pos;
         this.level = inventory.player.level();
 
-        addSlot(new FluidContainerSlot(this.container, 0, 44, 36)); // input
-        addSlot(new FluidContainerSlot(this.container, 1, 134, 36)); // output
+        addSlot(new FluidContainerSlot(this.container, 0, 26, 52)); // input
+        addSlot(new FluidContainerSlot(this.container, 1, 134, 52)); // output
 		this.data = data;
 
 		addDataSlots(data);
@@ -56,7 +57,7 @@ public class PurificationChamberMenu extends AbstractContainerMenu {
 
     private void addPlayerInventory(Inventory playerInventory) {
     	int offsetX = 9;
-    	int offsetY = 102;
+    	int offsetY = 103;
     	
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
@@ -67,12 +68,13 @@ public class PurificationChamberMenu extends AbstractContainerMenu {
     
     private void addPlayerHotbar(Inventory playerInventory) {
     	int offsetX = 8;
-    	int offsetY = 160;
+    	int offsetY = 161;
     	
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, offsetX + i * 18, offsetY));
         }
     }
+
 
     // Returns how far done the recipe is (mostly for progress bar)
     public int getScaledProgress() {
@@ -121,6 +123,10 @@ public class PurificationChamberMenu extends AbstractContainerMenu {
         return copy;
     }
 
+    public PurificationChamberBlockEntity getBlockEntity() {
+        BlockEntity be = this.level.getBlockEntity(this.pos); // copy pasted these two lines i have NO idea how they work
+        return be instanceof PurificationChamberBlockEntity custom ? custom : null;
+    }
     @Override
     public boolean stillValid(Player player) {
     	return true;

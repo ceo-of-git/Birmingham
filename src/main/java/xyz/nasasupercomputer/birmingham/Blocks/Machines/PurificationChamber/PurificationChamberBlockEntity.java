@@ -3,6 +3,9 @@ package xyz.nasasupercomputer.birmingham.Blocks.Machines.PurificationChamber;
 import net.minecraft.core.BlockPos;
 import net.minecraft.data.Main;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -17,6 +20,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
@@ -24,6 +28,7 @@ import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.Recipes.RecipeTypeCokingOven;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class PurificationChamberBlockEntity extends BlockEntity implements Container {
@@ -120,12 +125,18 @@ public class PurificationChamberBlockEntity extends BlockEntity implements Conta
 
         fluidHandler.ifPresent(iFluidHandlerItem -> { // if its a valid item
                     int amountToDrain = blockEntity.fluidTank1.getCapacity() - blockEntity.fluidTank1.getFluidAmount(); // get the amount to drain (capacity - amount = amount remaining to dfrain)
+
+                    Fluid actualfluid1 = iFluidHandlerItem.drain(amountToDrain, IFluidHandler.FluidAction.SIMULATE).getFluid();
                     int amount = iFluidHandlerItem.drain(amountToDrain, IFluidHandler.FluidAction.SIMULATE).getAmount(); // i dont really understand this but drain removes fluids, i dont understand the simulate tho
                     // according to claude:
             // drain(maxdrain, fluidaction)
             // maxdrain (amounttodrain) is the max to remove. returned fluidstack is the fluid and the amount that was drained. the fluidaction.simulate means we are askingf "how much would be removed if we drained it?"
             // eg, if we ask for 1000mb from a tank but it only has 300mb, it returns 300mb
 
+
+                    if (!blockEntity.fluidTank1.getFluid().getFluid().equals(actualfluid1) && !blockEntity.fluidTank1.isEmpty()) { // check if its the same fluid to prevent bugs
+                        return;
+                    }
                     if (amount > 0) { // if its not empty
                         blockEntity.fluidTank1.fill(iFluidHandlerItem.drain(amountToDrain, IFluidHandler.FluidAction.EXECUTE), IFluidHandler.FluidAction.EXECUTE); // this time instead of simulating it, we actually do it
 
@@ -142,6 +153,7 @@ public class PurificationChamberBlockEntity extends BlockEntity implements Conta
 
 
     }
+
 
     private Optional<RecipeTypeCokingOven> getCurrentRecipe() {
         if (level == null) { return Optional.empty(); }
@@ -207,7 +219,24 @@ public class PurificationChamberBlockEntity extends BlockEntity implements Conta
         return data;
     }
 
-	// bunch of balony
+    @Override
+    public CompoundTag getUpdateTag() {
+        CompoundTag nbt = super.getUpdateTag();
+        saveAdditional(nbt);
+        return nbt;
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+
+
+
+
+    // bunch of balony
     @Override public int getContainerSize() { return items.getContainerSize(); }
     @Override public boolean isEmpty() { return items.isEmpty(); }
     @Override public ItemStack getItem(int slot) { return items.getItem(slot); }
@@ -216,6 +245,8 @@ public class PurificationChamberBlockEntity extends BlockEntity implements Conta
     @Override public void setItem(int slot, ItemStack stack) { items.setItem(slot, stack); }
     @Override public boolean stillValid(Player player) { return true; }
     @Override public void clearContent() { items.clearContent(); }
+
+
 
     public FluidTank getFluidTank1() {
         return this.fluidTank1;

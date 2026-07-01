@@ -63,7 +63,7 @@ public class AlloyBlastFurnaceMenu extends AbstractContainerMenu {
 
     private void addPlayerInventory(Inventory playerInventory) {
     	int offsetX = 9;
-    	int offsetY = 102;
+    	int offsetY = 103;
     	
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
@@ -74,7 +74,7 @@ public class AlloyBlastFurnaceMenu extends AbstractContainerMenu {
     
     private void addPlayerHotbar(Inventory playerInventory) {
     	int offsetX = 8;
-    	int offsetY = 160;
+    	int offsetY = 161;
     	
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, offsetX + i * 18, offsetY));
