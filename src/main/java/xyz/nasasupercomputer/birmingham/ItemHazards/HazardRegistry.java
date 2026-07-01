@@ -54,7 +54,7 @@ public class HazardRegistry {
 		HazardSystem.RegisterHazard(FluidRegistry.CONTAMINATED_WATER.bucket.get(), new HazardRadioactive(1));
 
 		HazardSystem.RegisterHazard(ItemRegistry.FLAME_GEM.get(), Hazard_Molten_T1);
-		HazardSystem.RegisterHazard(ItemRegistry.RADIOACTIVE_GEM.get(), new HazardRadioactive(30.00));
+		HazardSystem.RegisterHazard(ItemRegistry.RADIOACTIVE_GEM.get(), new HazardRadioactive(30.00)); // TODO: MAKE THIS IRRADIATE THE ITEM ITS APPLIED TO
 
 	}
 

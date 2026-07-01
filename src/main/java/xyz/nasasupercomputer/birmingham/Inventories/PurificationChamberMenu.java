@@ -36,8 +36,8 @@ public class PurificationChamberMenu extends AbstractContainerMenu {
         this.pos = pos;
         this.level = inventory.player.level();
 
-        addSlot(new FluidContainerSlot(this.container, 0, 26, 52)); // input
-        addSlot(new FluidContainerSlot(this.container, 1, 134, 52)); // output
+        addSlot(new FluidContainerSlot(this.container, 0, 26, 53)); // input
+        addSlot(new FluidContainerSlot(this.container, 1, 134, 53)); // output
 		this.data = data;
 
 		addDataSlots(data);

@@ -10,7 +10,6 @@
 	"inventory.birmingham.coking_oven": "Coking Oven",
 	"inventory.birmingham.alloy_blast_furnace": "Primitive Alloy Blast Furnace",
 	"inventory.birmingham.purification_chamber": "Purification Chamber",
-	
 
 	"item.birmingham.test_item": "fucked up bread",
 	"item.birmingham.energy_drink": "Energy Drink",
@@ -74,7 +73,10 @@
 	"block.birmingham.tin_block": "Block of Tin",
 	"block.birmingham.tin_ore": "Tin Ore",
 	"block.birmingham.deepslate_tin_ore": "Deepslate Tin Ore",
-	
+
+	"fluid_type.birmingham.contaminated_water": "Contaminated Water",
+
+
 	"hazard.birmingham.toxic.title": "Mildly Toxic",
 	"hazard.birmingham.toxic.description": "Inflicts Poison III when held if unprotected.",
 	"hazard.birmingham.toxic.moderate.title": "Moderately Toxic",

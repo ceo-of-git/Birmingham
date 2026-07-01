@@ -29,6 +29,7 @@ import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.Recipes.RecipeTypeCokingOven;
 
 import javax.annotation.Nullable;
+import java.lang.reflect.Array;
 import java.util.Optional;
 
 public class PurificationChamberBlockEntity extends BlockEntity implements Container {
@@ -66,6 +67,8 @@ public class PurificationChamberBlockEntity extends BlockEntity implements Conta
             PurificationChamberBlockEntity.this.sendUpdate();
         }
     };
+
+    FluidTank[] fluidTankArray = {fluidTank1}; // add more fluid tnaks here. this is probably a stupid way to do it but i cant be bothered to think of any othe rwa yrn
 
     private final LazyOptional<FluidTank> fluidOptional = LazyOptional.of(() -> this.fluidTank1);
 
@@ -248,8 +251,8 @@ public class PurificationChamberBlockEntity extends BlockEntity implements Conta
 
 
 
-    public FluidTank getFluidTank1() {
-        return this.fluidTank1;
+    public FluidTank[] getFluidTanks() {
+        return this.fluidTankArray;
     }
     public LazyOptional<FluidTank> getFluidOptional() {
         return this.fluidOptional;
