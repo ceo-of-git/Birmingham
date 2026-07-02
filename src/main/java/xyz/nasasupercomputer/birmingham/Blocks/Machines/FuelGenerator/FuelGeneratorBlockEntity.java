@@ -9,10 +9,13 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.energy.IEnergyStorage;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlockEntity;
 import xyz.nasasupercomputer.birmingham.Inventories.CokingOvenMenu;
@@ -21,11 +24,14 @@ import xyz.nasasupercomputer.birmingham.Inventories.FuelGeneratorMenu;
 import xyz.nasasupercomputer.birmingham.Inventories.FuelGeneratorScreen;
 import xyz.nasasupercomputer.birmingham.Recipes.RecipeTypeCokingOven;
 
-public class FuelGeneratorBlockEntity extends BlockEntity implements Container  {
+public class FuelGeneratorBlockEntity extends BlockEntity implements Container, IEnergyStorage  {
 
-	private final SimpleContainer items = new SimpleContainer(2);
-	public int progress = 0;
-	public int maxProgress = 1200;
+	private final SimpleContainer items = new SimpleContainer(1);
+	public long remainingBurnTime = 0;
+	
+	private static final int MAX_ENERGY = 10000;
+	public long currentEnergy = 0;
+	
 	// private float progressMultiplier = 1.0f; TODO: Overhaul Configs & make this configurable.
     
 	public FuelGeneratorBlockEntity(BlockPos pos, BlockState state) {
@@ -33,21 +39,22 @@ public class FuelGeneratorBlockEntity extends BlockEntity implements Container  
 	}
 
 	// Runs every tick, handles recipe progression and stuff.
-    public static void tick(Level level, BlockPos pos, BlockState state, CokingOvenBlockEntity blockEntity) {
+    public static void tick(Level level, BlockPos pos, BlockState state, FuelGeneratorBlockEntity blockEntity) {
 
-//        Optional<RecipeTypeCokingOven> recipe = blockEntity.getCurrentRecipe();
-//
-//        if (recipe.isPresent() && blockEntity.canCraft(recipe.get())) {
-//            blockEntity.progress += 1;
-//
-//            if (blockEntity.progress >= blockEntity.maxProgress) {
-//                blockEntity.craftItem(recipe.get());
-//                blockEntity.progress = 0;
-//            }
-//            
-//        } else {
-//            blockEntity.progress = 0;
-//        }
+    	ItemStack fuelItem = blockEntity.getItem(0);
+    	if (fuelItem != ItemStack.EMPTY) {
+    		int burnTimeToAdd = ForgeHooks.getBurnTime(blockEntity.getItem(0), RecipeType.SMELTING);
+    		
+    		blockEntity.remainingBurnTime += burnTimeToAdd;
+    		blockEntity.removeItem(0, 1);
+    	}
+    	
+    	if (blockEntity.remainingBurnTime > 0) {
+    		
+			blockEntity.currentEnergy = Math.min(blockEntity.currentEnergy + 400, MAX_ENERGY);
+			blockEntity.remainingBurnTime--;
+    	}
+    	
 
         blockEntity.setChanged();
     }
@@ -66,4 +73,12 @@ public class FuelGeneratorBlockEntity extends BlockEntity implements Container  
     @Override public void setItem(int slot, ItemStack stack) { items.setItem(slot, stack); }
     @Override public boolean stillValid(Player player) { return true; }
     @Override public void clearContent() { items.clearContent(); }
+    
+    // bunch o' balony energy edition
+	@Override public int receiveEnergy(int maxReceive, boolean simulate) { return 0; }
+	@Override public int extractEnergy(int maxExtract, boolean simulate) { return 0; }
+	@Override public int getEnergyStored() { return (int)currentEnergy; }
+	@Override public int getMaxEnergyStored() { return MAX_ENERGY; }
+	@Override public boolean canExtract() { return true; }
+	@Override public boolean canReceive() { return false; }
 }

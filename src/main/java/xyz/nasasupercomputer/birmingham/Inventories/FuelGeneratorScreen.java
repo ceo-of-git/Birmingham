@@ -61,7 +61,6 @@ public class FuelGeneratorScreen extends AbstractContainerScreen<FuelGeneratorMe
     		// Machine is OFF
     		guiGraphics.blit(GUI_TEXTURE, x + 151, y + 23, 39, 186, 17, 27, 17, 27);
     	}
-    	
             
 //            int l = this.menu.getBurnProgress();
 //            pGuiGraphics.blit(this.texture, i + 79, j + 34, 176, 14, l + 1, 16);

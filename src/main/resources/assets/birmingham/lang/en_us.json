@@ -10,7 +10,7 @@
 	"inventory.birmingham.coking_oven": "Coking Oven",
 	"inventory.birmingham.alloy_blast_furnace": "Primitive Alloy Blast Furnace",
 	"inventory.birmingham.purification_chamber": "Purification Chamber",
-	"inventory.birmingham.fuel_generator": "Basic Fuel Generator",
+	"inventory.birmingham.fuel_generator": "Primitive Fuel Generator",
 
 	"item.birmingham.test_item": "fucked up bread",
 	"item.birmingham.energy_drink": "Energy Drink",
@@ -48,7 +48,6 @@
 	"item.birmingham.dollar_100": "100$ Bill",
 	"item.birmingham.radium_ingot": "Radium Ingot",
 	"item.birmingham.radium_nugget": "Radium Nugget",
-	"block.birmingham.radium_block": "Radium Block",
 
 	"tooltip.birmingham.description.view_shift": "§8For more detail, hold §7[§8SHIFT§7]",
 	"tooltip.birmingham.description.view_ctrl": "§8For more detail, hold §7[§8CTRL§7]",
@@ -69,6 +68,8 @@
 	"block.birmingham.bronze_block": "Block of Bronze",
 	"block.birmingham.unfired_crucible": "Unfired Crucible",
 	"block.birmingham.fired_crucible": "Crucible",
+	"block.birmingham.radium_block": "Radium Block",
+	"block.birmingham.fuel_generator": "Fuel Generator",
 	
 	"block.birmingham.raw_tin": "Block of Raw Tin",
 	"block.birmingham.tin_block": "Block of Tin",

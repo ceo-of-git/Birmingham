@@ -13,6 +13,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import xyz.nasasupercomputer.birmingham.Items.curios.energyDrink;
+import xyz.nasasupercomputer.birmingham.Items.custom.Fuel;
 import xyz.nasasupercomputer.birmingham.Items.custom.GeigerCounter;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
@@ -31,7 +32,7 @@ public class ItemRegistry {
 	public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item", () -> new Item(new Item.Properties().stacksTo(64)));
 	public static final RegistryObject<Item> RAW_ADAMANTITE = ITEMS.register("raw_adamantite", () -> new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> HORSING_AROUND = ITEMS.register("horsing_around", () -> new RecordItem(6, SoundRegistry.horsing_around, new Item.Properties().stacksTo(1), 2440));
-	public static final RegistryObject<Item> COAL_COKE = ITEMS.register("coal_coke", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> COAL_COKE = ITEMS.register("coal_coke", () -> new Fuel(new Item.Properties().stacksTo(64), 3200));
 
 	// =========================
 	// TOOLS / CURIOS

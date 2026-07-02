@@ -65,6 +65,6 @@ public class FuelGeneratorBlock extends BaseEntityBlock {
     // Makes the block entity tick
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return level.isClientSide ? null : createTickerHelper(type, BlockRegistry.COKING_OVEN_ENTITY.get(), FuelGeneratorBlockEntity::tick);
+        return level.isClientSide ? null : createTickerHelper(type, BlockRegistry.FUEL_GENERATOR_ENTITY.get(), FuelGeneratorBlockEntity::tick);
     }
 }
