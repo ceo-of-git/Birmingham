@@ -3,6 +3,7 @@ package xyz.nasasupercomputer.birmingham.Blocks.Machines.FuelGenerator;
 import java.util.Optional;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -28,6 +29,7 @@ public class FuelGeneratorBlockEntity extends BlockEntity implements Container, 
 
 	private final SimpleContainer items = new SimpleContainer(1);
 	public long remainingBurnTime = 0;
+	private boolean enabled = true; // The togglable switch in the UI
 	
 	private static final int MAX_ENERGY = 10000;
 	public long currentEnergy = 0;
@@ -37,16 +39,35 @@ public class FuelGeneratorBlockEntity extends BlockEntity implements Container, 
 	public FuelGeneratorBlockEntity(BlockPos pos, BlockState state) {
 	    super(BlockRegistry.FUEL_GENERATOR_ENTITY.get(), pos, state);
 	}
+	
+    @Override
+    protected void saveAdditional(CompoundTag tag) {
+        super.saveAdditional(tag);
+        tag.put("inventory", items.createTag());
+        tag.putFloat("energy", currentEnergy);
+    }
+    
+    @Override
+    public void load(CompoundTag tag) {
+        super.load(tag);
+        items.fromTag(tag.getList("inventory", 10));
+        currentEnergy = (long)tag.getFloat("energy");
+    }
+    
 
 	// Runs every tick, handles recipe progression and stuff.
     public static void tick(Level level, BlockPos pos, BlockState state, FuelGeneratorBlockEntity blockEntity) {
-
+    	if (!blockEntity.isEnabled())
+    	    return;
+    	
     	ItemStack fuelItem = blockEntity.getItem(0);
-    	if (fuelItem != ItemStack.EMPTY) {
+    	if (!fuelItem.isEmpty()) {
     		int burnTimeToAdd = ForgeHooks.getBurnTime(blockEntity.getItem(0), RecipeType.SMELTING);
     		
-    		blockEntity.remainingBurnTime += burnTimeToAdd;
-    		blockEntity.removeItem(0, 1);
+    		if (burnTimeToAdd > 0) {
+        		blockEntity.remainingBurnTime += burnTimeToAdd;
+        		blockEntity.removeItem(0, 1);	
+    		}
     	}
     	
     	if (blockEntity.remainingBurnTime > 0) {
@@ -64,6 +85,11 @@ public class FuelGeneratorBlockEntity extends BlockEntity implements Container, 
         return new SimpleMenuProvider((id, inv, player) -> new FuelGeneratorMenu(id, inv, pos), FuelGeneratorScreen.GUI_TITLE);
     }
     
+    // More Stuff
+    public boolean isEnabled() { return enabled; }
+    public void setEnabled(boolean enabled) { this.enabled = enabled; setChanged(); }
+    public void toggleEnabled() { this.enabled = !this.enabled; setChanged(); }
+    
 	// bunch of balony
     @Override public int getContainerSize() { return items.getContainerSize(); }
     @Override public boolean isEmpty() { return items.isEmpty(); }
@@ -76,9 +102,13 @@ public class FuelGeneratorBlockEntity extends BlockEntity implements Container, 
     
     // bunch o' balony energy edition
 	@Override public int receiveEnergy(int maxReceive, boolean simulate) { return 0; }
-	@Override public int extractEnergy(int maxExtract, boolean simulate) { return 0; }
 	@Override public int getEnergyStored() { return (int)currentEnergy; }
 	@Override public int getMaxEnergyStored() { return MAX_ENERGY; }
 	@Override public boolean canExtract() { return true; }
 	@Override public boolean canReceive() { return false; }
+	@Override public int extractEnergy(int maxExtract, boolean simulate) {
+	    int extracted = (int)Math.min(currentEnergy, maxExtract);
+	    if (!simulate) { currentEnergy -= extracted; }
+	    return extracted;
+	}
 }

@@ -2,6 +2,7 @@ package xyz.nasasupercomputer.birmingham.Blocks.Machines.FuelGenerator;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -34,7 +35,7 @@ public class FuelGeneratorBlock extends BaseEntityBlock {
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
 		// TODO Auto-generated method stub
-		return null;
+		return new FuelGeneratorBlockEntity(pPos, pState);
 	}
 	
     @Override
@@ -62,6 +63,15 @@ public class FuelGeneratorBlock extends BaseEntityBlock {
         return InteractionResult.sidedSuccess(level.isClientSide());
     }
     
+	@Override
+	public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+
+		// Drop GUI Items when broken
+		if (level.getBlockEntity(pos) instanceof FuelGeneratorBlockEntity fuelBE) {
+			Containers.dropContents(level, pos, fuelBE);
+		}
+	}
+		
     // Makes the block entity tick
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {

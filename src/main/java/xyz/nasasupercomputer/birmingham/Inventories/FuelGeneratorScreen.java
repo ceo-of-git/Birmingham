@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Inventory;
 
 public class FuelGeneratorScreen extends AbstractContainerScreen<FuelGeneratorMenu> {
@@ -48,19 +49,36 @@ public class FuelGeneratorScreen extends AbstractContainerScreen<FuelGeneratorMe
 	    this.renderTooltip(graphics, mouseX, mouseY);
 	}
 	
+	@Override
+	public boolean mouseClicked(double mouseX, double mouseY, int button) {
+
+	    int switchX = this.leftPos + 151;
+	    int switchY = this.topPos + 23;
+	    boolean isToggled = this.menu.getToggled();
+
+	    if (mouseX >= switchX && mouseX < switchX + 17 && mouseY >= switchY && mouseY < switchY + 27) {
+
+	        menu.toggleMachine();
+	        
+	        if (!isToggled) {
+	        	minecraft.player.playSound( SoundEvents.STONE_BUTTON_CLICK_ON, 1.0F, 1.0F );
+	        } else { minecraft.player.playSound( SoundEvents.STONE_BUTTON_CLICK_OFF, 1.0F, 1.0F ); }
+
+	        return true;
+	    }
+
+	    return super.mouseClicked(mouseX, mouseY, button);
+	}
+	
     private void renderToggleSwitch(GuiGraphics guiGraphics) {
     	int x = this.leftPos;
     	int y = this.topPos;
     	
-    	boolean isToggled = this.menu.getSmelting();
-    	if (isToggled) {
-    		// Machine is ON
-    		guiGraphics.blit(GUI_TEXTURE, x + 151, y + 23, 57, 186, 17, 27, 17, 27);
-    	}
-    	else {
-    		// Machine is OFF
-    		guiGraphics.blit(GUI_TEXTURE, x + 151, y + 23, 39, 186, 17, 27, 17, 27);
-    	}
+        boolean isToggled = this.menu.getToggled();
+
+        guiGraphics.blit(
+            GUI_TEXTURE, x + 151, y + 23, isToggled ? 57 : 39, 186, 17, 27, 384, 256
+        );
             
 //            int l = this.menu.getBurnProgress();
 //            pGuiGraphics.blit(this.texture, i + 79, j + 34, 176, 14, l + 1, 16);

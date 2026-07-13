@@ -15,6 +15,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlockEntity;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.FuelGenerator.FuelGeneratorBlockEntity;
 
 public class FuelGeneratorMenu extends AbstractContainerMenu {
 
@@ -27,6 +28,9 @@ public class FuelGeneratorMenu extends AbstractContainerMenu {
     private final BlockPos pos;
     private final Level level;
     private final ContainerData data;
+    
+    private final FuelGeneratorBlockEntity blockEntity;
+    
     
     // "Menu Constructor"
     public FuelGeneratorMenu(int containerId, Inventory inventory, BlockPos pos, Container container, ContainerData data) {
@@ -43,6 +47,8 @@ public class FuelGeneratorMenu extends AbstractContainerMenu {
         
         addSlot(new Slot(this.container, 0, 62, 54)); // input
 		this.data = data;
+		
+		this.blockEntity = (FuelGeneratorBlockEntity)inventory.player.level().getBlockEntity(pos);;
         
 		addDataSlots(data);
         addPlayerInventory(inventory);
@@ -60,7 +66,12 @@ public class FuelGeneratorMenu extends AbstractContainerMenu {
     }
     
     public boolean getToggled() {
-    	return isToggled;
+    	return blockEntity != null && blockEntity.isEnabled();
+    }
+    
+    
+    public void toggleMachine() {
+    	blockEntity.toggleEnabled();
     }
     
     public boolean getSmelting() {
