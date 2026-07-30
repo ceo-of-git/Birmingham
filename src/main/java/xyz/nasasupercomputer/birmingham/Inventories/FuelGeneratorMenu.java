@@ -14,7 +14,6 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlockEntity;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.FuelGenerator.FuelGeneratorBlockEntity;
 
 public class FuelGeneratorMenu extends AbstractContainerMenu {
@@ -29,7 +28,7 @@ public class FuelGeneratorMenu extends AbstractContainerMenu {
     private final Level level;
     private final ContainerData data;
     
-    private final FuelGeneratorBlockEntity blockEntity;
+    private FuelGeneratorBlockEntity blockEntity;
     
     
     // "Menu Constructor"
@@ -43,12 +42,12 @@ public class FuelGeneratorMenu extends AbstractContainerMenu {
         this.level = inventory.player.level();
         
         isToggled = true;
-        isSmelting = false;
+        isSmelting = getSmelting();
         
         addSlot(new Slot(this.container, 0, 62, 54)); // input
 		this.data = data;
 		
-		this.blockEntity = (FuelGeneratorBlockEntity)inventory.player.level().getBlockEntity(pos);;
+		this.blockEntity = (FuelGeneratorBlockEntity)inventory.player.level().getBlockEntity(pos);
         
 		addDataSlots(data);
         addPlayerInventory(inventory);
@@ -65,6 +64,24 @@ public class FuelGeneratorMenu extends AbstractContainerMenu {
         this(containerId, inventory, buf.readBlockPos());
     }
     
+    // Returns how full the energy tank is
+    public int getEnergyProgress() {
+        int currentEnergy = getCurrentEnergy();
+        int maxEnergy = getMaximumEnergy();
+
+        int energyTankSize = 63;
+
+        return maxEnergy > 0 ? currentEnergy * energyTankSize / maxEnergy : 0;
+    }
+    
+    public int getCurrentEnergy() {
+    	return data.get(0);
+    }
+    
+    public int getMaximumEnergy() {
+    	return data.get(1);
+    }
+    
     public boolean getToggled() {
     	return blockEntity != null && blockEntity.isEnabled();
     }
@@ -75,7 +92,10 @@ public class FuelGeneratorMenu extends AbstractContainerMenu {
     }
     
     public boolean getSmelting() {
-    	return isSmelting;
+    	if (this.level.getBlockEntity(pos) instanceof FuelGeneratorBlockEntity FuelBE) {
+        	boolean isSmelting = FuelBE.remainingBurnTime > 0L;
+        	return isSmelting;
+    	} else { return false; }
     }
 
     private void addPlayerInventory(Inventory playerInventory) {
@@ -119,16 +139,16 @@ public class FuelGeneratorMenu extends AbstractContainerMenu {
     }
     
     private static Container getContainer(Inventory inventory, BlockPos pos) {
-        if (inventory.player.level().getBlockEntity(pos) instanceof CokingOvenBlockEntity be) {
-            return be;
+        if (inventory.player.level().getBlockEntity(pos) instanceof FuelGeneratorBlockEntity fuelBE) {
+            return fuelBE;
         }
 
         return new SimpleContainer(1);
     }
 
     private static ContainerData getData(Inventory inventory, BlockPos pos) {
-        if (inventory.player.level().getBlockEntity(pos) instanceof CokingOvenBlockEntity be) {
-            return be.getData();
+        if (inventory.player.level().getBlockEntity(pos) instanceof FuelGeneratorBlockEntity fuelBE) {
+            return fuelBE.getData();
         }
 
         return new SimpleContainerData(1);

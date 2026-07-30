@@ -34,8 +34,6 @@ public class FuelGeneratorScreen extends AbstractContainerScreen<FuelGeneratorMe
 	    // Background is typically rendered first
 	    this.renderBackground(graphics);
 
-	    // Render things here before widgets (background textures)
-
 	    // Then the widgets if this is a direct child of the Screen
 	    super.render(graphics, mouseX, mouseY, partialTick);
 	    
@@ -43,7 +41,8 @@ public class FuelGeneratorScreen extends AbstractContainerScreen<FuelGeneratorMe
 	    renderToggleSwitch(graphics);
 	    
 	    // Render FE Tank
-
+	    renderEnergyTank(graphics);
+	    renderEnergyTooltip(graphics, mouseX, mouseY);
 	    
 	    // Render things after widgets (tooltips)
 	    this.renderTooltip(graphics, mouseX, mouseY);
@@ -70,18 +69,47 @@ public class FuelGeneratorScreen extends AbstractContainerScreen<FuelGeneratorMe
 	    return super.mouseClicked(mouseX, mouseY, button);
 	}
 	
-    private void renderToggleSwitch(GuiGraphics guiGraphics) {
+    private void renderToggleSwitch(GuiGraphics pGuiGraphics) {
     	int x = this.leftPos;
     	int y = this.topPos;
     	
         boolean isToggled = this.menu.getToggled();
 
-        guiGraphics.blit(
+        pGuiGraphics.blit(
             GUI_TEXTURE, x + 151, y + 23, isToggled ? 57 : 39, 186, 17, 27, 384, 256
         );
-            
-//            int l = this.menu.getBurnProgress();
-//            pGuiGraphics.blit(this.texture, i + 79, j + 34, 176, 14, l + 1, 16);
+    }
+    
+    private void renderEnergyTank(GuiGraphics pGuiGraphics) {
+    	int x = this.leftPos;
+    	int y = this.topPos;
+    	
+        int h = this.menu.getEnergyProgress();
+
+        pGuiGraphics.blit(
+        	    GUI_TEXTURE,
+        	    x + 121, y + 13 + (63 - h),	// Where the blit is Rendered on the screen
+        	    22, 187 + (63 - h),			// Where the texture is in the image (Bars)
+        	    17, h,						// The Width/Height of the source texture
+        	    384, 256					// Size of GUI_TEXTURE
+        	);
+    }
+    
+    private void renderEnergyTooltip(GuiGraphics pGuiGraphics, int mouseX, int mouseY) {
+        int tankX = this.leftPos + 121;
+        int tankY = this.topPos + 13;
+        int tankWidth = 17;
+        int tankHeight = 63;
+
+        // Hovering
+        if (mouseX >= tankX && mouseX < tankX + tankWidth && mouseY >= tankY && mouseY < tankY + tankHeight) {
+        	pGuiGraphics.renderTooltip(
+                this.font,
+                Component.literal(menu.getCurrentEnergy() + " / " + menu.getMaximumEnergy() + " RF"),
+                mouseX,
+                mouseY
+            );
+        }
     }
 	
 	// Called when the player tries to exit the screen in any way (ESC or E)

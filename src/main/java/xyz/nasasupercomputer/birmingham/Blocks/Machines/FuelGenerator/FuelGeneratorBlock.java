@@ -70,6 +70,8 @@ public class FuelGeneratorBlock extends BaseEntityBlock {
 		if (level.getBlockEntity(pos) instanceof FuelGeneratorBlockEntity fuelBE) {
 			Containers.dropContents(level, pos, fuelBE);
 		}
+		
+		super.onRemove(state, level, pos, newState, isMoving);
 	}
 		
     // Makes the block entity tick

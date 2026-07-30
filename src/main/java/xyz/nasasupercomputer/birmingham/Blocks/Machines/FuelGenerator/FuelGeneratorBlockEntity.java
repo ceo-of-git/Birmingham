@@ -2,6 +2,8 @@ package xyz.nasasupercomputer.birmingham.Blocks.Machines.FuelGenerator;
 
 import java.util.Optional;
 
+import com.google.common.base.Supplier;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Container;
@@ -9,6 +11,7 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -31,7 +34,10 @@ public class FuelGeneratorBlockEntity extends BlockEntity implements Container, 
 	public long remainingBurnTime = 0;
 	private boolean enabled = true; // The togglable switch in the UI
 	
-	private static final int MAX_ENERGY = 10000;
+	// Energy
+    private final long maxInput = 700000;
+    private final long maxOutput = 500;
+	private static final long MAX_ENERGY = 100000;
 	public long currentEnergy = 0;
 	
 	// private float progressMultiplier = 1.0f; TODO: Overhaul Configs & make this configurable.
@@ -85,6 +91,34 @@ public class FuelGeneratorBlockEntity extends BlockEntity implements Container, 
         return new SimpleMenuProvider((id, inv, player) -> new FuelGeneratorMenu(id, inv, pos), FuelGeneratorScreen.GUI_TITLE);
     }
     
+    // Data
+    private final ContainerData data = new ContainerData() {
+        @Override
+        public int get(int index) {
+            return switch(index) {
+                case 0 -> (int)currentEnergy;
+                case 1 -> (int)MAX_ENERGY;
+                default -> 0;
+            };
+        }
+
+        @Override
+        public void set(int index, int value) {
+            switch(index) {
+                case 0 -> currentEnergy = value;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+    };
+    
+    public ContainerData getData() {
+        return data;
+    }
+    
     // More Stuff
     public boolean isEnabled() { return enabled; }
     public void setEnabled(boolean enabled) { this.enabled = enabled; setChanged(); }
@@ -101,12 +135,24 @@ public class FuelGeneratorBlockEntity extends BlockEntity implements Container, 
     @Override public void clearContent() { items.clearContent(); }
     
     // bunch o' balony energy edition
-	@Override public int receiveEnergy(int maxReceive, boolean simulate) { return 0; }
 	@Override public int getEnergyStored() { return (int)currentEnergy; }
-	@Override public int getMaxEnergyStored() { return MAX_ENERGY; }
+	@Override public int getMaxEnergyStored() { return (int)MAX_ENERGY; }
 	@Override public boolean canExtract() { return true; }
 	@Override public boolean canReceive() { return false; }
+	public void setEnergy(long energy) { this.currentEnergy = energy; }
+	
+	@Override public int receiveEnergy(int toReceive, boolean simulate) {
+        if (this.maxInput <= 0) { return 0; }
+        
+        int energyReceived = (int)Math.min(this.getMaxEnergyStored() - this.getEnergyStored(),  Math.min(this.maxInput, toReceive));
+        if (!simulate && energyReceived > 0) {
+        	this.setEnergy(energyReceived);
+        }
+        
+        return energyReceived;
+	}
 	@Override public int extractEnergy(int maxExtract, boolean simulate) {
+		maxExtract = Math.min(maxExtract, (int)this.maxOutput);
 	    int extracted = (int)Math.min(currentEnergy, maxExtract);
 	    if (!simulate) { currentEnergy -= extracted; }
 	    return extracted;
