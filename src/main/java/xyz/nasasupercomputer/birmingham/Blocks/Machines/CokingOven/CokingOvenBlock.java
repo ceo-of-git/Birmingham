@@ -40,6 +40,8 @@ public class CokingOvenBlock extends BaseEntityBlock implements IBigBlockType {
     private int SizeY = 2;
     private int SizeZ = 2;
     
+
+    
 	public CokingOvenBlock(Properties pProperties) {
 		super(pProperties);
 		
@@ -184,21 +186,18 @@ public class CokingOvenBlock extends BaseEntityBlock implements IBigBlockType {
 
 	@Override
 	public int GetSizeX() {
-		// TODO Auto-generated method stub
 		return SizeX;
 	}
 
 
 	@Override
 	public int GetSizeY() {
-		// TODO Auto-generated method stub
 		return SizeY;
 	}
 
 
 	@Override
 	public int GetSizeZ() {
-		// TODO Auto-generated method stub
 		return SizeZ;
 	}
 }

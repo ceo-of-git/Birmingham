@@ -11,6 +11,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
+import xyz.nasasupercomputer.birmingham.Inventories.Computers.TerminalScreen;
 
 @Mod.EventBusSubscriber(modid = MainRegistry.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class InventoryRegistry {
@@ -29,5 +30,6 @@ public class InventoryRegistry {
 		event.enqueueWork(() -> MenuScreens.register(ALLOY_BLAST_MENU.get(), AlloyBlastFurnaceScreen::new));
 		event.enqueueWork(() -> MenuScreens.register(PURIFICATION_CHAMBER_MENU.get(), PurificationChamberScreen::new));
 		event.enqueueWork(() -> MenuScreens.register(FUEL_GENERATOR_MENU.get(), FuelGeneratorScreen::new));
+
     }
 }

@@ -29,18 +29,28 @@ public class ItemRegistry {
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MainRegistry.MOD_ID);
 	
 	// =========================
-	// ORIGINAL ITEMS
+	// ORIGINAL / CRAFTING ITEMS
 	public static final RegistryObject<Item> TEST_ITEM = ITEMS.register("test_item", () -> new Item(new Item.Properties().stacksTo(64)));
 	public static final RegistryObject<Item> RAW_ADAMANTITE = ITEMS.register("raw_adamantite", () -> new Item(new Item.Properties().stacksTo(64)));
     public static final RegistryObject<Item> HORSING_AROUND = ITEMS.register("horsing_around", () -> new RecordItem(6, SoundRegistry.horsing_around, new Item.Properties().stacksTo(1), 2440));
 	public static final RegistryObject<Item> COAL_COKE = ITEMS.register("coal_coke", () -> new Fuel(new Item.Properties().stacksTo(64), 3200));
+	public static final RegistryObject<Item> EMPTY_CIRCUIT_BOARD = ITEMS.register("empty_circuit_board", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> ETCHED_CIRCUIT_BOARD = ITEMS.register("etched_circuit_board", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> TRANSISTOR = ITEMS.register("transistor", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> CAPACITOR = ITEMS.register("capacitor", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> PCB_CIRCUIT = ITEMS.register("pcb_circuit", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> CIRCUIT_T1 = ITEMS.register("circuit_t1", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> CIRCUIT_T2 = ITEMS.register("circuit_t2", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> CIRCUIT_T3 = ITEMS.register("circuit_t3", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> CIRCUIT_T4 = ITEMS.register("circuit_t4", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> CIRCUIT_T5 = ITEMS.register("circuit_t5", () -> new Item(new Item.Properties().stacksTo(64)));
 
 	// =========================
 	// TOOLS / CURIOS
 	public static final RegistryObject<Item> LEATHER_GLOVES = ITEMS.register("leather_gloves", () -> new Gloves(new Item.Properties().stacksTo(1), 1, List.of(HazardRegistry.Hazard_Molten_T1, HazardRegistry.Hazard_Molten_T2), false));
 	public static final RegistryObject<Item> CREATIVE_GLOVES = ITEMS.register("creative_gloves", () -> new Gloves(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), 69420, null, false));
-	public static final RegistryObject<Item> WOODEN_TONGS = ITEMS.register("wooden_tongs", () -> new Gloves(new Item.Properties().stacksTo(1).durability(128), 3, List.of(HazardRegistry.Hazard_Molten_T1), true));
-	public static final RegistryObject<Item> STEEL_TONGS = ITEMS.register("steel_tongs", () -> new Gloves(new Item.Properties().stacksTo(1).durability(2048), 3, List.of(HazardRegistry.Hazard_Molten_T1), true));
+	public static final RegistryObject<Item> WOODEN_TONGS = ITEMS.register("wooden_tongs", () -> new Gloves(new Item.Properties().stacksTo(1).durability(128), 3, List.of(HazardRegistry.Hazard_Molten_T2), true));
+	public static final RegistryObject<Item> STEEL_TONGS = ITEMS.register("steel_tongs", () -> new Gloves(new Item.Properties().stacksTo(1).durability(2048), 3, null, true));
 	
 	public static final RegistryObject<Item> ENERGY_DRINK = ITEMS.register("energy_drink", () -> new energyDrink(new Item.Properties().stacksTo(1).food(new FoodProperties.Builder().nutrition(4).saturationMod(0.6f).effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1600, 7), 1f).alwaysEat().build()), 1f));
 	public static final RegistryObject<Item> GEIGER_COUNTER = ITEMS.register("geiger_counter", () -> new GeigerCounter(new Item.Properties().stacksTo(1), "item.birmingham.geigercounter.description"));

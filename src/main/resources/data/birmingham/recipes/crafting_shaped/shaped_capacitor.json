@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    " S ",
+    " I "
+  ],
+  "key": {
+    "G": {
+      "tag": "forge:glass_panes"
+    },
+    "S": {
+      "item": "minecraft:slime_ball"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "birmingham:capacitor",
+    "count": 4
+  }
+}

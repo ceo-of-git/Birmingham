@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "IGR",
+    "ISC"
+  ],
+  "key": {
+    "S": {
+      "item": "birmingham:steel_block"
+    },
+    "G": {
+      "item": "minecraft:black_stained_glass"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone_torch"
+    },
+    "C": {
+      "item": "birmingham:circuit_t1"
+    }
+  },
+  "result": {
+    "item": "birmingham:terminal",
+    "count": 1
+  }
+}

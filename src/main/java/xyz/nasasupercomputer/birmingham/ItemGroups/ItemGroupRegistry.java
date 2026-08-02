@@ -61,6 +61,8 @@ public class ItemGroupRegistry {
         if (event.getTabKey() == CREATIVE_TAB_MACHINES.getKey()) {
         	event.accept(BlockRegistry.COKING_OVEN_ITEM);
         	event.accept(BlockRegistry.ALLOY_BLAST_FURNACE_ITEM);
+        	event.accept(BlockRegistry.DESKTOP_ITEM);
+        	event.accept(BlockRegistry.TERMINAL_ITEM);
         }
         
         // ADDING TO RESOURCES TAB
@@ -72,6 +74,8 @@ public class ItemGroupRegistry {
             event.accept(BlockRegistry.DEEPSLATE_TIN_ORE_ITEM);
             event.accept(BlockRegistry.RAW_TIN_BLOCK_ITEM);
             event.accept(ItemRegistry.RAW_TIN);
+            event.accept(ItemRegistry.TRANSISTOR);
+            event.accept(ItemRegistry.CAPACITOR);
             event.accept(ItemRegistry.CENT_1);
             event.accept(ItemRegistry.CENT_10);
             event.accept(ItemRegistry.CENT_25);
@@ -81,7 +85,14 @@ public class ItemGroupRegistry {
             event.accept(ItemRegistry.DOLLAR_20);
             event.accept(ItemRegistry.DOLLAR_50);
             event.accept(ItemRegistry.DOLLAR_100);
-
+            event.accept(ItemRegistry.EMPTY_CIRCUIT_BOARD);
+            event.accept(ItemRegistry.PCB_CIRCUIT);
+            event.accept(ItemRegistry.CIRCUIT_T1);
+            event.accept(ItemRegistry.CIRCUIT_T2);
+            event.accept(ItemRegistry.CIRCUIT_T3);
+            event.accept(ItemRegistry.CIRCUIT_T4);
+            event.accept(ItemRegistry.CIRCUIT_T5);
+            
             // MaterialRegistry items
             List<MaterialSetRecord> list = MaterialSetRegistry.getSets();
             
@@ -94,6 +105,14 @@ public class ItemGroupRegistry {
                 event.accept(thing.ingot().get());
                 if (thing.nugget() != null) {
                     event.accept(thing.nugget().get());
+                }
+                
+                if (thing.dust() != null) {
+                    event.accept(thing.dust().get());
+                }
+                
+                if (thing.plate() != null) {
+                    event.accept(thing.plate().get());
                 }
                 
                 if (thing.slag() != null) {
@@ -112,7 +131,7 @@ public class ItemGroupRegistry {
         
         // ADDING TO BUILDING TAB
         else if (event.getTabKey() == CREATIVE_TAB_BUILDING.getKey()) {
-        	event.accept(ItemRegistry.TEST_ITEM);
+        	event.accept(BlockRegistry.TABLE_ITEM);
         }
 
         // ADDING TO TOOLS TAB

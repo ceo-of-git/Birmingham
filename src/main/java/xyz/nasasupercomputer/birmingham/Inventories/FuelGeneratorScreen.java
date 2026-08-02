@@ -13,7 +13,6 @@ public class FuelGeneratorScreen extends AbstractContainerScreen<FuelGeneratorMe
 	public static final Component GUI_TITLE = Component.translatable("inventory.birmingham.fuel_generator").withStyle(ChatFormatting.RED);
 	private static final ResourceLocation GUI_TEXTURE = new ResourceLocation("birmingham", "textures/gui/machines/gui_fuel_generator.png");
     
-	@SuppressWarnings("unchecked") // shut up
 	public FuelGeneratorScreen(FuelGeneratorMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
 		super(pMenu, pPlayerInventory, GUI_TITLE);
 		

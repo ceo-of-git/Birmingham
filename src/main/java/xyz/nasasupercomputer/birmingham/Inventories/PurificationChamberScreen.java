@@ -26,7 +26,6 @@ public class PurificationChamberScreen extends AbstractContainerScreen<Purificat
 	private static final ResourceLocation GUI_TEXTURE = new ResourceLocation("birmingham", "textures/gui/machines/gui_purification_chamber.png");
 
 
-	@SuppressWarnings("unchecked") // shut up
 	public PurificationChamberScreen(PurificationChamberMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
 		super(pMenu, pPlayerInventory, GUI_TITLE);
 		

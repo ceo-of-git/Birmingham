@@ -1,0 +1,12 @@
+{
+	"type": "birmingham:coking",
+	"ingredients": [
+		{
+			"item": "minecraft:slime_ball"
+		}
+	],
+	"output": {
+		"count": 1,
+		"item": "minecraft:magma_cream"
+	}	
+}

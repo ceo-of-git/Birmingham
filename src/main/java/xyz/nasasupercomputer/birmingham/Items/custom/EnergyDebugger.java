@@ -49,6 +49,7 @@ public class EnergyDebugger extends Item {
     		pPlayer.sendSystemMessage(Component.literal(String.format("Current Energy - " + fuelGen.getEnergyStored())));
     		pPlayer.sendSystemMessage(Component.literal(String.format("Maximum Energy - " + fuelGen.getMaxEnergyStored())));
     		pPlayer.sendSystemMessage(Component.literal(String.format("Remaining Burn - " + fuelGen.remainingBurnTime)));
+    		pPlayer.sendSystemMessage(Component.literal(String.format("is Enabled?    - " + fuelGen.isEnabled())));
     	}
     	
     	pPlayer.sendSystemMessage(Component.literal(String.format("-----------------------------------")));

@@ -17,8 +17,6 @@ public class CokingOvenScreen extends AbstractContainerScreen<CokingOvenMenu> {
 	public static final Component GUI_TITLE = Component.translatable("inventory.birmingham.coking_oven").withStyle(ChatFormatting.YELLOW);
     private static final ResourceLocation GUI_TEXTURE = new ResourceLocation("birmingham", "textures/gui/machines/gui_coking_oven.png");
 
-    
-	@SuppressWarnings("unchecked") // shut up
 	public CokingOvenScreen(CokingOvenMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
 		super(pMenu, pPlayerInventory, GUI_TITLE);
 		

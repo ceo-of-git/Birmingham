@@ -26,9 +26,13 @@ public class Money extends Item {
 		return worth;
 	}
 	
+	public boolean getAuthenticity() {
+		return isAuthentic;
+	}
+	
     @Override
     public void appendHoverText(ItemStack stack, Level level, List<Component> tooltip, TooltipFlag flag ) {
-    	tooltip.add(Component.literal("$" + this.getWorth()).withStyle(ChatFormatting.GREEN));
+    	tooltip.add(Component.literal(String.format("$%.2f", this.getWorth())).withStyle(ChatFormatting.GREEN));
     	if (Screen.hasShiftDown()) {
     		if (isAuthentic) {
     			tooltip.add(Component.translatable("tooltip.birmingham.money.authentic").withStyle(ChatFormatting.GREEN));

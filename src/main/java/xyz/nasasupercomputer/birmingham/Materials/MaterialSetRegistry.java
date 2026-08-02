@@ -48,6 +48,8 @@ public class MaterialSetRegistry {
 		private static boolean IS_INITIALIZED = false;
 		
 		private static final double BLOCK_RADS_MULT = 9;
+		private static final double DUST_RADS_MULTIPLY = 1.1;
+		private static final double PLATE_RADS_MULTIPLY = 1.0;
 		private static final double NUGGET_RADS_DIVIDE = 9;
 		private static final double SLAG_RADS_DIVIDE = 4;
 		
@@ -57,10 +59,10 @@ public class MaterialSetRegistry {
 
 		    // NOTE: When adding sets, recipes will NOT generate unless you run gradle in the data mode
 		    // gradlew runData (instead of runClient) (idk why) (it just does)
-		    ALL_SETS.add(createItemSet("steel", true, true, true, MapColor.COLOR_GRAY, 6.0f, 2.0f, 0.0, new IrradiationProperties(false, 0, 0.0)));
-		    ALL_SETS.add(createItemSet("radium", true, true, false, MapColor.COLOR_LIGHT_GREEN, 6.0f, 2.0f, 30.0, new IrradiationProperties(true, 30, 100.0)));
-		    ALL_SETS.add(createItemSet("bronze", true, true, true, MapColor.COLOR_ORANGE, 6.0f, 2.0f, 0.0, new IrradiationProperties(false, 0, 0.0)));
-		    ALL_SETS.add(createItemSet("tin", true, true, false, MapColor.TERRACOTTA_WHITE, 3.0f, 1.0f, 0.0, new IrradiationProperties(false, 0, 0.0)));
+		    ALL_SETS.add(createItemSet("steel", true, true, true, true, true, MapColor.COLOR_GRAY, 6.0f, 2.0f, 0.0, new IrradiationProperties(false, 0, 0.0)));
+		    ALL_SETS.add(createItemSet("radium", true, true, false, true, false, MapColor.COLOR_LIGHT_GREEN, 6.0f, 2.0f, 30.0, new IrradiationProperties(true, 30, 100.0)));
+		    ALL_SETS.add(createItemSet("bronze", true, true, true, true, true, MapColor.COLOR_ORANGE, 6.0f, 2.0f, 0.0, new IrradiationProperties(false, 0, 0.0)));
+		    ALL_SETS.add(createItemSet("tin", true, true, false, true, true, MapColor.TERRACOTTA_WHITE, 3.0f, 1.0f, 0.0, new IrradiationProperties(false, 0, 0.0)));
 		}
 
 		public static void registerEverything(IEventBus bus) {
@@ -81,12 +83,14 @@ public class MaterialSetRegistry {
 	}
 
 	// Creates a full set of Ingots, Nuggets, Blocks & Slag if specified
-	// Does not create Models or Recipes for you. (yet... (TODO))
+	// Does not create Models or Recipes for you.
 	public static MaterialSetRecord createItemSet(
 			String name,
 			boolean hasNugget,
 			boolean hasBlock,
 			boolean hasSlagForm,
+			boolean hasDustForm,
+			boolean hasPlateForm,
 			MapColor blockColor, // <---- When shown on Maps
 			float blockHardness,
 			float blockResistance,
@@ -103,6 +107,8 @@ public class MaterialSetRegistry {
 		
 		RegistryObject<Item> nuggetSetup = hasNugget ? ITEMS.register(name + "_nugget", () -> new Item(new Item.Properties())) : null;
 		RegistryObject<Item> slagSetup = hasSlagForm ? ITEMS.register(name + "_slag", () -> new Item(new Item.Properties())) : null;
+		RegistryObject<Item> dustSetup = hasDustForm ? ITEMS.register(name + "_dust", () -> new Item(new Item.Properties())) : null;
+		RegistryObject<Item> plateSetup = hasPlateForm ? ITEMS.register(name + "_plate", () -> new Item(new Item.Properties())) : null;
 		RegistryObject<Block> blockSetup;
 
 		if (hasBlock) {
@@ -136,6 +142,16 @@ public class MaterialSetRegistry {
 			PENDING_HAZARDS.add(() -> HazardSystem.RegisterHazard(nuggetSetup.get(), new HazardRadioactive(ingotRADS / NUGGET_RADS_DIVIDE)));
 		}
 		
+		// Add Radiation to the Dust (if applicable)
+		if (hasDustForm & ingotRADS > 0) {
+			PENDING_HAZARDS.add(() -> HazardSystem.RegisterHazard(dustSetup.get(), new HazardRadioactive(ingotRADS * DUST_RADS_MULTIPLY)));
+		}
+		
+		// Add Radiation to the Plate (if applicable)
+		if (hasPlateForm & ingotRADS > 0) {
+			PENDING_HAZARDS.add(() -> HazardSystem.RegisterHazard(plateSetup.get(), new HazardRadioactive(ingotRADS * PLATE_RADS_MULTIPLY)));
+		}
+		
 		// Add Molten & Radiation (if applicable) to Slag
 		if (hasSlagForm) {
 			PENDING_HAZARDS.add(() -> HazardSystem.RegisterHazard(slagSetup.get(), HazardRegistry.Hazard_Molten_T1));
@@ -156,10 +172,11 @@ public class MaterialSetRegistry {
 //		RegistryObject<Item> slag,
 //		RegistryObject<Item> blockItem,
 //		RegistryObject<Block> block
-		return new MaterialSetRecord(name, ingotSetup, nuggetSetup, slagSetup, blockItemSetup, blockSetup);
+		return new MaterialSetRecord(name, ingotSetup, nuggetSetup, dustSetup, plateSetup, slagSetup, blockItemSetup, blockSetup);
 	}
 	
 
+	// TODO: When adding Dust & Plate recipes, add them to these methods here to auto-generate that :)
 	public static void createRecipes(Consumer<FinishedRecipe> recipeWriter, MaterialSetRecord materialSet)
 	{
 		

@@ -18,7 +18,6 @@ public class AlloyBlastFurnaceScreen extends AbstractContainerScreen<AlloyBlastF
     private static final ResourceLocation GUI_TEXTURE = new ResourceLocation("birmingham", "textures/gui/machines/gui_alloy_blast_furnace.png");
 
     
-	@SuppressWarnings("unchecked") // shut up
 	public AlloyBlastFurnaceScreen(AlloyBlastFurnaceMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
 		super(pMenu, pPlayerInventory, GUI_TITLE);
 		

@@ -27,9 +27,6 @@ public class ConfiguredFeatures {
 		BlockMatchTest netherrackReplaceable = new BlockMatchTest(Blocks.NETHERRACK);
 		BlockMatchTest endstoneReplaceable = new BlockMatchTest(Blocks.END_STONE);
 		
-		// =====================
-		// "ADAMANITE" ORE
-		// TODO Change Adamantite to TIN
 		List<OreConfiguration.TargetBlockState> overworldTinOres = List.of(OreConfiguration.target(stoneReplaceable, 
 				BlockRegistry.TIN_ORE.get().defaultBlockState()),
 				OreConfiguration.target(deepslateReplaceable, BlockRegistry.DEEPSLATE_TIN_ORE.get().defaultBlockState()));

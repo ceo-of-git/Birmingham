@@ -68,23 +68,21 @@ public class ServerEventHandler {
 			
 			if (player.gameMode.getGameModeForPlayer() == GameType.CREATIVE) { rads = 0.0; }
 			
-			// TODO: Localize
-
 			if (rads > 200 && !playerRadiation.getWarn(1)) {
 				playerRadiation.setWarn(1, true);
-				player.sendSystemMessage(Component.literal("You feel ill..").withStyle(ChatFormatting.RED), true);
+				player.sendSystemMessage(Component.translatable("hazard.birmingham.radioactive.warn1").withStyle(ChatFormatting.RED), true);
 			}
 			if (rads > 500 && !playerRadiation.getWarn(2)) {
 				playerRadiation.setWarn(2, true);
-				player.sendSystemMessage(Component.literal("You feel greatly ill..").withStyle(ChatFormatting.RED), true);
+				player.sendSystemMessage(Component.translatable("hazard.birmingham.radioactive.warn2").withStyle(ChatFormatting.RED), true);
 			}
 			if (rads > 800 && !playerRadiation.getWarn(3)) {
 				playerRadiation.setWarn(3, true);
-				player.sendSystemMessage(Component.literal("You feel as if you are dying..").withStyle(ChatFormatting.RED), true);
+				player.sendSystemMessage(Component.translatable("hazard.birmingham.radioactive.warn3").withStyle(ChatFormatting.RED), true);
 			}
 			if (rads > 1200 && !playerRadiation.getWarn(4)) {
 				playerRadiation.setWarn(4, true);
-				player.sendSystemMessage(Component.literal("You are going to die.").withStyle(ChatFormatting.DARK_RED), true);
+				player.sendSystemMessage(Component.translatable("hazard.birmingham.radioactive.warn4").withStyle(ChatFormatting.DARK_RED), true);
 			}
 			
 			// slash kill

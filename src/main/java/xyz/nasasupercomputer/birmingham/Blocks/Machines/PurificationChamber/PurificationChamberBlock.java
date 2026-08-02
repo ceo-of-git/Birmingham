@@ -182,21 +182,18 @@ public class PurificationChamberBlock extends BaseEntityBlock implements IBigBlo
 
 	@Override
 	public int GetSizeX() {
-		// TODO Auto-generated method stub
 		return SizeX;
 	}
 
 
 	@Override
 	public int GetSizeY() {
-		// TODO Auto-generated method stub
 		return SizeY;
 	}
 
 
 	@Override
 	public int GetSizeZ() {
-		// TODO Auto-generated method stub
 		return SizeZ;
 	}
 }

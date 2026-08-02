@@ -34,7 +34,6 @@ public class FuelGeneratorBlock extends BaseEntityBlock {
 
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-		// TODO Auto-generated method stub
 		return new FuelGeneratorBlockEntity(pPos, pState);
 	}
 	

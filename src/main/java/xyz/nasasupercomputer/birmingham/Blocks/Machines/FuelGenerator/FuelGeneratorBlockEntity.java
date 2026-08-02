@@ -63,10 +63,10 @@ public class FuelGeneratorBlockEntity extends BlockEntity implements Container, 
 
 	// Runs every tick, handles recipe progression and stuff.
     public static void tick(Level level, BlockPos pos, BlockState state, FuelGeneratorBlockEntity blockEntity) {
-    	if (!blockEntity.isEnabled())
-    	    return;
+    	if (!blockEntity.isEnabled()) { return; }
     	
     	ItemStack fuelItem = blockEntity.getItem(0);
+    	
     	if (!fuelItem.isEmpty()) {
     		int burnTimeToAdd = ForgeHooks.getBurnTime(blockEntity.getItem(0), RecipeType.SMELTING);
     		
@@ -76,7 +76,7 @@ public class FuelGeneratorBlockEntity extends BlockEntity implements Container, 
     		}
     	}
     	
-    	if (blockEntity.remainingBurnTime > 0) {
+    	if (blockEntity.remainingBurnTime > 0 && blockEntity.currentEnergy < blockEntity.MAX_ENERGY - 400) {
     		
 			blockEntity.currentEnergy = Math.min(blockEntity.currentEnergy + 400, MAX_ENERGY);
 			blockEntity.remainingBurnTime--;
@@ -120,7 +120,7 @@ public class FuelGeneratorBlockEntity extends BlockEntity implements Container, 
     }
     
     // More Stuff
-    public boolean isEnabled() { return enabled; }
+    public boolean isEnabled() { return this.enabled; }
     public void setEnabled(boolean enabled) { this.enabled = enabled; setChanged(); }
     public void toggleEnabled() { this.enabled = !this.enabled; setChanged(); }
     

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " TR",
+    "GGC",
+    "GIC"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_block"
+    },
+    "C": {
+      "item": "birmingham:circuit_t1"
+    },
+    "T": {
+      "item": "birmingham:transistor"
+    },
+    "G": {
+      "tag": "forge:glass_panes"
+    },
+    "R": {
+      "item": "minecraft:redstone_torch"
+    }
+  },
+  "result": {
+    "item": "birmingham:desktop",
+    "count": 1
+  }
+}

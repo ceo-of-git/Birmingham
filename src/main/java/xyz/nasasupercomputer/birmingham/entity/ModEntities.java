@@ -19,7 +19,6 @@ public class ModEntities {
 
 	public static void register(IEventBus modEventBus) {
 		ENTITY_TYPES.register(modEventBus);
-		// TODO Auto-generated method stub
 		
 	}
 

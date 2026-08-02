@@ -64,7 +64,6 @@ public class crab_model<T extends Entity> extends HierarchicalModel<T> {
 
 	@Override
 	public ModelPart root() {
-		// TODO Auto-generated method stub
 		return bone;
 	}
 }

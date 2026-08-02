@@ -8,6 +8,8 @@ public record MaterialSetRecord(
 		String name,
 		RegistryObject<Item> ingot,
 		RegistryObject<Item> nugget,
+		RegistryObject<Item> dust,
+		RegistryObject<Item> plate,
 		RegistryObject<Item> slag,
 		RegistryObject<Item> blockItem,
 		RegistryObject<Block> block

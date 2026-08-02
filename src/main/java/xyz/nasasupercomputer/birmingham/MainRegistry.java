@@ -109,6 +109,7 @@ public class MainRegistry
         // Register all Item Hazards
         HazardRegistry.RegisterAllHazards();
         
+        
 //        // Some common setup code
 //        LOGGER.info("HELLO FROM COMMON SETUP");
 //
@@ -127,16 +128,4 @@ public class MainRegistry
         LOGGER.info("HELLO from server starting");
     }
 
-    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents
-    {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
-        	EntityRenderers.register(ModEntities.crab.get(), CrabRenderer::new);
-            // Some client setup code
-            // LOGGER.info("HELLO FROM CLIENT SETUP");
-            // LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-        }
-    }
 }
