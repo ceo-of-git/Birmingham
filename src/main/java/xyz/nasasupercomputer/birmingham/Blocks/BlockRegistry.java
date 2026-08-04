@@ -62,7 +62,7 @@ public class BlockRegistry {
 	public static final RegistryObject<Block> DEEPSLATE_TIN_ORE = BLOCKS.register("deepslate_tin_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE).strength(6f).requiresCorrectToolForDrops().destroyTime(2.0f)));
 	public static final RegistryObject<Block> TIN_ORE = BLOCKS.register("tin_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).strength(6f).requiresCorrectToolForDrops().destroyTime(1.5f)));
 	public static final RegistryObject<Block> RAW_TIN_BLOCK = BLOCKS.register("raw_tin_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).strength(6f).requiresCorrectToolForDrops().destroyTime(2.0f)));
-	public static final RegistryObject<Block> TABLE = BLOCKS.register("table", () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(1f)));
+	public static final RegistryObject<Block> TABLE = BLOCKS.register("table", () -> new Block(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(1f).dynamicShape().destroyTime(1)));
 
 	
 	// =========================

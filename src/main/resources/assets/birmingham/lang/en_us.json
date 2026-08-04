@@ -4,6 +4,7 @@
 	"itemGroup.birmingham.creative_tab_building": "Building",
 	"itemGroup.birmingham.creative_tab_tools": "Tools",
 	"itemGroup.birmingham.creative_tab_modules": "Modules",
+	"itemGroup.birmingham.creative_tab_misc": "Birmingham Miscellanious",
 
 	"horsing.around.test.whatever": "hello didcool",
 
@@ -66,6 +67,7 @@
 	"item.birmingham.circuit_t5": "Tier 5 Circuit",
 	"item.birmingham.transistor": "Transistor",
 	"item.birmingham.capacitor": "Capacitor",
+	"item.birmingham.mysterious_pill": "Mysterious Pill",
 
 	"tooltip.birmingham.description.view_shift": "§8For more detail, hold §7[§8SHIFT§7]",
 	"tooltip.birmingham.description.view_ctrl": "§8For more detail, hold §7[§8CTRL§7]",
@@ -80,6 +82,7 @@
 	"tooltip.birmingham.table": "Can be placed on any kind of Desktop",
 	"tooltip.birmingham.desktop": "§7Desktop Multiblock Component",
 	"tooltip.birmingham.terminal": "§7Desktop Multiblock Component\n§8Needs to be placed ontop of a Powered Desktop to function.\nShift Right-Click to toggle on (Needs Power)",
+	"tooltip.birmingham.mysterious_pill": "A Pill! I Wonder what it does...",
 	
 	"block.birmingham.example_block": "test blockkkk123123123123",
 	"block.birmingham.adamantite": "ADAMMMMANTITE",
@@ -117,14 +120,30 @@
 	"hazard.birmingham.radioactive.warn2": "You feel greatly ill...",
 	"hazard.birmingham.radioactive.warn3": "You feel as if you were dying...",
 	"hazard.birmingham.radioactive.warn4": "You are going to die.",
+	
+	"pill.birmingham.0.chat": "One makes you float",
+	"pill.birmingham.1.chat": "One makes you rich",
+	"pill.birmingham.2.chat": "FULL HEAL",
+	"pill.birmingham.3.chat": "Whoops",
+	"pill.birmingham.4.chat": "One makes you RAGE!",
+	"pill.birmingham.5.chat": "One makes you",
+	"pill.birmingham.6.chat": "One makes you",
+	"pill.birmingham.7.chat": "One makes you",
+	"pill.birmingham.8.chat": "One makes you",
+	"pill.birmingham.9.chat": "One makes you",
+	"pill.birmingham.10.chat": "One makes you",
+	"pill.birmingham.11.chat": "One makes you",
+	"pill.birmingham.12.chat": "One makes you",
+	"pill.birmingham.13.chat": "One makes you",
+	
 
 
 	"gems.birmingham.shift_to_view": "- Shift to View Effects",
 	"gems.birmingham.empty.title": "[EMPTY SOCKET]",
 	"gems.birmingham.flame.title": "[SOCKET] Flame Gem",
-	"gems.birmingham.flame.description": "    §a[+] Attacks have a 50%% chance to burn.\n    §a[+] 20%% increased damage to burning enemies.\n    §c[-] 30%% chance to light self on fire.",
+	"gems.birmingham.flame.description": "    §a[+] Attacks have a 50%%§a chance to burn.\n    §a[+] 20%%§a increased damage to burning enemies.\n    §c[-] 30%%§c chance to light self on fire.",
 	"gems.birmingham.vampiric.title": "[SOCKET] Vampiric Gem",
-	"gems.birmingham.vampiric.description": "    §a[+] Attacks restore 1 health.\n    §c[-] Take 30%% more damage.",
+	"gems.birmingham.vampiric.description": "    §a[+] Attacks restore 1 health.\n    §c[-] Take 30%%§c more damage.",
 	"gems.birmingham.radioactive.title": "[SOCKET] Radium Gem",
 	"gems.birmingham.radioactive.description": "    §a[+] Attacking an enemy applies +20 RADS to them.\n    §c[-] Item becomes slightly radioactive"
 

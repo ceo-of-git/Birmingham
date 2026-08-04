@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -33,6 +34,7 @@ import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.IDesktopType;
 import xyz.nasasupercomputer.birmingham.ItemGems.GemSystem;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardSystem;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
+import xyz.nasasupercomputer.birmingham.Items.custom.PillItem;
 
 @Mod.EventBusSubscriber(modid = MainRegistry.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class ClientEventHandler {
@@ -40,6 +42,7 @@ public class ClientEventHandler {
 	@SubscribeEvent
 	public static void drawTooltip(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
+        Player player = event.getEntity();
         List<Component> tooltipList = event.getToolTip();
         List<String> tooltipString = new ArrayList<String>();
         
@@ -94,6 +97,15 @@ public class ClientEventHandler {
         // Easter Eggs
   		if (stack.is(ItemRegistry.RAW_TIN.get()) && Screen.hasShiftDown()) {
   			tooltipList.add(Component.literal("Say that again...").withStyle(ChatFormatting.RED).withStyle(ChatFormatting.ITALIC));
+  		}
+  		
+  		// ===================
+  		// Display pill effects if in creative
+  		if (stack.getItem() instanceof PillItem pill) {
+  			if (player != null && player.isCreative()) {
+  				tooltipList.add(1, Component.literal("Note that pills gotten from creative have set textures/effects and AREN'T randomized.").withStyle(ChatFormatting.DARK_RED).withStyle(ChatFormatting.ITALIC));
+  				// tooltipList.add(1, Component.literal("Effect #" + PillItem.getPillType(stack)).withStyle(ChatFormatting.RED).withStyle(ChatFormatting.ITALIC));
+  			}
   		}
   		
   		

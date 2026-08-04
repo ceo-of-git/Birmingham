@@ -1,0 +1,11 @@
+{
+	"providers": [
+		{
+			"type": "ttf",
+			"file": "birmingham:ttf/cascadiamono.ttf",
+			"shift": [0, 0],
+			"size": 11,
+			"oversample": 2
+		}
+	]
+}

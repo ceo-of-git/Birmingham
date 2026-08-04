@@ -1,0 +1,86 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "birmingham:item/mysterious_pill"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"birmingham:pill_texture": 1
+			},
+			"model": "birmingham:item/pill_1"
+		},
+		{
+			"predicate": {
+				"birmingham:pill_texture": 2
+			},
+			"model": "birmingham:item/pill_2"
+		},
+		{
+			"predicate": {
+				"birmingham:pill_texture": 3
+			},
+			"model": "birmingham:item/pill_3"
+		},
+		{
+			"predicate": {
+				"birmingham:pill_texture": 4
+			},
+			"model": "birmingham:item/pill_4"
+		},
+		{
+			"predicate": {
+				"birmingham:pill_texture": 5
+			},
+			"model": "birmingham:item/pill_5"
+		},
+		{
+			"predicate": {
+				"birmingham:pill_texture": 6
+			},
+			"model": "birmingham:item/pill_6"
+		},
+		{
+			"predicate": {
+				"birmingham:pill_texture": 7
+			},
+			"model": "birmingham:item/pill_7"
+		},
+		{
+			"predicate": {
+				"birmingham:pill_texture": 8
+			},
+			"model": "birmingham:item/pill_8"
+		},
+		{
+			"predicate": {
+				"birmingham:pill_texture": 9
+			},
+			"model": "birmingham:item/pill_9"
+		},
+		{
+			"predicate": {
+				"birmingham:pill_texture": 10
+			},
+			"model": "birmingham:item/pill_10"
+		},
+		{
+			"predicate": {
+				"birmingham:pill_texture": 11
+			},
+			"model": "birmingham:item/pill_11"
+		},
+		{
+			"predicate": {
+				"birmingham:pill_texture": 12
+			},
+			"model": "birmingham:item/pill_12"
+		},
+		{
+			"predicate": {
+				"birmingham:pill_texture": 13
+			},
+			"model": "birmingham:item/pill_13"
+		}
+	]
+}

@@ -59,7 +59,6 @@ public class GeigerCounter extends Item {
 		} else {
 			pTooltipComponents.add(Component.translatable("tooltip.birmingham.geiger.description"));
 		}
-        
     }
 
 }

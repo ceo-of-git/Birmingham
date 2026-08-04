@@ -1,9 +1,11 @@
 package xyz.nasasupercomputer.birmingham.ItemGroups;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.registries.DeferredRegister;
@@ -11,7 +13,9 @@ import net.minecraftforge.registries.RegistryObject;
 import xyz.nasasupercomputer.birmingham.Fluids.FluidRegistry;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
+import xyz.nasasupercomputer.birmingham.Datagen.SavedData.PillData;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
+import xyz.nasasupercomputer.birmingham.Items.custom.PillItem;
 import xyz.nasasupercomputer.birmingham.Materials.MaterialSetRecord;
 import xyz.nasasupercomputer.birmingham.Materials.MaterialSetRegistry;
 
@@ -51,6 +55,12 @@ public class ItemGroupRegistry {
     public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_TOOLS = CREATIVE_MODE_TABS.register("creative_tab_tools", () -> CreativeModeTab.builder()
             .icon(() -> ItemRegistry.LEATHER_GLOVES.get().getDefaultInstance())
             .title(Component.translatable("itemGroup.birmingham.creative_tab_tools"))
+            .build());
+    
+    // Misc Tab
+    public static final RegistryObject<CreativeModeTab> CREATIVE_TAB_MISC = CREATIVE_MODE_TABS.register("creative_tab_misc", () -> CreativeModeTab.builder()
+            .icon(() -> ItemRegistry.MYSTERIOUS_PILL.get().getDefaultInstance())
+            .title(Component.translatable("itemGroup.birmingham.creative_tab_misc"))
             .build());
     
 	// =========================
@@ -143,5 +153,26 @@ public class ItemGroupRegistry {
             event.accept(ItemRegistry.ENERGY_DRINK);
             event.accept(ItemRegistry.GEIGER_COUNTER);
         }
+        
+        else if (event.getTabKey() == CREATIVE_TAB_MISC.getKey()) {
+        	
+        	// Add all Pills in texture order
+        	for (int i = 0; i < PillData.EXISTING_PILL_EFFECTS; i++) {
+        	    event.accept(addPill(i));
+        	}
+        	
+        }
     }
+    
+    private static ItemStack addPill(int effectID) {
+
+        ItemStack stack = new ItemStack(ItemRegistry.MYSTERIOUS_PILL.get());
+        CompoundTag tag = stack.getOrCreateTag();
+
+        tag.putInt("pill_data", effectID);
+        tag.putInt("pill_texture", effectID);
+
+        return stack;
+    }
+
 }

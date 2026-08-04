@@ -23,6 +23,7 @@ import xyz.nasasupercomputer.birmingham.ItemHazards.IHazardType;
 import xyz.nasasupercomputer.birmingham.Items.custom.Gem;
 import xyz.nasasupercomputer.birmingham.Items.custom.Gloves;
 import xyz.nasasupercomputer.birmingham.Items.custom.Money;
+import xyz.nasasupercomputer.birmingham.Items.custom.PillItem;
 import xyz.nasasupercomputer.birmingham.Sound.SoundRegistry;
 
 public class ItemRegistry {
@@ -44,6 +45,7 @@ public class ItemRegistry {
 	public static final RegistryObject<Item> CIRCUIT_T3 = ITEMS.register("circuit_t3", () -> new Item(new Item.Properties().stacksTo(64)));
 	public static final RegistryObject<Item> CIRCUIT_T4 = ITEMS.register("circuit_t4", () -> new Item(new Item.Properties().stacksTo(64)));
 	public static final RegistryObject<Item> CIRCUIT_T5 = ITEMS.register("circuit_t5", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> MYSTERIOUS_PILL = ITEMS.register("mysterious_pill", () -> new PillItem(new Item.Properties()));
 
 	// =========================
 	// TOOLS / CURIOS
