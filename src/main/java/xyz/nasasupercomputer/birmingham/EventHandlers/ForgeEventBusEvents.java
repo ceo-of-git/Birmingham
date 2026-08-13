@@ -17,9 +17,8 @@ public class ForgeEventBusEvents {
     @SubscribeEvent
     public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
     	Player joiningPlayer = event.getEntity();
-    	
-    	joiningPlayer.sendSystemMessage(Component.literal("Tetsing!").withStyle(ChatFormatting.ITALIC));
-    	
+
+    	// joiningPlayer.sendSystemMessage(Component.literal("Tetsing!").withStyle(ChatFormatting.ITALIC));
     	// Randomize Pills
         if (event.getEntity().level() instanceof ServerLevel level) {
             PillData pillData = level.getDataStorage().computeIfAbsent(PillData::load, () -> PillData.createData(level), "pill_data");
