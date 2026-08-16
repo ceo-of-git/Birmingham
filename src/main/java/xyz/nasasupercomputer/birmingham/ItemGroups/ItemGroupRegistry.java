@@ -73,6 +73,7 @@ public class ItemGroupRegistry {
         	event.accept(BlockRegistry.ALLOY_BLAST_FURNACE_ITEM);
         	event.accept(BlockRegistry.DESKTOP_ITEM);
         	event.accept(BlockRegistry.TERMINAL_ITEM);
+            event.accept(BlockRegistry.ELITE_GAMING_CHAIR_ITEM);
         }
         
         // ADDING TO RESOURCES TAB

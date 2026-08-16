@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "facing=north,dye_color=1": { "model": "birmingham:block/elite_gaming_chair_red" },
+    "facing=east,dye_color=1":  { "model": "birmingham:block/elite_gaming_chair_red", "y": 90 },
+    "facing=south,dye_color=1": { "model": "birmingham:block/elite_gaming_chair_red", "y": 180 },
+    "facing=west,dye_color=1":  { "model": "birmingham:block/elite_gaming_chair_red", "y": 270 },
+    "facing=north,dye_color=2": { "model": "birmingham:block/elite_gaming_chair_green" },
+    "facing=east,dye_color=2":  { "model": "birmingham:block/elite_gaming_chair_green", "y": 90 },
+    "facing=south,dye_color=2": { "model": "birmingham:block/elite_gaming_chair_green", "y": 180 },
+    "facing=west,dye_color=2":  { "model": "birmingham:block/elite_gaming_chair_green", "y": 270 },
+    "facing=north,dye_color=3": { "model": "birmingham:block/elite_gaming_chair_blue" },
+    "facing=east,dye_color=3":  { "model": "birmingham:block/elite_gaming_chair_blue", "y": 90 },
+    "facing=south,dye_color=3": { "model": "birmingham:block/elite_gaming_chair_blue", "y": 180 },
+    "facing=west,dye_color=3":  { "model": "birmingham:block/elite_gaming_chair_blue", "y": 270 }
+  }
+}

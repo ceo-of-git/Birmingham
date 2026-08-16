@@ -13,6 +13,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.*;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.PurificationChamber.PurificationChamberBlock;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.PurificationChamber.PurificationChamberBlockEntity;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
@@ -20,10 +21,6 @@ import xyz.nasasupercomputer.birmingham.Blocks.Machines.AlloyBlastFurnace.AlloyB
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.AlloyBlastFurnace.AlloyBlastFurnaceBlockEntity;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlock;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlockEntity;
-import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.DesktopBlock;
-import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.DesktopBlockEntity;
-import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.TerminalBlock;
-import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.TerminalBlockEntity;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.FuelGenerator.FuelGeneratorBlock;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.FuelGenerator.FuelGeneratorBlockEntity;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
@@ -51,7 +48,7 @@ public class BlockRegistry {
 	public static final RegistryObject<BlockEntityType<DesktopBlockEntity>> DESKTOP_ENTITY = BLOCK_ENTITIES.register("desktop", () -> BlockEntityType.Builder.of(DesktopBlockEntity::new, DESKTOP.get()).build(null));
 	public static final RegistryObject<Block> TERMINAL = BLOCKS.register("terminal", () -> new TerminalBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops().strength(3.0F, 12.0F).noOcclusion().destroyTime(2.5f)));
 	public static final RegistryObject<BlockEntityType<TerminalBlockEntity>> TERMINAL_ENTITY = BLOCK_ENTITIES.register("terminal", () -> BlockEntityType.Builder.of(TerminalBlockEntity::new, TERMINAL.get()).build(null));
-			
+	public static final RegistryObject<Block> ELITE_GAMING_CHAIR = BLOCKS.register("elite_gaming_chair", () -> new DesktopChair(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops().strength(3.0F, 12.0F).noOcclusion().destroyTime(2.5f), 2.0f, 2.0f, 3.0f));
 	
 	// =========================
 	// ORIGINAL BLOCKS
@@ -81,7 +78,7 @@ public class BlockRegistry {
 	public static final RegistryObject<Item> DESKTOP_ITEM = ItemRegistry.ITEMS.register("desktop", () -> new BlockItem(DESKTOP.get(), new Item.Properties()));
 	public static final RegistryObject<Item> TERMINAL_ITEM = ItemRegistry.ITEMS.register("terminal", () -> new DescriptiveBlockItem(TERMINAL.get(), new Item.Properties(), "tooltip.birmingham.terminal", true, ChatFormatting.DARK_GRAY));
 	public static final RegistryObject<Item> TABLE_ITEM = ItemRegistry.ITEMS.register("table", () -> new DescriptiveBlockItem(TABLE.get(), new Item.Properties(), "tooltip.birmingham.table", true, ChatFormatting.DARK_GRAY));
-
+	public static final RegistryObject<Item> ELITE_GAMING_CHAIR_ITEM = ItemRegistry.ITEMS.register("elite_gaming_chair", () -> new BlockItem(ELITE_GAMING_CHAIR.get(), new Item.Properties()));
 	
 	// Helper Methods
     // Rotates a VoxelShape (code found online somewhere) (probably barely works) (not sure) (slightly modified)

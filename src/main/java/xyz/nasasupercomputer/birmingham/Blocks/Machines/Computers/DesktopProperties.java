@@ -6,4 +6,5 @@ public record DesktopProperties(
         double powerEfficiency, // Multiplies how much power is used,
         boolean hasGuiSupport // If the GUI is the Terminal one (false) or the mouse usable one (true)
 ) {
+
 }

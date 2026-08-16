@@ -96,6 +96,7 @@
 	"block.birmingham.tin_ore": "Tin Ore",
 	"block.birmingham.deepslate_tin_ore": "Deepslate Tin Ore",
 	"block.birmingham.terminal": "Terminal",
+	"block.birmingham.elite_gaming_chair": "Elite Gaming Chair",
 	"block.birmingham.table": "Oak Table",
 	"fluid_type.birmingham.contaminated_water": "Contaminated Water",
 	"hazard.birmingham.toxic.title": "Mildly Toxic",
@@ -135,8 +136,20 @@
 	"gems.birmingham.radioactive.title": "[SOCKET] Radium Gem",
 	"gems.birmingham.radioactive.description": "    §a[+] Attacking an enemy applies +20 RADS to them.\n    §c[-] Item becomes slightly radioactive",
 	"terminal.unknown.input": "Unknown Command Recognized:",
-	"terminal.command.help": "Available Commands: help, stats,",
-	"terminal.command.help.additional": "if you put in \"help <CMD>\" it'll display additional help relating to that command."
+	"terminal.command.help": "Available Commands: help, stats, shop, clear",
+	"terminal.command.help.additional": "if you put in 'help <CMD>' it'll display",
+	"terminal.command.help.additional.2": "additional help relating to that command.",
+	"terminal.command.empty": "Command is Empty",
+	"command.stats.power": "Compute Power: ",
+	"command.stats.speed": "Compute Speed: ",
+	"command.stats.efficiency": "Power Efficiency: ",
+	"terminal.command.help.shop": "Shop <catalog/buy> <page/id> <x> <y> <z>",
+	"terminal.command.help.stats": "Shows your computers stats",
+	"terminal.command.help.clear": "Clears the screen",
+	"terminal.boot": "Welcome! Type 'help' for help",
+	"tooltip.birmingham.chair": "§8Boosts the stats of any desktop it is placed in front of",
+	"tooltip.birmingham.desktop.optional": "§7Desktop Multiblock Component §8(Optional)",
+	"tooltip.birmingham.chair.dyeable": "§8(Can be dyed Red, Green or Blue)"
 
 	
 }

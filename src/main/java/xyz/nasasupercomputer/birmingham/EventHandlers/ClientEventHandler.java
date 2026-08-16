@@ -24,6 +24,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.DesktopChair;
 import xyz.nasasupercomputer.birmingham.ForgeConfigs;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
@@ -75,23 +76,42 @@ public class ClientEventHandler {
         // ===================
         // Display Desktop Stats
         if (Block.byItem(stack.getItem()) instanceof IDesktopType desktopType) {
-        	
-        	// TODO: Localize
-        	if (!Screen.hasShiftDown()) {
-        		tooltipList.add(1, Component.literal("§8Hold §e<SHIFT> §8To view Computational Stats"));
-        	}
-        	else {
-        		DesktopProperties desktopProperties = desktopType.GetProperties();
-        		tooltipList.add(1, Component.literal("§2> Supports GUI: §a" + desktopProperties.hasGuiSupport() + "§r"));
-        		tooltipList.add(1, Component.literal("§2> Power Efficiency: §a" + desktopProperties.powerEfficiency() * 100 + "% §r"));
-        		tooltipList.add(1, Component.literal("§2> Compute Speed: §a" + desktopProperties.computeSpeed() * 100 + "% §r"));
-        		tooltipList.add(1, Component.literal("§2> Compute Power: §a" + desktopProperties.computePower() + "§r"));
-        		tooltipList.add(1, Component.literal("§aDesktop Stats:"));
-        		
-        	}
-        	
-        	tooltipList.add(1, Component.translatable("tooltip.birmingham.desktop").withStyle(ChatFormatting.DARK_GRAY));
-        }
+
+			// TODO: Localize
+			if (!Screen.hasShiftDown()) {
+				tooltipList.add(1, Component.literal("§8Hold §e<SHIFT> §8To view Computational Stats"));
+			} else {
+				DesktopProperties desktopProperties = desktopType.GetProperties();
+				tooltipList.add(1, Component.literal("§2> Supports GUI: §a" + desktopProperties.hasGuiSupport() + "§r"));
+				tooltipList.add(1, Component.literal("§2> Power Efficiency: §a" + desktopProperties.powerEfficiency() * 100 + "% §r"));
+				tooltipList.add(1, Component.literal("§2> Compute Speed: §a" + desktopProperties.computeSpeed() * 100 + "% §r"));
+				tooltipList.add(1, Component.literal("§2> Compute Power: §a" + desktopProperties.computePower() + "§r"));
+				tooltipList.add(1, Component.literal("§aDesktop Stats:"));
+
+			}
+
+			tooltipList.add(1, Component.translatable("tooltip.birmingham.desktop").withStyle(ChatFormatting.DARK_GRAY));
+		}
+
+		// ===================
+		// Gaming Chairs
+		if (Block.byItem(stack.getItem()) instanceof DesktopChair chair) {
+
+			// TODO: Localize
+			tooltipList.add(1, Component.translatable("tooltip.birmingham.chair.dyeable").withStyle(ChatFormatting.DARK_GRAY));
+			if (!Screen.hasShiftDown()) {
+				tooltipList.add(1, Component.literal("§8Hold §e<SHIFT> §8To view Booster Stats"));
+			} else {
+				tooltipList.add(1, Component.literal("§2> Power Efficiency Boost: §a" + chair.getEfficiencyBoostPercent() * 100 + "% §r"));
+				tooltipList.add(1, Component.literal("§2> Compute Speed Boost: §a" + chair.getSpeedBoostPercent() * 100 + "% §r"));
+				tooltipList.add(1, Component.literal("§2> Compute Power Boost: §a" + chair.getPowerBoostPercent() * 100 + "% §r"));
+				tooltipList.add(1, Component.literal("§aDesktop Stats:"));
+
+			}
+
+			tooltipList.add(1, Component.translatable("tooltip.birmingham.chair").withStyle(ChatFormatting.DARK_GRAY));
+			tooltipList.add(1, Component.translatable("tooltip.birmingham.desktop.optional").withStyle(ChatFormatting.DARK_GRAY));
+		}
   		
         // ===================
         // Easter Eggs

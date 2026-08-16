@@ -8,8 +8,12 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.DesktopBlock;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.DesktopBlockEntity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class TerminalScreen extends Screen {
@@ -17,13 +21,19 @@ public class TerminalScreen extends Screen {
 	private static final Component GUI_TITLE = Component.literal(" ").withStyle(ChatFormatting.YELLOW);
     private static final ResourceLocation GUI_TEXTURE = new ResourceLocation("birmingham", "textures/gui/machines/gui_terminal_monitor.png");
     private static final ResourceLocation TERMINAL_FONT_DIRECTORY = new ResourceLocation("birmingham", "terminal");
+    private final BlockEntity desktopBlockEntity;
+
+    private static final int TERMINAL_LINE_DISPLAY_LIMIT = 10; //
 
     private List<Component> terminalFeedback = new ArrayList<Component>();
 
     private EditBox input;
 
-    public TerminalScreen() {
+    public TerminalScreen(BlockEntity desktopBlockEntity) {
         super(GUI_TITLE);
+        this.desktopBlockEntity = desktopBlockEntity;
+
+        sendTerminalFeedback(Component.translatable("terminal.boot"));
     }
 
     @Override
@@ -32,7 +42,7 @@ public class TerminalScreen extends Screen {
         int x = (width - 256) / 2;
         int y = (height - 256) / 2;
 
-        input = new EditBox(this.font, x, y + 62, 140, 20, Component.literal("").withStyle(style -> style.withFont(TERMINAL_FONT_DIRECTORY)));
+        input = new EditBox(this.font, x + 50, y + 145, 140, 20, Component.literal("").withStyle(style -> style.withFont(TERMINAL_FONT_DIRECTORY)));
         
         input.setTextColor(0x2B9C19);
         input.setTextColorUneditable(0x2B9C19);
@@ -64,15 +74,51 @@ public class TerminalScreen extends Screen {
     }
 
     public void sendTerminalFeedback(Component component){
+        terminalFeedback.add(0, component.copy().withStyle(style -> style.withFont(TERMINAL_FONT_DIRECTORY).withColor(ChatFormatting.GREEN)));
 
+        if (terminalFeedback.size() > TERMINAL_LINE_DISPLAY_LIMIT) { terminalFeedback.remove(10); } // Limit the lines
     }
 
     public void sendTerminalCommand(String commandSent) {
-        String command = commandSent.toLowerCase();
+        if (commandSent == null || commandSent.isBlank()) { return; }
+        String[] fullCommand = commandSent.split("\\s+");
+        String command = fullCommand[0].toLowerCase();
+        String[] commandArgs = Arrays.copyOfRange(fullCommand, 1, fullCommand.length);
 
         switch (command) {
             case "help":                    // HELP: Displays all other non-secret terminal commands
-                sendTerminalFeedback(Component.translatable("terminal.command.help").append(Component.translatable("terminal.command.help.additional").withStyle(ChatFormatting.ITALIC)));
+                if (checkCmdArg(commandArgs, 0, "shop")) { sendTerminalFeedback(Component.translatable("terminal.command.help.shop")); }
+                else if (checkCmdArg(commandArgs, 0, "stats")) { sendTerminalFeedback(Component.translatable("terminal.command.help.stats")); }
+                else if (checkCmdArg(commandArgs, 0, "clear")) { sendTerminalFeedback(Component.translatable("terminal.command.help.clear")); }
+                else {
+                    sendTerminalFeedback(Component.translatable("terminal.command.help"));
+                    sendTerminalFeedback(Component.translatable("terminal.command.help.additional"));
+                    sendTerminalFeedback(Component.translatable("terminal.command.help.additional.2"));
+                }
+                break;
+
+            case "shop":                    // SHOP: Buy things
+                if (checkCmdArg(commandArgs, 0, "catalog")) {
+                    // Catalog: list all buyable items
+                } else if (checkCmdArg(commandArgs, 0, "buy")) {
+                    // Buy: buy an item
+                } else {
+                    // ????
+                }
+                break;
+
+            case "stats":                   // STATS: Display Computational Stats
+                if (desktopBlockEntity instanceof DesktopBlockEntity desktopBE) {
+                    sendTerminalFeedback(Component.translatable("command.stats.power").append(Component.literal(String.valueOf(desktopBE.GetProperties().computePower()))));
+                    sendTerminalFeedback(Component.translatable("command.stats.speed").append(Component.literal(desktopBE.GetProperties().computeSpeed() * 100 + "%")));
+                    sendTerminalFeedback(Component.translatable("command.stats.efficiency").append(Component.literal(desktopBE.GetProperties().powerEfficiency() * 100 + "%")));
+                }
+                break;
+
+            case "clear":                   // CLEAR: Clears the screen
+                for (int i = 0; i < TERMINAL_LINE_DISPLAY_LIMIT + 1; i++) {
+                    sendTerminalFeedback(Component.empty());
+                }
                 break;
 
             case "instantly_close_game":    // Secret Command: Closes the game
@@ -89,16 +135,34 @@ public class TerminalScreen extends Screen {
         }
     }
 
+    public boolean checkCmdArg(String[] args, int index, String checkFor){
+        if (args == null || index >= args.length) {
+            return false;
+        }
+
+        return args[index].equals(checkFor);
+    }
+
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-    	float scale = 2.0F;
-    	// graphics.pose().scale(scale, scale, 1.0F);
-    	
-        int x = (width / (int)scale - 256) / 2;
-        int y = (height / (int)scale - 256) / 2;
 
-    	// Background is typically rendered first
+        int x = (width - 256) / 2;
+        int y = (height - 256) / 2;
+        int feedbackX = (width - 256) / 2 + 135;
+        int feedbackY = (width - 256) / 2 + 50;
+
+        // Background is typically rendered first
         this.renderBackground(graphics);
+
+        // Feedback text
+        graphics.pose().pushPose();
+        graphics.pose().scale(0.75f, 0.75f, 1.0f);
+        for (Component feedback : terminalFeedback) {
+            graphics.drawString(font, feedback, feedbackX, feedbackY, 0x2B9C19);
+
+            feedbackY -= font.lineHeight;
+        }
+        graphics.pose().popPose();
 
         // Render box before screen because the text aurafarms anyways and goes on top.
         input.render(graphics, mouseX, mouseY, partialTick);
@@ -106,7 +170,7 @@ public class TerminalScreen extends Screen {
 
         graphics.blit(GUI_TEXTURE, x, y, 0, 0, 256, 256);
 
-        graphics.drawString(font, Component.literal("hiihihih").withStyle(style -> style.withFont(TERMINAL_FONT_DIRECTORY)).withStyle(ChatFormatting.GREEN), x, y, 0xFFFFFF);
+        // graphics.drawString(font, Component.literal("hiihihih").withStyle(style -> style.withFont(TERMINAL_FONT_DIRECTORY)).withStyle(ChatFormatting.GREEN), x, y, 0xFFFFFF);
     }
 
     @Override

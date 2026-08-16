@@ -1,6 +1,8 @@
 package xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,7 +25,24 @@ public class DesktopBlockEntity extends BlockEntity implements IDesktopType {
 
 	@Override
 	public DesktopProperties GetProperties() {
-		return DESKTOP_PROPERTIES;
+		BlockPos pos = this.worldPosition;
+		BlockEntity blockEntity = level.getBlockEntity(pos);
+
+		DesktopProperties properties = DESKTOP_PROPERTIES;
+
+		// Check for an account for gaming chairs
+		if (blockEntity instanceof DesktopBlockEntity desktopBE) {
+			Direction direction = desktopBE.getBlockState().getValue(DesktopBlock.FACING);
+			BlockPos pleasebeachair = pos.relative(direction, 1);
+
+			if (level.getBlockState(pleasebeachair).getBlock() instanceof DesktopChair itisachair) {
+				properties = new DesktopProperties(properties.computePower() * itisachair.getPowerBoostPercent(), properties.computeSpeed() * itisachair.getSpeedBoostPercent(), properties.powerEfficiency() * itisachair.getEfficiencyBoostPercent(), properties.hasGuiSupport());
+			}
+		}
+
+
+
+		return properties;
 	}
 
 }

@@ -77,7 +77,7 @@ public class TerminalBlock extends BaseEntityBlock {
         				// Desktop DOESNT have GUI support, open Terminal UI.
         		        // Open the screen here (on server only?)
         		        if (level.isClientSide()) {
-        		        	Minecraft.getInstance().setScreen(new TerminalScreen());
+        		        	Minecraft.getInstance().setScreen(new TerminalScreen(desktopBE));
         		        }
         			}
         			

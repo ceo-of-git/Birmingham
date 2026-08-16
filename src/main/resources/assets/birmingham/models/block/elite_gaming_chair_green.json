@@ -1,0 +1,7 @@
+{
+	"parent": "birmingham:block/elite_gaming_chair_template",
+	"textures": {
+		"0": "birmingham:block/elite_gaming_chair_green",
+		"particle": "birmingham:block/elite_gaming_chair_green"
+	}
+}
