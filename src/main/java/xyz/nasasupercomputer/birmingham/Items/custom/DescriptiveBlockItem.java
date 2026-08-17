@@ -16,28 +16,16 @@ import net.minecraft.world.level.block.Block;
 
 public class DescriptiveBlockItem extends BlockItem {
 
-	private final String description;
-	private final Boolean isLocalized;
-	private final ChatFormatting style;
+	Component description;
 	
-	public DescriptiveBlockItem(Block block, Properties pProperties, String description, boolean isLocalized, ChatFormatting style) {
+	public DescriptiveBlockItem(Block block, Properties pProperties, Component description) {
 		super(block, pProperties);
-		
+
 		this.description = description;
-		this.isLocalized = isLocalized;
-		
-		if (style == null) {
-			this.style = ChatFormatting.WHITE;
-		} else { this.style = style; }
-		
 	}
 
     @Override
     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-		if (isLocalized) {
-			pTooltipComponents.add(Component.translatable(description).withStyle(style));
-		} else {
-			pTooltipComponents.add(Component.literal(description).withStyle(style));
-		}
+		pTooltipComponents.add(description);
     }
 }

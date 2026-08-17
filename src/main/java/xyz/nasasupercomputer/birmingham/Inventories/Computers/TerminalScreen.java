@@ -181,4 +181,9 @@ public class TerminalScreen extends Screen {
         // Update the terminal feedback text
         // Technically super unoptimized, but this is so little and the gui is only open so often so I don't mind.
     }
+
+    @Override
+    public boolean isPauseScreen() {
+        return false;
+    }
 }

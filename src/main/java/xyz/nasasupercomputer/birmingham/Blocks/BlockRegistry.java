@@ -2,6 +2,7 @@ package xyz.nasasupercomputer.birmingham.Blocks;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -13,6 +14,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import xyz.nasasupercomputer.birmingham.Blocks.Custom.Package.PackageBlock;
+import xyz.nasasupercomputer.birmingham.Blocks.Custom.Package.PackageBlockEntity;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.*;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.PurificationChamber.PurificationChamberBlock;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.PurificationChamber.PurificationChamberBlockEntity;
@@ -49,10 +52,14 @@ public class BlockRegistry {
 	public static final RegistryObject<Block> TERMINAL = BLOCKS.register("terminal", () -> new TerminalBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops().strength(3.0F, 12.0F).noOcclusion().destroyTime(2.5f)));
 	public static final RegistryObject<BlockEntityType<TerminalBlockEntity>> TERMINAL_ENTITY = BLOCK_ENTITIES.register("terminal", () -> BlockEntityType.Builder.of(TerminalBlockEntity::new, TERMINAL.get()).build(null));
 	public static final RegistryObject<Block> ELITE_GAMING_CHAIR = BLOCKS.register("elite_gaming_chair", () -> new DesktopChair(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops().strength(3.0F, 12.0F).noOcclusion().destroyTime(2.5f), 2.0f, 2.0f, 3.0f));
-	
+
+	// =========================
+	// GENERAL BLOCK ENTITIES
+	public static final RegistryObject<Block> PACKAGE = BLOCKS.register("package", () -> new PackageBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS).strength(0.2f).destroyTime(0.4f)));
+	public static final RegistryObject<BlockEntityType<PackageBlockEntity>> PACKAGE_ENTITY = BLOCK_ENTITIES.register("package", () -> BlockEntityType.Builder.of(PackageBlockEntity::new, PACKAGE.get()).build(null));
+
 	// =========================
 	// ORIGINAL BLOCKS
-	public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)));
 	public static final RegistryObject<Block> ADAMANTITE = BLOCKS.register("adamantite", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS).strength(6f).requiresCorrectToolForDrops()));
 	public static final RegistryObject<Block> DEEPSLATE_ADAMANTITE_ORE = BLOCKS.register("deepslate_adamantite_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE).strength(6f).requiresCorrectToolForDrops()));
 	public static final RegistryObject<Block> ADAMANTITE_ORE = BLOCKS.register("adamantite_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).strength(6f).requiresCorrectToolForDrops()));
@@ -64,7 +71,6 @@ public class BlockRegistry {
 	
 	// =========================
 	// BLOCK ITEMS
-	public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ItemRegistry.ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties()));
 	public static final RegistryObject<Item> ADAMANTITE_ITEM = ItemRegistry.ITEMS.register("adamantite", () -> new BlockItem(ADAMANTITE.get(), new Item.Properties()));
 	public static final RegistryObject<Item> DEEPSLATE_ADAMANTITE_ITEM = ItemRegistry.ITEMS.register("deepslate_adamantite_ore", () -> new BlockItem(DEEPSLATE_ADAMANTITE_ORE.get(), new Item.Properties()));
 	public static final RegistryObject<Item> ORE_ADAMANTITE_ITEM = ItemRegistry.ITEMS.register("adamantite_ore", () -> new BlockItem(ADAMANTITE_ORE.get(), new Item.Properties()));
@@ -76,9 +82,11 @@ public class BlockRegistry {
 	public static final RegistryObject<Item> PURIFICATION_CHAMBER_ITEM = ItemRegistry.ITEMS.register("purification_chamber", () -> new BlockItem(PURIFICATION_CHAMBER.get(), new Item.Properties()));
 	public static final RegistryObject<Item> FUEL_GENERATOR_ITEM = ItemRegistry.ITEMS.register("fuel_generator", () -> new BlockItem(FUEL_GENERATOR.get(), new Item.Properties()));
 	public static final RegistryObject<Item> DESKTOP_ITEM = ItemRegistry.ITEMS.register("desktop", () -> new BlockItem(DESKTOP.get(), new Item.Properties()));
-	public static final RegistryObject<Item> TERMINAL_ITEM = ItemRegistry.ITEMS.register("terminal", () -> new DescriptiveBlockItem(TERMINAL.get(), new Item.Properties(), "tooltip.birmingham.terminal", true, ChatFormatting.DARK_GRAY));
-	public static final RegistryObject<Item> TABLE_ITEM = ItemRegistry.ITEMS.register("table", () -> new DescriptiveBlockItem(TABLE.get(), new Item.Properties(), "tooltip.birmingham.table", true, ChatFormatting.DARK_GRAY));
+	public static final RegistryObject<Item> TERMINAL_ITEM = ItemRegistry.ITEMS.register("terminal", () -> new DescriptiveBlockItem(TERMINAL.get(), new Item.Properties(), Component.translatable("tooltip.birmingham.terminal").withStyle(ChatFormatting.DARK_GRAY)));
+	public static final RegistryObject<Item> TABLE_ITEM = ItemRegistry.ITEMS.register("table", () -> new DescriptiveBlockItem(TABLE.get(), new Item.Properties(), Component.translatable("tooltip.birmingham.table").withStyle(ChatFormatting.DARK_GRAY)));
 	public static final RegistryObject<Item> ELITE_GAMING_CHAIR_ITEM = ItemRegistry.ITEMS.register("elite_gaming_chair", () -> new BlockItem(ELITE_GAMING_CHAIR.get(), new Item.Properties()));
+	public static final RegistryObject<Item> PACKAGE_ITEM = ItemRegistry.ITEMS.register("package", () -> new DescriptiveBlockItem(PACKAGE.get(), new Item.Properties(), Component.translatable("tooltip.birmingham.package").withStyle(ChatFormatting.YELLOW)));
+
 	
 	// Helper Methods
     // Rotates a VoxelShape (code found online somewhere) (probably barely works) (not sure) (slightly modified)

@@ -90,6 +90,7 @@
 	"block.birmingham.fired_crucible": "Crucible",
 	"block.birmingham.radium_block": "Radium Block",
 	"block.birmingham.fuel_generator": "Fuel Generator",
+	"block.birmingham.package": "Package",
 	"block.birmingham.desktop": "Janky Office Desktop",
 	"block.birmingham.raw_tin": "Block of Raw Tin",
 	"block.birmingham.tin_block": "Block of Tin",
@@ -149,7 +150,8 @@
 	"terminal.boot": "Welcome! Type 'help' for help",
 	"tooltip.birmingham.chair": "§8Boosts the stats of any desktop it is placed in front of",
 	"tooltip.birmingham.desktop.optional": "§7Desktop Multiblock Component §8(Optional)",
-	"tooltip.birmingham.chair.dyeable": "§8(Can be dyed Red, Green or Blue)"
+	"tooltip.birmingham.chair.dyeable": "§8(Can be dyed Red, Green or Blue)",
+	"tooltip.birmingham.package": "Right-Click to Open!"
 
 	
 }

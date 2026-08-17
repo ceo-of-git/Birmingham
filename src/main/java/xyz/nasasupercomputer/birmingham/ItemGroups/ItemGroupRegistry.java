@@ -143,6 +143,7 @@ public class ItemGroupRegistry {
         // ADDING TO BUILDING TAB
         else if (event.getTabKey() == CREATIVE_TAB_BUILDING.getKey()) {
         	event.accept(BlockRegistry.TABLE_ITEM);
+            event.accept(BlockRegistry.PACKAGE_ITEM);
         }
 
         // ADDING TO TOOLS TAB
