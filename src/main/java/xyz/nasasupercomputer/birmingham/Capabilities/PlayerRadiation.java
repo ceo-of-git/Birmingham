@@ -1,7 +1,6 @@
-package xyz.nasasupercomputer.birmingham.Radiation;
+package xyz.nasasupercomputer.birmingham.Capabilities;
 
 import net.minecraft.nbt.CompoundTag;
-import org.checkerframework.checker.units.qual.A;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 
 import java.math.BigDecimal;

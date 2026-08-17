@@ -1,23 +1,15 @@
 package xyz.nasasupercomputer.birmingham.Items.custom;
 
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.network.NetworkHooks;
-import xyz.nasasupercomputer.birmingham.Blocks.Machines.CokingOven.CokingOvenBlock;
-import xyz.nasasupercomputer.birmingham.Radiation.PlayerRadiationProvider;
+import xyz.nasasupercomputer.birmingham.Capabilities.PlayerRadiationProvider;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

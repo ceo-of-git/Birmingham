@@ -1,6 +1,6 @@
-package xyz.nasasupercomputer.birmingham.Radiation;
+package xyz.nasasupercomputer.birmingham.Capabilities;
 
-// i essnetially just went off the code from googles ai overvierw thing because there is ZERO chance i ujnddeerstand anyh of tihs
+// Aug 17 cleaned up vinxinty slop code
 
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -9,28 +9,23 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 
-public class PlayerRadiationProvider implements ICapabilitySerializable<CompoundTag> { // wtf is ICapabilitySerializable<CompoundTag>
-    public static Capability<PlayerRadiation> PLAYER_RADIATION = CapabilityManager.get(new CapabilityToken<>(){}); // capabilities sutff , ZERO clue on any of this
+public class PlayerRadiationProvider implements ICapabilitySerializable<CompoundTag> {
+    public static Capability<PlayerRadiation> PLAYER_RADIATION = CapabilityManager.get(new CapabilityToken<>(){});
 
     private PlayerRadiation radiation = null;
+    private final LazyOptional<PlayerRadiation> optional = LazyOptional.of(this::createPlayerRadiation);
 
-    private final LazyOptional<PlayerRadiation> optional = LazyOptional.of(this::createPlayerRadiation); // the FUCK does this mean. or do. or anything.
-
-    private PlayerRadiation createPlayerRadiation() { // think i understand this. if from the start the radiation hasnt been initialzied yetr (still null) we just set it to type of playerradiation., or smth. im not good at java
-        if(this.radiation == null) {
+    private PlayerRadiation createPlayerRadiation() {
+        if (this.radiation == null) {
             this.radiation = new PlayerRadiation();
             MainRegistry.LOGGER.info("Player radiation created");
         }
         return this.radiation;
     }
 
-
-
-    @Override // more stolen code i don't understand. awesome.
+    @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
         if(cap == PLAYER_RADIATION) {
             return optional.cast();
@@ -39,7 +34,7 @@ public class PlayerRadiationProvider implements ICapabilitySerializable<Compound
     }
 
     @Override
-    public CompoundTag serializeNBT() { // kiknd of ujnderstand but not really
+    public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
         createPlayerRadiation().saveNBTData(nbt);
         return nbt;

@@ -3,20 +3,15 @@ import net.minecraftforge.event.entity.living.LivingDamageEvent;
 
 import java.util.List;
 
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.GameType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.language.I18n;
 import xyz.nasasupercomputer.birmingham.ItemGems.IGemType;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import xyz.nasasupercomputer.birmingham.Radiation.PlayerRadiationProvider;
+import xyz.nasasupercomputer.birmingham.Capabilities.PlayerRadiationProvider;
 
 public class GemRadioactive implements IGemType {
 	

@@ -23,7 +23,7 @@ public class TerminalScreen extends Screen {
     private static final ResourceLocation TERMINAL_FONT_DIRECTORY = new ResourceLocation("birmingham", "terminal");
     private final BlockEntity desktopBlockEntity;
 
-    private static final int TERMINAL_LINE_DISPLAY_LIMIT = 10; //
+    private static final int TERMINAL_LINE_DISPLAY_LIMIT = 19; //
 
     private List<Component> terminalFeedback = new ArrayList<Component>();
 
@@ -42,7 +42,7 @@ public class TerminalScreen extends Screen {
         int x = (width - 256) / 2;
         int y = (height - 256) / 2;
 
-        input = new EditBox(this.font, x + 50, y + 145, 140, 20, Component.literal("").withStyle(style -> style.withFont(TERMINAL_FONT_DIRECTORY)));
+        input = new EditBox(this.font, x + 14, y + 145, 140, 20, Component.literal("").withStyle(style -> style.withFont(TERMINAL_FONT_DIRECTORY)));
         
         input.setTextColor(0x2B9C19);
         input.setTextColorUneditable(0x2B9C19);
@@ -76,7 +76,7 @@ public class TerminalScreen extends Screen {
     public void sendTerminalFeedback(Component component){
         terminalFeedback.add(0, component.copy().withStyle(style -> style.withFont(TERMINAL_FONT_DIRECTORY).withColor(ChatFormatting.GREEN)));
 
-        if (terminalFeedback.size() > TERMINAL_LINE_DISPLAY_LIMIT) { terminalFeedback.remove(10); } // Limit the lines
+        if (terminalFeedback.size() > TERMINAL_LINE_DISPLAY_LIMIT) { terminalFeedback.remove(TERMINAL_LINE_DISPLAY_LIMIT); } // Limit the lines
     }
 
     public void sendTerminalCommand(String commandSent) {
@@ -116,7 +116,7 @@ public class TerminalScreen extends Screen {
                 break;
 
             case "clear":                   // CLEAR: Clears the screen
-                for (int i = 0; i < TERMINAL_LINE_DISPLAY_LIMIT + 1; i++) {
+                for (int i = 0; i < TERMINAL_LINE_DISPLAY_LIMIT * 2; i++) {
                     sendTerminalFeedback(Component.empty());
                 }
                 break;
@@ -148,7 +148,7 @@ public class TerminalScreen extends Screen {
 
         int x = (width - 256) / 2;
         int y = (height - 256) / 2;
-        int feedbackX = (width - 256) / 2 + 135;
+        int feedbackX = (width - 256) / 2 + 90;
         int feedbackY = (width - 256) / 2 + 50;
 
         // Background is typically rendered first

@@ -1,7 +1,6 @@
 package xyz.nasasupercomputer.birmingham.Fluids.CustomFluids;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -11,8 +10,7 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.phys.AABB;
-import xyz.nasasupercomputer.birmingham.MainRegistry;
-import xyz.nasasupercomputer.birmingham.Radiation.PlayerRadiationProvider;
+import xyz.nasasupercomputer.birmingham.Capabilities.PlayerRadiationProvider;
 
 import java.util.function.Supplier;
 
