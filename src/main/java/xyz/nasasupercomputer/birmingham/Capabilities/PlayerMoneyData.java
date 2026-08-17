@@ -13,13 +13,13 @@ import xyz.nasasupercomputer.birmingham.MainRegistry;
 public class PlayerMoneyData {
     private static final String KEY = "Money";
 
-    public static void setValue(ServerPlayer player, long value){
-        player.getPersistentData().putLong(KEY, value);
+    public static void setValue(ServerPlayer player, float value){
+        player.getPersistentData().putFloat(KEY, value);
     }
 
-    public static long getValue(ServerPlayer player){
+    public static float getValue(ServerPlayer player){
         CompoundTag data = player.getPersistentData();
-        return data.getLong(KEY);
+        return data.getFloat(KEY);
     }
 
     // Transfers money post-death
@@ -29,11 +29,11 @@ public class PlayerMoneyData {
 
         if (oldData.contains(KEY)) {
 
-            long oldValue = oldData.getLong(KEY);
-            long newMoneyValue = 0;
+            float oldValue = oldData.getFloat(KEY);
+            float newMoneyValue = 0;
             if (oldValue != 0) { newMoneyValue = oldValue / 2L; }
 
-            event.getEntity().getPersistentData().putLong(KEY, newMoneyValue);
+            event.getEntity().getPersistentData().putFloat(KEY, newMoneyValue);
             event.getEntity().sendSystemMessage(Component.translatable("birmingham.death.money_loss").withStyle(ChatFormatting.RED).append(Component.literal(newMoneyValue + "$)").withStyle(ChatFormatting.RED)));
         }
     }

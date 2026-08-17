@@ -137,7 +137,7 @@
 	"gems.birmingham.radioactive.title": "[SOCKET] Radium Gem",
 	"gems.birmingham.radioactive.description": "    §a[+] Attacking an enemy applies +20 RADS to them.\n    §c[-] Item becomes slightly radioactive",
 	"terminal.unknown.input": "Unknown Command Recognized:",
-	"terminal.command.help": "Available Commands: help, stats, shop, clear",
+	"terminal.command.help": "Available Commands: help, stats, shop, clear, balance",
 	"terminal.command.help.additional": "if you put in 'help <CMD>' it'll display",
 	"terminal.command.help.additional.2": "additional help relating to that command.",
 	"terminal.command.empty": "Command is Empty",
@@ -153,7 +153,10 @@
 	"tooltip.birmingham.chair.dyeable": "§8(Can be dyed Red, Green or Blue)",
 	"tooltip.birmingham.package": "Right-Click to Open!",
 	"birmingham.death.money_loss": "You Died and lost 50% of your Money! (Now: ",
-	"birmingham.money.redeem": "Redeemed Money! "
-
-	
+	"birmingham.money.redeem": "Redeemed Money! ",
+	"terminal.command.shop.amount": "Amount to Purchase:",
+	"terminal.command.shop.power_req": "Compute Power Required:",
+	"terminal.command.shop.page0": "Cannot view Page #0",
+	"terminal.command.bal": "You have: ",
+	"terminal.command.shop.cost": "Price: $"
 }

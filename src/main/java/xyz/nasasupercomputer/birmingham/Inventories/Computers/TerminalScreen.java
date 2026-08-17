@@ -11,6 +11,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.DesktopBlock;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.DesktopBlockEntity;
+import xyz.nasasupercomputer.birmingham.Capabilities.PlayerMoneyData;
+import xyz.nasasupercomputer.birmingham.Packets.NetworkManager;
+import xyz.nasasupercomputer.birmingham.Packets.TerminalBalancePacket;
+import xyz.nasasupercomputer.birmingham.Shops.TerminalShop;
+import xyz.nasasupercomputer.birmingham.Shops.TerminalShopEntry;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -100,6 +105,36 @@ public class TerminalScreen extends Screen {
             case "shop":                    // SHOP: Buy things
                 if (checkCmdArg(commandArgs, 0, "catalog")) {
                     // Catalog: list all buyable items
+                    int catalogPage = Integer.parseInt(getCmdArg(commandArgs, 1, true));
+                    if (catalogPage == 0) { sendTerminalFeedback(Component.translatable("terminal.command.shop.page0")); break; }
+
+                    List<TerminalShopEntry> terminalShop = TerminalShop.getAvailableShopItems();
+
+                    int entriesPerPage = 4;
+                    for (int i = 0; i < entriesPerPage; i++) {
+                        if (terminalShop.size() >= ((catalogPage - 1) * entriesPerPage) + i) {
+                            if (terminalShop.get(((catalogPage - 1) * entriesPerPage) + i) != null) {
+                                if (desktopBlockEntity instanceof DesktopBlockEntity desktopBE) {
+                                    int currentEntryID = ((catalogPage - 1) * entriesPerPage) + i;
+                                    TerminalShopEntry currentEntry = terminalShop.get(currentEntryID);
+
+                                    // Weed out the improperly powered chuds
+                                    // playing in the danger zone with the i-- here.
+                                    if (currentEntry.powerRequirementToView() > desktopBE.GetProperties().computePower()) { continue; }
+
+                                    // Display shop entry now
+                                    sendTerminalFeedback(Component.literal("(ID: " + currentEntryID + ") - " + currentEntry.itemToPurchase().getDisplayName().getString()));
+                                    sendTerminalFeedback(Component.translatable("terminal.command.shop.amount").append(Component.literal(" x" + currentEntry.itemToPurchase().getCount())));
+                                    sendTerminalFeedback(Component.translatable("terminal.command.shop.power_req").append(Component.literal(" " + String.valueOf(currentEntry.powerRequirementToView()))));
+                                    sendTerminalFeedback(Component.translatable("terminal.command.shop.cost").append(Component.literal(" " + String.format("$%.2f", currentEntry.dollarCost()))));
+                                }
+                                if (i == 3) {
+                                    sendTerminalFeedback(Component.literal("pg: 1 / " + (terminalShop.size() / 4)));
+                                }
+                            } else { continue; }
+                        } else { continue; }
+                    }
+
                 } else if (checkCmdArg(commandArgs, 0, "buy")) {
                     // Buy: buy an item
                 } else {
@@ -114,6 +149,14 @@ public class TerminalScreen extends Screen {
                     sendTerminalFeedback(Component.translatable("command.stats.efficiency").append(Component.literal(desktopBE.GetProperties().powerEfficiency() * 100 + "%")));
                 }
                 break;
+
+            case "bal":
+            case "balance":                // BALANCE: Shows how much $$$ the player has
+                // oooooh god i have to do packets now don't i?
+                // update as of 15 hours later: the actual message sent back is done on the response packet
+                NetworkManager.INSTANCE.sendToServer(new TerminalBalancePacket());
+                break;
+
 
             case "clear":                   // CLEAR: Clears the screen
                 for (int i = 0; i < TERMINAL_LINE_DISPLAY_LIMIT * 2; i++) {
@@ -141,6 +184,26 @@ public class TerminalScreen extends Screen {
         }
 
         return args[index].equals(checkFor);
+    }
+
+    public String getCmdArg(String[] args, int index, boolean convertToInt){
+        if (args == null || index >= args.length) {
+            if (convertToInt) { return "0"; }
+            return "";
+        }
+
+        int returnValue = 0;
+        if (convertToInt){
+            try {
+                returnValue = Integer.parseInt(args[index]);
+            } catch (NumberFormatException e) {
+                return "0";
+            }
+
+            return String.valueOf(returnValue);
+        }
+
+        return args[index];
     }
 
     @Override

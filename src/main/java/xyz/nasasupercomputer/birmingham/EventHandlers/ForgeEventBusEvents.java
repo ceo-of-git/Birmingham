@@ -9,6 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.Datagen.SavedData.PillData;
+import xyz.nasasupercomputer.birmingham.Shops.TerminalShop;
 
 // Please someone tell me the difference between Bus.FORGE and bus.MOD
 @Mod.EventBusSubscriber(modid = MainRegistry.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -23,5 +24,8 @@ public class ForgeEventBusEvents {
         if (event.getEntity().level() instanceof ServerLevel level) {
             PillData pillData = level.getDataStorage().computeIfAbsent(PillData::load, () -> PillData.createData(level), "pill_data");
         }
+
+        // Initialize Shop Entries
+        TerminalShop.addShopEntries();
     }
 }

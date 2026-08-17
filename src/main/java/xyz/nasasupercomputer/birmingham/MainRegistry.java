@@ -1,5 +1,6 @@
 package xyz.nasasupercomputer.birmingham;
 
+import com.google.common.graph.Network;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -40,6 +41,7 @@ import xyz.nasasupercomputer.birmingham.ItemHazards.HazardRegistry;
 import xyz.nasasupercomputer.birmingham.ItemHazards.HazardSystem;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
 import xyz.nasasupercomputer.birmingham.Materials.MaterialSetRegistry;
+import xyz.nasasupercomputer.birmingham.Packets.NetworkManager;
 import xyz.nasasupercomputer.birmingham.Recipes.RecipeRegistry;
 import xyz.nasasupercomputer.birmingham.Sound.SoundRegistry;
 import xyz.nasasupercomputer.birmingham.entity.ModEntities;
@@ -69,6 +71,7 @@ public class MainRegistry
         BlockRegistry.BLOCKS.register(modEventBus);
         BlockRegistry.BLOCK_ENTITIES.register(modEventBus);
 
+        NetworkManager.register();
         ItemRegistry.ITEMS.register(modEventBus);
         SoundRegistry.SOUND_EVENTS.register(modEventBus);
         ItemGroupRegistry.CREATIVE_MODE_TABS.register(modEventBus);

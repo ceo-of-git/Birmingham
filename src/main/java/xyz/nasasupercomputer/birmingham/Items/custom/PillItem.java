@@ -55,6 +55,7 @@ public class PillItem extends Item {
 	public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
 		
 		// Just incase
+		// TODO: Pill Effects
 		if (pStack.getItem() instanceof PillItem pill && pLivingEntity instanceof ServerPlayer player) {
 			
 			switch(getPillType(pStack)) {
@@ -64,7 +65,7 @@ public class PillItem extends Item {
 					player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 200, 1));
 					break;
 					
-				case 1: // One makes you Rich (Give loot) TODO: Make this more than 1 diamond
+				case 1:
 					player.sendSystemMessage(Component.translatable("pill.birmingham.1.chat").withStyle(ChatFormatting.ITALIC));
 					break;
 					
