@@ -10,9 +10,11 @@ import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
 import xyz.nasasupercomputer.birmingham.Blocks.Custom.Package.PackageBlock;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.Desktops.DesktopBlockEntityBase;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.Desktops.Office.DesktopBlock;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.Desktops.Office.DesktopBlockEntity;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.DesktopProperties;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.IDesktopType;
 import xyz.nasasupercomputer.birmingham.Capabilities.PlayerMoneyData;
 import xyz.nasasupercomputer.birmingham.Shops.TerminalShop;
 import xyz.nasasupercomputer.birmingham.Shops.TerminalShopEntry;
@@ -49,8 +51,8 @@ public class TerminalPurchasePacket {
 //            player.sendSystemMessage(Component.literal("getting desktop"));
             DesktopProperties properties;
             // Get Desktop BE
-            if (state.getBlock() instanceof DesktopBlock desktopBlock) {
-                properties = desktopBlock.GetProperties(level, this.desktopPos);
+            if (state.getBlock() instanceof IDesktopType desktopBlock) {
+                properties = desktopBlock.GetProperties();
             } else {
                 sendResponsePacket(false, player);
                 return;
@@ -58,7 +60,7 @@ public class TerminalPurchasePacket {
 
             // Get Shop Entry
             List<TerminalShopEntry> shopEntries = TerminalShop.getAvailableShopItems();
-            if (level.getBlockEntity(desktopPos) instanceof DesktopBlockEntity) {
+            if (level.getBlockEntity(desktopPos) instanceof DesktopBlockEntityBase) {
                 shopEntries = TerminalShop.getAvailableShopItems(properties.computePower());
 
                 if (shopEntryIDToBuy >= 0 || shopEntryIDToBuy < shopEntries.size()) {
