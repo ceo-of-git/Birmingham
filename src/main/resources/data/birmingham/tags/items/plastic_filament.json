@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "birmingham:white_plastic_filament",
+    "birmingham:light_gray_plastic_filament",
+    "birmingham:gray_plastic_filament",
+    "birmingham:black_plastic_filament",
+    "birmingham:brown_plastic_filament",
+    "birmingham:red_plastic_filament",
+    "birmingham:orange_plastic_filament",
+    "birmingham:yellow_plastic_filament",
+    "birmingham:lime_plastic_filament",
+    "birmingham:green_plastic_filament",
+    "birmingham:cyan_plastic_filament",
+    "birmingham:light_blue_plastic_filament",
+    "birmingham:blue_plastic_filament",
+    "birmingham:purple_plastic_filament",
+    "birmingham:magenta_plastic_filament",
+    "birmingham:pink_plastic_filament"
+  ]
+}

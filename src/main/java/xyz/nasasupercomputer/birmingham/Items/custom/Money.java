@@ -43,13 +43,13 @@ public class Money extends Item {
 		if (pPlayer instanceof ServerPlayer serverPlayer){
 			if (getAuthenticity()) {
 				// Authentic
-				PlayerMoneyData.setValue(serverPlayer, (long)(PlayerMoneyData.getValue(serverPlayer) + this.getWorth()));
-				pPlayer.sendSystemMessage(Component.translatable("birmingham.money.redeem").withStyle(ChatFormatting.GREEN).withStyle(ChatFormatting.ITALIC).append(Component.literal("(" + PlayerMoneyData.getValue(serverPlayer) + "$)")));
+				PlayerMoneyData.setValue(serverPlayer, (PlayerMoneyData.getValue(serverPlayer) + (float)this.getWorth()));
+				pPlayer.sendSystemMessage(Component.translatable("birmingham.money.redeem").withStyle(ChatFormatting.GREEN).withStyle(ChatFormatting.ITALIC).append(String.format("$%.2f", PlayerMoneyData.getValue(serverPlayer))));
 				pPlayer.getItemInHand(pUsedHand).shrink(1);
 			}
 			else{
 				// Fraudulent (Pretend that you claimed it) (but it doesn't do anything)
-				pPlayer.sendSystemMessage(Component.translatable("birmingham.money.redeem").withStyle(ChatFormatting.GREEN).withStyle(ChatFormatting.ITALIC).append(Component.literal("(" + PlayerMoneyData.getValue(serverPlayer) + "$)")));
+				pPlayer.sendSystemMessage(Component.translatable("birmingham.money.redeem").withStyle(ChatFormatting.GREEN).withStyle(ChatFormatting.ITALIC).append(String.format("$%.2f", PlayerMoneyData.getValue(serverPlayer))));
 				pPlayer.getItemInHand(pUsedHand).shrink(1);
 			}
 		}

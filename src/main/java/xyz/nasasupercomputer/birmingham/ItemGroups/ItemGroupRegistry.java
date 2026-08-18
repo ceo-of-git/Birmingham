@@ -103,7 +103,23 @@ public class ItemGroupRegistry {
             event.accept(ItemRegistry.CIRCUIT_T3);
             event.accept(ItemRegistry.CIRCUIT_T4);
             event.accept(ItemRegistry.CIRCUIT_T5);
-            
+            event.accept(ItemRegistry.WHITE_PLASTIC_FILAMENT);
+            event.accept(ItemRegistry.LIGHT_GRAY_PLASTIC_FILAMENT);
+            event.accept(ItemRegistry.GRAY_PLASTIC_FILAMENT);
+            event.accept(ItemRegistry.BLACK_PLASTIC_FILAMENT);
+            event.accept(ItemRegistry.BROWN_PLASTIC_FILAMENT);
+            event.accept(ItemRegistry.RED_PLASTIC_FILAMENT);
+            event.accept(ItemRegistry.ORANGE_PLASTIC_FILAMENT);
+            event.accept(ItemRegistry.YELLOW_PLASTIC_FILAMENT);
+            event.accept(ItemRegistry.LIME_PLASTIC_FILAMENT);
+            event.accept(ItemRegistry.GREEN_PLASTIC_FILAMENT);
+            event.accept(ItemRegistry.CYAN_PLASTIC_FILAMENT);
+            event.accept(ItemRegistry.LIGHT_BLUE_PLASTIC_FILAMENT);
+            event.accept(ItemRegistry.BLUE_PLASTIC_FILAMENT);
+            event.accept(ItemRegistry.PURPLE_PLASTIC_FILAMENT);
+            event.accept(ItemRegistry.MAGENTA_PLASTIC_FILAMENT);
+            event.accept(ItemRegistry.PINK_PLASTIC_FILAMENT);
+
             // MaterialRegistry items
             List<MaterialSetRecord> list = MaterialSetRegistry.getSets();
             

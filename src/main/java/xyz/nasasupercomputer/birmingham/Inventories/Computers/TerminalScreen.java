@@ -112,6 +112,7 @@ public class TerminalScreen extends Screen {
                 if (checkCmdArg(commandArgs, 0, "shop")) { sendTerminalFeedback(Component.translatable("terminal.command.help.shop")); sendTerminalFeedback(Component.translatable("terminal.command.help.shop.2")); sendTerminalFeedback(Component.translatable("terminal.command.help.shop.3")); }
                 else if (checkCmdArg(commandArgs, 0, "stats")) { sendTerminalFeedback(Component.translatable("terminal.command.help.stats")); }
                 else if (checkCmdArg(commandArgs, 0, "clear")) { sendTerminalFeedback(Component.translatable("terminal.command.help.clear")); }
+                else if (checkCmdArg(commandArgs, 0, "balance") || checkCmdArg(commandArgs, 0, "bal")) { sendTerminalFeedback(Component.translatable("terminal.command.help.balance")); }
                 else {
                     sendTerminalFeedback(Component.translatable("terminal.command.help"));
                     sendTerminalFeedback(Component.translatable("terminal.command.help.additional"));

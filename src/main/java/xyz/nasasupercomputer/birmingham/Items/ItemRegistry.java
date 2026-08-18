@@ -46,6 +46,22 @@ public class ItemRegistry {
 	public static final RegistryObject<Item> CIRCUIT_T4 = ITEMS.register("circuit_t4", () -> new Item(new Item.Properties().stacksTo(64)));
 	public static final RegistryObject<Item> CIRCUIT_T5 = ITEMS.register("circuit_t5", () -> new Item(new Item.Properties().stacksTo(64)));
 	public static final RegistryObject<Item> MYSTERIOUS_PILL = ITEMS.register("mysterious_pill", () -> new PillItem(new Item.Properties()));
+	public static final RegistryObject<Item> BLACK_PLASTIC_FILAMENT = ITEMS.register("black_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> BLUE_PLASTIC_FILAMENT = ITEMS.register("blue_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> BROWN_PLASTIC_FILAMENT = ITEMS.register("brown_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> CYAN_PLASTIC_FILAMENT = ITEMS.register("cyan_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> GREEN_PLASTIC_FILAMENT = ITEMS.register("green_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> LIGHT_BLUE_PLASTIC_FILAMENT = ITEMS.register("light_blue_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> LIGHT_GRAY_PLASTIC_FILAMENT = ITEMS.register("light_gray_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> LIME_PLASTIC_FILAMENT = ITEMS.register("lime_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> MAGENTA_PLASTIC_FILAMENT = ITEMS.register("magenta_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> ORANGE_PLASTIC_FILAMENT = ITEMS.register("orange_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> PINK_PLASTIC_FILAMENT = ITEMS.register("pink_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> RED_PLASTIC_FILAMENT = ITEMS.register("red_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> WHITE_PLASTIC_FILAMENT = ITEMS.register("white_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> YELLOW_PLASTIC_FILAMENT = ITEMS.register("yellow_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> GRAY_PLASTIC_FILAMENT = ITEMS.register("gray_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> PURPLE_PLASTIC_FILAMENT = ITEMS.register("purple_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
 
 	// =========================
 	// TOOLS / CURIOS
