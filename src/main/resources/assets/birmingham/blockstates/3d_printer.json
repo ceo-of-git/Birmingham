@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "birmingham:block/3d_printer" },
+    "facing=east":  { "model": "birmingham:block/3d_printer", "y": 90 },
+    "facing=south": { "model": "birmingham:block/3d_printer", "y": 180 },
+    "facing=west":  { "model": "birmingham:block/3d_printer", "y": 270 }
+  }
+}

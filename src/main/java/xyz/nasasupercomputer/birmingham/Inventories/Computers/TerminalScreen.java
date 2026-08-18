@@ -9,9 +9,8 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.DesktopBlock;
-import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.DesktopBlockEntity;
-import xyz.nasasupercomputer.birmingham.Capabilities.PlayerMoneyData;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.Desktops.DesktopBlockEntityBase;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.Desktops.Office.DesktopBlockEntity;
 import xyz.nasasupercomputer.birmingham.Packets.NetworkManager;
 import xyz.nasasupercomputer.birmingham.Packets.TerminalBalancePacket;
 import xyz.nasasupercomputer.birmingham.Packets.TerminalPurchasePacket;
@@ -65,7 +64,7 @@ public class TerminalScreen extends Screen {
         int y = (height - 256) / 2;
 
         input = new EditBox(this.font, x + 14, y + 145, 140, 20, Component.literal("").withStyle(style -> style.withFont(TERMINAL_FONT_DIRECTORY)));
-        
+
         input.setTextColor(0x2B9C19);
         input.setTextColorUneditable(0x2B9C19);
         input.setCanLoseFocus(false);
@@ -113,8 +112,10 @@ public class TerminalScreen extends Screen {
                 else if (checkCmdArg(commandArgs, 0, "stats")) { sendTerminalFeedback(Component.translatable("terminal.command.help.stats")); }
                 else if (checkCmdArg(commandArgs, 0, "clear")) { sendTerminalFeedback(Component.translatable("terminal.command.help.clear")); }
                 else if (checkCmdArg(commandArgs, 0, "balance") || checkCmdArg(commandArgs, 0, "bal")) { sendTerminalFeedback(Component.translatable("terminal.command.help.balance")); }
+                else if (checkCmdArg(commandArgs, 0, "exit") || checkCmdArg(commandArgs, 0, "close") || checkCmdArg(commandArgs, 0, "quit") || checkCmdArg(commandArgs, 0, "leave")) { sendTerminalFeedback(Component.translatable("terminal.command.help.exit")); }
                 else {
                     sendTerminalFeedback(Component.translatable("terminal.command.help"));
+                    sendTerminalFeedback(Component.translatable("terminal.command.help.continued"));
                     sendTerminalFeedback(Component.translatable("terminal.command.help.additional"));
                     sendTerminalFeedback(Component.translatable("terminal.command.help.additional.2"));
                 }
@@ -123,68 +124,73 @@ public class TerminalScreen extends Screen {
             case "shop":                    // SHOP: Buy things
                 if (checkCmdArg(commandArgs, 0, "catalog")) {
                     // Catalog: list all buyable items
-                    int catalogPage = Integer.parseInt(getCmdArg(commandArgs, 1, true));
-                    if (catalogPage == 0) { sendTerminalFeedback(Component.translatable("terminal.command.shop.page0")); break; }
-
-                    List<TerminalShopEntry> terminalShop = TerminalShop.getAvailableShopItems();
-
                     int entriesPerPage = 4;
-                    for (int i = 0; i < entriesPerPage; i++) {
-                        if (terminalShop.size() >= ((catalogPage - 1) * entriesPerPage) + i) {
-                            if (terminalShop.get(((catalogPage - 1) * entriesPerPage) + i) != null) {
-                                if (desktopBlockEntity instanceof DesktopBlockEntity desktopBE) {
-                                    int currentEntryID = ((catalogPage - 1) * entriesPerPage) + i;
-                                    TerminalShopEntry currentEntry = terminalShop.get(currentEntryID);
+                    int catalogPage = Integer.parseInt(getCmdArg(commandArgs, 1, true));
 
-                                    // Weed out the improperly powered chuds
-                                    // playing in the danger zone with the i-- here.
-                                    if (currentEntry.powerRequirementToView() > desktopBE.GetProperties().computePower()) { continue; }
-
-                                    // Display shop entry now
-                                    sendTerminalFeedback(Component.literal("(ID: " + currentEntryID + ") - " + currentEntry.itemToPurchase().getDisplayName().getString()));
-                                    sendTerminalFeedback(Component.translatable("terminal.command.shop.amount").append(Component.literal(" x" + currentEntry.itemToPurchase().getCount())));
-                                    sendTerminalFeedback(Component.translatable("terminal.command.shop.power_req").append(Component.literal(" " + String.valueOf(currentEntry.powerRequirementToView()))));
-                                    sendTerminalFeedback(Component.translatable("terminal.command.shop.cost").append(Component.literal(" " + String.format("$%.2f", currentEntry.dollarCost()))));
-                                }
-                                if (i == 3) {
-                                    sendTerminalFeedback(Component.literal("pg: 1 / " + (terminalShop.size() / 4)));
-                                }
-                            } else { continue; }
-                        } else { continue; }
+                    // Filter out whats available in shop
+                    List<TerminalShopEntry> terminalShop = TerminalShop.getAvailableShopItems();
+                    if (desktopBlockEntity instanceof DesktopBlockEntityBase desktopBE) {
+                        terminalShop = TerminalShop.getAvailableShopItems(desktopBE.GetProperties().computePower());
                     }
+
+                    // Display shop items
+                    int totalPageCount = (int)Math.ceil((double)terminalShop.size() / entriesPerPage);
+
+                    if (catalogPage > totalPageCount) { sendTerminalFeedback(Component.translatable("terminal.command.shop.page_unknown")); break; }
+                    else if (catalogPage <= 0) { catalogPage = 1; }
+
+                    int startingIndex = (catalogPage - 1) * entriesPerPage;
+
+                    for (int i = 0; i < entriesPerPage; i++) {
+
+                        int currentEntryID = startingIndex + i;
+                        if (currentEntryID >= terminalShop.size()) { break; }
+
+                        TerminalShopEntry currentEntry = terminalShop.get(currentEntryID);
+                        sendTerminalFeedback(Component.literal("(ID: " + currentEntryID + ") - " + currentEntry.itemToPurchase().getDisplayName().getString()));
+                        sendTerminalFeedback(Component.translatable("terminal.command.shop.amount").append(Component.literal(" x" + currentEntry.itemToPurchase().getCount())));
+                        sendTerminalFeedback(Component.translatable("terminal.command.shop.power_req").append(Component.literal(" " + String.valueOf(currentEntry.powerRequirementToView()))));
+                        sendTerminalFeedback(Component.translatable("terminal.command.shop.cost").append(Component.literal(" " + String.format("$%.2f", currentEntry.dollarCost()))));
+                    }
+                    sendTerminalFeedback(Component.literal("pg: " + catalogPage + " / " + totalPageCount));
 
                 } else if (checkCmdArg(commandArgs, 0, "buy")) {
                     // Buy: buy an item
                     int itemIDToBuy = Integer.parseInt(getCmdArg(commandArgs, 1, true));
-                    List<TerminalShopEntry> terminalShop = TerminalShop.getAvailableShopItems();
 
-                    int deliveryX = Integer.parseInt(getCmdArg(commandArgs, 2, true));
-                    int deliveryZ = Integer.parseInt(getCmdArg(commandArgs, 3, true));
+                    // Filter out whats available in shop
+                    if (desktopBlockEntity instanceof DesktopBlockEntityBase desktopBE) {
+                        List<TerminalShopEntry> terminalShop = TerminalShop.getAvailableShopItems(desktopBE.GetProperties().computePower());
 
-                    // Clientside Checks (Very secure)
-                    if (desktopBlockEntity instanceof DesktopBlockEntity desktopBE) {
+                        int deliveryX = Integer.parseInt(getCmdArg(commandArgs, 2, true));
+                        int deliveryZ = Integer.parseInt(getCmdArg(commandArgs, 3, true));
 
+                        // Clientside Checks (Very secure)
                         if (terminalShop.size() > itemIDToBuy) {
-                            sendTerminalFeedback(Component.literal("Checking power requirements <= what you got: " + terminalShop.get(itemIDToBuy).powerRequirementToView() + ", " + desktopBE.GetProperties().computePower()));
-                            if (terminalShop.get(itemIDToBuy).powerRequirementToView() <= desktopBE.GetProperties().computePower()){
-                                sendTerminalFeedback(Component.literal("Attempting buy"));
-                                NetworkManager.INSTANCE.sendToServer(new TerminalPurchasePacket(itemIDToBuy, deliveryX, deliveryZ, desktopBE.getBlockPos()));
-                            } else { sendTerminalFeedback(Component.literal("ERROR! You do not have enough Compute Power to view this item, (Required: " + terminalShop.get(itemIDToBuy).powerRequirementToView())); }
+                            NetworkManager.INSTANCE.sendToServer(new TerminalPurchasePacket(itemIDToBuy, deliveryX, deliveryZ, desktopBE.getBlockPos()));
                         } else { sendTerminalFeedback(Component.literal("ERROR! Item does NOT exist in shop!")); }
                     }
-
-
+                    else {
+                        // ???? how
+                    }
                 } else {
                     // ????
                 }
                 break;
 
             case "stats":                   // STATS: Display Computational Stats
-                if (desktopBlockEntity instanceof DesktopBlockEntity desktopBE) {
+                if (desktopBlockEntity instanceof DesktopBlockEntityBase desktopBE) {
                     sendTerminalFeedback(Component.translatable("command.stats.power").append(Component.literal(String.valueOf(desktopBE.GetProperties().computePower()))));
                     sendTerminalFeedback(Component.translatable("command.stats.speed").append(Component.literal(desktopBE.GetProperties().computeSpeed() * 100 + "%")));
-                    sendTerminalFeedback(Component.translatable("command.stats.efficiency").append(Component.literal(desktopBE.GetProperties().powerEfficiency() * 100 + "%")));
+                    sendTerminalFeedback(Component.translatable("command.stats.efficiency").append(Component.literal(String.format("%.2f", (desktopBE.GetProperties().powerEfficiency() * 100)) + "%")));
                 }
+                break;
+
+            case "exit":
+            case "close":
+            case "quit":
+            case "leave":
+                this.onClose();
                 break;
 
             case "bal":

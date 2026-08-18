@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=north,has_table=false": { "model": "birmingham:block/creative_desktop" },
+    "facing=east,has_table=false":  { "model": "birmingham:block/creative_desktop", "y": 90 },
+    "facing=south,has_table=false": { "model": "birmingham:block/creative_desktop", "y": 180 },
+    "facing=west,has_table=false":  { "model": "birmingham:block/creative_desktop", "y": 270 },
+    "facing=north,has_table=true": { "model": "birmingham:block/creative_desktop_tabled" },
+    "facing=east,has_table=true":  { "model": "birmingham:block/creative_desktop_tabled", "y": 90 },
+    "facing=south,has_table=true": { "model": "birmingham:block/creative_desktop_tabled", "y": 180 },
+    "facing=west,has_table=true":  { "model": "birmingham:block/creative_desktop_tabled", "y": 270 }
+  }
+}

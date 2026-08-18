@@ -1,5 +1,6 @@
 package xyz.nasasupercomputer.birmingham.EventHandlers;
 
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -11,6 +12,7 @@ import net.minecraftforge.client.model.DynamicFluidContainerModel;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Printer3D.Printer3DBlockRenderer;
 import xyz.nasasupercomputer.birmingham.Fluids.FluidRegistryContainer;
 import xyz.nasasupercomputer.birmingham.Items.ItemRegistry;
 import xyz.nasasupercomputer.birmingham.entity.ModEntities;
@@ -59,6 +61,9 @@ public class ClientEventHandlerMOD {
     		        return stack.getTag().getInt("pill_texture");
     		    }
     		);
+
+		// Hooks up the Animated Block Entities to their Animators
+		BlockEntityRenderers.register(BlockRegistry.PRINTER_3D_ENTITY.get(), Printer3DBlockRenderer::new);
 
     }
 

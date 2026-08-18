@@ -1,25 +1,27 @@
-package xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers;
+package xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.Desktops.Creative;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
-import xyz.nasasupercomputer.birmingham.Blocks.Custom.IrradiationProperties;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.DesktopChair;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.DesktopProperties;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.Desktops.DesktopBlockEntityBase;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.Desktops.Office.DesktopBlock;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.IDesktopType;
 
-public class DesktopBlockEntity extends BlockEntity implements IDesktopType {
-	
+public class CreativeDesktopBlockEntity extends DesktopBlockEntityBase implements IDesktopType {
+
 	public final DesktopProperties DESKTOP_PROPERTIES;
 
-	public DesktopBlockEntity(BlockPos pPos, BlockState pBlockState) {
-		super(BlockRegistry.DESKTOP_ENTITY.get(), pPos, pBlockState);
+	public CreativeDesktopBlockEntity(BlockPos pPos, BlockState pBlockState) {
+		super(BlockRegistry.CREATIVE_DESKTOP_ENTITY.get(), pPos, pBlockState);
 		this.DESKTOP_PROPERTIES = new DesktopProperties(0.0, 0.0, 1.0, false);
 	}
-	
-	public DesktopBlockEntity(BlockPos pPos, BlockState pBlockState, DesktopProperties desktopProperties) {
-		super(BlockRegistry.DESKTOP_ENTITY.get(), pPos, pBlockState);
+
+	public CreativeDesktopBlockEntity(BlockPos pPos, BlockState pBlockState, DesktopProperties desktopProperties) {
+		super(BlockRegistry.CREATIVE_DESKTOP_ENTITY.get(), pPos, pBlockState);
 		this.DESKTOP_PROPERTIES = desktopProperties;
 	}
 
@@ -31,7 +33,7 @@ public class DesktopBlockEntity extends BlockEntity implements IDesktopType {
 		DesktopProperties properties = DESKTOP_PROPERTIES;
 
 		// Check for an account for gaming chairs
-		if (blockEntity instanceof DesktopBlockEntity desktopBE) {
+		if (blockEntity instanceof DesktopBlockEntityBase desktopBE) {
 			Direction direction = desktopBE.getBlockState().getValue(DesktopBlock.FACING);
 			BlockPos pleasebeachair = pos.relative(direction, 1);
 

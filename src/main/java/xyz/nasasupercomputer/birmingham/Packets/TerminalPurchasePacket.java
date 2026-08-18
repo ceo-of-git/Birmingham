@@ -2,22 +2,18 @@ package xyz.nasasupercomputer.birmingham.Packets;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.registries.ForgeRegistries;
 import xyz.nasasupercomputer.birmingham.Blocks.BlockRegistry;
 import xyz.nasasupercomputer.birmingham.Blocks.Custom.Package.PackageBlock;
-import xyz.nasasupercomputer.birmingham.Blocks.Custom.Package.PackageBlockEntity;
-import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.DesktopBlock;
-import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.DesktopBlockEntity;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.Desktops.Office.DesktopBlock;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.Desktops.Office.DesktopBlockEntity;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.DesktopProperties;
 import xyz.nasasupercomputer.birmingham.Capabilities.PlayerMoneyData;
-import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.Shops.TerminalShop;
 import xyz.nasasupercomputer.birmingham.Shops.TerminalShopEntry;
 
@@ -31,16 +27,16 @@ public class TerminalPurchasePacket {
 
     private BlockPos desktopPos;
     private TerminalShopEntry shopEntry;
-    private int shopEntryID;
+    private int shopEntryIDToBuy;
     private int X;
     private int Z;
 
     private static final int DELIVERY_MAX_DISTANCE = 50;
 
-    public TerminalPurchasePacket(int shopEntryID, int X, int Z, BlockPos desktopPos) { this.shopEntryID = shopEntryID; this.X = X; this.Z = Z; this.desktopPos = desktopPos; }
-    public TerminalPurchasePacket(FriendlyByteBuf buf) { this.desktopPos = buf.readBlockPos(); this.shopEntryID = buf.readInt(); this.X = buf.readInt(); this.Z = buf.readInt(); }
+    public TerminalPurchasePacket(int shopEntryID, int X, int Z, BlockPos desktopPos) { this.shopEntryIDToBuy = shopEntryID; this.X = X; this.Z = Z; this.desktopPos = desktopPos; }
+    public TerminalPurchasePacket(FriendlyByteBuf buf) { this.desktopPos = buf.readBlockPos(); this.shopEntryIDToBuy = buf.readInt(); this.X = buf.readInt(); this.Z = buf.readInt(); }
     public void toBytes(FriendlyByteBuf buf) { }
-    public void encode(FriendlyByteBuf friendlyByteBuf) { friendlyByteBuf.writeBlockPos(desktopPos); friendlyByteBuf.writeInt(shopEntryID); friendlyByteBuf.writeInt(X); friendlyByteBuf.writeInt(Z);}
+    public void encode(FriendlyByteBuf friendlyByteBuf) { friendlyByteBuf.writeBlockPos(desktopPos); friendlyByteBuf.writeInt(shopEntryIDToBuy); friendlyByteBuf.writeInt(X); friendlyByteBuf.writeInt(Z);}
     public static TerminalPurchasePacket decode(FriendlyByteBuf friendlyByteBuf) { return new TerminalPurchasePacket(friendlyByteBuf); }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
@@ -61,42 +57,38 @@ public class TerminalPurchasePacket {
             }
 
             // Get Shop Entry
-//            player.sendSystemMessage(Component.literal("getting shop"));
-            if (shopEntryID >= 0) {
-                if (TerminalShop.getAvailableShopItems().size() > shopEntryID) { shopEntry = TerminalShop.getAvailableShopItems().get(shopEntryID); }
-                else { sendResponsePacket(false, player); ctx.get().setPacketHandled(true); return; }
-            } else { sendResponsePacket(false, player); ctx.get().setPacketHandled(true); return; }
+            List<TerminalShopEntry> shopEntries = TerminalShop.getAvailableShopItems();
+            if (level.getBlockEntity(desktopPos) instanceof DesktopBlockEntity) {
+                shopEntries = TerminalShop.getAvailableShopItems(properties.computePower());
 
-//            player.sendSystemMessage(Component.literal("getting powah!"));
-//            player.sendSystemMessage(Component.literal(properties.toString()));
-//            player.sendSystemMessage(Component.literal(String.valueOf(shopEntry.powerRequirementToView() + " / ") + String.valueOf(properties.computePower())));
-            // Check power requirements
-            if (shopEntry.powerRequirementToView() <= properties.computePower()) {
-//                player.sendSystemMessage(Component.literal("Checking $$$$ requirement"));
-                // Check $$$ Requirements
-                if (PlayerMoneyData.getValue(player) >= shopEntry.dollarCost()) {
-//                    player.sendSystemMessage(Component.literal("Checking location closeness requirement"));
-                    // Check if spawn location is close enough
-                    if (Math.abs(desktopPos.getX() - X) <= DELIVERY_MAX_DISTANCE && Math.abs(desktopPos.getZ() - Z) <= DELIVERY_MAX_DISTANCE) {
-//                        player.sendSystemMessage(Component.literal("Checking location block requirement"));
-                        // Check if spawn block is valid
-                        BlockPos packageSpawnPosition = new BlockPos(X, 256, Z);
-                        if (level.getBlockState(packageSpawnPosition).getBlock().defaultBlockState().isAir()) {
-//                            player.sendSystemMessage(Component.literal("spawning package"));
-                            PlayerMoneyData.setValue(player, PlayerMoneyData.getValue(player) - shopEntry.dollarCost());
+                if (shopEntryIDToBuy >= 0 || shopEntryIDToBuy < shopEntries.size()) {
+                    this.shopEntry = shopEntries.get(shopEntryIDToBuy);
+                }
+                } else { sendResponsePacket(false, player); ctx.get().setPacketHandled(true); return; }
 
-                            // Setup Package Items
-                            List<ItemStack> items = new ArrayList<>();
-                            items.add(shopEntry.itemToPurchase().copy());
-//                            player.sendSystemMessage(Component.literal("Items - " + items.get(0).getDisplayName().getString()));
 
-                            PackageBlock packageBlock = (PackageBlock)BlockRegistry.PACKAGE.get();
-                            packageBlock.placePackage(level, packageSpawnPosition, items);
+            // Check $$$ Requirements
+            if (PlayerMoneyData.getValue(player) >= shopEntry.dollarCost()) {
 
-                            sendResponsePacket(true, player);
-                            ctx.get().setPacketHandled(true);
-                            return;
-                        }
+                // Check if spawn location is close enough
+                if (Math.abs(desktopPos.getX() - X) <= DELIVERY_MAX_DISTANCE && Math.abs(desktopPos.getZ() - Z) <= DELIVERY_MAX_DISTANCE) {
+
+                    // Check if spawn block is valid
+                    BlockPos packageSpawnPosition = new BlockPos(X, 256, Z);
+                    if (level.getBlockState(packageSpawnPosition).getBlock().defaultBlockState().isAir()) {
+                        // Spawning package & spending $$$
+                        PlayerMoneyData.setValue(player, PlayerMoneyData.getValue(player) - shopEntry.dollarCost());
+
+                        // Setup Package Items
+                        List<ItemStack> items = new ArrayList<>();
+                        items.add(shopEntry.itemToPurchase().copy());
+
+                        PackageBlock packageBlock = (PackageBlock)BlockRegistry.PACKAGE.get();
+                        packageBlock.placePackage(level, packageSpawnPosition, items);
+
+                        sendResponsePacket(true, player);
+                        ctx.get().setPacketHandled(true);
+                        return;
                     }
                 }
             }

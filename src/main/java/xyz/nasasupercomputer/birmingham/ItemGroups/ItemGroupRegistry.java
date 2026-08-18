@@ -72,8 +72,10 @@ public class ItemGroupRegistry {
         	event.accept(BlockRegistry.COKING_OVEN_ITEM);
         	event.accept(BlockRegistry.ALLOY_BLAST_FURNACE_ITEM);
         	event.accept(BlockRegistry.DESKTOP_ITEM);
+            event.accept(BlockRegistry.CREATIVE_DESKTOP_ITEM);
         	event.accept(BlockRegistry.TERMINAL_ITEM);
             event.accept(BlockRegistry.ELITE_GAMING_CHAIR_ITEM);
+            event.accept(BlockRegistry.PRINTER_3D_ITEM);
         }
         
         // ADDING TO RESOURCES TAB

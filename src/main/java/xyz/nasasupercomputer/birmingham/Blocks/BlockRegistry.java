@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -17,6 +18,13 @@ import net.minecraftforge.registries.RegistryObject;
 import xyz.nasasupercomputer.birmingham.Blocks.Custom.Package.PackageBlock;
 import xyz.nasasupercomputer.birmingham.Blocks.Custom.Package.PackageBlockEntity;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.*;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.Desktops.Creative.CreativeDesktopBlock;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.Desktops.Creative.CreativeDesktopBlockEntity;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.Desktops.Office.DesktopBlock;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.Desktops.Office.DesktopBlockEntity;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Printer3D.Printer3DBlock;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Printer3D.Printer3DBlockEntity;
+import xyz.nasasupercomputer.birmingham.Blocks.Machines.Printer3D.Printer3DBlockItem;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.PurificationChamber.PurificationChamberBlock;
 import xyz.nasasupercomputer.birmingham.Blocks.Machines.PurificationChamber.PurificationChamberBlockEntity;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
@@ -32,6 +40,7 @@ import xyz.nasasupercomputer.birmingham.Items.custom.DescriptiveBlockItem;
 public class BlockRegistry {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MainRegistry.MOD_ID);
 	public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, MainRegistry.MOD_ID);
+
 	
 	// =========================
 	// MACHINES
@@ -49,9 +58,14 @@ public class BlockRegistry {
 	// DESKTOP COMPONENTS
 	public static final RegistryObject<Block> DESKTOP = BLOCKS.register("desktop", () -> new DesktopBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops().strength(3.0F, 12.0F).noOcclusion().destroyTime(2.5f)));
 	public static final RegistryObject<BlockEntityType<DesktopBlockEntity>> DESKTOP_ENTITY = BLOCK_ENTITIES.register("desktop", () -> BlockEntityType.Builder.of(DesktopBlockEntity::new, DESKTOP.get()).build(null));
+	public static final RegistryObject<Block> CREATIVE_DESKTOP = BLOCKS.register("creative_desktop", () -> new CreativeDesktopBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops().strength(3.0F, 12.0F).noOcclusion().destroyTime(2.5f)));
+	public static final RegistryObject<BlockEntityType<CreativeDesktopBlockEntity>> CREATIVE_DESKTOP_ENTITY = BLOCK_ENTITIES.register("creative_desktop", () -> BlockEntityType.Builder.of(CreativeDesktopBlockEntity::new, CREATIVE_DESKTOP.get()).build(null));
 	public static final RegistryObject<Block> TERMINAL = BLOCKS.register("terminal", () -> new TerminalBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops().strength(3.0F, 12.0F).noOcclusion().destroyTime(2.5f)));
 	public static final RegistryObject<BlockEntityType<TerminalBlockEntity>> TERMINAL_ENTITY = BLOCK_ENTITIES.register("terminal", () -> BlockEntityType.Builder.of(TerminalBlockEntity::new, TERMINAL.get()).build(null));
 	public static final RegistryObject<Block> ELITE_GAMING_CHAIR = BLOCKS.register("elite_gaming_chair", () -> new DesktopChair(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops().strength(3.0F, 12.0F).noOcclusion().destroyTime(2.5f), 2.0f, 2.0f, 3.0f));
+	public static final RegistryObject<Block> PRINTER_3D = BLOCKS.register("3d_printer", () -> new Printer3DBlock(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops().strength(3.0F, 12.0F).noOcclusion().destroyTime(5.0f)));
+	public static final RegistryObject<BlockEntityType<Printer3DBlockEntity>> PRINTER_3D_ENTITY = BLOCK_ENTITIES.register("3d_printer", () -> BlockEntityType.Builder.of(Printer3DBlockEntity::new, PRINTER_3D.get()).build(null));
+
 
 	// =========================
 	// GENERAL BLOCK ENTITIES
@@ -82,10 +96,12 @@ public class BlockRegistry {
 	public static final RegistryObject<Item> PURIFICATION_CHAMBER_ITEM = ItemRegistry.ITEMS.register("purification_chamber", () -> new BlockItem(PURIFICATION_CHAMBER.get(), new Item.Properties()));
 	public static final RegistryObject<Item> FUEL_GENERATOR_ITEM = ItemRegistry.ITEMS.register("fuel_generator", () -> new BlockItem(FUEL_GENERATOR.get(), new Item.Properties()));
 	public static final RegistryObject<Item> DESKTOP_ITEM = ItemRegistry.ITEMS.register("desktop", () -> new BlockItem(DESKTOP.get(), new Item.Properties()));
+	public static final RegistryObject<Item> CREATIVE_DESKTOP_ITEM = ItemRegistry.ITEMS.register("creative_desktop", () -> new BlockItem(CREATIVE_DESKTOP.get(), new Item.Properties().rarity(Rarity.EPIC)));
 	public static final RegistryObject<Item> TERMINAL_ITEM = ItemRegistry.ITEMS.register("terminal", () -> new DescriptiveBlockItem(TERMINAL.get(), new Item.Properties(), Component.translatable("tooltip.birmingham.terminal").withStyle(ChatFormatting.DARK_GRAY)));
 	public static final RegistryObject<Item> TABLE_ITEM = ItemRegistry.ITEMS.register("table", () -> new DescriptiveBlockItem(TABLE.get(), new Item.Properties(), Component.translatable("tooltip.birmingham.table").withStyle(ChatFormatting.DARK_GRAY)));
 	public static final RegistryObject<Item> ELITE_GAMING_CHAIR_ITEM = ItemRegistry.ITEMS.register("elite_gaming_chair", () -> new BlockItem(ELITE_GAMING_CHAIR.get(), new Item.Properties()));
 	public static final RegistryObject<Item> PACKAGE_ITEM = ItemRegistry.ITEMS.register("package", () -> new DescriptiveBlockItem(PACKAGE.get(), new Item.Properties(), Component.translatable("tooltip.birmingham.package").withStyle(ChatFormatting.YELLOW)));
+	public static final RegistryObject<Item> PRINTER_3D_ITEM = ItemRegistry.ITEMS.register("3d_printer", () -> new Printer3DBlockItem(PRINTER_3D.get(), new Item.Properties(), Component.translatable("tooltip.birmingham.3d_printer").withStyle(ChatFormatting.DARK_GRAY)));
 
 	
 	// Helper Methods
