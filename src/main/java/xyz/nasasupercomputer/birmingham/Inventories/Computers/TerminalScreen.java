@@ -14,6 +14,7 @@ import xyz.nasasupercomputer.birmingham.Blocks.Machines.Computers.DesktopBlockEn
 import xyz.nasasupercomputer.birmingham.Capabilities.PlayerMoneyData;
 import xyz.nasasupercomputer.birmingham.Packets.NetworkManager;
 import xyz.nasasupercomputer.birmingham.Packets.TerminalBalancePacket;
+import xyz.nasasupercomputer.birmingham.Packets.TerminalPurchasePacket;
 import xyz.nasasupercomputer.birmingham.Shops.TerminalShop;
 import xyz.nasasupercomputer.birmingham.Shops.TerminalShopEntry;
 
@@ -38,6 +39,22 @@ public class TerminalScreen extends Screen {
         super(GUI_TITLE);
         this.desktopBlockEntity = desktopBlockEntity;
 
+        sendTerminalFeedback(Component.literal("░░░░░▄▄▄▄▀▀▀▀▀▀▀▀▄▄▄▄▄▄░░░░░░░"));
+        sendTerminalFeedback(Component.literal("░░░░░█░░░░▒▒▒▒▒▒▒▒▒▒▒▒░░▀▀▄░░░░"));
+        sendTerminalFeedback(Component.literal("░░░░█░░░▒▒▒▒▒▒░░░░░░░░▒▒▒░░█░░░"));
+        sendTerminalFeedback(Component.literal("░░░█░░░░░░▄██▀▄▄░░░░░▄▄▄░░░░█░░   BirmingOS V1.20.1"));
+        sendTerminalFeedback(Component.literal("░▄▀▒▄▄▄▒░█▀▀▀▀▄▄█░░░██▄▄█░░░░█░   -----------------"));
+        sendTerminalFeedback(Component.literal("█░▒█▒▄░▀▄▄▄▀░░░░░░░░█░░░▒▒▒▒▒░█"));
+        sendTerminalFeedback(Component.literal("█░▒█░█▀▄▄░░░░░█▀░░░░▀▄░░▄▀▀▀▄▒█"));
+        sendTerminalFeedback(Component.literal("░█░▀▄░█▄░█▀▄▄░▀░▀▀░▄▄▀░░░░█░░█░"));
+        sendTerminalFeedback(Component.literal("░░█░░░▀▄▀█▄▄░█▀▀▀▄▄▄▄▀▀█▀██░█░░"));
+        sendTerminalFeedback(Component.literal("░░░█░░░░██░░▀█▄▄▄█▄▄█▄████░█░░░"));
+        sendTerminalFeedback(Component.literal("░░░░█░░░░▀▀▄░█░░░█░█▀██████░█░░"));
+        sendTerminalFeedback(Component.literal("░░░░░▀▄░░░░░▀▀▄▄▄█▄█▄█▄█▄▀░░█░░"));
+        sendTerminalFeedback(Component.literal("░░░░░░░▀▄▄░▒▒▒▒░░░░░░░░░░▒░░░█░"));
+        sendTerminalFeedback(Component.literal("░░░░░░░░░░▀▀▄▄░▒▒▒▒▒▒▒▒▒▒░░░░█░"));
+        sendTerminalFeedback(Component.literal("░░░░░░░░░░░░░░▀▄▄▄▄▄░░░░░░░░█░░"));
+        sendTerminalFeedback(Component.literal(" "));
         sendTerminalFeedback(Component.translatable("terminal.boot"));
     }
 
@@ -92,7 +109,7 @@ public class TerminalScreen extends Screen {
 
         switch (command) {
             case "help":                    // HELP: Displays all other non-secret terminal commands
-                if (checkCmdArg(commandArgs, 0, "shop")) { sendTerminalFeedback(Component.translatable("terminal.command.help.shop")); }
+                if (checkCmdArg(commandArgs, 0, "shop")) { sendTerminalFeedback(Component.translatable("terminal.command.help.shop")); sendTerminalFeedback(Component.translatable("terminal.command.help.shop.2")); sendTerminalFeedback(Component.translatable("terminal.command.help.shop.3")); }
                 else if (checkCmdArg(commandArgs, 0, "stats")) { sendTerminalFeedback(Component.translatable("terminal.command.help.stats")); }
                 else if (checkCmdArg(commandArgs, 0, "clear")) { sendTerminalFeedback(Component.translatable("terminal.command.help.clear")); }
                 else {
@@ -137,6 +154,25 @@ public class TerminalScreen extends Screen {
 
                 } else if (checkCmdArg(commandArgs, 0, "buy")) {
                     // Buy: buy an item
+                    int itemIDToBuy = Integer.parseInt(getCmdArg(commandArgs, 1, true));
+                    List<TerminalShopEntry> terminalShop = TerminalShop.getAvailableShopItems();
+
+                    int deliveryX = Integer.parseInt(getCmdArg(commandArgs, 2, true));
+                    int deliveryZ = Integer.parseInt(getCmdArg(commandArgs, 3, true));
+
+                    // Clientside Checks (Very secure)
+                    if (desktopBlockEntity instanceof DesktopBlockEntity desktopBE) {
+
+                        if (terminalShop.size() > itemIDToBuy) {
+                            sendTerminalFeedback(Component.literal("Checking power requirements <= what you got: " + terminalShop.get(itemIDToBuy).powerRequirementToView() + ", " + desktopBE.GetProperties().computePower()));
+                            if (terminalShop.get(itemIDToBuy).powerRequirementToView() <= desktopBE.GetProperties().computePower()){
+                                sendTerminalFeedback(Component.literal("Attempting buy"));
+                                NetworkManager.INSTANCE.sendToServer(new TerminalPurchasePacket(itemIDToBuy, deliveryX, deliveryZ, desktopBE.getBlockPos()));
+                            } else { sendTerminalFeedback(Component.literal("ERROR! You do not have enough Compute Power to view this item, (Required: " + terminalShop.get(itemIDToBuy).powerRequirementToView())); }
+                        } else { sendTerminalFeedback(Component.literal("ERROR! Item does NOT exist in shop!")); }
+                    }
+
+
                 } else {
                     // ????
                 }
@@ -186,14 +222,14 @@ public class TerminalScreen extends Screen {
         return args[index].equals(checkFor);
     }
 
-    public String getCmdArg(String[] args, int index, boolean convertToInt){
+    public String getCmdArg(String[] args, int index, boolean onlyReturnInts){
         if (args == null || index >= args.length) {
-            if (convertToInt) { return "0"; }
+            if (onlyReturnInts) { return "0"; }
             return "";
         }
 
         int returnValue = 0;
-        if (convertToInt){
+        if (onlyReturnInts){
             try {
                 returnValue = Integer.parseInt(args[index]);
             } catch (NumberFormatException e) {

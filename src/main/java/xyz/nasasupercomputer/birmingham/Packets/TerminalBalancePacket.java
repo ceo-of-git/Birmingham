@@ -9,6 +9,7 @@ import net.minecraftforge.network.PacketDistributor;
 import xyz.nasasupercomputer.birmingham.Capabilities.PlayerMoneyData;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
+import xyz.nasasupercomputer.birmingham.Shops.TerminalShopEntry;
 
 import java.util.function.Supplier;
 

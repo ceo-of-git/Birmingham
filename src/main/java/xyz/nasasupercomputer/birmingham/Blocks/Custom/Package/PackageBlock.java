@@ -4,19 +4,25 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -67,6 +73,7 @@ public class PackageBlock extends FallingBlock implements EntityBlock {
                 pLevel.setBlock(pPos, Blocks.AIR.defaultBlockState(), 0);
             }
         }
+
         pLevel.playSound(pPlayer, pPos, SoundEvents.CHICKEN_EGG, SoundSource.BLOCKS, 1.0f, 1.0f);
         Random rng = new Random();
         for (int i = 0; i < 16; i++) {
@@ -76,8 +83,47 @@ public class PackageBlock extends FallingBlock implements EntityBlock {
         return super.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
     }
 
+    public void placePackage(Level level, BlockPos pos, List<ItemStack> items) {
+        if (level.isClientSide()) { return; }
+
+        level.setBlock(pos, this.defaultBlockState(), 3, 0);
+
+        if (level.getBlockEntity(pos) instanceof PackageBlockEntity packageEntity) {
+            packageEntity.setPackageItems(items);
+
+            level.scheduleTick(pos, this, this.getDelayAfterPlace());
+        }
+    }
+
+    @Override
+    public void onPlace(BlockState pState, Level pLevel, BlockPos pPos, BlockState pOldState, boolean pIsMoving) {
+        // ignore previous behavior.
+        // placePackage() will do the dirty work schedule the fall
+    }
+
+    @Override
+    protected int getDelayAfterPlace() {
+        return 10;
+    }
+
+    @Override
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (!FallingBlock.isFree(level.getBlockState(pos.below()))) { return; }
+
+        PackageBlockEntity packageBE = level.getBlockEntity(pos) instanceof PackageBlockEntity packageBEFind ? packageBEFind : null;
+        FallingBlockEntity fallingBlock = FallingBlockEntity.fall(level, pos, state);
+
+        if (packageBE != null) {
+            CompoundTag tag = new CompoundTag();
+            packageBE.saveAdditional(tag);
+
+            fallingBlock.blockData = tag;
+        }
+    }
+
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new PackageBlockEntity(pPos, pState);
     }
+
 }

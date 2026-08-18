@@ -1,6 +1,9 @@
 package xyz.nasasupercomputer.birmingham.Blocks.Custom.Package;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -27,5 +30,32 @@ public class PackageBlockEntity extends BlockEntity {
 
     public List<ItemStack> getPackageItems(){
         return packageItems;
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag pTag) {
+        super.saveAdditional(pTag);
+
+        ListTag itemsTag = new ListTag();
+
+        for (ItemStack stack : packageItems) {
+            CompoundTag itemTag = new CompoundTag();
+            stack.save(itemTag);
+            itemsTag.add(itemTag);
+        }
+
+        pTag.put("Items", itemsTag);
+    }
+
+    @Override
+    public void load(CompoundTag pTag) {
+        super.load(pTag);
+
+        packageItems.clear();
+
+        ListTag itemsTag = pTag.getList("Items", Tag.TAG_COMPOUND);
+        for (int i = 0; i < itemsTag.size(); i++) {
+            packageItems.add(ItemStack.of(itemsTag.getCompound(i)));
+        }
     }
 }

@@ -149,6 +149,29 @@ public class DesktopBlock extends BaseEntityBlock implements IDesktopType {
 	public DesktopProperties GetProperties() {
 		return DESKTOP_PROPERTIES;
 	}
+
+	// For server packets, only use this if GetProperties() does not work
+	public DesktopProperties GetProperties(Level level, BlockPos blockPos) {
+		DesktopProperties properties = DESKTOP_PROPERTIES;
+
+		BlockState state = level.getBlockState(blockPos);
+
+		if (state.getBlock() instanceof DesktopBlock) {
+			Direction direction = state.getValue(FACING);
+			BlockPos chairPos = blockPos.relative(direction, 1);
+
+			if (level.getBlockState(chairPos).getBlock() instanceof DesktopChair chair) {
+				properties = new DesktopProperties(
+						properties.computePower() * chair.getPowerBoostPercent(),
+						properties.computeSpeed() * chair.getSpeedBoostPercent(),
+						properties.powerEfficiency() * chair.getEfficiencyBoostPercent(),
+						properties.hasGuiSupport()
+				);
+			}
+		}
+
+		return properties;
+	}
 	
 	
 

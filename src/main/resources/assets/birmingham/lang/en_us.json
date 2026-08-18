@@ -144,7 +144,7 @@
 	"command.stats.power": "Compute Power: ",
 	"command.stats.speed": "Compute Speed: ",
 	"command.stats.efficiency": "Power Efficiency: ",
-	"terminal.command.help.shop": "Shop <catalog/buy> <page/id> <x> <y> <z>",
+	"terminal.command.help.shop": "Shop <catalog/buy> <page/id> <x> <z>",
 	"terminal.command.help.stats": "Shows your computers stats",
 	"terminal.command.help.clear": "Clears the screen",
 	"terminal.boot": "Welcome! Type 'help' for help",
@@ -158,5 +158,10 @@
 	"terminal.command.shop.power_req": "Compute Power Required:",
 	"terminal.command.shop.page0": "Cannot view Page #0",
 	"terminal.command.bal": "You have: ",
-	"terminal.command.shop.cost": "Price: $"
+	"terminal.command.shop.cost": "Price: $",
+	"terminal.command.shop.purchase.successful": "Purchase Successful! Your package will arrive soon!",
+	"terminal.command.shop.purchase.failure": "Purchase FAILED! Try making some $$$ noob.",
+	"terminal.command.shop.purchase.failure.2": "(That or your delivery location is invalid)",
+	"terminal.command.help.shop.2": "Deliveries must be made within 50 blocks of the Desktop",
+	"terminal.command.help.shop.3": "<x>, <z> args are not required for catalog viewing"
 }

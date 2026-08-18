@@ -17,20 +17,12 @@ public class NetworkManager {
 
 
     public static void register() {
-        INSTANCE.registerMessage(
-                packetId++,
-                TerminalBalancePacket.class,
-                TerminalBalancePacket::encode,
-                TerminalBalancePacket::decode,
-                TerminalBalancePacket::handle
-        );
+        // Terminal Balance-Check Packet
+        INSTANCE.registerMessage(packetId++, TerminalBalancePacket.class, TerminalBalancePacket::encode, TerminalBalancePacket::decode, TerminalBalancePacket::handle);
+        INSTANCE.registerMessage(packetId++, TerminalBalanceResponsePacket.class, TerminalBalanceResponsePacket::encode, TerminalBalanceResponsePacket::decode, TerminalBalanceResponsePacket::handle);
 
-        INSTANCE.registerMessage(
-                packetId++,
-                TerminalBalanceResponsePacket.class,
-                TerminalBalanceResponsePacket::encode,
-                TerminalBalanceResponsePacket::decode,
-                TerminalBalanceResponsePacket::handle
-        );
+        // Terminal Shop Purchase Packet
+        INSTANCE.registerMessage(packetId++, TerminalPurchasePacket.class, TerminalPurchasePacket::encode, TerminalPurchasePacket::decode, TerminalPurchasePacket::handle);
+        INSTANCE.registerMessage(packetId++, TerminalPurchaseResponsePacket.class, TerminalPurchaseResponsePacket::encode, TerminalPurchaseResponsePacket::decode, TerminalPurchaseResponsePacket::handle);
     }
 }
