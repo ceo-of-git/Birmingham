@@ -21,6 +21,7 @@ public class TerminalShop {
         addShopEntry(new TerminalShopEntry(new ItemStack(ItemRegistry.TRANSISTOR.get(), 6), 2.00f, 8));
         addShopEntry(new TerminalShopEntry(new ItemStack(BlockRegistry.PRINTER_3D_ITEM.get(), 1), 32.00f, 8));
         addShopEntry(new TerminalShopEntry(new ItemStack(BlockRegistry.TERMINAL_ITEM.get(), 1), 60.00f, 8));
+        addShopEntry(new TerminalShopEntry(new ItemStack(ItemRegistry.EMPTY_CIRCUIT_BOARD.get(), 4), 4.00f, 8));
         addShopEntry(new TerminalShopEntry(new ItemStack(ItemRegistry.STEEL_TONGS.get(), 1), 0.75f, 8));
 
         addShopEntry(new TerminalShopEntry(new ItemStack(Items.COAL, 8), 3.25f, 16));
@@ -37,6 +38,7 @@ public class TerminalShop {
         addShopEntry(new TerminalShopEntry(new ItemStack(Items.PEARLESCENT_FROGLIGHT, 16), 4.00f, 24));
 
         addShopEntry(new TerminalShopEntry(new ItemStack(BlockRegistry.DESKTOP_ITEM.get(), 1), 100.00f, 32));
+        addShopEntry(new TerminalShopEntry(new ItemStack(ItemRegistry.GEIGER_COUNTER.get(), 1), 100.00f, 32));
 
         addShopEntry(new TerminalShopEntry(new ItemStack(ItemRegistry.CIRCUIT_T1.get(), 1), 30.00f, 16));
         addShopEntry(new TerminalShopEntry(new ItemStack(ItemRegistry.CIRCUIT_T2.get(), 1), 90.00f, 48));

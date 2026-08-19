@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BSB",
+    "SFS",
+    "BSB"
+  ],
+  "key": {
+    "F": {
+      "item": "birmingham:cooling_fan_t1"
+    },
+    "B": {
+      "item": "birmingham:bronze_plate"
+    },
+    "S": {
+      "item": "birmingham:steel_plate"
+    }
+  },
+  "result": {
+    "item": "birmingham:cooling_fan_t2",
+    "count": 1
+  }
+}

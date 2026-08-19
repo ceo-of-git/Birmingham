@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "birmingham:bronze_nugget"
+    "birmingham:bronze_nugget",
+    "#forge:nugget/bronze"
   ]
 }

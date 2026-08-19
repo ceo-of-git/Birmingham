@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TST",
+    "SIS",
+    "CSC"
+  ],
+  "key": {
+    "T": {
+      "item": "birmingham:transistor"
+    },
+    "C": {
+      "item": "birmingham:capacitor"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "S": {
+      "item": "birmingham:steel_plate"
+    }
+  },
+  "result": {
+    "item": "birmingham:cooling_fan_t1",
+    "count": 4
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FIF",
+    "DCH",
+    "BTB"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:dispenser"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "H": {
+      "item": "minecraft:hopper"
+    },
+    "B": {
+      "item": "minecraft:iron_block"
+    },
+    "C": {
+      "item": "birmingham:circuit_t2"
+    },
+    "T": {
+      "item": "birmingham:terminal"
+    },
+    "F": {
+      "item": "birmingham:cooling_fan_t2"
+    }
+  },
+  "result": {
+    "item": "birmingham:3d_printer",
+    "count": 1
+  }
+}

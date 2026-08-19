@@ -18,6 +18,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 
 public class GemSystem {
 	
@@ -65,18 +66,31 @@ public class GemSystem {
 			}
 		}
 	}
-	
+
 	public static LivingDamageEvent ApplyGemEffectDamage(ItemStack stack, LivingEntity attacker, LivingEntity enemy, LivingDamageEvent event) {
 		if (stack.isEmpty()) return event;
-		
+
 		List<IGemType> itemGems = GetGemsFromItemStack(stack);
-		
+
 		for (IGemType gem : itemGems) {
 			event=gem.RegisterDamage(attacker, enemy, stack, event);
 		}
-		
+
 		return event;
 	}
+
+	public static LivingDeathEvent ApplyGemEffectKill(ItemStack stack, LivingEntity attacker, LivingEntity enemy, LivingDeathEvent event) {
+		if (stack.isEmpty()) return event;
+
+		List<IGemType> itemGems = GetGemsFromItemStack(stack);
+
+		for (IGemType gem : itemGems) {
+			event=gem.OnKill(attacker, enemy, stack, event);
+		}
+
+		return event;
+	}
+
 	public static LivingDamageEvent ApplyGemEffectTaken(ItemStack stack, LivingEntity enemy, LivingDamageEvent event) {
 		if (stack.isEmpty()) return event;
 		

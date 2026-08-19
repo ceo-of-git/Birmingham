@@ -9,6 +9,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import xyz.nasasupercomputer.birmingham.ItemGems.IGemType;
 import net.minecraft.world.entity.LivingEntity;
 import xyz.nasasupercomputer.birmingham.Capabilities.PlayerRadiationProvider;
@@ -34,7 +35,12 @@ public class GemRadioactive implements IGemType {
 		
 		return event; // Apply 20 RADS to Victim
 	}
-	
+
+	@Override
+	public LivingDeathEvent OnKill(LivingEntity attacker, LivingEntity victim, ItemStack stack, LivingDeathEvent event) {
+		return event;
+	}
+
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void AddGemTooltip(Player player, List<String> description, ItemStack stack) {

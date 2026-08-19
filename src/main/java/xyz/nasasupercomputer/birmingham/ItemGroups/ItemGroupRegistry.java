@@ -121,6 +121,9 @@ public class ItemGroupRegistry {
             event.accept(ItemRegistry.PURPLE_PLASTIC_FILAMENT);
             event.accept(ItemRegistry.MAGENTA_PLASTIC_FILAMENT);
             event.accept(ItemRegistry.PINK_PLASTIC_FILAMENT);
+            event.accept(ItemRegistry.COOLING_FAN_T1);
+            event.accept(ItemRegistry.COOLING_FAN_T2);
+            event.accept(ItemRegistry.COOLING_FAN_T3);
 
             // MaterialRegistry items
             List<MaterialSetRecord> list = MaterialSetRegistry.getSets();
@@ -156,6 +159,7 @@ public class ItemGroupRegistry {
         	event.accept(ItemRegistry.FLAME_GEM);
         	event.accept(ItemRegistry.VAMPIRE_GEM);
         	event.accept(ItemRegistry.RADIOACTIVE_GEM);
+            event.accept(ItemRegistry.ANCIENT_GOLD_SHARD);
         }
         
         // ADDING TO BUILDING TAB

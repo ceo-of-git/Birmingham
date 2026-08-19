@@ -21,6 +21,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.AnvilUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -212,6 +213,32 @@ public class ServerEventHandler {
 		}
 	}
 
+	@SubscribeEvent
+	public void onEntityDeath(LivingDeathEvent event) {
+		DamageSource dmgSrc = event.getSource();
+
+		LivingEntity victim = event.getEntity();
+		Entity sourceEntity = dmgSrc.getEntity();
+
+		if (sourceEntity instanceof LivingEntity attacker) {
+			ArrayList<ItemStack> stuff=new ArrayList<ItemStack>();
+			stuff.add(attacker.getMainHandItem());
+			for (ItemStack i : attacker.getArmorSlots()) {
+				stuff.add(i);
+			}
+
+			for (ItemStack item : stuff) {
+				if (item.hasTag()){
+					CompoundTag tag = item.getTag();
+
+					if (tag.contains("GemList")){
+						//float damage=event.getAmount();
+						event = GemSystem.ApplyGemEffectKill(item, attacker, victim, event);
+					}
+				}
+			}
+		}
+	}
 
 	@SubscribeEvent
 	public static void onEntityHit(LivingDamageEvent event){

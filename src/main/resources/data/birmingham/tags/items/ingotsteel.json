@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "birmingham:steel_ingot"
+    "birmingham:steel_ingot",
+    "#forge:ingot/steel"
   ]
 }

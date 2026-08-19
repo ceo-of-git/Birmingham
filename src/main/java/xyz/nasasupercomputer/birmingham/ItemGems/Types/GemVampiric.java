@@ -13,6 +13,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import xyz.nasasupercomputer.birmingham.ItemGems.IGemType;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -36,7 +37,12 @@ public class GemVampiric implements IGemType {
 		event.setAmount((float) (event.getAmount()*1.3));
 		return event; //default event since flame gem doesnt have any damage taken trigger
 	}
-	
+
+	@Override
+	public LivingDeathEvent OnKill(LivingEntity attacker, LivingEntity victim, ItemStack stack, LivingDeathEvent event) {
+		return event;
+	}
+
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void AddGemTooltip(Player player, List<String> description, ItemStack stack) {

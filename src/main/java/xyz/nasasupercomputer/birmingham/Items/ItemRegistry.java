@@ -62,6 +62,10 @@ public class ItemRegistry {
 	public static final RegistryObject<Item> YELLOW_PLASTIC_FILAMENT = ITEMS.register("yellow_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
 	public static final RegistryObject<Item> GRAY_PLASTIC_FILAMENT = ITEMS.register("gray_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
 	public static final RegistryObject<Item> PURPLE_PLASTIC_FILAMENT = ITEMS.register("purple_plastic_filament", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> COOLING_FAN_T1 = ITEMS.register("cooling_fan_t1", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> COOLING_FAN_T2 = ITEMS.register("cooling_fan_t2", () -> new Item(new Item.Properties().stacksTo(64)));
+	public static final RegistryObject<Item> COOLING_FAN_T3 = ITEMS.register("cooling_fan_t3", () -> new Item(new Item.Properties().stacksTo(64)));
+
 
 	// =========================
 	// TOOLS / CURIOS
@@ -99,6 +103,7 @@ public class ItemRegistry {
 	public static final RegistryObject<Item> FLAME_GEM = ITEMS.register("flame_gem", () -> new Gem(new Item.Properties().stacksTo(64), "Flame", "gems.birmingham.flame.title", "gems.birmingham.flame.description"));
 	public static final RegistryObject<Item> VAMPIRE_GEM = ITEMS.register("vampire_gem", () -> new Gem(new Item.Properties().stacksTo(64), "Vampiric", "gems.birmingham.vampiric.title", "gems.birmingham.vampiric.description"));
 	public static final RegistryObject<Item> RADIOACTIVE_GEM = ITEMS.register("radioactive_gem", () -> new Gem(new Item.Properties().stacksTo(64), "Radioactive", "gems.birmingham.radioactive.title", "gems.birmingham.radioactive.description"));
-	
+	public static final RegistryObject<Item> ANCIENT_GOLD_SHARD = ITEMS.register("ancient_gold_shard", () -> new Gem(new Item.Properties().stacksTo(64).rarity(Rarity.UNCOMMON), "Greed", "gems.birmingham.greed.title", "gems.birmingham.greed.description"));
+
 }
 

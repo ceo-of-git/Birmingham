@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    " TR",
-    "GGC",
-    "GIC"
+    "RTF",
+    "FGC",
+    "IIC"
   ],
   "key": {
     "I": {
@@ -11,6 +11,9 @@
     },
     "C": {
       "item": "birmingham:circuit_t1"
+    },
+    "F": {
+      "item": "birmingham:cooling_fan_t1"
     },
     "T": {
       "item": "birmingham:transistor"

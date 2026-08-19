@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "birmingham:tin_nugget"
+    "birmingham:tin_nugget",
+    "#forge:nugget/tin"
   ]
 }

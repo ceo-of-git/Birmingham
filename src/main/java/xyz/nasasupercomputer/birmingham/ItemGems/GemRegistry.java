@@ -5,6 +5,8 @@ import net.minecraftforge.eventbus.api.IEventBus;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import xyz.nasasupercomputer.birmingham.ItemGems.Types.GemGreed;
 import xyz.nasasupercomputer.birmingham.MainRegistry;
 import xyz.nasasupercomputer.birmingham.ItemGems.Types.GemFlame;
 import xyz.nasasupercomputer.birmingham.ItemGems.Types.GemRadioactive;
@@ -23,6 +25,7 @@ public class GemRegistry{
 		gemList.put("Flame", new GemFlame());
 		gemList.put("Vampiric", new GemVampiric());
 		gemList.put("Radioactive", new GemRadioactive());
+		gemList.put("Greed", new GemGreed());
 	}
 
 }

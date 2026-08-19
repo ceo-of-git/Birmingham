@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "birmingham:tin_ingot"
+    "birmingham:tin_ingot",
+    "#forge:ingot/tin"
   ]
 }

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  G",
+    "GGC",
+    "SSS"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "C": {
+      "item": "birmingham:circuit_t3"
+    },
+    "S": {
+      "item": "minecraft:polished_deepslate"
+    }
+  },
+  "result": {
+    "item": "birmingham:geiger_counter"
+  }
+}

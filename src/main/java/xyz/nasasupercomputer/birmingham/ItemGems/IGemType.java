@@ -2,6 +2,7 @@ package xyz.nasasupercomputer.birmingham.ItemGems;
 
 import java.util.List;
 
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import org.spongepowered.asm.mixin.MixinEnvironment.Side;
 
 import net.minecraft.server.level.ServerPlayer;
@@ -21,8 +22,8 @@ public interface IGemType {
 
 
 	public LivingDamageEvent RegisterDamage(LivingEntity attacker, LivingEntity victim, ItemStack stack, LivingDamageEvent event);
-	
 	public LivingDamageEvent RegisterTaken(LivingEntity victim, ItemStack stack, LivingDamageEvent event);
+	public LivingDeathEvent OnKill(LivingEntity attacker, LivingEntity victim, ItemStack stack, LivingDeathEvent event);
 	
 	// Adds the GEM Tooltip to the actual item.
 	@OnlyIn(Dist.CLIENT)

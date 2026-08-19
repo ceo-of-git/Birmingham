@@ -1,6 +1,7 @@
   {
   "replace": false,
   "values": [
-    "birmingham:steel_nugget"
+    "birmingham:steel_nugget",
+    "#forge:nugget/steel"
   ]
 }
