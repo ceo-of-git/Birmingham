@@ -75,7 +75,7 @@ public class DesktopChair extends Block {
         return state;
     }
 
-    public double getPowerBoostPercent() { return this.powerBoostPercent; }
-    public double getSpeedBoostPercent() { return this.speedBoostPercent; }
-    public double getEfficiencyBoostPercent() { return this.efficiencyBoostPercent; }
+    public double getPowerBoostPercent() { return Math.round(this.powerBoostPercent * 100.0) / 100.0; }
+    public double getSpeedBoostPercent() { return Math.round(this.speedBoostPercent * 100.0) / 100.0; }
+    public double getEfficiencyBoostPercent() { return Math.round(this.efficiencyBoostPercent * 100.0) / 100.0; }
 }

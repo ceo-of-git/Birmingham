@@ -192,6 +192,6 @@
 	"terminal.command.help.exit": "Closes the Terminal Screen (Alias: 'close', 'quit', 'leave')",
 	"tooltip.birmingham.3d_printer": "§7Desktop Multiblock Component\n§8Needs to be placed ontop of a Powered Desktop to function.",
 	"terminal.command.help.continued": "exit,",
-	"birmingham.jei.available_in_terminal": "Can be bought in a Desktop/Terminal Setup",
+	"birmingham.jei.available_in_terminal": "Can be bought in an Online Shop",
 	"gems.birmingham.greed.leech": "§6Your greed has given you +$"
 }

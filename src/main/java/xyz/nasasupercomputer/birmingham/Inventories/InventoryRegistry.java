@@ -22,6 +22,7 @@ public class InventoryRegistry {
 	public static final RegistryObject<MenuType<AlloyBlastFurnaceMenu>> ALLOY_BLAST_MENU = MENUS.register("alloy_blast", () -> IForgeMenuType.create((id, inv, pos) -> new AlloyBlastFurnaceMenu(id, inv, pos)));
 	public static final RegistryObject<MenuType<PurificationChamberMenu>> PURIFICATION_CHAMBER_MENU = MENUS.register("purification_chamber", () -> IForgeMenuType.create((id, inv, pos) -> new PurificationChamberMenu(id, inv, pos)));
 	public static final RegistryObject<MenuType<FuelGeneratorMenu>> FUEL_GENERATOR_MENU = MENUS.register("fuel_generator", () -> IForgeMenuType.create((id, inv, pos) -> new FuelGeneratorMenu(id, inv, pos)));
+	public static final RegistryObject<MenuType<Printer3DMenu>> PRINTER_3D_MENU = MENUS.register("3d_printer", () -> IForgeMenuType.create((id, inv, pos) -> new Printer3DMenu(id, inv, pos)));
 
 	// Link all Menus to their respective Screen
 	@SubscribeEvent
@@ -30,6 +31,6 @@ public class InventoryRegistry {
 		event.enqueueWork(() -> MenuScreens.register(ALLOY_BLAST_MENU.get(), AlloyBlastFurnaceScreen::new));
 		event.enqueueWork(() -> MenuScreens.register(PURIFICATION_CHAMBER_MENU.get(), PurificationChamberScreen::new));
 		event.enqueueWork(() -> MenuScreens.register(FUEL_GENERATOR_MENU.get(), FuelGeneratorScreen::new));
-
+		event.enqueueWork(() -> MenuScreens.register(PRINTER_3D_MENU.get(), Printer3DScreen::new));
     }
 }

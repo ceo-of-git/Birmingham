@@ -61,7 +61,8 @@ public class JEI implements IModPlugin {
 			registration.addIngredientInfo(entry.itemToPurchase(), VanillaTypes.ITEM_STACK,
 				Component.translatable("birmingham.jei.available_in_terminal"),
 				Component.translatable("terminal.command.shop.cost").append(String.valueOf(entry.dollarCost())).withStyle(ChatFormatting.GREEN),
-				Component.translatable("terminal.command.shop.power_req").append(" " + String.valueOf(entry.powerRequirementToView())).withStyle(ChatFormatting.DARK_GREEN)
+				Component.translatable("terminal.command.shop.power_req").append(" " + String.valueOf(entry.powerRequirementToView())).withStyle(ChatFormatting.DARK_GREEN),
+				Component.translatable("terminal.command.shop.amount").append(" x" + String.valueOf(entry.itemToPurchase().getCount())).withStyle(ChatFormatting.DARK_GREEN)
 			);
 		}
 	}

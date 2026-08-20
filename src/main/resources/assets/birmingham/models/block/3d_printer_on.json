@@ -3,8 +3,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [128, 128],
 	"textures": {
-		"0": "birmingham:block/3d_printer",
-		"particle": "birmingham:block/3d_printer"
+		"0": "birmingham:block/3d_printer_on",
+		"particle": "birmingham:block/3d_printer_on"
 	},
 	"elements": [
 		{

@@ -48,7 +48,7 @@ public class TerminalBlock extends BaseEntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
     	if (level.getBlockEntity(pos) instanceof TerminalBlockEntity terminalBE) {
-    		if (level.getBlockState(pos).getValue(ACTIVE) == true) {
+    		if (level.getBlockState(pos).getValue(ACTIVE)) {
     			BlockEntity blockBelow = level.getBlockEntity(pos.below());
     			// Open GUI since Active
     			// add power check soon? not sure
